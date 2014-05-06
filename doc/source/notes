@@ -1,0 +1,22 @@
+Core Reviewers:
+
+Maintaining the Core Group
++/-2 votes
+Approval
+Re-approval
+
+Project Drivers:
+
+Feature Branches
+  Merge Commits
+Release Management
+  Milestones
+    Create milestone-proposed Branch
+    Authoring Changes for milestone-proposed
+    Submit Changes in master to milestone-proposed
+    Submit Changes in milestone-proposed to master
+    Tagging a Release
+    End of Milestone
+Targeting Blueprints
+Gerrit IRC Notifications
+Running Jobs with Zuul
