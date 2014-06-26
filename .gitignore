@@ -1,0 +1,17 @@
+# Testenvironment
+.tox/*
+
+# Build directories
+doc/build/*
+
+# Packages
+*.egg-info/*
+
+# Editors
+*~
+.*.swp
+.bak
+
+# For Mac Users
+.DS_Store
+
