@@ -31,6 +31,10 @@ will need to match your preferred email address in Gerrit.
 Visit https://review.openstack.org/ and click the ``Sign In`` link at
 the top-right corner of the page.  Log in with your Launchpad ID.
 
+The first time you sign into OpenStack's Gerrit (review.openstack.org),
+you will be prompted to "Select a unique username:". Please enter your
+Launchpad username.
+
 Because Gerrit uses Launchpad OpenID single sign-on, you won't need a
 separate password for Gerrit, and once you log in to one of Launchpad,
 Gerrit, or any number of other OpenStack services, you won't have to
@@ -144,7 +148,7 @@ Git-review checks that you can log in to gerrit with your ssh key. It
 assumes that your gerrit/launchpad user name is the same as the
 current running user.  If that doesn't work, it asks for your
 gerrit/launchpad user name.  You can avoid that question by
-configuring your Gerrit username, as follows::
+configuring git to use your Gerrit username, as follows::
 
   git config --global gitreview.username yourgerritusername
 
@@ -367,17 +371,17 @@ If a change fails tests in Jenkins, please follow the steps below:
 2. Examine the console log or other relevant log files to determine the cause of the error. If it is related to your change, you should fix the problem and upload a new patchset. Do not use "recheck" or "reverify".
 3. If the problem is due to non-deterministic behavior already merged, and is unrelated to your change, you should do the following to help other developers who may be affected by the same issue, and to focus attention of QA, CI, and other developers working to fix high-impact bugs and improve test systems:
 
-  1. Visit http://status.openstack.org/rechecks/ to see if one of the bugs listed there matches the error you've seen. If your error isn't there, then:
-  2. Identify which project(s) are affected, and search for a related bug on Launchpad. If you do not find an existing bug, file a new one (and be sure to include the error message). If the problem is due to an infrastructure problem (such as Jenkins, Gerrit, etc.), file (or search for) the bug against the openstack-ci project.
+  1. Visit http://status.openstack.org/elastic-recheck/ to see if one of the bugs listed there matches the error you've seen. If your error isn't there, then:
+  2. Identify which project(s) are affected, and search for a related bug on Launchpad. You can search for bugs affecting all OpenStack Programs here: https://bugs.launchpad.net/openstack/ If you do not find an existing bug, file a new one (and be sure to include the error message and a link to the logs for the failure). If the problem is due to an infrastructure problem (such as Jenkins, Gerrit, etc.), file (or search for) the bug against the openstack-ci project.
 
-4. To update the rechecks status page to help others prioritize fixes for transient issues, leave a comment on the review referencing the bug causing the transient failure (not the bug you're attempting to fix with your patch):
+4. To re-run check or gate jobs, leave a comment on the review referencing the bug causing the transient failure (not the bug you're attempting to fix with your patch):
 
   1. To re-run the check jobs (before a change has been approved), leave a comment with the form "recheck bug ####".
   2. To re-run the gate jobs (after a change has been approved), leave a comment with the form "reverify bug ####".
 
-5. If a nice message from Elastic Recheck didn't show up in your patch when Jenkins failed, and you've identified a bug to recheck/reverify against, help out by writing an elastic-recheck query for the bug.
+5. If a nice message from Elastic Recheck didn't show up in your patch when Jenkins failed, and you've identified a bug to recheck/reverify against, help out by writing an `elastic-recheck query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for the bug.
 
-If you need to re-run tests and it does not make sense to include a bug number (perhaps there is no error, you've just made a draft change visible and want it tested or you're updating test results because you know that a related branch has changed since the last time they were run), you may leave a comment with the form "recheck no bug". Please only do this if you are certain there is no bug that needs to be addressed. A bug number is required to reverify.
+If you need to re-run tests and it does not make sense to include a bug number (perhaps there is no error or you're updating test results because you know that a related branch has changed since the last time they were run), you may leave a comment with the form "recheck no bug". Please only do this if you are certain there is no bug that needs to be addressed. A bug number is required to reverify.
 
 Peer Review
 -----------
