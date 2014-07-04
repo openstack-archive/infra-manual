@@ -83,6 +83,7 @@ address::
 
   git config --global user.name "Firstname Lastname"
   git config --global user.email "your_email@youremail.com"
+  git config --global user.editor "your preferred editor"
 
 To check your git configuration::
 
@@ -128,20 +129,27 @@ git commands. If you want to know more about what it's doing, just
 add -v to the options and it will print out all of the commands it's
 running.
 
-Starting Work on a New Project
-------------------------------
+Learn the Gerrit Workflow in the Sandbox
+----------------------------------------
 
-Clone a project in the usual way, for example::
+OpenStack has a sandbox repository for learning and testing purposes:
+http://git.openstack.org/cgit/openstack-dev/sandbox/ This is a great
+repository to begin your OpenStack learning. It allows you to experiment
+with the workflow and try different options so you can learn what they do.
+Please only create 2 or 3 different patches and submit new patchsets to those
+few patches. Please don't create 10 or more patches, this is not what this
+repo is designed for.
 
-  git clone https://git.openstack.org/openstack/nova.git
+Clone the sandbox repo::
 
-You may want to ask git-review to configure your project to know about
-Gerrit at this point.  If you don't, it will do so the first time you
+  git clone ``https://git.openstack.org/openstack-dev/sandbox``
+
+Move into the root directory for the sandbox repo and configure git-review
+so that it knows about Gerrit. If you don't, it will do so the first time you
 submit a change for review, but you probably want to do this ahead of
-time so the Gerrit Change-Id commit hook gets installed.  To do so
-(again, using Nova as an example)::
+time so the Gerrit Change-Id commit hook gets installed.  To do so::
 
-  cd nova
+  cd sandbox
   git review -s
 
 Git-review checks that you can log in to gerrit with your ssh key. It
@@ -158,7 +166,6 @@ on gerrit <https://review.openstack.org/#/settings/>`_ to check it out
 
 Note that you can verify the SSH host keys for review.openstack.org
 here: https://review.openstack.org/#/settings/ssh-keys
-
 
 Development Workflow
 ====================
