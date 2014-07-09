@@ -131,6 +131,8 @@ pip::
 
   pip install git-review
 
+If you run into trouble you can refer to the git-review readme file:
+http://git.openstack.org/cgit/openstack-infra/git-review/tree/README.rst
 
 All of git-review's interactions with gerrit are sequences of normal
 git commands. If you want to know more about what it's doing, just
@@ -144,7 +146,7 @@ OpenStack has a sandbox repository for learning and testing purposes:
 http://git.openstack.org/cgit/openstack-dev/sandbox/ This is a great
 repository to begin your OpenStack learning. It allows you to experiment
 with the workflow and try different options so you can learn what they do.
-Please only create 2 or 3 different patches and submit new patchsets to those
+Please only create 2 or 3 different patchs and submit new patchsets to those
 few patches. Please don't create 10 or more patches, this is not what this
 repo is designed for.
 
@@ -175,51 +177,20 @@ on gerrit <https://review.openstack.org/#/settings/>`_ to check it out
 Note that you can verify the SSH host keys for review.openstack.org
 here: https://review.openstack.org/#/settings/ssh-keys
 
-If you get this error::
+If you get an error that says no .gitreview file found, we don't know
+where your gerrit is, you need to ensure your are in the openstack repo
+root directory when you run git review.
 
- Traceback (most recent call last):
-  File "/usr/local/bin/git-review", line 11, in <module>
-    sys.exit(main())
-  File "/usr/local/lib/python2.7/dist-packages/git_review/cmd.py", line 1157, in main
-    raise no_git_dir
- git_review.cmd.GitDirectoriesException: Cannot determine where .git directory is.
- The following command failed with exit code 128
-    "git rev-parse --show-toplevel --git-dir"
- -----------------------
- fatal: Not a git repository (or any of the parent directories): .git
- -----------------------
-
-you need to ensure your are in the sandbox repo root directory when
-you run git review.
-
-If you get output that includes the message::
-
- This repository is now set up for use with git-review.
-
-you have completed git-review -s successfully and can proceed.
+If you get output that includes the message "This repository is now
+set up for use with git-review." you have completed git-review -s
+successfully and can proceed.
 
 Create a git branch locally from the sandbox repo master branch::
 
   git checkout -b <new-branch>
 
-Create a new file, add some content and save the file.
-Run::
-
-  git status
-
-and stage your changes with::
-
-  git add <filename>
-
-or::
-
-  git add .
-
-or::
-
-  git add -a
-
-Next commit your change with::
+Create a new file, add some content and save the file. Run git status
+and stage your changes with git add. Next commit your change with::
 
   git commit
 
@@ -230,13 +201,13 @@ Then save the file and close the editor. Next submit your patch to gerrit::
 
   git review
 
-You will get some output including a URL to your patch, click on the URL
+You will get some output including a url to your patch, click on the url
 and view your patch.
 
 Now create a second patchset, in the same git branch as your first patchset,
 make some changes, either create a new file or add or delete content in your
 first file. Save your changes and stage them. To ensure you submit your new
-patchset to the same change execute::
+changes to the same patchset execute::
 
   git commit --amend
 
@@ -247,8 +218,7 @@ Then run::
   git review
 
 and again you should see a url that links to your patch. Viewing the patch
-you should see a new patchset as patchset 2 below your original patchset 1,
-you should not see a new change.
+you should see a second version of your first patchset not a new patchset.
 
 Development Workflow
 ====================
