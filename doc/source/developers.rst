@@ -131,6 +131,8 @@ pip::
 
   pip install git-review
 
+If you run into trouble you can refer to this mediawiki page:
+http://www.mediawiki.org/wiki/Gerrit/git-review
 
 All of git-review's interactions with gerrit are sequences of normal
 git commands. If you want to know more about what it's doing, just
