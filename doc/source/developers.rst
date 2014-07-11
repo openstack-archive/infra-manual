@@ -8,6 +8,7 @@ Developer's Guide
 Quick Reference
 ===============
 .. image:: code_review.png
+   :width: 700 px
 
 Getting Started
 ===============
