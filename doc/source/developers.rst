@@ -131,6 +131,8 @@ pip::
 
   pip install git-review
 
+If you run into trouble, you can refer to the `git-review readme file
+<http://git.openstack.org/cgit/openstack-infra/git-review/tree/README.rst>`_.
 
 All of git-review's interactions with gerrit are sequences of normal
 git commands. If you want to know more about what it's doing, just
