@@ -13,6 +13,14 @@ Quick Reference
 Getting Started
 ===============
 
+The goal of this document is to walk you through the concepts and
+specifics that should be understood while contributing to OpenStack.
+
+Prior to contributing to an OpenStack project a few steps need to be
+completed. This document covers the steps that get you started, such as
+creating a few accounts on required websites, signing a contributor
+license agreement, uploading an ssh key, and installing git-review.
+
 Account Setup
 -------------
 
