@@ -392,7 +392,19 @@ https://wiki.openstack.org/wiki/ReviewChecklist
 Work in Progress
 ----------------
 
-TODO
+To get **early feedback** on a change which is not fully finished yet,
+You can submit a change to gerrit and mark it as **Work in Progress**.
+
+To do so, after submitting a change to gerrit in usual way (``git review``),
+You should go to gerrit, and do `Code Review`_ of your own change while
+setting *Workflow* vote to *-1* which marks the change as WIP.
+
+This allows others to review the change, while at the same time
+blocking it from being merged, as you already plan to continue working on it.
+
+.. Note:: After uploading a new patchset, this -1 (WIP) vote disappears.
+    So if you still plan to do additional changes, don't forget to **set Workflow to -1**
+    on the new patchset.
 
 Merging
 =======
