@@ -329,59 +329,84 @@ Code Review
 Log in to https://review.openstack.org/ to see proposed changes, and
 review them.
 
-To provide a review for a proposed change in the Gerrit UI, click on
-the Review button (it will be next to the buttons that will provide
-unified or side-by-side diffs in the browser). In the code review, you
-can add a message, as well as a vote (+1,0,-1).
+To provide a **review for a proposed change** in the Gerrit UI, click on
+the *Review* button (it will be next to the buttons that will provide
+unified or side-by-side diffs in the browser,
+or *Reply...* button on top if You are using New Screen UI/View).
+In the code review, you can **add a message**, as well as a **vote** (+1,0,-1).
 
 Any Openstack developer may propose or comment on a change (including
-voting +1/0/-1 on it). Openstack projects have a policy requiring two
-positive reviews from core reviewers. A vote of +2 is allowed from
+voting +1/0/-1 on it). Openstack projects have a policy requiring **two
+positive reviews from core reviewers**. A vote of +2 is allowed from
 core reviewers, and should be used to indicate that they are a core
 reviewer and are leaving a vote that should be counted as such.
 
 When a review has two +2 reviews and one of the core team believes it
 is ready to be merged, he or she should leave a +1 vote in the
-"Approved" category. You may do so by clicking the "Review" button
+*Approved* category. You may do so by clicking the *Review* button
 again, with or without changing your code review vote and optionally
-leaving a comment. When a +1 Approved review is received, Jenkins will
-run tests on the change, and if they pass, it will be merged.
+leaving a comment. When a **+1 Approved** review is received, Jenkins will
+run tests on the change, and if they pass, it **will be merged**.
 
 A green checkmark indicates that the review has met the requirement
-for that category. Under "Code-Review", only one +2 gets the green
+for that category. Under *Code-Review*, only one +2 gets the green
 check.
 
 Automated Testing
 -----------------
 
-When a new patchset is uploaded to Gerrit, that project's "check"
-tests are run on the patchset by Jenkins. Once completed the test
-results are reported to Gerrit by Jenkins in the form of a Verified:
-+/-1 vote. After code reviews have been completed and a change
-receives an Approved: +1 vote that project's "gate" tests are run on
+When a new **patchset is uploaded** to Gerrit, that project's **"check"
+tests** are run on the patchset by Jenkins. Once completed the test
+results are reported to Gerrit by Jenkins in the form of a **Verified:
++/-1 vote**. After code reviews have been completed and a change
+receives an **Approved: +1 vote** that project's **"gate" tests** are run on
 the change by Jenkins. Jenkins reports the results of these tests back
-to Gerrit in the form of a Verified: +/-2 vote. Code merging will only
+to Gerrit in the form of a **Verified: +/-2 vote**. Code merging will only
 occur after the gate tests have passed successfully and received a
 Verified: +2. You can view the state of tests currently being run on
-the Zuul Status.
+the `Zuul Status <http://status.openstack.org/zuul/>`_ page.
 
 If a change fails tests in Jenkins, please follow the steps below:
 
-1. Jenkins leaves a comment in the review with links to the log files for the test run. Follow those links and examine the output from the test. It will include a console log, and in the case of unit tests, HTML output from the test runner, or in the case of a devstack-gate test, it may contain quite a large number of system logs.
-2. Examine the console log or other relevant log files to determine the cause of the error. If it is related to your change, you should fix the problem and upload a new patchset. Do not use "recheck" or "reverify".
-3. If the problem is due to non-deterministic behavior already merged, and is unrelated to your change, you should do the following to help other developers who may be affected by the same issue, and to focus attention of QA, CI, and other developers working to fix high-impact bugs and improve test systems:
+1. Jenkins leaves a comment in the review with **links to the log files** for the test run.
+   Follow those links and examine the output from the test.
+   It will include a console log, and in the case of unit tests, HTML output from the test runner,
+   or in the case of a devstack-gate test, it may contain quite a large number of system logs.
+2. Examine the console log or other relevant log files to **determine the cause of the error**.
+   If it is related to **your change**, you should **fix** the problem and upload a new patchset.
+   Do *not* use "recheck" or "reverify".
+3. If the problem is due to **non-deterministic** behavior already merged,
+   and is **unrelated** to your change, you should do the following
+   to help other developers who may be affected by the same issue,
+   and to focus attention of QA, CI, and other developers working to fix
+   high-impact bugs and improve test systems:
 
-  1. Visit http://status.openstack.org/elastic-recheck/ to see if one of the bugs listed there matches the error you've seen. If your error isn't there, then:
-  2. Identify which project(s) are affected, and search for a related bug on Launchpad. You can search for bugs affecting all OpenStack Programs here: https://bugs.launchpad.net/openstack/ If you do not find an existing bug, file a new one (and be sure to include the error message and a link to the logs for the failure). If the problem is due to an infrastructure problem (such as Jenkins, Gerrit, etc.), file (or search for) the bug against the openstack-ci project.
+  1. Visit http://status.openstack.org/elastic-recheck/ to see
+     if one of the **bugs listed there matches the error** you've seen.
+     If your error isn't there, then:
+  2. Identify which project(s) are affected, and **search for a related bug** on `Launchpad <https://launchpad.net>`_.
+     You can search for bugs affecting all OpenStack Programs on https://bugs.launchpad.net/openstack/.
+     If you do not find an existing bug, file a new one
+     (and be sure to include the error message and a link to the logs for the failure).
+     If the problem is due to an infrastructure problem (such as Jenkins, Gerrit, etc.),
+     file (or search for) the bug against the openstack-ci project.
 
-4. To re-run check or gate jobs, leave a comment on the review referencing the bug causing the transient failure (not the bug you're attempting to fix with your patch):
+4. To **re-run check or gate** jobs, leave a comment on the review referencing the bug
+   causing the transient failure (not the bug you're attempting to fix with your patch):
 
   1. To re-run the check jobs (before a change has been approved), leave a comment with the form "recheck bug ####".
   2. To re-run the gate jobs (after a change has been approved), leave a comment with the form "reverify bug ####".
 
-5. If a nice message from Elastic Recheck didn't show up in your patch when Jenkins failed, and you've identified a bug to recheck/reverify against, help out by writing an `elastic-recheck query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for the bug.
+5. If a nice message from Elastic Recheck didn't show up in your patch when Jenkins failed,
+   and you've identified a bug to recheck/reverify against,
+   help out by writing an `elastic-recheck query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for the bug.
 
-If you need to re-run tests and it does not make sense to include a bug number (perhaps there is no error or you're updating test results because you know that a related branch has changed since the last time they were run), you may leave a comment with the form "recheck no bug". Please only do this if you are certain there is no bug that needs to be addressed. A bug number is required to reverify.
+If you need to re-run tests and it does not make sense to include a bug number
+(perhaps there is no error or you're updating test results because you know
+that a related branch has changed since the last time they were run),
+you may leave a comment with the form "recheck no bug".
+Please only do this if you are certain there is no bug that needs to be addressed.
+A bug number is required to reverify.
 
 Peer Review
 -----------
