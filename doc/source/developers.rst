@@ -386,8 +386,10 @@ If you need to re-run tests and it does not make sense to include a bug number (
 Peer Review
 -----------
 
-https://wiki.openstack.org/wiki/ReviewChecklist
-
+Before reviewing a patch for an OpenStack project, it is helpful to first
+read the checklist <https://wiki.openstack.org/wiki/ReviewChecklist>.
+It contains a list of things that reviewers should keep in mind when 
+reviewing patches to OpenStack projects.
 
 Work in Progress
 ----------------
