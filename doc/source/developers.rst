@@ -56,7 +56,7 @@ matches the one you set for your OpenStack Foundation Membership --
 otherwise Gerrit will give you an error message and refuse to accept
 your contact information.
 
-Employees of the the U.S. Government do not sign the Individual
+Employees of the U.S. Government do not sign the Individual
 CLA. Instead, someone with authority to sign on behalf of your agency
 should sign the `U.S. Government Contributor License Agreement
 <https://wiki.openstack.org/wiki/GovernmentCLA>`_. Please contact the
@@ -249,7 +249,7 @@ developers will peer review it.
 Updating a Change
 -----------------
 If the code review process suggests additional changes, make and amend
-the changes to the the existing commit. Leave the existing Change-Id:
+the changes to the existing commit. Leave the existing Change-Id:
 footer in the commit message as-is. Gerrit knows that this is an
 updated patch for an existing change::
 
