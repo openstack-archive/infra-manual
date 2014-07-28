@@ -334,8 +334,8 @@ the Review button (it will be next to the buttons that will provide
 unified or side-by-side diffs in the browser). In the code review, you
 can add a message, as well as a vote (+1,0,-1).
 
-Any Openstack developer may propose or comment on a change (including
-voting +1/0/-1 on it). Openstack projects have a policy requiring two
+Any OpenStack developer may propose or comment on a change (including
+voting +1/0/-1 on it). OpenStack projects have a policy requiring two
 positive reviews from core reviewers. A vote of +2 is allowed from
 core reviewers, and should be used to indicate that they are a core
 reviewer and are leaving a vote that should be counted as such.
