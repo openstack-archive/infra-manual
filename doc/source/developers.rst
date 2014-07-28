@@ -156,8 +156,8 @@ If you don't remember your Gerrit user name go to the `settings page
 on gerrit <https://review.openstack.org/#/settings/>`_ to check it out
 (it's not your email address).
 
-Note that you can verify the SSH host keys for review.openstack.org
-here: https://review.openstack.org/#/settings/ssh-keys
+.. Note:: You can verify the SSH host keys for review.openstack.org
+    on https://review.openstack.org/#/settings/ssh-keys
 
 
 Development Workflow
@@ -231,9 +231,9 @@ Make your changes, commit them, and submit them for review::
 
   git commit -a
 
-Caution: Do not check in changes on your master branch.  Doing so will
-cause merge commits when you pull new upstream changes, and merge
-commits will not be accepted by Gerrit.
+.. Note:: Do not check in changes on your master branch.  Doing so will
+    cause merge commits when you pull new upstream changes, and merge
+    commits will not be accepted by Gerrit.
 
 Submitting a Change for Review
 ------------------------------
@@ -295,13 +295,13 @@ Edit files, add files to git::
   git commit -a
   git review
 
-NOTE: git review rebases the existing change (the dependency) and the
-new commit if there is a conflict against the branch they are being
-proposed to. Typically this is desired behavior as merging cannot
-happen until these conflicts are resolved. If you don't want to deal
-with new patchsets in the existing change immediately you can pass
-the -R option to git review in the last step above to prevent
-rebasing. This requires future rebasing to resolve conflicts.
+.. Note:: git review rebases the existing change (the dependency) and the
+    new commit if there is a conflict against the branch they are being
+    proposed to. Typically this is desired behavior as merging cannot
+    happen until these conflicts are resolved. If you don't want to deal
+    with new patchsets in the existing change immediately you can pass
+    the ``-R`` option to git review in the last step above to prevent
+    rebasing. This requires future rebasing to resolve conflicts.
 
 If the commit your work depends on is updated, and you need to get the
 latest patch from the depended commit, you can do the following.
@@ -320,7 +320,7 @@ Submit rebased change for review::
 
 The note for the previous example applies here as well. Typically you
 want the rebase behavior in git review. If you would rather postpone
-resolving merge conflicts you can use git review -R as the last step
+resolving merge conflicts you can use git review ``-R`` as the last step
 above.
 
 Code Review
