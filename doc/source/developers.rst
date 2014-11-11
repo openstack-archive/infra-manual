@@ -175,7 +175,7 @@ Development Workflow
 Working on Bugs
 ---------------
 
-TODO: Finding a bug in launchpad and assigning it to yourself.
+TODO: Finding a bug in launchpad/storyboard and assigning it to yourself.
 
 Working on Blueprints
 ---------------------
