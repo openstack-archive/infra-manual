@@ -20,4 +20,5 @@ instead a user or developer looking for API documentation, see
    developers
    core
    drivers
+   creators
    third-party
