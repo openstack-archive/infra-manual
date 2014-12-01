@@ -14,26 +14,136 @@ Merge Commits
 Release Management
 ==================
 
-Milestones
-----------
+This section describes topics related to release management.
 
-Create milestone-proposed Branch
+.. (jeblair) After the other sections move, this should probably
+   mention that actions here require specific permissions, and name
+   what they are.
+
+Release Branches
+----------------
+
+Between RC1 and the final release, there needs to be a separate branch
+in Gerrit for release-critical changes destined for the final
+release. Meanwhile, development on the master branch should continue
+as normal (with the addition that changes proposed for the final
+release should also be proposed for master, and some changes for
+master may need to be applied to the release branch).
+
+This process creates an ephemeral proposed/<series> (for example,
+proposed/juno) branch that is only available in Gerrit during the
+final release process. At final release, a tag is applied to the final
+commit to record the state of the branch at the time.
+
+Create proposed/* Branch
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+For OpenStack projects this should be performed by the OpenStack
+Release Manager at the Release Branch Point.  If you are managing
+branches for your project you may have permission to do this yourself.
+
+* Go to https://review.openstack.org/ and sign in
+* Select 'Admin', 'Projects', then the project
+* Select 'Branches'
+* Enter ``proposed/<series>`` in the 'Branch Name' field, and ``HEAD``
+  as the 'Initial Revision', then press 'Create Branch'.
+  Alternatively, you may run ``git branch proposed<series> <sha> &&
+  git push gerrit proposed/<series>``
+
+In your local checkout::
+
+  git checkout master
+  git pull
+  git checkout proposed/<series>
+
+Authoring Changes for proposed/*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Authoring Changes for milestone-proposed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. (jeblair) This probably belongs in developer.rst
 
-Submit Changes in master to milestone-proposed
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Create topic branches as normal, but branch them from proposed/\*
+rather than master::
 
-Submit Changes in milestone-proposed to master
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  git checkout proposed/<series>
+  git pull
+  git checkout -b <topic branch>
+
+Changes for proposed/\* should be submitted with::
+
+  git review proposed/<series>
+
+Submit Changes in master to proposed/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. (jeblair) This probably belongs in developer.rst
+
+If a change to master should also be included in proposed/\*, use this
+procedure to cherry-pick that change and submit it for review::
+
+  git checkout proposed/<series>
+  git pull
+  git checkout -b master-to-mp
+  git cherry-pick -x <SHA1 or "master">
+  git review proposed/<series>
+  git checkout master
+  git branch -D master-to-mp
+
+``git cherry-pick`` master will pick the most recent commit from master
+to apply, if you want a different patch, use the SHA1 of the commit
+instead.
+
+The ``-x`` flag will ensure the commit message records the SHA1 hash of
+the original commit in master.
+
+If there are conflicts when cherry-picking, do not delete the
+'Conflicts' lines GIT adds to the commit message. These are valuable
+to reviewers to identify files which need extra attention.
+
 
 Tagging a Release
 ~~~~~~~~~~~~~~~~~
 
-End of Milestone
-~~~~~~~~~~~~~~~~
+This step should be performed by the OpenStack Release Manager when
+the release is made.  If you are managing your own releases, you may
+have permission to do this yourself.
+
+Tag the tip of the appropriate branch (proposed/<series> for server
+projects, master for clients/libraries) with a release tag and push
+that tag to Gerrit by running the following commands::
+
+  git checkout <branch name>
+  git pull --ff-only
+  git tag -s <version number>
+  git push gerrit <version number>
+
+.. note::
+
+  * Git won't have a remote named gerrit until the first time git-review
+    runs. You may need to run ``git review -s`` before the push.
+
+  * The -s option to git tag signs the tag using GnuPG, so it's
+    important to ensure that the person making the release has a
+    suitable OpenPGP key.
+
+  * Make sure you're only adding a single tag when pushing to
+    gerrit, like in the example above.
+
+  * After a tag is created the release build will get deployed to a
+    repository such as PyPI.
+
+End of Release
+~~~~~~~~~~~~~~
+This step should be performed by the OpenStack Release Manager after
+the release is tagged.
+
+When the release process is complete and the released commit is
+tagged, remove the ``proposed/<series>`` branch. The tag will persist,
+even after the branch is deleted, making it possible to restore the
+state of the tree.
+
+* Go to https://review.openstack.org/ and sign in
+* Select 'Admin', 'Projects', then the project
+* Select 'Branches'
+* Select the checkbox next to 'proposed/<series>' and hit 'Delete'
 
 Targeting Blueprints
 ====================
