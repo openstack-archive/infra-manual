@@ -381,6 +381,16 @@ the Review button (it will be next to the buttons that will provide
 unified or side-by-side diffs in the browser). In the code review, you
 can add a message, as well as a vote (+1,0,-1).
 
+It's also possible to add comments to specific lines in the file, for
+giving context to the comment. For that look at the diff of changes
+done in the file (click the file name), and click on the line number
+for which you want to add the inline comment. After you add one or
+more inline comments, you still have to send the Review message (see
+above, with or without text and vote). Prior to sending the inline
+comments in a review comment the inline comments are stored as Drafts
+in your browser. Other reviewers can only see them after you have
+submitted them as a comment on the patch.
+
 Any OpenStack developer may propose or comment on a change (including
 voting +1/0/-1 on it). OpenStack projects have a policy requiring two
 positive reviews from core reviewers. A vote of +2 is allowed from
@@ -397,6 +407,10 @@ run tests on the change, and if they pass, it will be merged.
 A green checkmark indicates that the review has met the requirement
 for that category. Under "Code-Review", only one +2 gets the green
 check.
+
+For more details on reviews in Gerrit, check the
+`Gerrit documentation
+<https://review.openstack.org/Documentation/intro-quick.html#_reviewing_the_change>`_.
 
 Automated Testing
 -----------------
