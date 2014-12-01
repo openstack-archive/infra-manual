@@ -400,6 +400,58 @@ Before reviewing a patch for an OpenStack project, it is helpful to first
 `read the checklist <https://wiki.openstack.org/wiki/ReviewChecklist>`_.
 It contains a list of things that reviewers should keep in mind when
 reviewing patches to OpenStack projects.
+=======
+Anyone can be a reviewer: participatingt to the review process is a
+great way to learn about OpenStack social norms and the development
+processess. Some things are necessary to keep in mind when doing code
+reviews:
+
+  1. The code should comply with everything in that project's
+`HACKING.rst` file, if it has one. If the project reuses nova's
+hacking guideines, then it may have a "hacking" section in its
+`tox.ini` file in which case much of this is already checked
+automatically for you by the continuous integration system.  
+  2. The code should be 'pythonic' and look like the code around it,
+to make the code more uniform and easier to read.
+  3. Commit Message and Change break-up: 
+      1.  Follow the advice of GitCommitMessages.
+      2.  Use the "DocImpact" tag on changes that affect
+documentation.  
+      3.  Use the "SecurityImpact" tag on changes that should get the
+attention of the OpenStack Security Group (OSSG) for additional
+review.
+      4.  Use the "UpgradeImpact" tag on changes which require
+configuration changes to be mentioned in the release notes.  
+      5.  If the patch fixes a bug, it should reference a bug report.
+      6.  If the patch implements a feature, it should reference a
+blueprint. The blueprint should be approved before the patch is
+merged.  
+  4. Test Case implementation (Mock vs. Mox):
+      1.  New test cases should be implemented using Mock. It is part
+of the Python standard library in Python 3 and as such is the
+preferred method for OpenStack.  
+      2.  Exceptions can be made for tests added where Mox was already
+in use, or any other situation where using Mock would cause excessive
+difficulty for some reason.  
+      3.  There is no need to convert existing Mox test cases to Mock,
+but if you are changing a Mox test case anyway, please consider
+converting it to Mock at the same time.
+  5.  About Python 3 compatibility:
+      1.  It is preferred for new code to use package six. When it is
+possible we should be use `six.text_type` or `six.text_binary` to cast
+or test value for unicode or str.  
+  6.  The code should comply with the community `logging standards
+<https://wiki.openstack.org/wiki/LoggingStandards>`_ 
+
+There may be more specific items to be aware of inside the projects'
+documentation for contributors.
+
+Non-Core contributors may notice a review that has several +1's from
+other reviewers, passes the functional tests, etc. but the code still
+has not been merged. As only Core Contributors can approve code for
+merging, you can help things along by getting a core developer's
+attention (preferably in IRC) and letting them know there is a review
+with lots of positive reviews and needs final approval.
 
 Work in Progress
 ----------------
