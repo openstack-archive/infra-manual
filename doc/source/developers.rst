@@ -426,25 +426,50 @@ the change by Jenkins. Jenkins reports the results of these tests back
 to Gerrit in the form of a Verified: +/-2 vote. Code merging will only
 occur after the gate tests have passed successfully and received a
 Verified: +2. You can view the state of tests currently being run on
-the Zuul Status.
+the `Zuul Status page <http://status.openstack.org/zuul>`_.
 
 If a change fails tests in Jenkins, please follow the steps below:
 
-1. Jenkins leaves a comment in the review with links to the log files for the test run. Follow those links and examine the output from the test. It will include a console log, and in the case of unit tests, HTML output from the test runner, or in the case of a devstack-gate test, it may contain quite a large number of system logs.
-2. Examine the console log or other relevant log files to determine the cause of the error. If it is related to your change, you should fix the problem and upload a new patchset. Do not use "recheck" or "reverify".
-3. If the problem is due to non-deterministic behavior already merged, and is unrelated to your change, you should do the following to help other developers who may be affected by the same issue, and to focus attention of QA, CI, and other developers working to fix high-impact bugs and improve test systems:
+1. Jenkins leaves a comment in the review with links to the log files
+   for the test run. Follow those links and examine the output from
+   the test. It will include a console log, and in the case of unit
+   tests, HTML output from the test runner, or in the case of a
+   devstack-gate test, it may contain quite a large number of system
+   logs.
+2. Examine the console log or other relevant log files to determine
+   the cause of the error. If it is related to your change, you should
+   fix the problem and upload a new patchset. Do not use "recheck".
+3. It may be the case that the problem is due to non-deterministic
+   behavior unrelated to your change that has already merged. In this
+   situation, you can help other developers and focus the attention of
+   QA, CI, and developers working on a fix by performing the following
+   steps:
 
-  1. Visit http://status.openstack.org/elastic-recheck/ to see if one of the bugs listed there matches the error you've seen. If your error isn't there, then:
-  2. Identify which project(s) are affected, and search for a related bug on Launchpad. You can search for bugs affecting all OpenStack Programs here: https://bugs.launchpad.net/openstack/ If you do not find an existing bug, file a new one (and be sure to include the error message and a link to the logs for the failure). If the problem is due to an infrastructure problem (such as Jenkins, Gerrit, etc.), file (or search for) the bug against the openstack-ci project.
+  1. Visit http://status.openstack.org/elastic-recheck/ to see if one
+     of the bugs listed there matches the error you've seen. If your
+     error isn't there, then:
+  2. Identify which project(s) are affected, and search for a related
+     bug on Launchpad. You can search for bugs affecting all OpenStack
+     Programs here: https://bugs.launchpad.net/openstack/ If you do
+     not find an existing bug, file a new one (be sure to include
+     the error message and a link to the logs for the failure). If the
+     problem is due to an infrastructure problem (such as Jenkins or
+     Gerrit), file (or search for) the bug against the openstack-ci
+     project.
 
-4. To re-run check or gate jobs, leave a comment on the review referencing the bug causing the transient failure (not the bug you're attempting to fix with your patch):
+4. To re-run check or gate jobs, leave a comment on the review
+   with the form "recheck".
 
-  1. To re-run the check jobs (before a change has been approved), leave a comment with the form "recheck bug ####".
-  2. To re-run the gate jobs (after a change has been approved), leave a comment with the form "reverify bug ####".
+5. If a nice message from Elastic Recheck didn't show up in your patch
+   when Jenkins failed, and you've identified a bug to recheck
+   against, help out by writing an `elastic-recheck query
+   <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for
+   the bug.
 
-5. If a nice message from Elastic Recheck didn't show up in your patch when Jenkins failed, and you've identified a bug to recheck/reverify against, help out by writing an `elastic-recheck query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for the bug.
-
-If you need to re-run tests and it does not make sense to include a bug number (perhaps there is no error or you're updating test results because you know that a related branch has changed since the last time they were run), you may leave a comment with the form "recheck no bug". Please only do this if you are certain there is no bug that needs to be addressed. A bug number is required to reverify.
+If the patch has failed a gate job and thus is approved, a recheck
+will first run the check jobs and if those pass, it will run again the
+gate jobs. There is no way to only run the gate jobs, the check jobs
+will first be run again.
 
 Peer Review
 -----------
