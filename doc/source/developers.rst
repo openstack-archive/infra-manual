@@ -176,7 +176,44 @@ Development Workflow
 Working on Bugs
 ---------------
 
-TODO: Finding a bug in launchpad and assigning it to yourself.
+Bug reports for a program or project are tracked on Launchpad at
+https://bugs.launchpad.net/<projectname>. Contributors may review these
+reports regularly when looking for work to complete.
+
+There are 4 key tasks with regards to bugs that anyone can do:
+
+ #. Confirm new bugs: When a bug is filed, it is set to the "New" status.
+    A "New" bug can be marked "Confirmed" once it has been reproduced
+    and is thus confirmed as genuine.
+ #. Solve inconsistencies: Make sure bugs are Confirmed, and if assigned
+    that they are marked "In Progress"
+ #. Review incomplete bugs: See if information that caused them to be marked
+    "Incomplete" has been provided, determine if more information is required
+    and provide reminders to the bug reporter if they haven't responded after
+    2-4 weeks.
+ #. Review stale In Progress bugs: Work with assignee of bugs to determine
+    if the bug is still being worked on, if not, unassign them and mark them
+    back to Confirmed or Triaged.
+
+Learn more about working with bugs for various projects at:
+
+https://wiki.openstack.org/wiki/BugTriage
+
+Bug statuses are documented here:
+
+https://wiki.openstack.org/wiki/Bugs
+
+If you find a bug that you wish to work on, you may assign it to yourself.
+When you upload a review, include the bug in the commit message for
+automatic updates back to Launchpad. The following options are available::
+
+  Closes-Bug: #######
+  Partial-Bug: #######
+  Related-Bug: #######
+
+Also see the `Including external references
+<https://wiki.openstack.org/wiki/GitCommitMessages#Including_external_references>`_
+section of the OpenStack Git Commit Good Practices wiki page.
 
 Working on Blueprints
 ---------------------
