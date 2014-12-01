@@ -449,6 +449,8 @@ For more details on reviews in Gerrit, check the
 `Gerrit documentation
 <https://review.openstack.org/Documentation/intro-quick.html#_reviewing_the_change>`_.
 
+.. _automated-testing:
+
 Automated Testing
 -----------------
 
