@@ -8,8 +8,74 @@ Project Driver's Guide
 Feature Branches
 ================
 
+There are times when prolonged development on specific features is easier
+on a feature branch rather than on master. In particular it organizes
+work to a location that interested parties can follow. Feature branches
+also move merge points to specific points in time rather than at every
+proposed change.
+
+To get started with a feature branch you will need to create the new
+branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
+not allow for pushing of new branches via git, but specific groups of
+Gerrit users can create new branches. For OpenStack projects the Infra
+team and the OpenStack Release Managers can create branches. Stackforge
+projects can update their Gerrit ACLs to allow their release teams to
+create these branches. For similar Gerrit ACL reasons branch deletion
+is typically limited to the Infra team. Keep this in mind before
+creating many branches that will need cleanup.
+
+One additional thing to keep in mind is that feature branches should be
+treated like master in most cases. They are specifically not for sustained
+long term development like stable branches.
+
 Merge Commits
 -------------
+
+An important activity when using feature branches is syncing to and from
+the project's master branch. During development on a feature branch a
+project will want to merge master into the feature branch periodically
+to keep up to date with changes over time. Then when development on the
+feature branch is complete, it will need to be merged into master.
+
+Before this can happen the project's release group will need to have
+access to push merge commits in Gerrit::
+
+  [access "refs/for/refs/*"]
+  pushMerge = group <project>-release
+
+Should be added to the project's ACL file in the project-config repo.
+
+Merge Master into Feature Branch
+--------------------------------
+
+::
+
+  git remote update
+  git checkout feature-branch
+  git pull --ff-only origin feature-branch
+  git checkout -b merge-branch
+  git merge origin/master
+  # Amend the merge commit to automatically add a Change-ID to the commit message
+  GIT_EDITOR=/bin/true git commit --amend
+  git review -R feature-branch
+  git checkout master
+  git branch -D merge-branch
+
+Merge Feature Branch into Master
+--------------------------------
+
+::
+
+  git remote update
+  git checkout master
+  git pull --ff-only origin master
+  git checkout -b merge-branch
+  git merge origin/feature-branch
+  # Amend the merge commit to automatically add a Change-ID to the commit message:
+  GIT_EDITOR=/bin/true git commit --amend
+  git review -R
+  git checkout master
+  git branch -D merge-branch
 
 Release Management
 ==================
