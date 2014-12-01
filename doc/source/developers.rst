@@ -128,7 +128,7 @@ under the name python-git-review, so install it as any other package::
   zypper in python-git-review
 
 On MacOSx, or most other Unix-like systems, you may install it with
-pip::
+`pip <http://docs.python-guide.org/en/latest/starting/install/osx/>`_::
 
   pip install git-review
 
