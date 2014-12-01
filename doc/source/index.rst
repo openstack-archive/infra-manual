@@ -21,3 +21,8 @@ instead a user or developer looking for API documentation, see
    core
    drivers
    third-party
+
+.. toctree::
+   :hidden:
+
+   sandbox
