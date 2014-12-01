@@ -463,6 +463,8 @@ occur after the gate tests have passed successfully and received a
 Verified: +2. You can view the state of tests currently being run on
 the `Zuul Status page <http://status.openstack.org/zuul>`_.
 
+.. _failed-tests:
+
 If a change fails tests in Jenkins, please follow the steps below:
 
 1. Jenkins leaves a comment in the review with links to the log files
