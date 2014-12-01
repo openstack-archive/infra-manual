@@ -503,7 +503,21 @@ blocking it from being merged, as you already plan to continue working on it.
 Merging
 =======
 
-TODO
+Once a patch has been approved and passed the gate jobs, Gerrit
+automatically merges the patch.
+
+Each patch gets merged to the head of the branch before testing it. If
+Gerrit cannot merge a patch, it will give a -1 review and add a
+comment notifying of merge failure.
+
+Each time a change merges, the "merge-check" pipeline verifies that
+all open changes on the same project are still mergeable. If any job
+is not mergeable, Jenkins will give a -1 review and add a comment
+notifying of merge failure.
+
+After a change is merged, project specific post jobs are run. Most
+often the post jobs publish documentation, run coverage, or send
+strings to the translation server.
 
 Project Gating
 --------------
