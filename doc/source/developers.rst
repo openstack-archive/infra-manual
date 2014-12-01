@@ -217,10 +217,45 @@ Also see the `Including external references
 <https://wiki.openstack.org/wiki/GitCommitMessages#Including_external_references>`_
 section of the OpenStack Git Commit Good Practices wiki page.
 
-Working on Blueprints
----------------------
+Working on Specifications and Blueprints
+----------------------------------------
 
-TODO: Spec process.
+Many OpenStack projects and programs have a <project>-specs respository which
+is used to hold approved design specifications for additions and changes to
+the project or program.
+
+The layout of the repository will typically be something like::
+
+  specs/<release>/
+
+It may also have subdirectories to make clear which specifications are approved
+and which have already been implemented:
+
+  specs/<release>/approved
+  specs/<release>/implemented
+
+You can typically find an example spec in ``specs/template.rst``.
+
+Check the repository for the project or program you're working on for specifics
+about repository organization.
+
+Specifications are proposed for a given release by adding them to the
+``specs/<release>`` directory and posting it for review.  The implementation
+status of a blueprint for a given release can be found by looking at the
+blueprint in Launchpad.  Not all approved blueprints will get fully implemented.
+
+Specifications have to be re-proposed for every release.  The review may be
+quick, but even if something was previously approved, it should be re-reviewed
+to make sure it still makes sense as written.
+
+Historically, Launchpad blueprints were used to track the implementation of
+these significant features and changes in OpenStack. For many projects and
+programs, these Launchpad blueprints are still used for tracking the current
+status of a specification. For more information, see `the Blueprints wiki page
+<https://wiki.openstack.org/wiki/Blueprints>`_.
+
+View all approved project and program specifications at
+http://specs.openstack.org/.
 
 Starting a Change
 -----------------
