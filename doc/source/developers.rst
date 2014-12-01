@@ -83,9 +83,10 @@ with an existing `Corporate CLA
 <https://wiki.openstack.org/wiki/Contributors/Corporate>`_ is available
 for your review.
 
-You'll also want to `upload an SSH key
+You'll also want to `upload an SSH key to Gerrit at review.openstack.org
 <https://review.openstack.org/#/settings/ssh-keys>`_ while you're at
-it, so that you'll be able to commit changes for review later.
+it, so that you'll be able to commit changes for review later. This is
+different from adding a key to Launchpad.
 
 Ensure that you have run these steps to let git know about your email
 address::
