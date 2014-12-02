@@ -183,15 +183,14 @@ Starting Work on a New Project
 
 Clone a project in the usual way, for example::
 
-  git clone https://git.openstack.org/openstack/nova.git
+  git clone https://git.openstack.org/openstack/<projectname>.git
 
 You may want to ask git-review to configure your project to know about
 Gerrit at this point.  If you don't, it will do so the first time you
 submit a change for review, but you probably want to do this ahead of
-time so the Gerrit Change-Id commit hook gets installed.  To do so
-(again, using Nova as an example)::
+time so the Gerrit Change-Id commit hook gets installed.  To do so::
 
-  cd nova
+  cd <projectname>
   git review -s
 
 Git-review checks that you can log in to gerrit with your ssh key. It
@@ -209,6 +208,8 @@ on gerrit <https://review.openstack.org/#/settings/>`_ to check it out
 .. Note:: You can verify the SSH host keys for review.openstack.org
     on https://review.openstack.org/#/settings/ssh-keys
 
+We have a tutorial: :ref:`sandbox`. If this is your first time
+contributing to OpenStack, we strongly suggest you follow this tutorial.
 
 Development Workflow
 ====================
