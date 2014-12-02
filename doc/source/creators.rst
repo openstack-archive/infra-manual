@@ -282,9 +282,9 @@ with permission to push tags to trigger releases.
 Create ``gerrit/acls/openstack/<projectname>.config``::
 
   [access "refs/heads/*"]
+  abandon = group <projectname>-core
   label-Code-Review = -2..+2 group <projectname>-core
   label-Workflow = -1..+1 group <projectname>-core
-  abandon = group <projectname>-core
 
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
