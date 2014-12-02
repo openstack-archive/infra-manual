@@ -21,5 +21,4 @@ instead a user or developer looking for API documentation, see
    core
    drivers
    creators
-   third-party
    sandbox
