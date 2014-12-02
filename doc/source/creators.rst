@@ -424,6 +424,11 @@ coordinate with the Infra team, and read ahead, but don't do any of
 these other steps until the import is complete and the new repository
 is configured.
 
+The Infra team can be contacted via IRC on Freenode in the
+#openstack-infra channel or via email to the `openstack-infra
+<http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_
+mail list.
+
 Update the Gerrit Group Members
 -------------------------------
 
