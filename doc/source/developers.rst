@@ -407,6 +407,34 @@ want the rebase behavior in git review. If you would rather postpone
 resolving merge conflicts you can use git review ``-R`` as the last step
 above.
 
+Cross-Project Dependencies
+--------------------------
+
+If your patch has a dependency on a change outside of a project, like
+a patch for another project or some manual change, here are some best
+practices on marking those changes so that patches merge at the right
+time.
+
+* As a developer, mark your patch with the "Work in Progress" tag
+  until the dependencies are in.
+
+* Add in the commit message of a patch dependend on another an
+  explicit dependency::
+
+    Depends-On: <patch-url>
+
+* Add in the commit message of a patch with dependencies in other
+  projects an explicit dependency::
+
+    Needed-By: <patch-url>
+
+* Use the same Gerrit Change-Id for all patches or use the same topic
+  for all of them. Both options allow you to find all patches across
+  repositories easily.
+
+* A core reviewer might block an important patch with a -2 so that it
+  does not get merged accidentally.
+
 Code Review
 ===========
 
