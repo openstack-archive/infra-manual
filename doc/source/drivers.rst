@@ -59,7 +59,8 @@ Gerrit IRC Notifications
 ========================
 
 The intent of this section is to detail how to set up notifications
-about all the projects that are hosted on OpenStack Gerrit in the appropiate IRC channels.
+about all the projects that are hosted on OpenStack Gerrit in the
+appropriate IRC channels.
 
 GerritBot is an IRC bot that listens to the OpenStack Gerrit server
 for events and notifies those on Freenode's OpenStack channels.
