@@ -29,7 +29,8 @@ import os
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo',
               'sphinx.ext.viewcode',
-              'oslosphinx'
+              'oslosphinx',
+              'hieroglyph',
              ]
 
 todo_include_todos = True
@@ -265,3 +266,6 @@ epub_copyright = u'2014, OpenStack Contributors'
 
 # Allow duplicate toc entries.
 #epub_tocdup = True
+
+# Disable autoslides
+autoslides = False
