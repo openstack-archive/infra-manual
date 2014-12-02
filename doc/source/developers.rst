@@ -7,6 +7,9 @@ Developer's Guide
 
 Quick Reference
 ===============
+
+.. slide:: The Quick Reference Slide
+
 .. image:: images/code_review.png
    :width: 700 px
 

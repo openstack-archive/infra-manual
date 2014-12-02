@@ -29,7 +29,8 @@ import os
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo',
               'sphinx.ext.viewcode',
-              'oslosphinx'
+              'oslosphinx',
+              'hieroglyph',
              ]
 
 todo_include_todos = True
