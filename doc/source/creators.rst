@@ -171,12 +171,13 @@ Give OpenStack Permission to Publish Releases
 New projects without any releases need to be manually registered on
 PyPI.
 
-If you already have PyPI credentials, visit
+If you do not have PyPI credentials, you should create them at
+https://pypi.python.org/pypi?%3Aaction=register_form as they are
+required for the next step.
+
+Once you have PyPI credentials visit
 https://pypi.python.org/pypi?%3Aaction=submit_form and fill in only
 the required fields.
-
-If you do not have PyPI credentials, you can either create them or ask
-another dev who has them to handle this step for you.
 
 Next your project needs to be updated so the "openstackci" user has
 "Owner" permissions.
