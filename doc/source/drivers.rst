@@ -94,3 +94,51 @@ listed in the YAML file.
 Running Jobs with Zuul
 ======================
 
+There are two major components in getting jobs running under Zuul. First
+you must ensure that the job you want to run is defined in the `JJB
+config <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_.
+The `JJB documentation <http://ci.openstack.org/jenkins-job-builder/>`_
+is extensive as are the examples in our JJB config so we will not cover
+that here.
+
+The second thing you need to do is update `Zuul's layout file
+<https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul/layout.yaml>`_
+instructing Zuul to run your job when appropriate. This file is organized
+into several sections.
+
+#. Zuul python includes. You can largely ignore this section as it
+   declares arbitrary python functions loaded into Zuul and is managed
+   by the Infra team.
+#. Pipelines. You should not need to add or modify any of these
+   pipelines but they provide information on why each pipeline exists
+   and when it is triggered. This section is good as a reference.
+#. Project templates. Useful if you want to collect several jobs under
+   a single name that can be reused across projects.
+#. Job specific overrides. This section is where you specify that a
+   specific job should not vote or run only against a specific set
+   of branches.
+#. Projects. This is the section where you will likely spend most of
+   your time. Note it is organized into alphabetical subsections based
+   on git repo name prefix.
+
+To add a job to a project you will need to edit your project in the
+projects list or add your project to the list if it does not exist.
+You should end up with something like::
+
+  - name: openstack/<project>
+    template:
+      - name: merge-check
+    check:
+      - gate-new-<project>-job
+    gate:
+      - gate-new-<project>-job
+
+The template section applies the common ``merge-check`` jobs to the
+project (every project should use this template). Then we have
+``gate-new-<project>-job`` listed in the check and gate pipelines. This
+says if an event comes in for ``openstack/<project>`` that matches the
+check or gate pipeline triggers run the ``gate-new-<project>-job``
+job against ``openstack/<project>`` in the matching pipeline.
+
+Zuul comes with extensive `documentation <http://ci.openstack.org/zuul/>`_
+too and should be referenced for more information.
