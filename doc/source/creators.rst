@@ -123,7 +123,9 @@ Create Bug Tracker
 
    .. note::
 
-      You may need to create the bug management team in Launchpad.
+      You may need to create the bug management team in Launchpad.  If
+      you do so, set the owner of the team to
+      'openstack-administrators'.
 
 #. Save your changes.
 
@@ -151,7 +153,8 @@ next to the Maintainer field. Replace your name with the
 
 .. note::
 
-   You may need to create the drivers team.
+   You may need to create the drivers team.  If you do so, set the
+   owner of the team to 'openstack-administrators'.
 
 From the Overview page for your project, click the pencil "edit" icon
 next to the Drivers field. Replace your name with the project drivers
