@@ -407,6 +407,28 @@ want the rebase behavior in git review. If you would rather postpone
 resolving merge conflicts you can use git review ``-R`` as the last step
 above.
 
+Cross-Project Dependencies
+--------------------------
+
+If your change has a dependency on a change outside of a project, like
+a change for another project or some manual setup, here are some best
+practices on marking those changes so that they merge at the right
+time.
+
+* As a developer, mark your change with the "Work in Progress" label
+  until the dependencies are in.
+
+* Add this header line to the commit message of a change which depends
+  on a change in another project::
+
+    Depends-On: <patch-url>
+
+* Use the same topic for all changes. This allows to easily find all
+  change across repositories.
+
+* A core reviewer might block an important change with a -2 so that it
+  does not get merged accidentally.
+
 Code Review
 ===========
 
