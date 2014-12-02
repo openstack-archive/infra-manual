@@ -85,47 +85,47 @@ configured.
 Create a new Launchpad Project
 ------------------------------
 
-Visit https://launchpad.net/projects/+new and fill in the details.
+#. Visit https://launchpad.net/projects/+new and fill in the details.
 
-Name your project using the same name you plan to use for the git
-repository, unless that is taken. Try "python-" as a prefix if
-necessary (for example, "python-stevedore"). If that name is also
-taken, consult with the Release Manager before going any further.
+#. Name your project using the same name you plan to use for the git
+   repository, unless that is taken. Try "python-" as a prefix if
+   necessary (for example, "python-stevedore"). If that name is also
+   taken, consult with the Release Manager before going any further.
 
 Put Your New Project in the Correct Project Group
 -------------------------------------------------
 
-From the Overview page of your project, select "Change Details" from
-the right sidebar (e.g., http://launchpad.net/oslo.foo/+edit).
+#. From the Overview page of your project, select "Change Details"
+   from the right sidebar (e.g., http://launchpad.net/oslo.foo/+edit).
 
-Find the "Part of" field and set the value to "openstack" for
-integrated projects and "oslo" for Oslo libraries.
+#. Find the "Part of" field and set the value to "openstack" for
+   integrated projects and "oslo" for Oslo libraries.
 
-Save your changes.
+#. Save your changes.
 
 Create Bug Tracker
 ------------------
 
-From the Overview page for your project, click the "Bugs" link at the
-top of the page. Launchpad should suggest that you set up bug
-tracking.
+#. From the Overview page for your project, click the "Bugs" link at the
+   top of the page. Launchpad should suggest that you set up bug
+   tracking.
 
-Choose "In launchpad".
+#. Choose "In launchpad".
 
-Check the box labeled "Expire 'Incomplete' bug reports when they
-become inactive"
+#. Check the box labeled "Expire 'Incomplete' bug reports when they
+   become inactive"
 
-Check the box labeled "Search for possible duplicate bugs when a new
-bug is filed"
+#. Check the box labeled "Search for possible duplicate bugs when a
+   new bug is filed"
 
-Set the "Bug supervisor" field to "<projectname>-bugs" (for example,
-"oslo-bugs").
+#. Set the "Bug supervisor" field to "<projectname>-bugs" (for example,
+   "oslo-bugs").
 
-.. note::
+   .. note::
+   
+      You may need to create the bug management team in Launchpad.
 
-   You may need to create the bug management team in Launchpad.
-
-Save your changes.
+#. Save your changes.
 
 Create Blueprint Tracker
 ------------------------
@@ -134,13 +134,13 @@ If your project uses Launchpad blueprints to track new feature work,
 you should set up the blueprint tracker now. Otherwise, skip this
 step.
 
-From the Overview page for your project, click the "Blueprints" link
-at the top of the page. Launchpad should suggest that you set up
-blueprint tracking.
+#. From the Overview page for your project, click the "Blueprints" link
+   at the top of the page. Launchpad should suggest that you set up
+   blueprint tracking.
 
-Choose "Launchpad".
+#. Choose "Launchpad".
 
-Save your changes.
+#. Save your changes.
 
 Set up Supervisors for your Project
 -----------------------------------
@@ -238,38 +238,38 @@ repository.
 Add the project to the master project list
 ------------------------------------------
 
-Edit ``gerrit/projects.yaml`` to add a new section like::
+#. Edit ``gerrit/projects.yaml`` to add a new section like::
 
-  - project: openstack/<projectname>
-    description: Latest and greatest cloud stuff.
+     - project: openstack/<projectname>
+       description: Latest and greatest cloud stuff.
 
-Provide a very brief description of the library.
+#. Provide a very brief description of the library.
 
-If you have an existing repository that you want to import (for
-example, when graduating an Oslo library or bringing a project into
-gerrit from github), set the "upstream" field to the URL of the
-publicly reachable repository::
-
-  - project: openstack/<projectname>
-    description: Latest and greatest cloud stuff.
-    upstream: git://github.com/awesumsauce/<projectname>.git
-
-.. note::
-
-   If the git repository short name does not match the Launchpad project
-   name, you need to add a "groups" list to provide the mapping. The
-   groups list is also used by Storyboard to be able to present grouped
-   views of stories and tasks across multiple related projects.
-
-   For example, Oslo projects should use "oslo" to ensure that they
-   are associated with the https://launchpad.net/oslo project group
-   for tracking bugs and milestones::
+#. If you have an existing repository that you want to import (for
+   example, when graduating an Oslo library or bringing a project into
+   gerrit from github), set the "upstream" field to the URL of the
+   publicly reachable repository::
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
        upstream: git://github.com/awesumsauce/<projectname>.git
-       groups:
-          - oslo
+
+   .. note::
+   
+      If the git repository short name does not match the Launchpad project
+      name, you need to add a "groups" list to provide the mapping. The
+      groups list is also used by Storyboard to be able to present grouped
+      views of stories and tasks across multiple related projects.
+   
+      For example, Oslo projects should use "oslo" to ensure that they
+      are associated with the https://launchpad.net/oslo project group
+      for tracking bugs and milestones::
+   
+        - project: openstack/<projectname>
+          description: Latest and greatest cloud stuff.
+          upstream: git://github.com/awesumsauce/<projectname>.git
+          groups:
+             - oslo
 
 Add Gerrit permissions
 ----------------------
@@ -611,36 +611,36 @@ file of devstack.
 Updating devstack
 -----------------
 
-Check out ``openstack-dev/devstack``.
+#. Check out ``openstack-dev/devstack``.
 
-Edit the appropriate project file under ``lib`` to add a variable
-defining where the source should go. For example, when adding a new
-Oslo library add it to ``lib/oslo``::
+#. Edit the appropriate project file under ``lib`` to add a variable
+   defining where the source should go. For example, when adding a new
+   Oslo library add it to ``lib/oslo``::
 
-  <PROJECTNAME>_DIR=$DEST/<projectname>
+     <PROJECTNAME>_DIR=$DEST/<projectname>
 
-Edit the installation function in the same file to add commands to
-check out the repository. For example, when adding an Oslo library,
-change :func:`install_oslo` in ``lib/oslo``.
+#. Edit the installation function in the same file to add commands to
+   check out the repository. For example, when adding an Oslo library,
+   change :func:`install_oslo` in ``lib/oslo``.
 
-When adding the new item, consider the installation
-order. Dependencies installed from source need to be processed in
-order so that the lower-level packages are installed first (this
-avoids having a library installed from a package and then re-installed
-from source as a dependency of something else)::
+   When adding the new item, consider the installation
+   order. Dependencies installed from source need to be processed in
+   order so that the lower-level packages are installed first (this
+   avoids having a library installed from a package and then re-installed
+   from source as a dependency of something else)::
+   
+     function install_oslo() {
+       ...
+       _do_install_oslo_lib "<projectname>"
+       ...
+     }
 
-  function install_oslo() {
-    ...
-    _do_install_oslo_lib "<projectname>"
-    ...
-  }
+#. Edit ``stackrc`` to add the other variables needed for configuring the
+   new library::
 
-Edit ``stackrc`` to add the other variables needed for configuring the
-new library::
-
-  # new-project
-  <PROJECTNAME>_REPO=${<PROJECTNAME>_REPO:-${GIT_BASE}/openstack/<projectname>.git}
-  <PROJECTNAME>_BRANCH=${<PROJECTNAME>_BRANCH:-master}
+     # new-project
+     <PROJECTNAME>_REPO=${<PROJECTNAME>_REPO:-${GIT_BASE}/openstack/<projectname>.git}
+     <PROJECTNAME>_BRANCH=${<PROJECTNAME>_BRANCH:-master}
 
 Add Link to Your Developer Documentation
 ========================================
