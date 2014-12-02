@@ -85,47 +85,47 @@ configured.
 Create a new Launchpad Project
 ------------------------------
 
-Visit https://launchpad.net/projects/+new and fill in the details.
+#. Visit https://launchpad.net/projects/+new and fill in the details.
 
-Name your project using the same name you plan to use for the git
-repository, unless that is taken. Try "python-" as a prefix if
-necessary (for example, "python-stevedore"). If that name is also
-taken, consult with the Release Manager before going any further.
+#. Name your project using the same name you plan to use for the git
+   repository, unless that is taken. Try "python-" as a prefix if
+   necessary (for example, "python-stevedore"). If that name is also
+   taken, consult with the Release Manager before going any further.
 
 Put Your New Project in the Correct Project Group
 -------------------------------------------------
 
-From the Overview page of your project, select "Change Details" from
-the right sidebar (e.g., http://launchpad.net/oslo.foo/+edit).
+#. From the Overview page of your project, select "Change Details"
+   from the right sidebar (e.g., http://launchpad.net/oslo.foo/+edit).
 
-Find the "Part of" field and set the value to "openstack" for
-integrated projects and "oslo" for Oslo libraries.
+#. Find the "Part of" field and set the value to "openstack" for
+   integrated projects and "oslo" for Oslo libraries.
 
-Save your changes.
+#. Save your changes.
 
 Create Bug Tracker
 ------------------
 
-From the Overview page for your project, click the "Bugs" link at the
-top of the page. Launchpad should suggest that you set up bug
-tracking.
+1. From the Overview page for your project, click the "Bugs" link at the
+   top of the page. Launchpad should suggest that you set up bug
+   tracking.
 
-Choose "In launchpad".
+2. Choose "In launchpad".
 
-Check the box labeled "Expire 'Incomplete' bug reports when they
-become inactive"
+3. Check the box labeled "Expire 'Incomplete' bug reports when they
+   become inactive"
 
-Check the box labeled "Search for possible duplicate bugs when a new
-bug is filed"
+4. Check the box labeled "Search for possible duplicate bugs when a
+   new bug is filed"
 
-Set the "Bug supervisor" field to "<projectname>-bugs" (for example,
-"oslo-bugs").
+5. Set the "Bug supervisor" field to "<projectname>-bugs" (for example,
+   "oslo-bugs").
 
 .. note::
 
    You may need to create the bug management team in Launchpad.
 
-Save your changes.
+6. Save your changes.
 
 Create Blueprint Tracker
 ------------------------
@@ -134,13 +134,13 @@ If your project uses Launchpad blueprints to track new feature work,
 you should set up the blueprint tracker now. Otherwise, skip this
 step.
 
-From the Overview page for your project, click the "Blueprints" link
-at the top of the page. Launchpad should suggest that you set up
-blueprint tracking.
+#. From the Overview page for your project, click the "Blueprints" link
+   at the top of the page. Launchpad should suggest that you set up
+   blueprint tracking.
 
-Choose "Launchpad".
+#. Choose "Launchpad".
 
-Save your changes.
+#. Save your changes.
 
 Set up Supervisors for your Project
 -----------------------------------
