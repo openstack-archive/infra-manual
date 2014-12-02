@@ -335,7 +335,7 @@ Updating a Change
 If the code review process suggests additional changes, make and amend
 the changes to the existing commit. Leave the existing Change-Id:
 footer in the commit message as-is. Gerrit knows that this is an
-updated patch for an existing change::
+updated patchset for an existing change::
 
   git commit -a --amend
   git review
@@ -388,7 +388,7 @@ Edit files, add files to git::
     rebasing. This requires future rebasing to resolve conflicts.
 
 If the commit your work depends on is updated, and you need to get the
-latest patch from the depended commit, you can do the following.
+latest patchset from the depended commit, you can do the following.
 
 Fetch and checkout the parent change::
 
@@ -426,7 +426,7 @@ more inline comments, you still have to send the Review message (see
 above, with or without text and vote). Prior to sending the inline
 comments in a review comment the inline comments are stored as Drafts
 in your browser. Other reviewers can only see them after you have
-submitted them as a comment on the patch.
+submitted them as a comment on the patchset.
 
 Any OpenStack developer may propose or comment on a change (including
 voting +1/0/-1 on it). OpenStack projects have a policy requiring two
@@ -495,13 +495,13 @@ If a change fails tests in Jenkins, please follow the steps below:
 4. To re-run check or gate jobs, leave a comment on the review
    with the form "recheck".
 
-5. If a nice message from Elastic Recheck didn't show up in your patch
+5. If a nice message from Elastic Recheck didn't show up in your change
    when Jenkins failed, and you've identified a bug to recheck
    against, help out by writing an `elastic-recheck query
    <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for
    the bug.
 
-If the patch has failed a gate job and thus is approved, a recheck
+If the patchset has failed a gate job and thus is approved, a recheck
 will first run the check jobs and if those pass, it will run again the
 gate jobs. There is no way to only run the gate jobs, the check jobs
 will first be run again.
@@ -509,10 +509,10 @@ will first be run again.
 Peer Review
 -----------
 
-Before reviewing a patch for an OpenStack project, it is helpful to first
+Before reviewing a patchset for an OpenStack project, it is helpful to first
 `read the checklist <https://wiki.openstack.org/wiki/ReviewChecklist>`_.
 It contains a list of things that reviewers should keep in mind when
-reviewing patches to OpenStack projects.
+reviewing patchsets to OpenStack projects.
 
 Anyone can be a reviewer: participating in the review process is a
 great way to learn about OpenStack social norms and the development
@@ -599,11 +599,11 @@ blocking it from being merged, as you already plan to continue working on it.
 Merging
 =======
 
-Once a patch has been approved and passed the gate jobs, Gerrit
-automatically merges the patch.
+Once a change has been approved and passed the gate jobs, Gerrit
+automatically merges the latest patchset.
 
-Each patch gets merged to the head of the branch before testing it. If
-Gerrit cannot merge a patch, it will give a -1 review and add a
+Each patchset gets merged to the head of the branch before testing it. If
+Gerrit cannot merge a patchset, it will give a -1 review and add a
 comment notifying of merge failure.
 
 Each time a change merges, the "merge-check" pipeline verifies that
