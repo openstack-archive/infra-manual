@@ -642,4 +642,16 @@ strings to the translation server.
 Project Gating
 --------------
 
-TODO
+Project Gating refers to the process of running regression tests
+when changes are submitted to Gerrit.  The system used for gating
+is Zuul, which listens to the event stream and is configured with
+yaml files to define a series of tests to be run in response to
+an event. Events are defined in the configuration yaml as triggers.
+The trigger which typically sets the gating process in motion is
+the patchset-created event. Once the trigger is activated, then
+the jobs which are to be run in response to the trigger are
+created in Zuul pipelines.  When the jobs are complete, the
+pipeline is configured to report back to Gerrit depending on
+the status of the jobs which were run.  If a system has voting
+privileges in Gerrit, that system can then "Gate" the patchset
+from being merged into the trunk.
