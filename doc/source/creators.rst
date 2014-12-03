@@ -528,6 +528,31 @@ in the previous section, you will have to ensure that all of the tests
 pass before the cookiecutter patch will merge. You can run most of the
 tests locally using ``tox`` to verify that they pass.
 
+Setting up an Imported Repository
+---------------------------------
+
+If the new project you have added has a specified upstream you will need
+to add a ``.gitreview`` file to the project once it has been created. This
+new file will allow you to use ``git review``.
+
+The basic process is clone from , add file, push to Gerrit,
+review and approve.::
+
+  git clone https://git.openstack.org/openstack/<projectname>
+  cd <projectname>
+  git checkout -b add-gitreview
+  cat > .gitreview <<EOF
+  [gerrit]
+  host=review.openstack.org
+  port=29418
+  project=stackforge/<projectname>.git
+  EOF
+  git review -s
+  git add .gitreview
+  git commit -m 'Add .gitreview file.'
+  git review
+
+
 Verify That Gerrit and the Test Jobs are Working
 ================================================
 
@@ -538,6 +563,7 @@ the repository.
 #. Verify that the tests run successfully for the new patch.
 #. Ensure that you have permission to approve changes.
 #. Test that the release process works by tagging a release.
+
 
 Prepare an Initial Release
 ==========================
