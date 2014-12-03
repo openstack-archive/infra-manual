@@ -769,4 +769,29 @@ strings to the translation server.
 Project Gating
 --------------
 
-TODO
+Project gating refers to the process of running regression tests
+before a developer's patchset is merged. The intent of running
+regression tests is to validate that new changes submitted
+against the source code repository will not introduce new
+bugs. Gating prevents regressions by ensuring that a series
+of tests pass successfully before allowing a patchset to
+be merged into the mainline of development.
+
+The system used for gating is Zuul, which listens to the Gerrit
+event stream and is configured with YAML files to define a series
+of tests to be run in response to an event.
+
+The jobs in the gate queue are executed once a core reviewer approves
+a change (using a +1 Workflow vote) and a verified +1 vote
+exist. When approving, at least one +2 Code-Review vote needs to exist
+(can be given by core reviewer when approving). The convention is that
+two +2 Code-Reviews are needed for approving. 
+
+When the jobs are complete, the pipeline is configured to report back
+to Gerrit depending on the status of the jobs which were run.  Once
+all of the jobs report success on an approved patchset in the
+configured gate pipeline, then Gerrit will merge the code into trunk.
+
+Additional information about project gating And Zuul can
+be found in the Zuul documentation, located at:
+http://ci.openstack.org/zuul/gating.html
