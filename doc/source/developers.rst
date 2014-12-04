@@ -513,7 +513,7 @@ If a change fails tests in Jenkins, please follow the steps below:
      not find an existing bug, file a new one (be sure to include
      the error message and a link to the logs for the failure). If the
      problem is due to an infrastructure problem (such as Jenkins or
-     Gerrit), file (or search for) the bug against the openstack-ci
+     Gerrit), file (or search for) the bug against the openstack-gate
      project.
 
 4. To re-run check or gate jobs, leave a comment on the review
