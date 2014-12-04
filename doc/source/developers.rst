@@ -74,14 +74,14 @@ OpenStack Foundation to initiate this process.
 If you are ``contributing on behalf of a company`` or organization,
 you still need to sign the ICLA above but someone at your company or
 organization also needs to sign the `Corporate Contributor License
-Agreement <https://review.openstack.org/#/settings/agreements>`_
+Agreement <https://secure.echosign.com/public/hostedForm?formid=56JUVGT95E78X5>`_
 providing a list of people authorized to commit code to
-OpenStack. Check `How to update the CCLA
-<https://wiki.openstack.org/wiki/HowToUpdateCorporateCLA>`_ to provide
-changes to such list. A list of current companies and organizations
-with an existing `Corporate CLA
-<https://wiki.openstack.org/wiki/Contributors/Corporate>`_ is available
-for your review.
+OpenStack. If you need a printable copy of the Corporate CLA please
+email `community managers <mailto:communitymngr@openstack.org>`_.
+Check `How to update the CCLA <https://wiki.openstack.org/wiki/HowToUpdateCorporateCLA>`_
+to provide changes to such list. A list of current companies and
+organizations with an existing `Corporate CLA <https://wiki.openstack.org/wiki/Contributors/Corporate>`_
+is available for your review.
 
 You'll also want to `upload an SSH key to Gerrit at review.openstack.org
 <https://review.openstack.org/#/settings/ssh-keys>`_ while you're at
