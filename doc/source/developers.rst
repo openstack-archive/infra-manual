@@ -421,7 +421,7 @@ time.
 * Add this header line to the commit message of a change which depends
   on a change in another project::
 
-    Depends-On: <patch-url>
+    Depends-On: <Gerrit Change-ID>
 
 * Use the same topic for all changes. This allows to easily find all
   changes across repositories.
