@@ -533,11 +533,6 @@ will first be run again.
 Peer Review
 -----------
 
-Before reviewing a patchset for an OpenStack project, it is helpful to first
-`read the checklist <https://wiki.openstack.org/wiki/ReviewChecklist>`_.
-It contains a list of things that reviewers should keep in mind when
-reviewing patchsets to OpenStack projects.
-
 Anyone can be a reviewer: participating in the review process is a
 great way to learn about OpenStack social norms and the development
 processes. Some things are necessary to keep in mind when doing code
