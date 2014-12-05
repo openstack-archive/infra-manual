@@ -429,6 +429,152 @@ time.
 * A core reviewer might block an important change with a -2 so that it
   does not get merged accidentally.
 
+Maintaining Dependency Chains
+-----------------------------
+
+Gerrit dependency chains may become very long and may require
+collaboration from many individuals. Without proper understanding of
+Gerrit and proper maintenance of these chains, this process can become
+very frustrating.
+
+Understanding Changes and Patch Sets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Each change is determined by the Change-Id in the commit
+message. That's why doing ``git commit --amend`` is suggested when
+updating a change. Two different Change-Ids means two
+different changes.
+
+A patch set is determined by a change in the commit hash. When a
+change is initially pushed up it only has one patch set. When an
+update is done for that change ``git commit --amend`` is typically
+used to update, followed by a ``git review`` to push this.  ``git
+commit --amend`` will change the most current commit's hash because it
+is essentially a new commit with the changes from the previous state
+combined with the new changes added. Since it has a new commit hash,
+once a ``git review`` is successfully processed, a new patch set
+appears in Gerrit.
+
+Since a patch set is determined by a change in the commit hash, many
+git commands will cause new patch sets. Three common ones that do this
+are:
+
+  * ``git commit --amend``
+  * ``git rebase``
+  * ``git cherry-pick``
+
+Common Problems
+^^^^^^^^^^^^^^^
+
+Pushing up an update to your change that is dependent on other changes
+inadvertently changes the dependent changes as well.
+
+
+Common Scenarios
+^^^^^^^^^^^^^^^^
+
+Rebase On Dependent
+"""""""""""""""""""
+
+Only needing to rebase your change on a dependent changes update is
+very simple and there are two methods to accomplish this. There are no
+advantages of one method over the other, except for your view of which
+is more convenient.
+
+* Gerrit Rebase Button: Click the "Rebase" button in the Gerrit UI
+  under your patch set.
+
+* Local rebasing: This requires copying the "cherry-pick" option
+  provided in the child's patch set details of the Gerrit UI.
+
+  Here `git review -R` is used because it should be up to the
+  parent to rebase based on its parent. If a conflict occurs it should
+  be their responsibility to fix the conflict and your responsibility
+  to rebase off of that fix.
+
+  #. Checkout and create local branch of the dependent change:
+     ``git review -d <PARENT_CHANGE_NUMBER>``.
+  #. Cherry-pick your review's most recent patch set: Execute the
+     copied line from the Gerrit UI.
+  #. Push up: ``git review -R``
+
+Rebase On Dependent and Update
+""""""""""""""""""""""""""""""
+
+There are two different options:
+
+#. Gerrit "Rebase" button and changing locally:
+
+   The problem with this option is that it creates two patch sets.
+
+   #. Click "Rebase" button in Gerrit UI.
+   #. ``git review -d <PARENT_CHANGE_NUMBER>``
+   #. Update.
+   #. ``git commit --amend``
+   #. Push up: `` git review -R``
+
+#. Local rebasing and changing locally: This requires cherry-pick from
+   child review and creates only one patch set:
+
+   #. Checkout and create local branch of the dependent review:
+      ``git review -d <PARENT_CHANGE_NUMBER>``.
+   #. Cherry-pick your review's most recent patch set: Execute the
+      copied line from the Gerrit UI.
+   #. Update.
+   #. ``git commit --amend``
+   #. Push up: ``git review -R``
+
+
+Make changes to many reviews and push them all up at once
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+This is actually using the same method that causes the common problems
+listed above. The use case is if you are the owner of many reviews
+that create a dependency chain and you need to make changes to each
+review. The easy way is to just pull down each review and make the
+changes and then push back up, then rebase the child review, make
+changes, and push back up. Repeat. Another way that requires less
+steps is to use the edit mode in git's rebase and then push all the
+changes up at once. Here are the steps:
+
+   #. Pull down the last review in the chain you need to make a chain
+      in (usually this is just the last review you own in the chain
+      since that one will need to be rebased anyway).
+   #. Do an interactive rebase back to the first commit you need to
+      make a change in.
+   #. In the editor mode, replace "pick" on all the commits you need
+      to make changes to with an "e" (or "edit").
+   #. Update your change.
+   #. Amend commit.
+   #. Continue rebase.
+   #. Repeat until rebase has finished.
+
+Example::
+
+  # pull down last review in the dependency chain
+  git review -d $LAST_REVIEW_IN_CHAIN
+  # get the first commit's hash that you want to start making changes on
+  git log
+  # start rebase interactively between current HEAD and the first
+  # commit's (the ^ is important and literal)
+  git rebase -i $FIRST_COMMIT^
+  # In editor mode, replace "pick" with "e" or "edit" for all commits
+  # you want to change
+  ...
+  # Update your change
+  ...
+  # Amend commit
+  git commit --amend
+  # Continue to next edited commit
+  git rebase --continue
+
+  # Repeat updating, git commit --amend, and git rebase --continue
+  # until the rebase is complete.
+  
+  # Push all changes up
+  git review
+
+
 Code Review
 ===========
 
