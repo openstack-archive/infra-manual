@@ -377,6 +377,15 @@ You can find more info about job templates in the beginning of
    as described in :ref:`register-pypi`. This will be required before
    your patch is merged.
 
+If you are not ready to run any gate tests yet and did not configure
+python-jobs in projects.yaml, it should look like this instead::
+
+  - name: stackforge/project-name
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
+
 Configure GerritBot to Announce Changes
 ---------------------------------------
 
