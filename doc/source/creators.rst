@@ -276,6 +276,7 @@ Add the project to the master project list
           groups:
              - oslo
 
+.. _add-gerrit-permissions:
 
 Add Gerrit permissions
 ----------------------
@@ -534,12 +535,8 @@ Verify That Gerrit and the Test Jobs are Working
 ================================================
 
 The next step is to verify that you can submit a change request for
-the repository.
-
-#. Check that ``git review`` submits the patch to the right project.
-#. Verify that the tests run successfully for the new patch.
-#. Ensure that you have permission to approve changes.
-#. Test that the release process works by tagging a release.
+the repository, have it pass the test jobs, approve it, and then have
+it merge.
 
 .. _setup_review:
 
@@ -567,13 +564,29 @@ review and approve::
   $ git commit -m 'Add .gitreview file'
   $ git review
 
-Verify tests
-------------
+Verify that the Tests Pass
+--------------------------
 
 If you configure tests for an imported project, ensure that all of the
 tests pass successfully before importing. Otherwise your first patch
 needs to fix all test failures. You can run most of the tests locally
 using ``tox`` to verify that they pass.
+
+Verify the Gerrit Review Permissions
+------------------------------------
+
+When your project is added to gerrit, the groups defined in the ACLs
+file (see :ref:`add-gerrit-permissions) are created, but they are
+empty by default. Someone on the infrastructure team with gerrit
+administrator privileges will need to add you to each group. After
+that point, you can add other members.
+
+To check the membership of the group, visit
+https://review.openstack.org/#/admin/groups/ and search for the
+group. Clicking on the group name will display a page with the group
+members, including individuals and sub-groups (see
+https://review.openstack.org/#/admin/groups/331,members for an
+example).
 
 Prepare an Initial Release
 ==========================
