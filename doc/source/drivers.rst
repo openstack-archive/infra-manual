@@ -268,6 +268,67 @@ The syntax for configuring the notifications is::
 Please note that the text between the angle brackets are placeholder values. Multiple projects and branches can be
 listed in the YAML file.
 
+Meetings
+========
+
+Create a Meeting
+----------------
+
+To create a new meeting, you need a meeting time and a meeting venue.
+Meetings are conducted in IRC in our publicly accessible and logged
+meeting channels. Currently we have four meeting channels.
+
+ * #openstack-meeting
+ * #openstack-meeting-alt
+ * #openstack-meeting-3
+ * #openstack-meeting-4
+
+To find and book a meeting time, visit our `meetings page
+<https://wiki.openstack.org/wiki/Meetings>`_. We do have the option of using
+an iCal feed to find meetings currently in existance. To evaluate the
+wikipage use Control-F and search for a specific UTC time (the majority
+of meeting start at the top of the hour and continue for 60 minutes).
+
+If you find you have selected a time which has other occurances on the wikipage,
+evaluate date and meeting channel to select a UTC time, date and channel that is
+available.
+
+Sign into the wikipage using your OpenID (the same as you would sign into Gerrit)
+and edit the wikipage, perhaps adding a new section for your meeting, and stating
+the date, time and channel combination you want to book for your meeting.
+
+Then create a new wikipage for your meeting (perhaps follow another team meeting
+wikipage as an example) and fill in the details about the purpose of your group
+and why you are meeting. An agenda is helpful.
+
+Chair a Meeting
+---------------
+
+To chair a meeting, show up in the IRC channel a few minutes before the date and
+time selected. Look for the "openstack" bot, it will be responding to your meeting
+commands. If there is a meeting ahead of you, wait until they are finished, do try
+to begin and conclude your meetings ontime, but be courteous to those ahead and
+following you, their meeting is important as well.
+
+To start the meeting, issue the "#startmeeting <meetingname>" command. The bot
+should start the meeting. If the bot doesn't respond to the "#startmeeting"
+command, ask for assistance in #openstack-infra.
+
+The meeting bot will also tell you what commands it responds to as soon as you
+start the meeting.
+
+End the meeting with the "#endmeeting" command. The "#endmeeting" command takes
+no arguments.
+
+All our meetings are logged at `eavesdrop.openstack.org
+<http://eavesdrop.openstack.org/>`_. Looking over logs and minutes of past
+meetings should show you the results of the various meeting commands so that
+your meeting minutes are output in a format that is useful to you and your
+team. The logs are based on exact name so "#startmeeting foo", "#startmeeting
+Foo", and #startmeeting FOO" would all be considered three separate
+meeting categories in the system. Be consistent in your meeting name to keep
+your meeting logs grouped together.
+
 Running Jobs with Zuul
 ======================
 
