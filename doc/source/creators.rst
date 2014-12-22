@@ -252,7 +252,8 @@ Add the project to the master project list
 #. If you have an existing repository that you want to import (for
    example, when graduating an Oslo library or bringing a project into
    gerrit from github), set the "upstream" field to the URL of the
-   publicly reachable repository::
+   publicly reachable repository and also read the information in
+   :ref:`setup_review`::
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
@@ -274,6 +275,7 @@ Add the project to the master project list
           upstream: git://github.com/awesumsauce/<projectname>.git
           groups:
              - oslo
+
 
 Add Gerrit permissions
 ----------------------
@@ -548,6 +550,40 @@ the repository.
 #. Verify that the tests run successfully for the new patch.
 #. Ensure that you have permission to approve changes.
 #. Test that the release process works by tagging a release.
+
+.. _setup_review:
+
+Configure ``git review``
+------------------------
+
+If the new project you have added has a specified upstream you will need
+to add a ``.gitreview`` file to the project once it has been created. This
+new file will allow you to use ``git review``.
+
+The basic process is clone your new repository, add file, push to Gerrit,
+review and approve::
+
+  $ git clone https://git.openstack.org/openstack/<projectname>
+  $ cd <projectname>
+  $ git checkout -b add-gitreview
+  $ cat > .gitreview <<EOF
+  [gerrit]
+  host=review.openstack.org
+  port=29418
+  project=openstack/<projectname>.git
+  EOF
+  $ git review -s
+  $ git add .gitreview
+  $ git commit -m 'Add .gitreview file'
+  $ git review
+
+Verify tests
+------------
+
+If you configure tests for an imported project, ensure that all of the
+tests pass successfully before importing. Otherwise your first patch
+needs to fix all test failures. You can run most of the tests locally
+using ``tox`` to verify that they pass.
 
 Prepare an Initial Release
 ==========================
