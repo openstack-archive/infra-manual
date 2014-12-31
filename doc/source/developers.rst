@@ -309,7 +309,8 @@ added by a Gerrit commit hook installed by git-review.  If you already
 made the commit and the Change-Id was not added, do the Gerrit setup
 step and run: ``git commit --amend``. The commit hook will
 automatically add the Change-Id when you finish amending the commit
-message, even if you don't actually make any changes.
+message, even if you don't actually make any changes. Do not change
+the Change-Id when amending a change as that will confuse gerrit.
 
 Make your changes, commit them, and submit them for review::
 
