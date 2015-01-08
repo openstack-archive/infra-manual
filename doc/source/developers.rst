@@ -49,6 +49,9 @@ separate password for Gerrit, and once you log in to one of Launchpad,
 Gerrit, or any number of other OpenStack services, you won't have to
 enter your password for the others.
 
+Sign the appropriate Individual Contributor License Agreement
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Unless you are an U.S. Government Employee (see below),
 `agree to the Individual Contributor License
 Agreement <https://review.openstack.org/#/settings/agreements>`_ and
