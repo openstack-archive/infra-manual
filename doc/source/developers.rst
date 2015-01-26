@@ -517,7 +517,8 @@ If a change fails tests in Jenkins, please follow the steps below:
      project.
 
 4. To re-run check or gate jobs, leave a comment on the review
-   with the form "recheck".
+   referencing the bug causing the transient failure (not the bug you're
+   attempting to fix with your patch) with the form "recheck bug ####".
 
 5. If a nice message from Elastic Recheck didn't show up in your change
    when Jenkins failed, and you've identified a bug to recheck
@@ -525,10 +526,13 @@ If a change fails tests in Jenkins, please follow the steps below:
    <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for
    the bug.
 
-If the patchset has failed a gate job and thus is approved, a recheck
-will first run the check jobs and if those pass, it will run again the
-gate jobs. There is no way to only run the gate jobs, the check jobs
-will first be run again.
+If you need to re-run tests and it does not make sense to include a bug
+number (perhaps there is no error or you're updating test results
+because you know that a related branch has changed since the last time
+they were run), you may leave a comment with the form "recheck no
+bug". Please only do this if you are certain there is no bug that needs
+to be addressed. A bug number is required to recheck.
+
 
 Peer Review
 -----------
