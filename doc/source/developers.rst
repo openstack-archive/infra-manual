@@ -363,6 +363,12 @@ this are:
   * ``git rebase``
   * ``git cherry-pick``
 
+As long as you leave the "Change-Id" line in the commit message alone
+and continue to propose the change to the same target branch, Gerrit
+will continue to associate the new commit with the already existing
+change, so that reviewers are able to see how the change evolves in
+response to comments.
+
 Squashing Changes
 -----------------
 If you have made many small commits, you should squash them so that
