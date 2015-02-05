@@ -49,21 +49,24 @@ separate password for Gerrit, and once you log in to one of Launchpad,
 Gerrit, or any number of other OpenStack services, you won't have to
 enter your password for the others.
 
-Unless you are an U.S. Government Employee (see below), `agree to the
-Individual Contributor License Agreement
-<https://review.openstack.org/#/settings/agreements>`_ and provide
-contact information. Your full name and email address will be public
-(since they also appear in project commit logs) and the latter needs
-to match the user.email in your Git configuration. The other contact
-information (postal address, phone numbers) will be kept confidential
-and is only used as a fallback record in the unlikely event The
-OpenStack Foundation needs to reach you directly over code
-contribution related matters. This contact information can also be
-easily `updated <https://review.openstack.org/#/settings/contact>`_
-later if desired, but make sure the primary email address always
-matches the one you set for your OpenStack Foundation Membership --
-otherwise Gerrit will give you an error message and refuse to accept
-your contact information.
+Unless you are an U.S. Government Employee (see below),
+`agree to the Individual Contributor License
+Agreement <https://review.openstack.org/#/settings/agreements>`_ and
+provide contact information. The full text of the agreement will be
+displayed before you can enter "I AGREE" below it, but it's also
+anonymously available if you want to `preview the OpenStack
+ICLA <https://review.openstack.org/static/cla.html>`_ now. Your full name
+and email address will be public (since they also appear in project commit
+logs) and the latter needs to match the user.email in your Git
+configuration. The other contact information (postal address, phone
+numbers) will be kept confidential and is only used as a fallback record in
+the unlikely event The OpenStack Foundation needs to reach you directly
+over code contribution related matters. This contact information can also
+be easily `updated <https://review.openstack.org/#/settings/contact>`_
+later if desired, but make sure the primary email address always matches
+the one you set for your OpenStack Foundation Membership -- otherwise
+Gerrit will give you an error message and refuse to accept your contact
+information.
 
 Employees of the U.S. Government do not sign the Individual
 CLA. Instead, someone with authority to sign on behalf of your agency
