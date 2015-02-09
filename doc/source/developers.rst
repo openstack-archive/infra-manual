@@ -343,6 +343,29 @@ updated patchset for an existing change::
   git commit -a --amend
   git review
 
+Understanding Changes and Patch Sets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+It's important to understand how Gerrit handles changes and patch
+sets. Gerrit combines the Change-Id in the commit message, the
+project, and the target branch to uniquely identify a change.
+
+A new patch set is determined by any modification in the commit
+hash. When a change is initially pushed up it only has one patch
+set. When an update is done for that change, ``git commit --amend``
+will change the most current commit's hash because it is essentially a
+new commit with the changes from the previous state combined with the
+new changes added. Since it has a new commit hash, once a ``git
+review`` is successfully processed, a new patch set appears in Gerrit.
+
+Since a patch set is determined by a modification in the commit hash,
+many git commands will cause new patch sets. Three common ones that do
+this are:
+
+  * ``git commit --amend``
+  * ``git rebase``
+  * ``git cherry-pick``
+
 Squashing Changes
 -----------------
 If you have made many small commits, you should squash them so that
@@ -409,6 +432,7 @@ The note for the previous example applies here as well. Typically you
 want the rebase behavior in git review. If you would rather postpone
 resolving merge conflicts you can use git review ``-R`` as the last step
 above.
+
 
 Cross-Project Dependencies
 --------------------------
