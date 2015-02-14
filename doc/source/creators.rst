@@ -124,8 +124,8 @@ Create Bug Tracker
    .. note::
 
       You may need to create the bug management team in Launchpad.  If
-      you do so, set the owner of the team to
-      'openstack-administrators'.
+      you do so, set the owner of the team to the 
+      "OpenStack Administrators team" called "openstack-admins".
 
 #. Save your changes.
 
