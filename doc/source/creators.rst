@@ -228,6 +228,14 @@ edit the "Common Libraries" section::
      - openstack-dev/hacking
      - openstack-dev/pbr
 
+Submit this change and note your change-Id.  When you later create the
+patch to the project-config project (the following steps outline how),
+make the project-config change dependent on the governance change with
+including a reference to this change in the commit message using::
+
+    Depends-On: <Gerrit Change-Id>
+
+
 Adding the Repository to the CI System
 ======================================
 
