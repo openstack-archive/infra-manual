@@ -184,7 +184,7 @@ Development Workflow
 Working on Bugs
 ---------------
 
-Bug reports for a program or project are tracked on Launchpad at
+Bug reports for a project are generally tracked on Launchpad at
 https://bugs.launchpad.net/<projectname>. Contributors may review these
 reports regularly when looking for work to complete.
 
@@ -226,9 +226,9 @@ section of the OpenStack Git Commit Good Practices wiki page.
 Working on Specifications and Blueprints
 ----------------------------------------
 
-Many OpenStack projects and programs have a <project>-specs respository which
+Many OpenStack projects teams have a <projectteam>-specs respository which
 is used to hold approved design specifications for additions and changes to
-the project or program.
+the project teams code repositories.
 
 The layout of the repository will typically be something like::
 
@@ -242,7 +242,7 @@ and which have already been implemented:
 
 You can typically find an example spec in ``specs/template.rst``.
 
-Check the repository for the project or program you're working on for specifics
+Check the repository for the project team you're working on for specifics
 about repository organization.
 
 Specifications are proposed for a given release by adding them to the
@@ -255,12 +255,12 @@ quick, but even if something was previously approved, it should be re-reviewed
 to make sure it still makes sense as written.
 
 Historically, Launchpad blueprints were used to track the implementation of
-these significant features and changes in OpenStack. For many projects and
-programs, these Launchpad blueprints are still used for tracking the current
+these significant features and changes in OpenStack. For many project teams,
+these Launchpad blueprints are still used for tracking the current
 status of a specification. For more information, see `the Blueprints wiki page
 <https://wiki.openstack.org/wiki/Blueprints>`_.
 
-View all approved project and program specifications at
+View all approved project teams specifications at
 http://specs.openstack.org/.
 
 Starting a Change
@@ -540,7 +540,7 @@ If a change fails tests in Jenkins, please follow the steps below:
      error isn't there, then:
   2. Identify which project(s) are affected, and search for a related
      bug on Launchpad. You can search for bugs affecting all OpenStack
-     Programs here: https://bugs.launchpad.net/openstack/ If you do
+     Projects here: https://bugs.launchpad.net/openstack/ If you do
      not find an existing bug, file a new one (be sure to include
      the error message and a link to the logs for the failure). If the
      problem is due to an infrastructure problem (such as Jenkins or

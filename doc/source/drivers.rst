@@ -222,14 +222,14 @@ state of the tree.
 Targeting Blueprints
 ====================
 
-Blueprints for a program or project are posted to
+Blueprints for a project are generally posted to
 https://blueprints.launchpad.net/<projectname>. Project drivers need to review
 blueprints regularly and assign them to a target. For each release there are three
 milestones. Based on interactions with the proposer and/or assignee of the blueprint,
 the project driver assigns the blueprint to a milestone
 (release-1, release-2 or release-3) or defers it to a later release.
 
-Many projects have repositories entitled <project>-specs. If a project has a spec
+Many projects have repositories entitled <projectteam>-specs. If a project has a spec
 repo, a spec needs to be submitted and linked to the launchpad blueprint. The spec
 needs to be reviewed and approved prior to the launchpad blueprint being targeted to
 a milestone.

@@ -197,21 +197,21 @@ and click "Add Role".
 Add Project to the Governance Repository
 ========================================
 
-Each project managed by an official program in OpenStack needs to be
-listed in ``reference/programs.yaml`` in the ``openstack/governance``
+Each project managed by an official OpenStack project team needs to be
+listed in ``reference/projects.yaml`` in the ``openstack/governance``
 repository to indicate who owns the project so we know where ATCs
 voting rights extend.
 
 If your project is under the ``stackforge`` section of the git
 repository structure, you can skip this step.
 
-Find the appropriate section in ``reference/programs.yaml`` and add
+Find the appropriate section in ``reference/projects.yaml`` and add
 the new project to the list. For example, to add a new Oslo library
-edit the "Common Libraries" section::
+edit the "Oslo" section::
 
- Common Libraries:
-   codename: Oslo
+ Oslo:
    ptl: Doug Hellmann (dhellmann)
+   service: Common libraries
    mission:
      To produce a set of python libraries containing code shared by OpenStack
      projects. The APIs provided by these libraries should be high quality,
