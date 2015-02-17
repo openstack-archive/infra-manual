@@ -228,7 +228,7 @@ Working on Specifications and Blueprints
 
 Many OpenStack projects teams have a <projectteam>-specs respository which
 is used to hold approved design specifications for additions and changes to
-the project teams code repositories.
+the project team's code repositories.
 
 The layout of the repository will typically be something like::
 
@@ -260,7 +260,7 @@ these Launchpad blueprints are still used for tracking the current
 status of a specification. For more information, see `the Blueprints wiki page
 <https://wiki.openstack.org/wiki/Blueprints>`_.
 
-View all approved project teams specifications at
+View all approved project team's specifications at
 http://specs.openstack.org/.
 
 Starting a Change
