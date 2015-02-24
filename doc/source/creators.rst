@@ -228,6 +228,15 @@ edit the "Oslo" section::
      - openstack-dev/hacking
      - openstack-dev/pbr
 
+Submit this change and note your change-Id.  When you later create the
+patch to the project-config project (the following steps outline how),
+make the project-config change dependent on the governance change by
+including a reference to the governance change in the commit message
+of the project-config change using::
+
+    Depends-On: <Gerrit Change-Id>
+
+
 Adding the Repository to the CI System
 ======================================
 
