@@ -441,24 +441,107 @@ above.
 Cross-Project Dependencies
 --------------------------
 
-If your change has a dependency on a change outside of a project, like
-a change for another project or some manual setup, here are some best
-practices on marking those changes so that they merge at the right
-time.
+If your change has a dependency on a manual change outside of a
+project, like some manual setup, here are some best practices on
+marking those changes so that they merge at the right time:
 
 * As a developer, mark your change with the "Work in Progress" label
-  until the dependencies are in.
-
-* Add this header line to the commit message of a change which depends
-  on a change in another project::
-
-    Depends-On: <Gerrit Change-Id>
-
-* Use the same topic for all changes. This allows to easily find all
-  changes across repositories.
+  until the manual setup is done.
 
 * A core reviewer might block an important change with a -2 so that it
   does not get merged accidentally.
+
+
+If your change has a dependency on a change in another project, you
+can use cross-repo dependencies (CRD) in Zuul:
+
+* To use them, include "Depends-On: <gerrit-change-id>" in the footer of
+  your commit message. Use the full Change-ID ('I' + 40 characters).
+
+* These are one-way dependencies only -- do not create a cycle.
+
+Cross-Repo Dependencies Explained
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+There are two behaviors that might go by the name "cross-repo
+dependencies". We call them one-way and multi-way.
+
+Multi-way CRD allow for bidirectional links between changes. For
+instance, A depends on B and B depends on A. The theory there is that
+both would be tested together and merged as a unit. This is _not_ what
+we have implemented in Zuul. Discussions over the past years have
+revealed that this type of behavior could cause problems for continuous
+deploments as it means that two components must be upgraded
+simultaneously. Not supporting this behavior is a choice we have made.
+
+One-way CRD behaves like a directed acyclic graph (DAG), like git
+itself, to indicate a one-way dependency relationship between changes in
+different git repos. Change A may depend on B, but B may not depend on
+A. This is what we have implemented in Zuul.
+
+Gate Pipeline
+^^^^^^^^^^^^^
+
+When Zuul sees CRD changes, it serializes them in the usual manner when
+enqueuing them into a pipeline. This means that if change A depends on
+B, then when they are added to the gate pipeline, B will appear first
+and A will follow. If tests for B fail, both B and A will be removed
+from the pipeline, and it will not be possible for A to merge until B
+does.
+
+Note that if changes with CRD do not share a change queue (such as the
+"integrated gate"), then Zuul is unable to enqueue them together, and the
+first will be required to merge before the second is enqueued.
+
+Check Pipeline
+^^^^^^^^^^^^^^
+
+When changes are enqueued into the check pipeline, all of the related
+dependencies (both normal git-dependencies that come from parent
+commits as well as CRD changes) appear in a dependency graph, as in
+the gate pipeline. This means that even in the check pipeline, your
+change will be tested with its dependency. So changes that were
+previously unable to be fully tested until a related change landed in
+a different repo may now be tested together from the start.
+
+All of the changes are still independent (so you will note that the
+whole pipeline does not share a graph as in the gate pipeline), but
+for each change tested, all of its dependencies are visually connected
+to it, and they are used to construct the git references that Zuul
+uses when testing.  When looking at this graph on the :ref:`Zuul
+status page <http://status.openstack.org/zuul>`, you will note that
+the dependencies show up as grey dots, while the actual change tested
+shows up as red or green. This is to indicate that the grey changes
+are only there to establish dependencies. Even if one of the
+dependencies is also being tested, it will show up as a grey dot when
+used as a dependency, but separately and additionally will appear as
+its own red or green dot for its test.
+
+Multiple Changes
+^^^^^^^^^^^^^^^^
+
+A Gerrit change ID may refer to multiple changes (on multiple branches
+of the same project, or even multiple projects). In these cases, Zuul
+will treat all of the changes with that change ID as dependencies. So
+if you say that a tempest change Depends-On a change ID that has changes
+in nova master and nova stable/juno, then when testing the tempest
+change, both nova changes will be applied, and when deciding whether the
+tempest change can merge, both changes must merge ahead of it.
+
+A change may depend on more than one Gerrit change ID as well. So it is
+possible for a change in tempest to depend on a change in devstack and a
+change in nova. Simply add more "Depends-On:" lines to the footer.
+
+Cycles
+^^^^^^
+
+If a cycle is created by use of CRD, Zuul will abort its work very
+early. There will be no message in Gerrit and no changes that are part
+of the cycle will be enqueued into any pipeline. This is to protect
+Zuul from infinite loops. The developers hope that they can improve
+this to at least leave a message in Gerrit in the future. But in the
+meantime, please be cognizant of this and do not create dependency
+cycles with Depends-On lines.
 
 Code Review
 ===========
