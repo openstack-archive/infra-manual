@@ -1,0 +1,10 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Stephanie Miller <stephane@alum.mit.edu>
+Submitted-by: Jenkins
+Submitted-at: Fri, 27 Feb 2015 17:22:56 +0000
+Reviewed-on: https://review.openstack.org/151221
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
