@@ -551,10 +551,10 @@ If a change fails tests in Jenkins, please follow the steps below:
    with the form "recheck".
 
 5. If a nice message from Elastic Recheck didn't show up in your change
-   when Jenkins failed, and you've identified a bug to recheck
-   against, help out by writing an `elastic-recheck query
-   <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_ for
-   the bug.
+   when a test in a gate job failed, and you've identified a bug to
+   recheck against, you can help out by writing an `elastic-recheck
+   query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_
+   for the bug.
 
 If the patchset has failed a gate job and thus is approved, a recheck
 will first run the check jobs and if those pass, it will run again the
