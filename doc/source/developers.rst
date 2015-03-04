@@ -146,6 +146,35 @@ git commands. If you want to know more about what it's doing, just
 add -v to the options and it will print out all of the commands it's
 running.
 
+Accessing Gerrit over HTTPS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Git-review normally communicates with Gerrit using SSH over port 29418 with
+no further configuration needed. However, if you suspect that ssh 
+over non-standards ports might be blocked (or you need to access the web 
+using https) then you can configure git-review to use an https endpoint 
+instead of ssh. Keep in mind that you will need to generate an 
+`HTTP password in Gerrit
+<https://review.openstack.org/#/settings/http-password>`_ to use this
+connection. You should then configure git-review to use an https scheme
+and https port as follows::
+
+  git config --global gitreview.scheme https
+  git config --global gitreview.port 443
+
+In case you had already tried to setup git-review and it failed, it might
+be necessary to remove the Gerrit remote from git::
+
+  git remote rm gerrit
+
+And re-launch git review to properly configure it::
+
+  git review -s
+
+You should then be prompted for your username and password (where
+this is the `HTTP password generated in Gerrit 
+<https://review.openstack.org/#/settings/http-password>`_).
+
 Starting Work on a New Project
 ------------------------------
 
