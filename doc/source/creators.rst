@@ -432,6 +432,9 @@ to the ``openstack-oslo`` section::
     branches:
       - master
 
+If you're adding a new IRC channel, see the `IRC
+services <http://ci.openstack.org/irc.html>`_ documentation.
+
 Submitting Infra Change for Review
 ----------------------------------
 
