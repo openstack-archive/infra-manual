@@ -229,7 +229,7 @@ edit the "Oslo" section::
      - openstack-dev/pbr
 
 Submit this change and note your change-Id.  When you later create the
-patch to the project-config project (the following steps outline how),
+change to the project-config project (the following steps outline how),
 you will make the project-config change dependent on the governance
 change by including a reference to the governance change in the commit
 message of the project-config change.
@@ -384,7 +384,7 @@ You can find more info about job templates in the beginning of
    If you use ``pypi-jobs`` and ``publish-to-pypi``, please ensure
    your project's namespace is registered on https://pypi.python.org
    as described in :ref:`register-pypi`. This will be required before
-   your patch is merged.
+   your change is merged.
 
 If you are not ready to run any tests yet and did not configure
 ``python-jobs`` in ``jenkins/jobs/projects.yaml``, the entry for
@@ -436,7 +436,7 @@ Submitting Infra Change for Review
 ----------------------------------
 
 In your commit message, include a reference to the governance change
-to make your project-config patch depend on it::
+to make your project-config change depend on it::
 
     Depends-On: <Gerrit Change-Id>
 
@@ -552,7 +552,7 @@ project skeleton, ready to have your other project files added.
 
 If you configured all of the tests for the project when it was created
 in the previous section, you will have to ensure that all of the tests
-pass before the cookiecutter patch will merge. You can run most of the
+pass before the cookiecutter change will merge. You can run most of the
 tests locally using ``tox`` to verify that they pass.
 
 Verify That Gerrit and the Test Jobs are Working
@@ -592,7 +592,7 @@ Verify that the Tests Pass
 --------------------------
 
 If you configure tests for an imported project, ensure that all of the
-tests pass successfully before importing. Otherwise your first patch
+tests pass successfully before importing. Otherwise your first change
 needs to fix all test failures. You can run most of the tests locally
 using ``tox`` to verify that they pass.
 
