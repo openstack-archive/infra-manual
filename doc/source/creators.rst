@@ -230,12 +230,9 @@ edit the "Oslo" section::
 
 Submit this change and note your change-Id.  When you later create the
 patch to the project-config project (the following steps outline how),
-make the project-config change dependent on the governance change by
-including a reference to the governance change in the commit message
-of the project-config change using::
-
-    Depends-On: <Gerrit Change-Id>
-
+you will make the project-config change dependent on the governance
+change by including a reference to the governance change in the commit
+message of the project-config change.
 
 Adding the Repository to the CI System
 ======================================
@@ -437,6 +434,11 @@ services <http://ci.openstack.org/irc.html>`_ documentation.
 
 Submitting Infra Change for Review
 ----------------------------------
+
+In your commit message, include a reference to the governance change
+to make your project-config patch depend on it::
+
+    Depends-On: <Gerrit Change-Id>
 
 When submitting the change to openstack-infra/project-config for
 review, use the "new-project" topic so it receives the appropriate
