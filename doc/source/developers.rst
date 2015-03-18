@@ -41,8 +41,11 @@ Visit https://review.openstack.org/ and click the ``Sign In`` link at
 the top-right corner of the page.  Log in with your Launchpad ID.
 
 The first time you sign into OpenStack's Gerrit (review.openstack.org),
-you will be prompted to "Select a unique username:". Please enter your
-Launchpad username.
+you will be prompted to "Select a unique username:". You can enter your
+Launchpad username here, or something else if you want. Type carefully,
+as once set it cannot be changed. This is the username you will
+eventually use to submit changes to Gerrit and to perform authenticated
+queries through its API.
 
 Because Gerrit uses Launchpad OpenID single sign-on, you won't need a
 separate password for Gerrit, and once you log in to one of Launchpad,
