@@ -52,6 +52,9 @@ master_doc = 'index'
 # General information about the project.
 project = u'OpenStack Project Infrastructure Manual'
 copyright = Markup(u'%s, OpenStack Contributors '
+                   u'- this work is freely licensed under the <a href="http://'
+                   u'creativecommons.org/licenses/by/3.0/legalcode">Creative '
+                   u'Commons Attribution 3.0 Unported License (CC BY 3.0)</a> '
                    u'- use the <a href="https://git.openstack.org/cgit/'
                    u'openstack-infra/infra-manual">infra-manual git repo</a> '
                    u'to propose changes' % datetime.date.today().year)
