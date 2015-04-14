@@ -194,46 +194,6 @@ and click "Add Role".
    :height: 499
    :width: 800
 
-Add Project to the Governance Repository
-========================================
-
-Each project managed by an official OpenStack project team needs to be
-listed in ``reference/projects.yaml`` in the ``openstack/governance``
-repository to indicate who owns the project so we know where ATCs
-voting rights extend.
-
-If your project is under the ``stackforge`` section of the git
-repository structure, you can skip this step.
-
-Find the appropriate section in ``reference/projects.yaml`` and add
-the new project to the list. For example, to add a new Oslo library
-edit the "Oslo" section::
-
- Oslo:
-   ptl: Doug Hellmann (dhellmann)
-   service: Common libraries
-   mission:
-     To produce a set of python libraries containing code shared by OpenStack
-     projects. The APIs provided by these libraries should be high quality,
-     stable, consistent, documented and generally applicable.
-   url: https://wiki.openstack.org/wiki/Oslo
-   projects:
-     - openstack/oslo-incubator
-     - openstack/oslo.config
-     - openstack/oslo.messaging
-     - openstack/oslo.rootwrap
-     - openstack/oslo.sphinx
-     - openstack/oslo.version
-     - openstack-dev/cookiecutter
-     - openstack-dev/hacking
-     - openstack-dev/pbr
-
-Submit this change and note your change-Id.  When you later create the
-change to the project-config project (the following steps outline how),
-you will make the project-config change dependent on the governance
-change by including a reference to the governance change in the commit
-message of the project-config change.
-
 Adding the Repository to the CI System
 ======================================
 
@@ -445,6 +405,54 @@ review, use the "new-project" topic so it receives the appropriate
 attention::
 
      $ git review -t new-project
+
+Note the Change-Id in your commit message for the next step.
+
+Add Project to the Governance Repository
+----------------------------------------
+
+Each project managed by an official OpenStack project team needs to be
+listed in ``reference/projects.yaml`` in the ``openstack/governance``
+repository to indicate who owns the project so we know where ATCs
+voting rights extend.
+
+If your project is under the ``stackforge`` section of the git
+repository structure, you can skip this step.
+
+Find the appropriate section in ``reference/projects.yaml`` and add
+the new project to the list. For example, to add a new Oslo library
+edit the "Oslo" section::
+
+ Oslo:
+   ptl: Doug Hellmann (dhellmann)
+   service: Common libraries
+   mission:
+     To produce a set of python libraries containing code shared by OpenStack
+     projects. The APIs provided by these libraries should be high quality,
+     stable, consistent, documented and generally applicable.
+   url: https://wiki.openstack.org/wiki/Oslo
+   projects:
+     - openstack/oslo-incubator
+     - openstack/oslo.config
+     - openstack/oslo.messaging
+     - openstack/oslo.rootwrap
+     - openstack/oslo.sphinx
+     - openstack/oslo.version
+     - openstack-dev/cookiecutter
+     - openstack-dev/hacking
+     - openstack-dev/pbr
+
+When writing the commit message for this change, make this change
+depend on the project creation change by including a link to its
+Change-ID (from the previous step)::
+
+    Depends-On: <Gerrit Change-Id>
+
+However, if you are creating an entirely new OpenStack project (i.e.,
+adding a new top-level entry into projects.yaml), you should reverse
+the dependency direction (the project creation change should depend on
+the governance change because the TC needs to approve the project
+first).
 
 Wait Here
 ---------
