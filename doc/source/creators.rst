@@ -1,8 +1,8 @@
-:title: Project Creator's Guide
+:title: Repository Creator's Guide
 
-=========================
- Project Creator's Guide
-=========================
+============================
+ Repository Creator's Guide
+============================
 
 Before You Start
 ================
@@ -14,12 +14,12 @@ It is important that you perform all of the steps, in the order they
 are given here. Don't skip any steps. Don't try to do things in
 parallel. Don't jump around.
 
-Choosing a Good Name for Your Project
-=====================================
+Choosing a Good Name for Your Repository
+========================================
 
 It is important to choose a descriptive name that does not conflict
-with other projects. There are several places you'll need to look to
-ensure uniqueness and suitability of the name.
+with other repositories. There are several places you'll need to
+look to ensure uniqueness and suitability of the name.
 
 .. note::
 
@@ -41,7 +41,8 @@ The base name of the repository should be unique across all of the
 namespace directories for git repositories under
 https://git.openstack.org/cgit.  That is, it is not sufficient to have
 ``openstack/foo`` and ``openstack-dev/foo`` because that prevents us
-from moving those two projects into the same namespace at some point.
+from moving those two repositories into the same namespace at some
+point.
 
 Launchpad
 ---------
@@ -53,14 +54,15 @@ https://launchpad.net to be the same as your git repository name. Try
 PyPI
 ----
 
-Python projects need to have a unique name on the Python Package Index
-(https://pypi.python.org) so we can publish source distributions to be
-installed via pip.
+Python packages need to have a unique name on the Python Package
+Index (https://pypi.python.org) so we can publish source
+distributions to be installed via pip.
 
-It is best to name the project and the top level Python package the
-same when possible so that the name used to install the dist and the
-name used to import the package in source files match. Try "python-"
-as a prefix if necessary (for example, "python-stevedore").
+It is best to name the repository and the top level Python package
+the same when possible so that the name used to install the dist and
+the name used to import the package in source files match. Try
+"python-" as a prefix if necessary (for example,
+"python-stevedore").
 
 Project Team Rules
 ------------------
@@ -76,8 +78,8 @@ Set up Launchpad
 
 OpenStack uses https://launchpad.net for project management tasks such
 as release planning and bug tracking. The first step to importing your
-project is to make sure you have the right project management tools
-configured.
+repository is to make sure you have the right project management
+tools configured.
 
 .. (dhellmann) This section will need to be updated when we move fully
    to storyboard.
@@ -171,7 +173,7 @@ team.
 Give OpenStack Permission to Publish Releases
 =============================================
 
-New projects without any releases need to be manually registered on
+New packages without any releases need to be manually registered on
 PyPI.
 
 If you do not have PyPI credentials, you should create them at
@@ -182,11 +184,11 @@ Once you have PyPI credentials visit
 https://pypi.python.org/pypi?%3Aaction=submit_form and fill in only
 the required fields.
 
-Next your project needs to be updated so the "openstackci" user has
+Next your package needs to be updated so the "openstackci" user has
 "Owner" permissions.
 
 Visit
-``https://pypi.python.org/pypi?:action=role_form&package_name=<projectname>``
+``https://pypi.python.org/pypi?:action=role_form&package_name=<packagename>``
 and add "openstackci" in the "User Name" field, set the role to "Owner",
 and click "Add Role".
 
@@ -205,40 +207,41 @@ All of the changes described in this section should be submitted
 together as one patchset to the ``openstack-infra/project-config``
 repository.
 
-Add the project to the master project list
-------------------------------------------
+Add the repository to the master repositories list
+--------------------------------------------------
 
 #. Edit ``gerrit/projects.yaml`` to add a new section like::
 
-     - project: openstack/<projectname>
+     - project: openstack/<repositoryname>
        description: Latest and greatest cloud stuff.
 
 #. Provide a very brief description of the library.
 
 #. If you have an existing repository that you want to import (for
-   example, when graduating an Oslo library or bringing a project into
-   gerrit from github), set the "upstream" field to the URL of the
-   publicly reachable repository and also read the information in
-   :ref:`setup_review`::
+   example, when graduating an Oslo library or bringing a repository
+   into gerrit from github), set the "upstream" field to the URL of
+   the publicly reachable repository and also read the information
+   in :ref:`setup_review`::
 
-     - project: openstack/<projectname>
+     - project: openstack/<repositoryname>
        description: Latest and greatest cloud stuff.
-       upstream: git://github.com/awesumsauce/<projectname>.git
+       upstream: git://github.com/awesumsauce/<repositoryname>.git
 
    .. note::
 
       If the git repository short name does not match the Launchpad project
       name, you need to add a "groups" list to provide the mapping. The
       groups list is also used by Storyboard to be able to present grouped
-      views of stories and tasks across multiple related projects.
+      views of stories and tasks across multiple related
+      repositories.
 
-      For example, Oslo projects should use "oslo" to ensure that they
-      are associated with the https://launchpad.net/oslo project group
-      for tracking bugs and milestones::
+      For example, Oslo repositories should use "oslo" to ensure
+      that they are associated with the https://launchpad.net/oslo
+      project group for tracking bugs and milestones::
 
-        - project: openstack/<projectname>
+        - project: openstack/<repositoryname>
           description: Latest and greatest cloud stuff.
-          upstream: git://github.com/awesumsauce/<projectname>.git
+          upstream: git://github.com/awesumsauce/<repositoryname>.git
           groups:
              - oslo
 
@@ -247,12 +250,13 @@ Add the project to the master project list
 Add Gerrit permissions
 ----------------------
 
-Each project should have two gerrit groups. The first, "<projectname>-core", is
-the normal core group, with permission to +2 changes. The second,
-"<projectname>-release" is a small group of the primary maintainers
-with permission to push tags to trigger releases.
+Each repository should have two gerrit groups. The first,
+"<projectname>-core", is the normal core group, with permission to
++2 changes. The second, "<projectname>-release" is a small group of
+the primary maintainers with permission to push tags to trigger
+releases.
 
-Create ``gerrit/acls/openstack/<projectname>.config``::
+Create ``gerrit/acls/openstack/<repositoryname>.config``::
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
@@ -279,21 +283,21 @@ jenkins-job-builder configuration files.
 
 .. note::
 
-   Different projects will need different jobs, depending on their
-   nature, implementation language, etc. This example shows how to set
-   up a new Python code project because that is our most common
-   case. If you are working on another type of project, you will want
-   to choose different jobs or job templates to include in the "jobs"
-   list.
+   Different repositories will need different jobs, depending on
+   their nature, implementation language, etc. This example shows
+   how to set up a new Python code repository because that is our
+   most common case. If you are working on another type of
+   repository, you will want to choose different jobs or job
+   templates to include in the "jobs" list.
 
-Edit ``jenkins/jobs/projects.yaml`` to add your project. There are
-several sections, designated in comments, for different types of
-projects. Find the right section and then add a new stanza like:
+Edit ``jenkins/jobs/projects.yaml`` to add your repository. There
+are several sections, designated in comments, for different types of
+repositories. Find the right section and then add a new stanza like:
 
 ::
 
  - project:
-    name: <projectname>
+    name: <repositoryname>
     node: 'bare-precise || bare-trusty'
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
@@ -311,20 +315,20 @@ need.
 
 .. note::
 
-   Different projects will need different jobs, depending on their
-   nature, implementation language, etc. This example shows how to set
-   up the full set of gate jobs for a new Python code project because
-   that is our most common case. If you are working on another type of
-   project, you will want to choose different jobs or job templates to
-   include here.
+   Different repositories will need different jobs, depending on
+   their nature, implementation language, etc. This example shows
+   how to set up the full set of gate jobs for a new Python code
+   repository because that is our most common case. If you are
+   working on another type of repository, you will want to choose
+   different jobs or job templates to include here.
 
-Edit ``zuul/layout.yaml`` to add your project. There are several
+Edit ``zuul/layout.yaml`` to add your repository. There are several
 sections, designated in comments, for different types of
-projects. Find the right section and then add a new stanza like:
+repositories. Find the right section and then add a new stanza like:
 
 ::
 
-  - name: openstack/<projectname>
+  - name: openstack/<repositoryname>
     template:
       - name: merge-check
       - name: python-jobs
@@ -342,15 +346,15 @@ You can find more info about job templates in the beginning of
 .. note::
 
    If you use ``pypi-jobs`` and ``publish-to-pypi``, please ensure
-   your project's namespace is registered on https://pypi.python.org
-   as described in :ref:`register-pypi`. This will be required before
-   your change is merged.
+   your repository's namespace is registered on
+   https://pypi.python.org as described in :ref:`register-pypi`.
+   This will be required before your change is merged.
 
 If you are not ready to run any tests yet and did not configure
 ``python-jobs`` in ``jenkins/jobs/projects.yaml``, the entry for
 ``zuul/layout.yaml`` should look like this instead::
 
-  - name: openstack/<projectname>
+  - name: openstack/<repositoryname>
     template:
       - name: merge-check
       - name: noop-jobs
@@ -359,11 +363,11 @@ If you are not ready to run any tests yet and did not configure
 Configure GerritBot to Announce Changes
 ---------------------------------------
 
-If you want changes proposed and merged to your project to be
+If you want changes proposed and merged to your repository to be
 announced on IRC, edit ``gerritbot/channels.yaml`` to add your new
-repository to the list of projects. For example, to announce changes
-related to an Oslo library in the ``#openstack-oslo`` channel, add it
-to the ``openstack-oslo`` section::
+repository to the list of repositories. For example, to announce
+changes related to an Oslo library in the ``#openstack-oslo``
+channel, add it to the ``openstack-oslo`` section::
 
   openstack-oslo:
     events:
@@ -408,20 +412,20 @@ attention::
 
 Note the Change-Id in your commit message for the next step.
 
-Add Project to the Governance Repository
-----------------------------------------
+Add New Repository to the Governance Repository
+-----------------------------------------------
 
-Each project managed by an official OpenStack project team needs to be
-listed in ``reference/projects.yaml`` in the ``openstack/governance``
-repository to indicate who owns the project so we know where ATCs
-voting rights extend.
+Each repository managed by an official OpenStack project team needs
+to be listed in ``reference/projects.yaml`` in the
+``openstack/governance`` repository to indicate who owns the
+repository so we know where ATCs voting rights extend.
 
-If your project is under the ``stackforge`` section of the git
+If your repository is under the ``stackforge`` section of the git
 repository structure, you can skip this step.
 
 Find the appropriate section in ``reference/projects.yaml`` and add
-the new project to the list. For example, to add a new Oslo library
-edit the "Oslo" section::
+the new repository to the list. For example, to add a new Oslo
+library edit the "Oslo" section::
 
  Oslo:
    ptl: Doug Hellmann (dhellmann)
@@ -431,28 +435,45 @@ edit the "Oslo" section::
      projects. The APIs provided by these libraries should be high quality,
      stable, consistent, documented and generally applicable.
    url: https://wiki.openstack.org/wiki/Oslo
+   tags:
+     - name: team:diverse-affiliation
    projects:
-     - openstack/oslo-incubator
-     - openstack/oslo.config
-     - openstack/oslo.messaging
-     - openstack/oslo.rootwrap
-     - openstack/oslo.sphinx
-     - openstack/oslo.version
-     - openstack-dev/cookiecutter
-     - openstack-dev/hacking
-     - openstack-dev/pbr
+     - repo: openstack/oslo-incubator
+       tags:
+         - name: release:has-stable-branches
+     - repo: openstack/oslo.config
+       tags:
+         - name: release:independent
+         - name: release:has-stable-branches
+     - repo: openstack/oslo.messaging
+       tags:
+         - name: release:independent
+         - name: release:has-stable-branches
+     - repo: openstack/oslo.rootwrap
+       tags:
+         - name: release:independent
+         - name: release:has-stable-branches
+     - repo: openstack/oslosphinx
+       tags:
+         - name: release:independent
+         - name: release:has-stable-branches
+     - repo: openstack-dev/cookiecutter
+     - repo: openstack-dev/pbr
+       tags:
+         - name: release:independent
 
 When writing the commit message for this change, make this change
-depend on the project creation change by including a link to its
+depend on the repository creation change by including a link to its
 Change-ID (from the previous step)::
 
     Depends-On: <Gerrit Change-Id>
 
-However, if you are creating an entirely new OpenStack project (i.e.,
-adding a new top-level entry into projects.yaml), you should reverse
-the dependency direction (the project creation change should depend on
-the governance change because the TC needs to approve the project
-first).
+However, if you are creating an entirely new OpenStack project team
+(i.e., adding a new top-level entry into
+``reference/projects.yaml``), you should reverse the dependency
+direction (the repository creation change should depend on the
+governance change because the TC needs to approve the new project
+team application first).
 
 Wait Here
 ---------
@@ -474,54 +495,55 @@ After the review is approved and groups are created, ask the Infra
 team to add you to both groups in gerrit, and then you can add other
 members.
 
-The project PTL, at least, should be added to "<projectname>-release",
-and other developers who understand the release process can volunteer
-to be added as well.
+The project team lead (PTL), at least, should be added to
+"<projectname>-release", and other developers who understand the
+release process can volunteer to be added as well.
 
 Updating devstack-vm-gate-wrap.sh
 ---------------------------------
 
-The ``devstack-gate`` tools let us install OpenStack projects in a
-consistent way so they can all be tested with a common
-configuration. If your project will not need to be installed for
+The ``devstack-gate`` tools let us install OpenStack repositories in
+a consistent way so they can all be tested with a common
+configuration. If your repository will not need to be installed for
 devstack gate jobs, you can skip this step.
 
 Check out ``openstack-infra/devstack-gate`` and edit
-``devstack-vm-gate-wrap.sh`` to add the new project::
+``devstack-vm-gate-wrap.sh`` to add the new repository::
 
-  PROJECTS="openstack/<projectname> $PROJECTS"
+  PROJECTS="openstack/<repositoryname> $PROJECTS"
 
 Keep the list in alphabetical order.
 
-Add Project to the Requirements List
-------------------------------------
+Add Repository to the Requirements List
+---------------------------------------
 
 The global requirements repository (openstack/requirements) controls
-which dependencies can be added to a project to ensure that all of
-OpenStack can be installed together on a single system without
+which dependencies can be added to a repository to ensure that all
+of OpenStack can be installed together on a single system without
 conflicts. It also automatically contributes updates to the
-requirements lists for OpenStack projects when the global requirements
-change.
+requirements lists for OpenStack repositories when the global
+requirements change.
 
-If your project is not going to participate in this requirements
+If your repository is not going to participate in this requirements
 management, you can skip this step.
 
 Edit the ``projects.txt`` file to add the new library, adding
-"openstack/<projectname>" in the appropriate place in alphabetical
-order.
+"openstack/<repositoryname>" in the appropriate place in
+alphabetical order.
 
 Preparing a New Git Repository using cookiecutter
 =================================================
 
-All OpenStack projects should use one of our cookiecutter_ templates
-for creating an initial repository to hold the source for the project.
+All OpenStack repositories should use one of our cookiecutter_
+templates for creating an initial repository to hold the source
+code.
 
 If you had an existing repository ready for import when you submitted
 the change to project-config, you can skip this section.
 
-Start by checking out a copy of the new repository for your project::
+Start by checking out a copy of your new repository::
 
-   $ git clone git://git.openstack.org/openstack/<projectname>
+   $ git clone git://git.openstack.org/openstack/<repositoryname>
 
 .. _cookiecutter: https://pypi.python.org/pypi/cookiecutter
 
@@ -533,7 +555,7 @@ Choosing the Right cookiecutter Template
 ----------------------------------------
 
 The template in ``openstack-dev/cookiecutter`` is suitable for
-most projects.
+most repositories.
 
 ::
 
@@ -550,18 +572,19 @@ Applying the Template
 ---------------------
 
 Running cookiecutter will prompt you for several settings, based on
-the template's configuration. It will then update your project with a
-project skeleton, ready to have your other project files added.
+the template's configuration. It will then update your repository
+with a skeleton, ready to have your other files added.
 
 ::
 
-   $ cd <projectname>
+   $ cd <repositoryname>
    $ git review
 
-If you configured all of the tests for the project when it was created
-in the previous section, you will have to ensure that all of the tests
-pass before the cookiecutter change will merge. You can run most of the
-tests locally using ``tox`` to verify that they pass.
+If you configured all of the tests for the repository when it was
+created in the previous section, you will have to ensure that all of
+the tests pass before the cookiecutter change will merge. You can
+run most of the tests locally using ``tox`` to verify that they
+pass.
 
 Verify That Gerrit and the Test Jobs are Working
 ================================================
@@ -575,21 +598,21 @@ it merge.
 Configure ``git review``
 ------------------------
 
-If the new project you have added has a specified upstream you will need
-to add a ``.gitreview`` file to the project once it has been created. This
-new file will allow you to use ``git review``.
+If the new repository you have added has a specified upstream you
+will need to add a ``.gitreview`` file to the repository once it has
+been created. This new file will allow you to use ``git review``.
 
 The basic process is clone your new repository, add file, push to Gerrit,
 review and approve::
 
-  $ git clone https://git.openstack.org/openstack/<projectname>
-  $ cd <projectname>
+  $ git clone https://git.openstack.org/openstack/<repositoryname>
+  $ cd <repositoryname>
   $ git checkout -b add-gitreview
   $ cat > .gitreview <<EOF
   [gerrit]
   host=review.openstack.org
   port=29418
-  project=openstack/<projectname>.git
+  project=openstack/<repositoryname>.git
   EOF
   $ git review -s
   $ git add .gitreview
@@ -599,22 +622,22 @@ review and approve::
 Verify that the Tests Pass
 --------------------------
 
-If you configure tests for an imported project, ensure that all of the
-tests pass successfully before importing. Otherwise your first change
-needs to fix all test failures. You can run most of the tests locally
-using ``tox`` to verify that they pass.
+If you configure tests for an imported repository, ensure that all
+of the tests pass successfully before importing. Otherwise your
+first change needs to fix all test failures. You can run most of the
+tests locally using ``tox`` to verify that they pass.
 
 Verify the Gerrit Review Permissions
 ------------------------------------
 
-When your project is added to gerrit, the groups defined in the ACLs
-file (see :ref:`add-gerrit-permissions`) are created, but they are
-empty by default. Someone on the infrastructure team with gerrit
+When your repository is added to gerrit, the groups defined in the
+ACLs file (see :ref:`add-gerrit-permissions`) are created, but they
+are empty by default. Someone on the infrastructure team with gerrit
 administrator privileges will need to add you to each group. After
 that point, you can add other members.
 
 To check the membership of the groups, visit
-``https://review.openstack.org/#/admin/projects/openstack/<projectname>,access``
+``https://review.openstack.org/#/admin/projects/openstack/<repositoryname>,access``
 -- for example,
 https://review.openstack.org/#/admin/projects/openstack-infra/infra-manual,access
 -- and then click on the group names displayed on that page to review
@@ -623,22 +646,22 @@ their membership.
 Prepare an Initial Release
 ==========================
 
-Make Your Project Useful
-------------------------
+Make Your Repository Useful
+---------------------------
 
-Before going any farther, make the project do something useful.
+Before going any farther, make the repository do something useful.
 
-If you are importing an existing project with features, you can go
-ahead.
+If you are importing an existing repository with features, you can
+go ahead.
 
-If you are creating a brand new project, add some code and tests to
-provide some minimal functionality.
+If you are creating a brand new repository, add some code and tests
+to provide some minimal functionality.
 
 Provide Basic Developer Documentation
 -------------------------------------
 
 Update the ``README.rst`` file to include a paragraph describing the
-new project.
+new repository.
 
 Update the rest of the documentation under ``doc/source`` with
 information about the public API, tips on adopting the tool,
@@ -649,7 +672,7 @@ Tagging a Release
 
 To verify that the release machinery works, push a signed tag to the
 "gerrit" remote. Use the smallest version number possible. If this is
-the first release, use "0.1.0". If other releases of the project
+the first release, use "0.1.0". If other releases of the repository
 exist, choose an appropriate next version number.
 
 .. note::
@@ -670,13 +693,13 @@ If you need to check the logs, you can use the `git-os-job`_ command::
 
 .. _git-os-job: https://pypi.python.org/pypi/git-os-job
 
-Allowing Other OpenStack Projects to Use Your Library
-=====================================================
+Allowing Other OpenStack Repositories to Use Your Library
+=========================================================
 
-OpenStack projects share a common global requirements list so that all
-components can be installed together on the same system. If you are
-importing a new library project, you need to update that list to allow
-other projects to use your library.
+OpenStack repositories share a common global requirements list so
+that all components can be installed together on the same system. If
+you are importing a new library repository, you need to update that
+list to allow other repositories to use your library.
 
 Update the Global Requirements List
 -----------------------------------
@@ -690,24 +713,24 @@ Check out the ``openstack/requirements`` git repository and modify
 Setting up Gate Testing
 =======================
 
-The devstack gate jobs install all OpenStack projects from source so
-that the appropriate git revisions (head, or revisions in the merge
-queue) are tested together. To include the new library in these tests,
-it needs to be included in the list of projects in the devstack gate
-wrapper script. For the same feature to work for developers outside of
-the gate, the project needs to be added to the appropriate library
-file of devstack.
+The devstack gate jobs install all OpenStack repositories from
+source so that the appropriate git revisions (head, or revisions in
+the merge queue) are tested together. To include the new library in
+these tests, it needs to be included in the list of repositories in
+the devstack gate wrapper script. For the same feature to work for
+developers outside of the gate, the repository needs to be added to
+the appropriate library file of devstack.
 
 Updating devstack
 -----------------
 
 #. Check out ``openstack-dev/devstack``.
 
-#. Edit the appropriate project file under ``lib`` to add a variable
-   defining where the source should go. For example, when adding a new
-   Oslo library add it to ``lib/oslo``::
+#. Edit the appropriate repository file under ``lib`` to add a
+   variable defining where the source should go. For example, when
+   adding a new Oslo library add it to ``lib/oslo``::
 
-     <PROJECTNAME>_DIR=$DEST/<projectname>
+     <REPOSITORYNAME>_DIR=$DEST/<repositoryname>
 
 #. Edit the installation function in the same file to add commands to
    check out the repository. For example, when adding an Oslo library,
@@ -721,16 +744,16 @@ Updating devstack
 
      function install_oslo() {
        ...
-       _do_install_oslo_lib "<projectname>"
+       _do_install_oslo_lib "<repositoryname>"
        ...
      }
 
 #. Edit ``stackrc`` to add the other variables needed for configuring the
    new library::
 
-     # new-project
-     <PROJECTNAME>_REPO=${<PROJECTNAME>_REPO:-${GIT_BASE}/openstack/<projectname>.git}
-     <PROJECTNAME>_BRANCH=${<PROJECTNAME>_BRANCH:-master}
+     # new-repository
+     <REPOSITORYNAME>_REPO=${<REPOSITORYNAME>_REPO:-${GIT_BASE}/openstack/<repositoryname>.git}
+     <REPOSITORYNAME>_BRANCH=${<REPOSITORYNAME>_BRANCH:-master}
 
 Add Link to Your Developer Documentation
 ========================================
@@ -740,4 +763,4 @@ page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
 
-Skip this step if your project is under ``stackforge``.
+Skip this step if your repository is under ``stackforge``.
