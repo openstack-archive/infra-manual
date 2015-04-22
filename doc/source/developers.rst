@@ -16,10 +16,11 @@ Getting Started
 The goal of this document is to walk you through the concepts and
 specifics that should be understood while contributing to OpenStack.
 
-Prior to contributing to an OpenStack project a few steps need to be
-completed. This document covers the steps that get you started, such as
-creating a few accounts on required websites, signing a contributor
-license agreement, uploading an ssh key, and installing git-review.
+Prior to contributing to an OpenStack source code repository a few
+steps need to be completed. This document covers the steps that get
+you started, such as creating a few accounts on required websites,
+signing a contributor license agreement, uploading an ssh key, and
+installing git-review.
 
 Account Setup
 -------------
@@ -62,17 +63,18 @@ provide contact information. The full text of the agreement will be
 displayed before you can enter "I AGREE" below it, but it's also
 anonymously available if you want to `preview the OpenStack
 ICLA <https://review.openstack.org/static/cla.html>`_ now. Your full name
-and email address will be public (since they also appear in project commit
-logs) and the latter needs to match the user.email in your Git
-configuration. The other contact information (postal address, phone
-numbers) will be kept confidential and is only used as a fallback record in
-the unlikely event The OpenStack Foundation needs to reach you directly
-over code contribution related matters. This contact information can also
-be easily `updated <https://review.openstack.org/#/settings/contact>`_
-later if desired, but make sure the primary email address always matches
-the one you set for your OpenStack Foundation Membership -- otherwise
-Gerrit will give you an error message and refuse to accept your contact
-information.
+and email address will be public (since they also appear in
+repository commit logs) and the latter needs to match the user.email
+in your Git configuration. The other contact information (postal
+address, phone numbers) will be kept confidential and is only used
+as a fallback record in the unlikely event The OpenStack Foundation
+needs to reach you directly over code contribution related matters.
+This contact information can also be easily `updated
+<https://review.openstack.org/#/settings/contact>`_ later if
+desired, but make sure the primary email address always matches the
+one you set for your OpenStack Foundation Membership -- otherwise
+Gerrit will give you an error message and refuse to accept your
+contact information.
 
 Employees of the U.S. Government do not sign the Individual
 CLA. Instead, someone with authority to sign on behalf of your agency
@@ -178,19 +180,20 @@ You should then be prompted for your username and password (where
 this is the `HTTP password generated in Gerrit
 <https://review.openstack.org/#/settings/http-password>`_).
 
-Starting Work on a New Project
-------------------------------
+Starting Work on a New Repository
+---------------------------------
 
-Clone a project in the usual way, for example::
+Clone a repository in the usual way, for example::
 
-  git clone https://git.openstack.org/openstack/<projectname>.git
+  git clone https://git.openstack.org/openstack/<repositoryname>.git
 
-You may want to ask git-review to configure your project to know about
-Gerrit at this point.  If you don't, it will do so the first time you
-submit a change for review, but you probably want to do this ahead of
-time so the Gerrit Change-Id commit hook gets installed.  To do so::
+You may want to ask git-review to configure your repository to know
+about Gerrit at this point. If you don't, it will do so the first
+time you submit a change for review, but you probably want to do
+this ahead of time so the Gerrit Change-Id commit hook gets
+installed. To do so::
 
-  cd <projectname>
+  cd <repositoryname>
   git review -s
 
 Git-review checks that you can log in to Gerrit with your ssh key. It
@@ -259,7 +262,7 @@ section of the OpenStack Git Commit Good Practices wiki page.
 Working on Specifications and Blueprints
 ----------------------------------------
 
-Many OpenStack projects teams have a <projectteam>-specs respository which
+Many OpenStack project teams have a <projectteam>-specs repository which
 is used to hold approved design specifications for additions and changes to
 the project team's code repositories.
 
@@ -385,7 +388,7 @@ Understanding Changes and Patch Sets
 
 It's important to understand how Gerrit handles changes and patch
 sets. Gerrit combines the Change-Id in the commit message, the
-project, and the target branch to uniquely identify a change.
+repository, and the target branch to uniquely identify a change.
 
 A new patch set is determined by any modification in the commit
 hash. When a change is initially pushed up it only has one patch
@@ -414,8 +417,9 @@ Squashing Changes
 If you have made many small commits, you should squash them so that
 they do not show up in the public repository. Remember: each commit
 becomes a change in Gerrit, and must be approved separately. If you
-are making one "change" to the project, squash your many "checkpoint"
-commits into one commit for public consumption. Here's how::
+are making one "change" to the repository, squash your many
+"checkpoint" commits into one commit for public consumption. Here's
+how::
 
   git checkout master
   git pull origin master
@@ -477,20 +481,20 @@ resolving merge conflicts you can use git review ``-R`` as the last step
 above.
 
 
-Cross-Project Dependencies
---------------------------
+Cross-Repository Dependencies
+-----------------------------
 
-If your change has a dependency on a change outside of a project, like
-a change for another project or some manual setup, you have to ensure
-that the change merge at the right time.
+If your change has a dependency on a change outside of that
+repository, like a change for another repository or some manual
+setup, you have to ensure that the change merge at the right time.
 
 For a change depending on a manual setup, mark your change with the
 "Work in Progress" label until the manual setup is done. A core
 reviewer might also block an important change with a -2 so that it
 does not get merged accidentally before the manual setup is done.
 
-If your change has a dependency on a change in another project, you
-can use cross-repo dependencies (CRD) in Zuul:
+If your change has a dependency on a change in another repository,
+you can use cross-repo dependencies (CRD) in Zuul:
 
 * To use them, include "Depends-On: <gerrit-change-id>" in the footer
   of your commit message. Use the full Change-ID ('I' + 40
@@ -543,12 +547,13 @@ Multiple Changes
 ^^^^^^^^^^^^^^^^
 
 A Gerrit change ID may refer to multiple changes (on multiple branches
-of the same project, or even multiple projects). In these cases, Zuul
-will treat all of the changes with that change ID as dependencies. So
-if you say that a tempest change Depends-On a change ID that has changes
-in nova master and nova stable/juno, then when testing the tempest
-change, both nova changes will be applied, and when deciding whether the
-tempest change can merge, both changes must merge ahead of it.
+of the same repository, or even multiple repositories). In these
+cases, Zuul will treat all of the changes with that change ID as
+dependencies. So if you say that a tempest change Depends-On a
+change ID that has changes in nova master and nova stable/juno, then
+when testing the tempest change, both nova changes will be applied,
+and when deciding whether the tempest change can merge, both changes
+must merge ahead of it.
 
 A change may depend on more than one Gerrit change ID as well. So it is
 possible for a change in tempest to depend on a change in devstack and a
@@ -587,10 +592,11 @@ in your browser. Other reviewers can only see them after you have
 submitted them as a comment on the patchset.
 
 Any OpenStack developer may propose or comment on a change (including
-voting +1/0/-1 on it). OpenStack projects have a policy requiring two
-positive reviews from core reviewers. A vote of +2 is allowed from
-core reviewers, and should be used to indicate that they are a core
-reviewer and are leaving a vote that should be counted as such.
+voting +1/0/-1 on it). OpenStack project teams have a policy
+requiring two positive reviews from core reviewers. A vote of +2 is
+allowed from core reviewers, and should be used to indicate that
+they are a core reviewer and are leaving a vote that should be
+counted as such.
 
 When a review has two +2 reviews and one of the core team believes it
 is ready to be merged, he or she should leave a +1 vote in the
@@ -612,16 +618,17 @@ For more details on reviews in Gerrit, check the
 Automated Testing
 -----------------
 
-When a new patchset is uploaded to Gerrit, that project's "check"
+When a new patchset is uploaded to Gerrit, that repository's "check"
 tests are run on the patchset by Jenkins. Once completed the test
 results are reported to Gerrit by Jenkins in the form of a Verified:
 +/-1 vote. After code reviews have been completed and a change
-receives an Approved: +1 vote that project's "gate" tests are run on
-the change by Jenkins. Jenkins reports the results of these tests back
-to Gerrit in the form of a Verified: +/-2 vote. Code merging will only
-occur after the gate tests have passed successfully and received a
-Verified: +2. You can view the state of tests currently being run on
-the `Zuul Status page <http://status.openstack.org/zuul>`_.
+receives an Approved: +1 vote that repository's "gate" tests are run
+on the change by Jenkins. Jenkins reports the results of these tests
+back to Gerrit in the form of a Verified: +/-2 vote. Code merging
+will only occur after the gate tests have passed successfully and
+received a Verified: +2. You can view the state of tests currently
+being run on the `Zuul Status page
+<http://status.openstack.org/zuul>`_.
 
 If a change fails tests in Jenkins, please follow the steps below:
 
@@ -643,14 +650,15 @@ If a change fails tests in Jenkins, please follow the steps below:
   1. Visit http://status.openstack.org/elastic-recheck/ to see if one
      of the bugs listed there matches the error you've seen. If your
      error isn't there, then:
-  2. Identify which project(s) are affected, and search for a related
-     bug on Launchpad. You can search for bugs affecting all OpenStack
-     Projects here: https://bugs.launchpad.net/openstack/ If you do
-     not find an existing bug, file a new one (be sure to include
-     the error message and a link to the logs for the failure). If the
-     problem is due to an infrastructure problem (such as Jenkins or
-     Gerrit), file (or search for) the bug against the openstack-gate
-     project.
+  2. Identify which repository or repositories are affected, and
+     search for a related bug on Launchpad. You can search for bugs
+     affecting all OpenStack Projects here:
+     https://bugs.launchpad.net/openstack/ If you do not find an
+     existing bug, file a new one (be sure to include the error
+     message and a link to the logs for the failure). If the problem
+     is due to an infrastructure problem (such as Jenkins or
+     Gerrit), file (or search for) the bug against the
+     openstack-gate project.
 
 4. To re-run check or gate jobs, leave a comment on the review
    with the form "recheck".
@@ -674,10 +682,10 @@ great way to learn about OpenStack social norms and the development
 processes. Some things are necessary to keep in mind when doing code
 reviews:
 
-1. The code should comply with everything in that project's
-   `HACKING.rst` file, if it has one. If the project reuses nova's
-   hacking guidelines, then it may have a "hacking" section in its
-   `tox.ini` file in which case much of this is already checked
+1. The code should comply with everything in that repository's
+   `HACKING.rst` file, if it has one. If the repository reuses
+   nova's hacking guidelines, then it may have a "hacking" section in
+   its `tox.ini` file in which case much of this is already checked
    automatically for you by the continuous integration system.
 2. The code should be 'pythonic' and look like the code around it,
    to make the code more uniform and easier to read.
@@ -719,8 +727,8 @@ reviews:
 
 6. The code should comply with the community `logging standards <https://wiki.openstack.org/wiki/LoggingStandards>`_.
 
-There may be more specific items to be aware of inside the projects'
-documentation for contributors.
+There may be more specific items to be aware of inside the
+repositories' documentation for contributors.
 
 Contributors may notice a review that has several +1's from other
 reviewers, passes the functional tests, etc. but the code still has
@@ -762,18 +770,18 @@ Gerrit cannot merge a patchset, it will give a -1 review and add a
 comment notifying of merge failure.
 
 Each time a change merges, the "merge-check" pipeline verifies that
-all open changes on the same project are still mergeable. If any job
-is not mergeable, Jenkins will give a -1 review and add a comment
-notifying of merge failure.
+all open changes on the same repository are still mergeable. If any
+job is not mergeable, Jenkins will give a -1 review and add a
+comment notifying of merge failure.
 
-After a change is merged, project specific post jobs are run. Most
-often the post jobs publish documentation, run coverage, or send
-strings to the translation server.
+After a change is merged, repository-specific post jobs are run.
+Most often the post jobs publish documentation, run coverage, or
+send strings to the translation server.
 
-Project Gating
---------------
+Repository Gating
+-----------------
 
-Project gating refers to the process of running regression tests
+Repository gating refers to the process of running regression tests
 before a developer's patchset is merged. The intent of running
 regression tests is to validate that new changes submitted
 against the source code repository will not introduce new
@@ -795,10 +803,10 @@ Once all of the jobs report success on an approved patchset in the
 configured gate pipeline, then Gerrit will merge the code into trunk.
 
 Besides running the gate tests, the gate pipeline determines the order
-of changes to merge accross multiple projects. The changes are tested
+of changes to merge accross multiple repositories. The changes are tested
 and merged in this order, so that for each change the state of all
 other repositories can be identified.
 
-Additional information about project gating And Zuul can
+Additional information about repository gating and Zuul can
 be found in the Zuul documentation, located at:
 http://ci.openstack.org/zuul/gating.html

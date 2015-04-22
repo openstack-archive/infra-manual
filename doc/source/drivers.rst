@@ -17,20 +17,21 @@ proposed change.
 To get started with a feature branch you will need to create the new
 branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
 not allow for pushing of new branches via git, but specific groups of
-Gerrit users can create new branches. For OpenStack projects the
-Release Manager creates feature branches. Stackforge projects may
-update their Gerrit ACLs to allow their release teams to create these
-branches. For similar Gerrit ACL reasons branch deletion is typically
-limited to the Infra team. Keep this in mind before creating many
-branches that will need cleanup.
+Gerrit users can create new branches. For OpenStack repositories the
+Release Manager creates feature branches. Stackforge repositories
+may update their Gerrit ACLs to allow their release teams to create
+these branches. For similar Gerrit ACL reasons branch deletion is
+typically limited to the Infra team. Keep this in mind before
+creating many branches that will need cleanup.
 
-If more than one project is involved in a feature development effort,
-the same feature branch name should be used across all such projects.
-This will cause integration testing with Zuul to use the respective
-feature branch from any project that carries it.  Projects without an
-equivalently named feature branch will use master instead.  Use care
-not to create a feature branch with the same name as a feature branch
-for an unrelated effort in another project.
+If more than one repository is involved in a feature development
+effort, the same feature branch name should be used across all such
+repositories. This will cause integration testing with Zuul to use
+the respective feature branch from any repository that carries it.
+Repositories without an equivalently named feature branch will use
+master instead. Use care not to create a feature branch with the
+same name as a feature branch for an unrelated effort in another
+repository.
 
 One additional thing to keep in mind is that feature branches should be
 treated like master in most cases. They are specifically not for sustained
@@ -40,18 +41,20 @@ Merge Commits
 -------------
 
 An important activity when using feature branches is syncing to and from
-the project's master branch. During development on a feature branch a
-project will want to merge master into the feature branch periodically
-to keep up to date with changes over time. Then when development on the
-feature branch is complete, it will need to be merged into master.
+the repository's master branch. During development on a feature
+branch a repository will want to merge master into the feature branch
+periodically to keep up to date with changes over time. Then when
+development on the feature branch is complete, it will need to be
+merged into master.
 
-Before this can happen the project's release group will need to have
-access to push merge commits in Gerrit::
+Before this can happen the project team's release group will need to
+have access to push merge commits in Gerrit::
 
   [access "refs/for/refs/*"]
-  pushMerge = group <project>-release
+  pushMerge = group <projectname>-release
 
-Should be added to the project's ACL file in the project-config repo.
+Should be added to the repository's ACL file in the project-config
+repo.
 
 Merge Master into Feature Branch
 --------------------------------
@@ -126,12 +129,13 @@ commit to record the state of the branch at the time.
 Create proposed/* Branch
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-For OpenStack projects this should be performed by the OpenStack
-Release Manager at the Release Branch Point.  If you are managing
-branches for your project you may have permission to do this yourself.
+For OpenStack repositories this should be performed by the OpenStack
+Release Manager at the Release Branch Point. If you are managing
+branches for your repository you may have permission to do this
+yourself.
 
 * Go to https://review.openstack.org/ and sign in
-* Select 'Admin', 'Projects', then the project
+* Select 'Admin', 'Projects', then the repository
 * Select 'Branches'
 * Enter ``proposed/<series>`` in the 'Branch Name' field, and ``HEAD``
   as the 'Initial Revision', then press 'Create Branch'.
@@ -195,8 +199,8 @@ the release is made.  If you are managing your own releases, you may
 have permission to do this yourself.
 
 Tag the tip of the appropriate branch (proposed/<series> for server
-projects, master for clients/libraries) with a release tag and push
-that tag to Gerrit by running the following commands::
+repositories, master for clients/libraries) with a release tag and
+push that tag to Gerrit by running the following commands::
 
   git checkout <branch name>
   git pull --ff-only
@@ -229,7 +233,7 @@ even after the branch is deleted, making it possible to restore the
 state of the tree.
 
 * Go to https://review.openstack.org/ and sign in
-* Select 'Admin', 'Projects', then the project
+* Select 'Admin', 'Projects', then the repository
 * Select 'Branches'
 * Select the checkbox next to 'proposed/<series>' and hit 'Delete'
 
@@ -257,19 +261,19 @@ Gerrit IRC Notifications
 ========================
 
 The intent of this section is to detail how to set up notifications
-about all the projects that are hosted on OpenStack Gerrit in the
-appropriate IRC channels.
+about all the repositories that are hosted on OpenStack Gerrit in
+the appropriate IRC channels.
 
 GerritBot is an IRC bot that listens to the OpenStack Gerrit server
 for events and notifies those on Freenode's OpenStack channels.
 
 GerritBot is able to notify the channel for events like creation of patchsets, changes merged,
 comments added to patchsets and updates to refs.
-These event notifications can be configured per project, so the channel can have multiple
-notifications per project.
+These event notifications can be configured per repository, so the
+channel can have multiple notifications per repository.
 
 In order for GerritBot to post notifications on the IRC channel of the
-project you are configuring,
+repository you are configuring,
 you need to add your GerritBot configuration into
 ``modules/gerritbot/files/gerritbot_channel_config.yaml``.
 This file is hosted in `openstack-infra/config <http://git.openstack.org/cgit/openstack-infra/config/>`_.
@@ -283,12 +287,13 @@ The syntax for configuring the notifications is::
           - comment-added
           - ref-updated
         projects:
-          - <project name>
+          - <repository name>
         branches:
           - <branch name>
 
-Please note that the text between the angle brackets are placeholder values. Multiple projects and branches can be
-listed in the YAML file.
+Please note that the text between the angle brackets are placeholder
+values. Multiple repositories and branches can be listed in the YAML
+file.
 
 Running Jobs with Zuul
 ======================
@@ -312,7 +317,7 @@ into several sections.
    pipelines but they provide information on why each pipeline exists
    and when it is triggered. This section is good as a reference.
 #. Project templates. Useful if you want to collect several jobs under
-   a single name that can be reused across projects.
+   a single name that can be reused across repositories.
 #. Job specific overrides. This section is where you specify that a
    specific job should not vote or run only against a specific set
    of branches.
@@ -320,24 +325,25 @@ into several sections.
    your time. Note it is organized into alphabetical subsections based
    on git repo name prefix.
 
-To add a job to a project you will need to edit your project in the
-projects list or add your project to the list if it does not exist.
-You should end up with something like::
+To add a job to a repository you will need to edit your repository
+in the projects list or add your repository to the list if it does
+not exist. You should end up with something like::
 
-  - name: openstack/<project>
+  - name: openstack/<repositoryname>
     template:
       - name: merge-check
     check:
-      - gate-new-<project>-job
+      - gate-new-<repositoryname>-job
     gate:
-      - gate-new-<project>-job
+      - gate-new-<repositoryname>-job
 
 The template section applies the common ``merge-check`` jobs to the
-project (every project should use this template). Then we have
-``gate-new-<project>-job`` listed in the check and gate pipelines. This
-says if an event comes in for ``openstack/<project>`` that matches the
-check or gate pipeline triggers run the ``gate-new-<project>-job``
-job against ``openstack/<project>`` in the matching pipeline.
+repository (every repository should use this template). Then we have
+``gate-new-<repositoryname>-job`` listed in the check and gate
+pipelines. This says if an event comes in for
+``openstack/<repositoryname>`` that matches the check or gate
+pipeline triggers run the ``gate-new-<repositoryname>-job`` job
+against ``openstack/<repositoryname>`` in the matching pipeline.
 
 Zuul comes with extensive `documentation <http://ci.openstack.org/zuul/>`_
 too and should be referenced for more information.
