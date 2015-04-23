@@ -85,6 +85,20 @@ Merge Feature Branch into Master
   git checkout master
   git branch -D merge-branch
 
+How To Avoid Merging Specific Files
+-----------------------------------
+
+Sometimes you may have files on one branch you don't want merged to
+or from another. An easy workaround for this is to checkout the file
+in question from the target branch and amend your merge commit
+before pushing it for review. For example, as in the last section
+you've just merged from ``origin/feature-branch`` into your local
+``merge-branch`` but want to keep the ``.gitreview`` file from
+``master`` because you don't want ``defaultbranch=feature-branch``
+added to it. Immediately before you ``git commit --amend`` do::
+
+  git checkout origin/master -- .gitreview
+
 Release Management
 ==================
 
