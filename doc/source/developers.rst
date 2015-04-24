@@ -719,6 +719,16 @@ reviews:
 
 6. The code should comply with the community `logging standards <https://wiki.openstack.org/wiki/LoggingStandards>`_.
 
+7. It is entirely appropriate to issue a negative review in the context
+   of a question in some cases. The cases where this is appropriate are
+   cases where a change is fully understood by the reviewer by itself,
+   but the potential effects on code that depends on the changed program
+   or library is not well documented or considered in the commit message,
+   comments, or formal documentation. It is not appropriate to issue a
+   negative review solely because the reviewer does not understand the
+   change or the code that the change depends on. For any questions like
+   these, a score of `+0` is the right choice.
+
 There may be more specific items to be aware of inside the projects'
 documentation for contributors.
 
