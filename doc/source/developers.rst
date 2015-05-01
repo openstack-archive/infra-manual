@@ -144,7 +144,7 @@ On Mac OS X, or most other Unix-like systems, you may install it with
 If you run into trouble, you can refer to the `git-review readme file
 <http://git.openstack.org/cgit/openstack-infra/git-review/tree/README.rst>`_.
 
-All of git-review's interactions with gerrit are sequences of normal
+All of git-review's interactions with Gerrit are sequences of normal
 git commands. If you want to know more about what it's doing, just
 add -v to the options and it will print out all of the commands it's
 running.
@@ -193,10 +193,10 @@ time so the Gerrit Change-Id commit hook gets installed.  To do so::
   cd <projectname>
   git review -s
 
-Git-review checks that you can log in to gerrit with your ssh key. It
-assumes that your gerrit/launchpad user name is the same as the
+Git-review checks that you can log in to Gerrit with your ssh key. It
+assumes that your Gerrit/Launchpad user name is the same as the
 current running user.  If that doesn't work, it asks for your
-gerrit/launchpad user name.  You can avoid that question by
+Gerrit/Launchpad user name.  You can avoid that question by
 configuring git to use your Gerrit username, as follows::
 
   git config --global gitreview.username yourgerritusername
@@ -312,7 +312,7 @@ Create a `topic branch
 <http://git-scm.com/book/en/Git-Branching-Branching-Workflows#Topic-Branches>`_
 to hold your work and switch to it.  If you are working on a
 blueprint, name your topic branch ``bp/BLUEPRINT`` where BLUEPRINT is
-the name of a blueprint in launchpad (for example,
+the name of a blueprint in Launchpad (for example,
 ``bp/authentication``).  The general convention when working on bugs
 is to name the branch ``bug/BUG-NUMBER`` (for example,
 ``bug/1234567``). Otherwise, give it a meaningful name because it will
@@ -676,7 +676,7 @@ reviews:
 
 1. The code should comply with everything in that project's
    `HACKING.rst` file, if it has one. If the project reuses nova's
-   hacking guideines, then it may have a "hacking" section in its
+   hacking guidelines, then it may have a "hacking" section in its
    `tox.ini` file in which case much of this is already checked
    automatically for you by the continuous integration system.
 2. The code should be 'pythonic' and look like the code around it,
@@ -734,14 +734,14 @@ Work in Progress
 ----------------
 
 To get early feedback on a change which is not fully finished yet, you
-can submit a change to gerrit and mark it as "Work in Progress" (WIP).
+can submit a change to Gerrit and mark it as "Work in Progress" (WIP).
 
 .. note::
    The OpenStack Gerrit system does not support drafts, use
    "Work in Progress" instead.
 
-To do so, after submitting a change to gerrit in usual way (``git review``),
-You should go to gerrit, and do `Code Review`_ of your own change while
+To do so, after submitting a change to Gerrit in usual way (``git review``),
+You should go to Gerrit, and do `Code Review`_ of your own change while
 setting "Workflow" vote to "-1", which marks the change as WIP.
 
 This allows others to review the change, while at the same time
