@@ -22,3 +22,4 @@ instead a user or developer looking for API documentation, see
    drivers
    creators
    sandbox
+   infra-cloud
