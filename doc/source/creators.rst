@@ -256,10 +256,72 @@ Each repository should have two gerrit groups. The first,
 the primary maintainers with permission to push tags to trigger
 releases.
 
-Create ``gerrit/acls/openstack/<repositoryname>.config``::
+Create a ``gerrit/acls/openstack/<repositoryname>.config`` as
+explained in the following sections.
+
+
+Minimal ACL file
+~~~~~~~~~~~~~~~~
+
+The minimal ACL file allows working only on master and requires a
+change-ID for each change::
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
+  label-Code-Review = -2..+2 group <projectname>-core
+  label-Workflow = -1..+1 group <projectname>-core
+
+  [receive]
+  requireChangeId = true
+
+  [submit]
+  mergeContent = true
+
+Request Signing of ICLA
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If your repository requires signing of the Individual Contributor
+License Agreement (`ICLA
+<https://review.openstack.org/static/cla.html>`_), change the
+``receive`` section to::
+
+  [receive]
+  requireChangeId = true
+  requireContributorAgreement = true
+
+Note that this is mandatory for all official projects in the openstack
+namespace and should also be set for repositories that want to become
+official.
+
+Creation of Tags
+~~~~~~~~~~~~~~~~
+
+To allow creation of tags by the release team, add a new section::
+
+  [access "refs/tags/*"]
+  pushSignedTag = group <projectname>-release
+
+Creating of Branches
+~~~~~~~~~~~~~~~~~~~~
+
+To allow creation of branches to the release team, add a ``create``
+rule to it the ``refs/heads/*`` section::
+
+  [access "refs/heads/*"]
+  abandon = group <projectname>-core
+  create = group <projectname>-release
+  label-Code-Review = -2..+2 group <projectname>-core
+  label-Workflow = -1..+1 group <projectname>-core
+
+Extended ACL File
+~~~~~~~~~~~~~~~~~
+So, if your repository requires the ICLA signed, has a release team
+that will create tags and branches, create a
+``gerrit/acls/openstack/<repositoryname>.config`` like::
+
+  [access "refs/heads/*"]
+  abandon = group <projectname>-core
+  create = group <projectname>-release
   label-Code-Review = -2..+2 group <projectname>-core
   label-Workflow = -1..+1 group <projectname>-core
 
@@ -273,7 +335,7 @@ Create ``gerrit/acls/openstack/<repositoryname>.config``::
   [submit]
   mergeContent = true
 
-See other files in the same directory for examples.
+See other files in the same directory for further examples.
 
 Add Basic Jenkins Jobs
 ----------------------
