@@ -362,6 +362,107 @@ Make your changes, commit them, and submit them for review::
     cause merge commits when you pull new upstream changes, and merge
     commits will not be accepted by Gerrit.
 
+
+Running Unit Tests
+------------------
+
+Before submitting your change, you should test it. Projects generally have
+several categories of tests:
+
+* Style Checks -- Check source code for style issues
+* Unit Tests --  Self contained in each project
+* Integration Tests -- Require a running OpenStack environment
+
+This section covers how to run the style check and unit tests. Both are run
+through `Tox`_.
+
+.. _`Tox`: https://tox.readthedocs.org/en/latest/
+
+
+Install `pip`_::
+
+  [apt-get | yum] install python-pip
+
+Use pip to install tox::
+
+  pip install --upgrade tox
+
+Run The Tests
+^^^^^^^^^^^^^
+
+Navigate to the project's root directory and execute::
+
+  tox
+
+Note: completing this command may take a long time (depends on system resources)
+also, you might not see any output until tox is complete.
+
+
+Run One Set of Tests
+^^^^^^^^^^^^^^^^^^^^
+
+Tox will run your entire test suite in the environments specified in the
+project tox.ini::
+
+  [tox]
+
+  envlist = <list of available environments>
+
+To run just one test suite in envlist execute::
+
+  tox -e <env>
+
+so for example, run the test suite in py27::
+
+  tox -e py27
+
+
+Running the style checks
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Just run::
+
+  tox -e pep8
+
+Run One Test
+^^^^^^^^^^^^
+
+To run individual tests with tox:
+
+if `testr`_ is in tox.ini, for example::
+
+  [testenv]
+
+  includes "python setup.py testr --slowest --testr-args='{posargs}'"
+
+run individual tests with the following syntax::
+
+  tox -e <env> -- path.to.module:Class.test
+
+so for example, run the cpu_limited test in Nova::
+
+  tox -e py27 -- nova.tests.test_claims:ClaimTestCase.test_cpu_unlimited
+
+if `nose`_ is in tox.ini, for example::
+
+  [testenv]
+
+  includes "nosetests {posargs}"
+
+run individual tests with the following syntax::
+
+  tox -e <env> -- --tests path.to.module:Class.test
+
+so for example, run the list test in Glance::
+
+  tox -e py27 -- --tests glance.tests.unit.test_auth.py:TestImageRepoProxy.test_list
+
+.. _`testr`: https://wiki.openstack.org/wiki/Testr
+.. _`nose`: https://nose.readthedocs.org/en/latest/
+
+
+
+
 Submitting a Change for Review
 ------------------------------
 
