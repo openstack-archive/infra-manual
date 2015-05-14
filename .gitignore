@@ -4,6 +4,10 @@
 # Build directories
 doc/build/*
 
+# generated during doc builds
+AUTHORS
+ChangeLog
+
 # Packages
 *.egg-info/*
 
