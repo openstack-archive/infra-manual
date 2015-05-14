@@ -809,4 +809,4 @@ other repositories can be identified.
 
 Additional information about repository gating and Zuul can
 be found in the Zuul documentation, located at:
-http://ci.openstack.org/zuul/gating.html
+http://docs.openstack.org/infra/zuul/gating.html

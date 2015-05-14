@@ -301,7 +301,7 @@ Running Jobs with Zuul
 There are two major components in getting jobs running under Zuul. First
 you must ensure that the job you want to run is defined in the `JJB
 config <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_.
-The `JJB documentation <http://ci.openstack.org/jenkins-job-builder/>`_
+The `JJB documentation <http://docs.openstack.org/infra/jenkins-job-builder/>`_
 is extensive as are the examples in our JJB config so we will not cover
 that here.
 
@@ -345,5 +345,5 @@ pipelines. This says if an event comes in for
 pipeline triggers run the ``gate-new-<repositoryname>-job`` job
 against ``openstack/<repositoryname>`` in the matching pipeline.
 
-Zuul comes with extensive `documentation <http://ci.openstack.org/zuul/>`_
+Zuul comes with extensive `documentation <http://docs.openstack.org/infra/zuul/>`_
 too and should be referenced for more information.
