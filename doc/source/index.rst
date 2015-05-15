@@ -18,6 +18,7 @@ instead a user or developer looking for API documentation, see
    :maxdepth: 2
 
    developers
+   python
    core
    drivers
    creators

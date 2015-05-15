@@ -362,6 +362,13 @@ Make your changes, commit them, and submit them for review::
     cause merge commits when you pull new upstream changes, and merge
     commits will not be accepted by Gerrit.
 
+
+Running Unit Tests
+------------------
+
+Before submitting your change, you should test it. To learn how to run
+python based unit tests in OpenStack projects see :ref:`python_unit_tests`.
+
 Submitting a Change for Review
 ------------------------------
 
