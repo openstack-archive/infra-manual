@@ -97,8 +97,10 @@ Create a new Launchpad Project
 Put Your New Project in the Correct Project Group
 -------------------------------------------------
 
+This step is optional if your repository will be under ``stackforge``.
+
 #. From the Overview page of your project, select "Change Details"
-   from the right sidebar (e.g., http://launchpad.net/oslo.foo/+edit).
+   from the right sidebar.
 
 #. Find the "Part of" field and set the value to "openstack" for
    integrated projects and "oslo" for Oslo libraries.
