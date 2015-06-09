@@ -345,5 +345,42 @@ pipelines. This says if an event comes in for
 pipeline triggers run the ``gate-new-<repositoryname>-job`` job
 against ``openstack/<repositoryname>`` in the matching pipeline.
 
+Integration Tests
+-----------------
+
+One of Zuul's most powerful features is the ability to perform complex
+integration testing across interrelated repositories.  Projects that
+share one or more jobs are combined into a shared change queue.  That
+means that as changes are approved, they are sequenced in order and
+can be tested together.  It also means that if a change specifies that
+it depends on another change with a "Depends-On:" header, those
+changes can be tested together and merged in rapid succession.
+
+In order to use this to its full advantage, your job should allow Zuul
+to perform all of the git operations for all of the projects related
+to the integration test.  If you install the software under test from
+the git checkouts supplied by Zuul, the test run will include all of
+the changes that will be merged ahead of the change under test.
+
+To do this, use the ``zuul-cloner`` command as follows::
+
+  sudo -E /usr/zuul-env/bin/zuul-cloner --cache-dir /opt/git \
+      git://git.openstack.org \
+      openstack/project1 \
+      openstack/project2 \
+      openstack/projectN
+
+Where the final arguments are the names of all of the projects
+involved in the integration test.  They will be checked out into the
+current directory (e.g., ``./openstack/project1``).  If you need them
+to be placed in a different location, see the ``clonemap`` feature of
+``zuul-cloner`` which allows for very flexible (including regular
+expressions) directory layout descriptions.
+
+Use that command in a single Jenkins Job Builder definition that you
+then invoke from all of the related projects.  This way they all run
+the same job (which tests the entire system) and Zuul knows to combine
+those projects into a shared change queue.
+
 Zuul comes with extensive `documentation <http://docs.openstack.org/infra/zuul/>`_
 too and should be referenced for more information.
