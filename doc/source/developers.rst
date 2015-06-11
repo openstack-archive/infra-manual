@@ -774,6 +774,11 @@ reviews:
       possible we should be use `six.text_type` or `six.text_binary` to cast
       or test value for unicode or str.
 
+   2. Use of six.iteritems should be avoided without justification. If a dict
+      will be very large, and the program will be expected to keep many such
+      dicts resident, then that should be stated in comments whenever
+      six.iteritems is used. Otherwise, migrate the code to use .items().
+
 6. The code should comply with the community `logging standards <https://wiki.openstack.org/wiki/LoggingStandards>`_.
 
 There may be more specific items to be aware of inside the
