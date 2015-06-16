@@ -461,11 +461,6 @@ services <http://docs.openstack.org/infra/system-config/irc.html>`_ documentatio
 Submitting Infra Change for Review
 ----------------------------------
 
-In your commit message, include a reference to the governance change
-to make your project-config change depend on it::
-
-    Depends-On: <Gerrit Change-Id>
-
 When submitting the change to openstack-infra/project-config for
 review, use the "new-project" topic so it receives the appropriate
 attention::
@@ -529,6 +524,9 @@ depend on the repository creation change by including a link to its
 Change-ID (from the previous step)::
 
     Depends-On: <Gerrit Change-Id>
+
+Also, add a review comment to the project-config change linking to the
+governance repository.
 
 However, if you are creating an entirely new OpenStack project team
 (i.e., adding a new top-level entry into
