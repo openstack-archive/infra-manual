@@ -32,7 +32,8 @@ from jinja2.utils import Markup
 extensions = ['sphinx.ext.autodoc',
               'sphinx.ext.todo',
               'sphinx.ext.viewcode',
-              'oslosphinx'
+              'oslosphinx',
+              'sphinxcontrib.blockdiag'
              ]
 
 todo_include_todos = True
