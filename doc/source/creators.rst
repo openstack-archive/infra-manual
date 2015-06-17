@@ -525,8 +525,9 @@ Change-ID (from the previous step)::
 
     Depends-On: <Gerrit Change-Id>
 
-Also, add a review comment to the project-config change linking to the
-governance repository.
+Then, go back to the project-config change and add a review comment
+that includes a link to the change in the governance repository, so
+that reviewers know that the governance change has been created.
 
 However, if you are creating an entirely new OpenStack project team
 (i.e., adding a new top-level entry into
