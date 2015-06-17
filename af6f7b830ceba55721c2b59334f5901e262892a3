@@ -1,0 +1,10 @@
+Verified+2: Jenkins
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Workflow+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Richard Raseley <richard@raseley.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 17 Jun 2015 13:21:49 +0000
+Reviewed-on: https://review.openstack.org/192129
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
