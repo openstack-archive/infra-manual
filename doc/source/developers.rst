@@ -723,6 +723,12 @@ will first run the check jobs and if those pass, it will run again the
 gate jobs. There is no way to only run the gate jobs, the check jobs
 will first be run again.
 
+More information on debugging automated testing failures can be found in the
+following recordings:
+
+ - `Tales From The Gate <https://www.youtube.com/watch?v=sa67J6yMYZ0>`_
+ - `Debugging Failures in the OpenStack Gate <https://www.youtube.com/watch?v=fowBDdLGBlU>`_
+
 Peer Review
 -----------
 
