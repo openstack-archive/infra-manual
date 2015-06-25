@@ -254,7 +254,8 @@ Each repository should have two gerrit groups. The first,
 "<projectname>-core", is the normal core group, with permission to
 +2 changes. The second, "<projectname>-release" is a small group of
 the primary maintainers with permission to push tags to trigger
-releases.
+releases. Libraries for projects managed by the release team do not need
+this group, and should use ``library-release`` instead.
 
 Create a ``gerrit/acls/openstack/<repositoryname>.config`` as
 explained in the following sections.
@@ -296,7 +297,16 @@ official.
 Creation of Tags
 ~~~~~~~~~~~~~~~~
 
-To allow creation of tags by the release team, add a new section::
+For library repositories managed by the release team, allow the
+``library-release`` team to create tags by adding a new section
+containing::
+
+  [access "refs/tags/*"]
+  pushSignedTag = group library-release
+
+For non-library projects, or projects not managed by the release team,
+you can allow the project-specific release team to create tags by
+adding a new section containing::
 
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
