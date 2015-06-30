@@ -31,12 +31,15 @@ will identify you. This is also useful for automatically crediting bug
 fixes to you when you address them with your code commits.
 
 If you haven't already, `join The OpenStack Foundation
-<https://www.openstack.org/join/>`_ (it's free and required for all
-code contributors). Among other privileges, this also allows you to
-vote in elections and run for elected positions within The OpenStack
-Project. When signing up for Foundation Membership, make sure to give
-the same email address you'll use for code contributions, since this
-will need to match your preferred email address in Gerrit.
+<https://www.openstack.org/join/>`_ (it's free and currently
+required for all code contributors, though there is work in progress
+which may remove this requirement in the future). Your member level
+needs to be *Foundation Member* (not Community Member). Among other
+privileges, this also allows you to vote in elections and run for
+elected positions within The OpenStack Project. When signing up for
+Foundation Membership, make sure to give the same email address
+you'll use for code contributions, since this will need to match
+your preferred email address in Gerrit.
 
 Visit https://review.openstack.org/ and click the ``Sign In`` link at
 the top-right corner of the page.  Log in with your Launchpad ID.
