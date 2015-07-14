@@ -835,3 +835,52 @@ page with a link to your documentation by checking out the
 ``www/developer/openstack-projects.html``.
 
 Skip this step if your repository is under ``stackforge``.
+
+Project Renames
+===============
+
+The first step of doing a rename is understanding the required
+governance changes needed by the rename. You can use the following
+criteria:
+
+For new project moving from Stackforge into the big tent: Add a "Depends-On:
+GovernanceID" of the ``openstack/governance`` change that accepted the project
+into the big tent to the commit message.
+
+For a project being added to existing non-Stackforge project: Create an
+``openstack/governance`` change and add a "Depends-On: project-changeID" of the
+change you make in the following steps to the commit message, and add a comment
+in the ``openstack-infra/project-config`` change that references the governance
+change. You will also make sure the PTL has expressed approval for the addition
+in some way.
+
+When preparing to rename a project, begin by making changes to the
+files in the ``openstack-infra/project-config`` repository related
+to your project.
+
+When uploading your change, make sure the topic is "project-rename"
+which can be done by submitting the review with the following
+git review command::
+
+   $ git review -t project-rename
+
+Members of the infrastructure team will review your change.
+
+Finally, add it to the `Upcoming Project Renames
+https://wiki.openstack.org/wiki/Meetings/InfraTeamMeeting#Upcoming_Project_Renames`_
+section of the Infrastructure Team Meeting page to make sure
+it's included in the next rename window.
+
+.. note::
+
+   Renames have to be done during a Gerrit maintenance window
+   scheduled by the Infrastructure team, so it may take a few
+   weeks for your rename to be completed.
+
+Post rename, a member of the Infrastructure team will submit a patch to update
+the :file:`.gitreview` file in the renamed project to point to the new project
+name.
+
+Other projects you may need to update post-rename:
+
+* projects.txt in ``openstack/requirements``
