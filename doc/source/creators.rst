@@ -835,3 +835,33 @@ page with a link to your documentation by checking out the
 ``www/developer/openstack-projects.html``.
 
 Skip this step if your repository is under ``stackforge``.
+
+Project Renames
+===============
+
+When preparing to rename a project, begin by making changes to the
+files in the ``openstack-infra/project-config`` repository related
+to your project.
+
+When uploading your change, make sure the topic is "project-rename"
+which can be done by submitting the review with the following
+git review command::
+
+   $ git review -t project-rename
+
+Members of the infrastructure team will review your change and add
+it to the next rename window.
+
+.. note::
+
+   Renames have to be done during a Gerrit maintenance window
+   scheduled by the Infrastructure team, so it may take a few
+   weeks for your rename to be completed.
+
+Post rename, a member of the Infrastructure team will submit a
+patch to update the .gireview file in the renamed project to
+point to the new project name.
+
+Other projects you may need to update post-rename:
+
+* projects.txt in ``openstack/requirements``
