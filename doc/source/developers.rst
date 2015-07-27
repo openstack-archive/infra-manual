@@ -889,7 +889,7 @@ Once all of the jobs report success on an approved patchset in the
 configured gate pipeline, then Gerrit will merge the code into trunk.
 
 Besides running the gate tests, the gate pipeline determines the order
-of changes to merge accross multiple repositories. The changes are tested
+of changes to merge across multiple repositories. The changes are tested
 and merged in this order, so that for each change the state of all
 other repositories can be identified.
 
