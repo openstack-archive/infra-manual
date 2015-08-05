@@ -155,8 +155,11 @@ next to the Maintainer field. Replace your name with the
 
 .. note::
 
-   You may need to create the drivers team.  If you do so, set the
-   owner of the team to 'openstack-administrators'.
+   You may need to create the drivers team.  If you do:
+
+     1. Set the owner of the team to 'openstack-administrators'
+     2. Add 'openstack-release' as a sub-team so the release team can
+        help keep milestones updated as part of the release process.
 
 From the Overview page for your project, click the pencil "edit" icon
 next to the Drivers field. Replace your name with the project drivers
