@@ -1,0 +1,15 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Jenkins
+Code-Review+1: Thierry Carrez <thierry@openstack.org>
+Code-Review+1: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Walter A. Boring IV (hemna) <walter.boring@hp.com>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Submitted-by: Jenkins
+Submitted-at: Wed, 05 Aug 2015 16:53:26 +0000
+Reviewed-on: https://review.openstack.org/187212
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
