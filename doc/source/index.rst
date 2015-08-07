@@ -14,12 +14,22 @@ If you are not trying to contribute to OpenStack directly, but are
 instead a user or developer looking for API documentation, see
 `OpenStack documentation <http://docs.openstack.org>`_.
 
+.. sidebar:: HOWTOs
+
+   * :doc:`sandbox`
+   * :doc:`creators`
+   * :doc:`python`
+
 .. toctree::
    :maxdepth: 2
 
    developers
-   python
    core
    drivers
-   creators
+
+.. toctree::
+   :hidden:
+
    sandbox
+   creators
+   python

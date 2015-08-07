@@ -1,9 +1,8 @@
-:title: Python Developer's Guide
+:title: Run Python Unit Tests
 
-
-Python Developer's Guide
-#########################
-
+==========================
+ Run Python Unit Tests
+==========================
 
 The goal of this document is to explain OpenStack wide standard
 practices around the use of Python.
