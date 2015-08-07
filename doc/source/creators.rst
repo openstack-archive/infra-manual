@@ -218,6 +218,10 @@ Add the project to the master projects list
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
 
+   Note: All projects should use the ``openstack/`` namespace
+   regardless of whether they are or intend to become official
+   OpenStack projects.
+
 #. Provide a very brief description of the library.
 
 #. If you have an existing repository that you want to import (for
@@ -293,9 +297,8 @@ License Agreement (`ICLA
   requireChangeId = true
   requireContributorAgreement = true
 
-Note that this is mandatory for all official projects in the openstack
-namespace and should also be set for projects that want to become
-official.
+Note that this is mandatory for all official OpenStack projects and
+should also be set for projects that want to become official.
 
 Creation of Tags
 ~~~~~~~~~~~~~~~~
@@ -485,13 +488,13 @@ Note the Change-Id in your commit message for the next step.
 Add New Repository to the Governance Repository
 -----------------------------------------------
 
+If your project is not intended to be an official OpenStack project,
+you may skip this step.
+
 Each repository managed by an official OpenStack project team needs
 to be listed in ``reference/projects.yaml`` in the
 ``openstack/governance`` repository to indicate who owns the
 repository so we know where ATCs voting rights extend.
-
-If your repository is under the ``stackforge`` section of the git
-repository structure, you can skip this step.
 
 Find the appropriate section in ``reference/projects.yaml`` and add
 the new repository to the list. For example, to add a new Oslo
@@ -832,12 +835,12 @@ Updating devstack
 Add Link to Your Developer Documentation
 ========================================
 
+If your project is not an official OpenStack project, skip this section.
+
 Update the http://docs.openstack.org/developer/openstack-projects.html
 page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
-
-Skip this step if your project is under ``stackforge``.
 
 Project Renames
 ===============
@@ -850,7 +853,7 @@ For new project moving from Stackforge into the big tent: Add a "Depends-On:
 GovernanceID" of the ``openstack/governance`` change that accepted the project
 into the big tent to the commit message.
 
-For a project being added to existing non-Stackforge project: Create an
+For a project being added to existing official OpenStack project: Create an
 ``openstack/governance`` change and add a "Depends-On: project-changeID" of the
 change you make in the following steps to the commit message, and add a comment
 in the ``openstack-infra/project-config`` change that references the governance

@@ -17,8 +17,8 @@ proposed change.
 To get started with a feature branch you will need to create the new
 branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
 not allow for pushing of new branches via git, but specific groups of
-Gerrit users can create new branches. For OpenStack projects the
-Release Manager creates feature branches. Stackforge projects may
+Gerrit users can create new branches. For official OpenStack projects
+the Release Manager creates feature branches. Unofficial projects may
 update their Gerrit ACLs to allow their release teams to create these
 branches. For similar Gerrit ACL reasons branch deletion is typically
 limited to the Infra team. Keep this in mind before creating many
