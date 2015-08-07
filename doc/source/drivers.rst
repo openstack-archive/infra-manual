@@ -17,21 +17,21 @@ proposed change.
 To get started with a feature branch you will need to create the new
 branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
 not allow for pushing of new branches via git, but specific groups of
-Gerrit users can create new branches. For OpenStack repositories the
-Release Manager creates feature branches. Stackforge repositories
-may update their Gerrit ACLs to allow their release teams to create
-these branches. For similar Gerrit ACL reasons branch deletion is
-typically limited to the Infra team. Keep this in mind before
-creating many branches that will need cleanup.
+Gerrit users can create new branches. For OpenStack projects the
+Release Manager creates feature branches. Stackforge projects may
+update their Gerrit ACLs to allow their release teams to create these
+branches. For similar Gerrit ACL reasons branch deletion is typically
+limited to the Infra team. Keep this in mind before creating many
+branches that will need cleanup.
 
-If more than one repository is involved in a feature development
-effort, the same feature branch name should be used across all such
-repositories. This will cause integration testing with Zuul to use
-the respective feature branch from any repository that carries it.
-Repositories without an equivalently named feature branch will use
-master instead. Use care not to create a feature branch with the
-same name as a feature branch for an unrelated effort in another
-repository.
+If more than one project is involved in a feature development effort,
+the same feature branch name should be used across all involved
+projects. This will cause integration testing with Zuul to use the
+respective feature branch from any project that carries it.
+Projects without an equivalently named feature branch will use
+master instead. Use care not to create a feature branch with the same
+name as a feature branch for an unrelated effort in another
+project.
 
 One additional thing to keep in mind is that feature branches should be
 treated like master in most cases. They are specifically not for sustained
@@ -41,8 +41,8 @@ Merge Commits
 -------------
 
 An important activity when using feature branches is syncing to and from
-the repository's master branch. During development on a feature
-branch a repository will want to merge master into the feature branch
+the project's master branch. During development on a feature
+branch a project will want to merge master into the feature branch
 periodically to keep up to date with changes over time. Then when
 development on the feature branch is complete, it will need to be
 merged into master.
@@ -53,7 +53,7 @@ have access to push merge commits in Gerrit::
   [access "refs/for/refs/*"]
   pushMerge = group <projectname>-release
 
-Should be added to the repository's ACL file in the project-config
+Should be added to the project's ACL file in the project-config
 repo.
 
 Merge Master into Feature Branch
@@ -129,13 +129,13 @@ commit to record the state of the branch at the time.
 Create proposed/* Branch
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-For OpenStack repositories this should be performed by the OpenStack
+For OpenStack projects this should be performed by the OpenStack
 Release Manager at the Release Branch Point. If you are managing
-branches for your repository you may have permission to do this
+branches for your project you may have permission to do this
 yourself.
 
 * Go to https://review.openstack.org/ and sign in
-* Select 'Admin', 'Projects', then the repository
+* Select 'Admin', 'Projects', then the project
 * Select 'Branches'
 * Enter ``proposed/<series>`` in the 'Branch Name' field, and ``HEAD``
   as the 'Initial Revision', then press 'Create Branch'.
@@ -199,7 +199,7 @@ the release is made.  If you are managing your own releases, you may
 have permission to do this yourself.
 
 Tag the tip of the appropriate branch (proposed/<series> for server
-repositories, master for clients/libraries) with a release tag and
+projects, master for clients/libraries) with a release tag and
 push that tag to Gerrit by running the following commands::
 
   git checkout <branch name>
@@ -233,7 +233,7 @@ even after the branch is deleted, making it possible to restore the
 state of the tree.
 
 * Go to https://review.openstack.org/ and sign in
-* Select 'Admin', 'Projects', then the repository
+* Select 'Admin', 'Projects', then the project
 * Select 'Branches'
 * Select the checkbox next to 'proposed/<series>' and hit 'Delete'
 
@@ -241,42 +241,45 @@ Targeting Blueprints
 ====================
 
 Blueprints for a project are generally posted to
-https://blueprints.launchpad.net/<projectname>. Project drivers need to review
-blueprints regularly and assign them to a target. For each release there are three
-milestones. Based on interactions with the proposer and/or assignee of the blueprint,
-the project driver assigns the blueprint to a milestone
-(release-1, release-2 or release-3) or defers it to a later release.
+https://blueprints.launchpad.net/<projectname>. Project drivers need
+to review blueprints regularly and assign them to a target. For each
+release there are three milestones. Based on interactions with the
+proposer and/or assignee of the blueprint, the project driver assigns
+the blueprint to a milestone (release-1, release-2 or release-3) or
+defers it to a later release.
 
-Many projects have repositories entitled <projectteam>-specs. If a project has a spec
-repo, a spec needs to be submitted and linked to the launchpad blueprint. The spec
-needs to be reviewed and approved prior to the launchpad blueprint being targeted to
-a milestone.
+Many projects have repositories entitled <project>-specs. If a project
+has a spec repo, a spec needs to be submitted and linked to the
+launchpad blueprint. The spec needs to be reviewed and approved prior
+to the launchpad blueprint being targeted to a milestone.
 
-Interactions with release management includes discussions of the blueprint target
-page: https://launchpad.net/<projectname>/+milestone/{release name}-{1|2|3} The more
-the blueprint target page reflects the reality of progress and intentions, the happier
-the release management team.
+Interactions with release management includes discussions of the
+blueprint target page:
+https://launchpad.net/<projectname>/+milestone/{release name}-{1|2|3}
+The more the blueprint target page reflects the reality of progress
+and intentions, the happier the release management team.
 
 Gerrit IRC Notifications
 ========================
 
 The intent of this section is to detail how to set up notifications
-about all the repositories that are hosted on OpenStack Gerrit in
-the appropriate IRC channels.
+about all the projects that are hosted on OpenStack Gerrit in the
+appropriate IRC channels.
 
 GerritBot is an IRC bot that listens to the OpenStack Gerrit server
 for events and notifies those on Freenode's OpenStack channels.
 
-GerritBot is able to notify the channel for events like creation of patchsets, changes merged,
-comments added to patchsets and updates to refs.
-These event notifications can be configured per repository, so the
-channel can have multiple notifications per repository.
+GerritBot is able to notify the channel for events like creation of
+patchsets, changes merged, comments added to patchsets and updates to
+refs.  These event notifications can be configured per project, so the
+channel can have multiple notifications per project.
 
 In order for GerritBot to post notifications on the IRC channel of the
-repository you are configuring,
-you need to add your GerritBot configuration into
-``modules/gerritbot/files/gerritbot_channel_config.yaml``.
-This file is hosted in `openstack-infra/config <http://git.openstack.org/cgit/openstack-infra/config/>`_.
+project you are configuring, you need to add your GerritBot
+configuration into
+``modules/gerritbot/files/gerritbot_channel_config.yaml``.  This file
+is hosted in `openstack-infra/config
+<http://git.openstack.org/cgit/openstack-infra/config/>`_.
 
 The syntax for configuring the notifications is::
 
@@ -287,12 +290,12 @@ The syntax for configuring the notifications is::
           - comment-added
           - ref-updated
         projects:
-          - <repository name>
+          - <project name>
         branches:
           - <branch name>
 
 Please note that the text between the angle brackets are placeholder
-values. Multiple repositories and branches can be listed in the YAML
+values. Multiple projects and branches can be listed in the YAML
 file.
 
 Running Jobs with Zuul
@@ -317,7 +320,7 @@ into several sections.
    pipelines but they provide information on why each pipeline exists
    and when it is triggered. This section is good as a reference.
 #. Project templates. Useful if you want to collect several jobs under
-   a single name that can be reused across repositories.
+   a single name that can be reused across projects.
 #. Job specific overrides. This section is where you specify that a
    specific job should not vote or run only against a specific set
    of branches.
@@ -325,25 +328,25 @@ into several sections.
    your time. Note it is organized into alphabetical subsections based
    on git repo name prefix.
 
-To add a job to a repository you will need to edit your repository
-in the projects list or add your repository to the list if it does
-not exist. You should end up with something like::
+To add a job to a project you will need to edit your project in the
+projects list or add your project to the list if it does not
+exist. You should end up with something like::
 
-  - name: openstack/<repositoryname>
+  - name: openstack/<projectname>
     template:
       - name: merge-check
     check:
-      - gate-new-<repositoryname>-job
+      - gate-new-<projectname>-job
     gate:
-      - gate-new-<repositoryname>-job
+      - gate-new-<projectname>-job
 
 The template section applies the common ``merge-check`` jobs to the
-repository (every repository should use this template). Then we have
-``gate-new-<repositoryname>-job`` listed in the check and gate
+project (every project should use this template). Then we have
+``gate-new-<projectname>-job`` listed in the check and gate
 pipelines. This says if an event comes in for
-``openstack/<repositoryname>`` that matches the check or gate
-pipeline triggers run the ``gate-new-<repositoryname>-job`` job
-against ``openstack/<repositoryname>`` in the matching pipeline.
+``openstack/<projectname>`` that matches the check or gate pipeline
+triggers run the ``gate-new-<projectname>-job`` job against
+``openstack/<projectname>`` in the matching pipeline.
 
 Integration Tests
 -----------------

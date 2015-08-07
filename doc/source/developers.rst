@@ -183,12 +183,12 @@ You should then be prompted for your username and password (where
 this is the `HTTP password generated in Gerrit
 <https://review.openstack.org/#/settings/http-password>`_).
 
-Starting Work on a New Repository
----------------------------------
+Starting Work on a New Project
+------------------------------
 
 Clone a repository in the usual way, for example::
 
-  git clone https://git.openstack.org/openstack/<repositoryname>.git
+  git clone https://git.openstack.org/openstack/<projectname>.git
 
 You may want to ask git-review to configure your repository to know
 about Gerrit at this point. If you don't, it will do so the first
@@ -196,7 +196,7 @@ time you submit a change for review, but you probably want to do
 this ahead of time so the Gerrit Change-Id commit hook gets
 installed. To do so::
 
-  cd <repositoryname>
+  cd <projectname>
   git review -s
 
 Git-review checks that you can log in to Gerrit with your ssh key. It
@@ -440,7 +440,7 @@ Understanding Changes and Patch Sets
 
 It's important to understand how Gerrit handles changes and patch
 sets. Gerrit combines the Change-Id in the commit message, the
-repository, and the target branch to uniquely identify a change.
+project, and the target branch to uniquely identify a change.
 
 A new patch set is determined by any modification in the commit
 hash. When a change is initially pushed up it only has one patch
@@ -469,9 +469,8 @@ Squashing Changes
 If you have made many small commits, you should squash them so that
 they do not show up in the public repository. Remember: each commit
 becomes a change in Gerrit, and must be approved separately. If you
-are making one "change" to the repository, squash your many
-"checkpoint" commits into one commit for public consumption. Here's
-how::
+are making one "change" to the project, squash your many "checkpoint"
+commits into one commit for public consumption. Here's how::
 
   git checkout master
   git pull origin master
@@ -599,13 +598,13 @@ Multiple Changes
 ^^^^^^^^^^^^^^^^
 
 A Gerrit change ID may refer to multiple changes (on multiple branches
-of the same repository, or even multiple repositories). In these
-cases, Zuul will treat all of the changes with that change ID as
-dependencies. So if you say that a tempest change Depends-On a
-change ID that has changes in nova master and nova stable/juno, then
-when testing the tempest change, both nova changes will be applied,
-and when deciding whether the tempest change can merge, both changes
-must merge ahead of it.
+of the same project, or even multiple projects). In these cases, Zuul
+will treat all of the changes with that change ID as dependencies. So
+if you say that a tempest change Depends-On a change ID that has
+changes in nova master and nova stable/juno, then when testing the
+tempest change, both nova changes will be applied, and when deciding
+whether the tempest change can merge, both changes must merge ahead of
+it.
 
 A change may depend on more than one Gerrit change ID as well. So it is
 possible for a change in tempest to depend on a change in devstack and a
@@ -670,11 +669,11 @@ For more details on reviews in Gerrit, check the
 Automated Testing
 -----------------
 
-When a new patchset is uploaded to Gerrit, that repository's "check"
+When a new patchset is uploaded to Gerrit, that project's "check"
 tests are run on the patchset by Jenkins. Once completed the test
 results are reported to Gerrit by Jenkins in the form of a Verified:
 +/-1 vote. After code reviews have been completed and a change
-receives an Approved: +1 vote that repository's "gate" tests are run
+receives an Approved: +1 vote that project's "gate" tests are run
 on the change by Jenkins. Jenkins reports the results of these tests
 back to Gerrit in the form of a Verified: +/-2 vote. Code merging
 will only occur after the gate tests have passed successfully and
@@ -702,15 +701,14 @@ If a change fails tests in Jenkins, please follow the steps below:
   1. Visit http://status.openstack.org/elastic-recheck/ to see if one
      of the bugs listed there matches the error you've seen. If your
      error isn't there, then:
-  2. Identify which repository or repositories are affected, and
-     search for a related bug on Launchpad. You can search for bugs
-     affecting all OpenStack Projects here:
-     https://bugs.launchpad.net/openstack/ If you do not find an
-     existing bug, file a new one (be sure to include the error
-     message and a link to the logs for the failure). If the problem
-     is due to an infrastructure problem (such as Jenkins or
-     Gerrit), file (or search for) the bug against the
-     openstack-gate project.
+  2. Identify which project or projects are affected, and search for a
+     related bug on Launchpad. You can search for bugs affecting all
+     OpenStack Projects here: https://bugs.launchpad.net/openstack/ If
+     you do not find an existing bug, file a new one (be sure to
+     include the error message and a link to the logs for the
+     failure). If the problem is due to an infrastructure problem
+     (such as Jenkins or Gerrit), file (or search for) the bug against
+     the openstack-gate project.
 
 4. To re-run check or gate jobs, leave a comment on the review
    with the form "recheck".
@@ -740,8 +738,8 @@ great way to learn about OpenStack social norms and the development
 processes. Some things are necessary to keep in mind when doing code
 reviews:
 
-1. The code should comply with everything in that repository's
-   `HACKING.rst` file, if it has one. If the repository reuses
+1. The code should comply with everything in that project's
+   `HACKING.rst` file, if it has one. If the project reuses
    nova's hacking guidelines, then it may have a "hacking" section in
    its `tox.ini` file in which case much of this is already checked
    automatically for you by the continuous integration system.
@@ -814,7 +812,7 @@ reviews:
       clear instructions for the submitter how they might fix the patch.
 
 There may be more specific items to be aware of inside the
-repositories' documentation for contributors.
+projects' documentation for contributors.
 
 Contributors may notice a review that has several +1's from other
 reviewers, passes the functional tests, etc. but the code still has
@@ -856,18 +854,18 @@ Gerrit cannot merge a patchset, it will give a -1 review and add a
 comment notifying of merge failure.
 
 Each time a change merges, the "merge-check" pipeline verifies that
-all open changes on the same repository are still mergeable. If any
+all open changes on the same project are still mergeable. If any
 job is not mergeable, Jenkins will give a -1 review and add a
 comment notifying of merge failure.
 
-After a change is merged, repository-specific post jobs are run.
+After a change is merged, project-specific post jobs are run.
 Most often the post jobs publish documentation, run coverage, or
 send strings to the translation server.
 
-Repository Gating
------------------
+Project Gating
+--------------
 
-Repository gating refers to the process of running regression tests
+Project gating refers to the process of running regression tests
 before a developer's patchset is merged. The intent of running
 regression tests is to validate that new changes submitted
 against the source code repository will not introduce new
@@ -889,10 +887,10 @@ Once all of the jobs report success on an approved patchset in the
 configured gate pipeline, then Gerrit will merge the code into trunk.
 
 Besides running the gate tests, the gate pipeline determines the order
-of changes to merge across multiple repositories. The changes are tested
+of changes to merge across multiple projects. The changes are tested
 and merged in this order, so that for each change the state of all
 other repositories can be identified.
 
-Additional information about repository gating and Zuul can
-be found in the Zuul documentation, located at:
+Additional information about project gating and Zuul can be found in
+the Zuul documentation, located at:
 http://docs.openstack.org/infra/zuul/gating.html
