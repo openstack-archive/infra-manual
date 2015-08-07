@@ -1,8 +1,8 @@
-:title: Project Creator's Guide
+:title: Create a New Project
 
-============================
- Project Creator's Guide
-============================
+======================
+ Create a New Project
+======================
 
 Before You Start
 ================
