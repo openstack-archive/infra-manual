@@ -81,7 +81,8 @@ Merge Feature Branch into Master
   git checkout master
   git pull --ff-only origin master
   git checkout -b merge-branch
-  git merge origin/feature-branch
+  # Force a merge commit by not fast-forwarding, in case master hasn't updated:
+  git merge --no-ff origin/feature-branch
   # Amend the merge commit to automatically add a Change-ID to the commit message:
   GIT_EDITOR=/bin/true git commit --amend
   git review -R
