@@ -109,8 +109,9 @@ Create Bug Tracker
 ------------------
 
 #. From the Overview page for your project, click the "Bugs" link at the
-   top of the page. Launchpad should suggest that you set up bug
-   tracking.
+   top of the page.
+
+#. Click the pencil "edit" icon next to "Configure bug tracker".
 
 #. Choose "In launchpad".
 
