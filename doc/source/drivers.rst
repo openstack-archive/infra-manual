@@ -199,6 +199,19 @@ This step should be performed by the OpenStack Release Manager when
 the release is made.  If you are managing your own releases, you may
 have permission to do this yourself.
 
+.. warning::
+
+   * Make sure you follow semantic versioning rules `semver <http://semver.org/>`_
+     when picking the version number. In particular, if there is a change going
+     into this release which requires a higher minimum version of a dependency,
+     then the minor version should be incremented.
+
+   * For libraries, check global-requirements.txt (g-r) in the
+     `openstack/requirements repo <http://git.openstack.org/cgit/openstack/requirements/>`_
+     to make sure the version you are about to release does not cause a
+     conflict and wedge the gate. Typically this is only a concern on stable
+     branches with (un)capped dependencies.
+
 Tag the tip of the appropriate branch (proposed/<series> for server
 projects, master for clients/libraries) with a release tag and
 push that tag to Gerrit by running the following commands::
