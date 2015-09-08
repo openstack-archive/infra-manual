@@ -540,11 +540,15 @@ When writing the commit message for this change, make this change
 depend on the project creation change by including a link to its
 Change-ID (from the previous step)::
 
-    Depends-On: <Gerrit Change-Id>
+    Depends-On: <Gerrit Change-Id of project-config change>
 
-Then, go back to the project-config change and add a review comment
-that includes a link to the change in the governance repository, so
-that reviewers know that the governance change has been created.
+Then, go back to the project-config change and add a link to the
+Change-ID of the governance change in the project-config commit
+message::
+
+    Needed-BY: <Gerrit Change-Id of governance change>
+
+so that reviewers know that the governance change has been created.
 
 However, if you are creating an entirely new OpenStack project team
 (i.e., adding a new top-level entry into
