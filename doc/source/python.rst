@@ -26,13 +26,31 @@ through `Tox`_.
 .. _`Tox`: https://tox.readthedocs.org/en/latest/
 
 
+Remove the system installed versions of Python 2 packages we need latest
+versions of::
+
+  [apt-get | yum] remove python-pip || true
+  [apt-get | yum] remove python-tox || true
+  [apt-get | yum] remove python-distribute || true
+  [apt-get | yum] remove python-setuptools || true
+  [apt-get | yum] remove python-virtualenv || true
+  [apt-get | yum] remove python-wheel || true
+
+Also, their corresponding Python 3 packages::
+
+  [apt-get | yum] remove python3-pip || true
+  [apt-get | yum] remove python3-tox || true
+  [apt-get | yum] remove python3-setuptools || true
+  [apt-get | yum] remove python3-virtualenv || true
+  [apt-get | yum] remove python3-wheel || true
+
 Install `pip`_::
 
-  [apt-get | yum] install python-pip
+  sudo python <(curl https://bootstrap.pypa.io/get-pip.py)
 
-Use pip to install tox::
+Use pip to install tox, setuptools, virtualenv and wheel::
 
-  pip install --upgrade tox
+  pip install --upgrade tox setuptools virtualenv wheel
 
 
 .. _`pip`: <http://pip.readthedocs.org/en/latest/installing.html>`
@@ -62,9 +80,10 @@ To run just one test suite in envlist execute::
 
   tox -e <env>
 
-so for example, run the test suite in py27::
+so for example, run the test suite in py27 and py34::
 
   tox -e py27
+  tox -e py34
 
 
 Running the style checks
