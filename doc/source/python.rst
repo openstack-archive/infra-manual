@@ -26,13 +26,22 @@ through `Tox`_.
 .. _`Tox`: https://tox.readthedocs.org/en/latest/
 
 
+Remove system installed versions of packages we need latest versions of::
+
+  [apt-get | yum] remove python-pip || true
+  [apt-get | yum] remove tox || true
+  [apt-get | yum] remove python-distribute || true
+  [apt-get | yum] remove python-setuptools || true
+  [apt-get | yum] remove python-virtualenv || true
+  [apt-get | yum] remove python-wheel || true
+
 Install `pip`_::
 
-  [apt-get | yum] install python-pip
+  sudo python <(curl https://bootstrap.pypa.io/get-pip.py)
 
-Use pip to install tox::
+Use pip to install tox, setuptools, virtualenv and wheel::
 
-  pip install --upgrade tox
+  pip install --upgrade tox setuptools virtualenv wheel
 
 
 .. _`pip`: <http://pip.readthedocs.org/en/latest/installing.html>`
