@@ -369,7 +369,7 @@ the changes that will be merged ahead of the change under test.
 To do this, use the ``zuul-cloner`` command as follows::
 
   sudo -E /usr/zuul-env/bin/zuul-cloner --cache-dir /opt/git \
-      git://git.openstack.org \
+      https://git.openstack.org \
       openstack/project1 \
       openstack/project2 \
       openstack/projectN

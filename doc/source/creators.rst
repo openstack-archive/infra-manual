@@ -235,7 +235,7 @@ Add the project to the master projects list
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
-       upstream: git://github.com/awesumsauce/<projectname>.git
+       upstream: https://github.com/awesumsauce/<projectname>.git
 
    .. note::
 
@@ -251,7 +251,7 @@ Add the project to the master projects list
 
         - project: openstack/<projectname>
           description: Latest and greatest cloud stuff.
-          upstream: git://github.com/awesumsauce/<projectname>.git
+          upstream: https://github.com/awesumsauce/<projectname>.git
           groups:
              - oslo
 
@@ -623,7 +623,7 @@ the change to project-config, you can skip this section.
 
 Start by checking out a copy of your new repository::
 
-   $ git clone git://git.openstack.org/openstack/<projectname>
+   $ git clone https://git.openstack.org/openstack/<projectname>
 
 .. _cookiecutter: https://pypi.python.org/pypi/cookiecutter
 
