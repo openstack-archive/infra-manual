@@ -756,7 +756,10 @@ reviews:
      review.
   4. Use the "UpgradeImpact" tag on changes which require
      configuration changes to be mentioned in the release notes.
-  5. Use the "APIImpact" tag on changes impacting `API stability <https://wiki.openstack.org/wiki/APIChangeGuidelines>`_.
+  5. Use the "APIImpact" tag on changes impacting `API stability <https://wiki.openstack.org/wiki/APIChangeGuidelines>`_,
+     this tag will aid in gaining the attention of the
+     `OpenStack API Working Group <https://wiki.openstack.org/wiki/API_Working_Group>`_
+     for additional review.
   6. If the change fixes a bug, it should include the bug number. For
      example, add the line "Fixes Bug: 1234".
   7. If the change implements a feature, it should reference a
