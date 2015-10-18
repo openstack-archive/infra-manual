@@ -538,6 +538,11 @@ library edit the "Oslo" section::
        tags:
          - name: release:independent
 
+You can check which tags to use, or the meaning of any tag, by
+consulting the `list of currently allowed tags`_.
+
+.. _list of currently allowed tags: http://governance.openstack.org/reference/tags/index.html
+
 When writing the commit message for this change, make this change
 depend on the project creation change by including a link to its
 Change-ID (from the previous step)::
