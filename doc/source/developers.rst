@@ -59,6 +59,9 @@ enter your password for the others.
 Sign the appropriate Individual Contributor License Agreement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+NOTE: You need to have completed **all** the steps above before you'll
+be able to sign an Individual Contributor License Agreement.
+
 Unless you are an U.S. Government Employee (see below),
 `agree to the Individual Contributor License
 Agreement <https://review.openstack.org/#/settings/agreements>`_ and
