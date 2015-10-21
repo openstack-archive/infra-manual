@@ -14,6 +14,30 @@ It is important that you perform all of the steps, in the order they
 are given here. Don't skip any steps. Don't try to do things in
 parallel. Don't jump around.
 
+Decide Status of your Project
+=============================
+
+The OpenStack CI infrastructre can be used both by official OpenStack
+projects and also by OpenStack related projects.
+
+Official projects are those that have applied for this status with the
+technical committee, the `governance site`__ contains details on how
+to become one and the list of current `OpenStack Project Teams`__. The
+`Project Team Guide`__ explains how OpenStack project teams work.
+
+If you add a new repository, you can make it part of an existing
+official OpenStack project, use it to start a new official project, or
+start as a related project, also known as a `StackForge`__ project.
+
+Note that only official OpenStack projects may use certain parts of
+the OpenStack infrastructure, especially the docs.openstack.org and
+specs.openstack.org server.
+
+.. governance site: http://governance.openstack.org
+.. OpenStack Project Teams: http://governance.openstack.org/reference/projects/index.html
+.. Project Team Guide: http://docs.openstack.org/project-team-guide/
+.. StackForge: http://docs.openstack.org/infra/system-config/stackforge.html
+
 Choosing a Good Name for Your Project
 =====================================
 
@@ -72,6 +96,7 @@ followed. For example, the Oslo team has `instructions for choosing a
 name`_ for new Oslo libraries.
 
 .. _instructions for choosing a name: https://wiki.openstack.org/wiki/Oslo/CreatingANewLibrary#Choosing_a_Name
+
 
 Set up Launchpad
 ================
