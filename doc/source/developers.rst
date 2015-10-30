@@ -722,10 +722,11 @@ If a change fails tests in Jenkins, please follow the steps below:
    query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_
    for the bug.
 
-If the patchset has failed a gate job and thus is approved, a recheck
-will first run the check jobs and if those pass, it will run again the
-gate jobs. There is no way to only run the gate jobs, the check jobs
-will first be run again.
+A patchset has to be approved to run tests in the gate pipeline. If the
+patchset has failed in the gate pipeline (it will have been approved to get
+into the gate pipeline) a recheck will first run the check jobs and if those 
+pass, it will again run the gate jobs. There is no way to only run the gate 
+jobs, the check jobs will first be run again.
 
 More information on debugging automated testing failures can be found in the
 following recordings:
