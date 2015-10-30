@@ -722,7 +722,7 @@ If a change fails tests in Jenkins, please follow the steps below:
    query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_
    for the bug.
 
-If the patchset has failed a gate job and thus is approved, a recheck
+If the patchset has failed a gate job and thus is not approved, a recheck
 will first run the check jobs and if those pass, it will run again the
 gate jobs. There is no way to only run the gate jobs, the check jobs
 will first be run again.
