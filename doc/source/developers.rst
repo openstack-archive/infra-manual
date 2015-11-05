@@ -417,6 +417,14 @@ Running Unit Tests
 Before submitting your change, you should test it. To learn how to run
 python based unit tests in OpenStack projects see :ref:`python_unit_tests`.
 
+Previewing a Change
+-------------------
+
+Before submitting your change, you should make sure that
+your change does not contain an unintended change::
+
+  git show
+
 Submitting a Change for Review
 ------------------------------
 
