@@ -415,7 +415,8 @@ Running Unit Tests
 ------------------
 
 Before submitting your change, you should test it. To learn how to run
-python based unit tests in OpenStack projects see :ref:`python_unit_tests`.
+python based unit tests in OpenStack projects see
+`Running Python Unit Tests`_
 
 Submitting a Change for Review
 ------------------------------
@@ -903,3 +904,5 @@ other repositories can be identified.
 Additional information about project gating and Zuul can be found in
 the Zuul documentation, located at:
 http://docs.openstack.org/infra/zuul/gating.html
+
+.. _`Running Python Unit Tests`: http://docs.openstack.org/project-team-guide/project-setup/python.html#running-python-unit-tests
