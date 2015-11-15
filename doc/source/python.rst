@@ -35,7 +35,7 @@ Use pip to install tox::
   pip install --upgrade tox
 
 
-.. _`pip`: <http://pip.readthedocs.org/en/latest/installing.html>`
+.. _`pip`: http://pip.readthedocs.org/en/latest/installing/
 
 Run The Tests
 ^^^^^^^^^^^^^
