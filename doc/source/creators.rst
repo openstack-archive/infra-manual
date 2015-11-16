@@ -467,6 +467,91 @@ If you are not ready to run any tests yet and did not configure
       - name: noop-jobs
 
 
+Zuul Best Practices
+-------------------
+
+There are a couple of best practices for setting up jobs.
+
+Adding a New Job
+~~~~~~~~~~~~~~~~
+
+If you add a new job, you might not know how stable it runs. Best
+practice is to add the job to the experimental pipeline and then
+progressively promote it to the gate pipeline. For example:
+
+#. Add the job to the ``experimental`` queue and run it manually with
+   giving ``check experimental`` on a review to see whether it works
+   fine on single changes.
+#. Move the job to the ``check`` queue as non-voting jobs and analyze
+   how it handles the incoming changes.
+#. Make the job voting and add it to the ``gate`` queue as well.
+
+Use Templates
+~~~~~~~~~~~~~
+
+For many common cases, there are templates defined in the
+``project-templates`` section. They contain the macro ``{name}`` which
+gets replaced with the basename of the repository when used::
+
+  - name: python3-jobs
+    check:
+      - 'gate-{name}-python34'
+    gate:
+      - 'gate-{name}-python34'
+  ...
+  - name: openstack/ceilometer
+    template:
+      - name: python3-jobs
+
+If you use the same set of tests in several repositories, introduce a
+new template and use that one.
+
+Non-Voting Jobs
+~~~~~~~~~~~~~~~
+
+A job can either be voting or non-voting. So, if you have a job that
+is voting in one repository but non-voting in another, you need to
+duplicate the job and use different names. All jobs that end with
+``-nv`` are non-voting due to a special rule in ``zuul/layout.yaml`` ,
+so you can use that for non-voting jobs.
+
+To make a single job non-voting everywhere, add a ``voting: false``
+line for it::
+
+  - name: gate-tempest-dsvm-ceilometer-mongodb-full
+    voting: false
+
+Non-voting jobs should only be added ``check`` queues, do not add them
+to the ``gate`` queue since running non-voting jobs in the gate is
+just a waste of resources.
+
+Running Jobs Only on Some Branches
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to run the job only on a specific stable branch, say so::
+
+  - name: ^gate-devstack-dsvm-cells$
+    branch: ^(stable/(juno|kilo)).*$
+
+If you create a new job and it should only run on current master and
+future stable branches, exclude all current stable ones::
+
+  - name: gate-oslo.messaging-dsvm-functional-zeromq
+    branch: ^(?!stable/(?:juno|kilo|liberty)).*$
+
+So, the job above will run on ``master`` but also on newer stable
+branches like ``stable/mitaka``. It will not run on the old
+``stable/juno``, ``stable/kilo``, and ``stable/liberty`` branches.
+
+Note that you cannot run a job voting on one branch and non-voting on
+another. If you combine non-voting and a branch instruction, it means:
+Run the job non-voting - and only on this branch. Example::
+
+  - name: gate-cinder-dsvm-apache
+    branch: ^(?!stable/(?:juno|kilo)).*$
+    voting: false
+
+
 Configure GerritBot to Announce Changes
 ---------------------------------------
 
