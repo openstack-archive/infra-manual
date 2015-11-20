@@ -186,7 +186,7 @@ next to the Maintainer field. Replace your name with the
 
    You may need to create the drivers team.  If you do:
 
-     1. Set the owner of the team to 'openstack-administrators'
+     1. Set the owner of the team to 'openstack-admins'
      2. Add 'openstack-release' as a sub-team so the release team can
         help keep milestones updated as part of the release process.
 
