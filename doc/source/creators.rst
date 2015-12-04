@@ -972,10 +972,6 @@ The first step of doing a rename is understanding the required
 governance changes needed by the rename. You can use the following
 criteria:
 
-For new project moving from Stackforge into the big tent: Add a "Depends-On:
-GovernanceID" of the ``openstack/governance`` change that accepted the project
-into the big tent to the commit message.
-
 For a project being added to existing official OpenStack project: Create an
 ``openstack/governance`` change and add a "Depends-On: project-changeID" of the
 change you make in the following steps to the commit message, and add a comment
