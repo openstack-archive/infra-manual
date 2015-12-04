@@ -27,7 +27,7 @@ to become one and the list of current `OpenStack Project Teams`_. The
 
 If you add a new repository, you can make it part of an existing
 official OpenStack project, use it to start a new official project, or
-start as a related project, also known as a `StackForge`_ project.
+start as a related project.
 
 Note that only official OpenStack projects may use certain parts of
 the OpenStack infrastructure, especially the docs.openstack.org and
@@ -971,10 +971,6 @@ Project Renames
 The first step of doing a rename is understanding the required
 governance changes needed by the rename. You can use the following
 criteria:
-
-For new project moving from Stackforge into the big tent: Add a "Depends-On:
-GovernanceID" of the ``openstack/governance`` change that accepted the project
-into the big tent to the commit message.
 
 For a project being added to existing official OpenStack project: Create an
 ``openstack/governance`` change and add a "Depends-On: project-changeID" of the
