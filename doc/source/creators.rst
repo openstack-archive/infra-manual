@@ -265,6 +265,15 @@ Add the project to the master projects list
 
    .. note::
 
+      If you do not configure the upstream source here and get the project
+      imported at project creation time you will have to push exisitng
+      history into Gerrit and "review" then approve it or push some squashed
+      set of history and "review" then approve that. If you need to preserve
+      history the best option is to configure the upstrema properly for
+      Gerrit project creation.
+
+   .. note::
+
       If the git repository short name does not match the Launchpad project
       name, you need to add a "groups" list to provide the mapping. The
       groups list is also used by Storyboard to be able to present grouped
