@@ -409,7 +409,7 @@ repositories. Find the right section and then add a new stanza like:
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     jobs:
-      - python-jobs
+      - python-constraints-jobs
       - openstack-publish-jobs
       - pypi-jobs
 
@@ -438,8 +438,9 @@ projects. Find the right section and then add a new stanza like:
   - name: openstack/<projectname>
     template:
       - name: merge-check
-      - name: python-jobs
-      - name: openstack-server-publish-jobs
+      - name: python-constraints-jobs
+      - name: python3-constraints-jobs
+      - name: openstack-server-publish-jobs-constraints
       - name: check-requirements
       - name: integrated-gate
       - name: publish-to-pypi
@@ -501,7 +502,7 @@ gets replaced with the basename of the repository when used::
   ...
   - name: openstack/ceilometer
     template:
-      - name: python3-jobs
+      - name: python3-constraints-jobs
 
 If you use the same set of tests in several repositories, introduce a
 new template and use that one.
@@ -551,6 +552,16 @@ Run the job non-voting - and only on this branch. Example::
     branch: ^(?!stable/(?:juno|kilo)).*$
     voting: false
 
+
+Use constraints jobs
+~~~~~~~~~~~~~~~~~~~~
+
+We've been bringing in known-good tracking of dependencies via the
+global-requirements ``upper-constraints.txt`` file (for Python
+projects). Because this reduces the ability for projects tests to be
+broken merely by the release of a dependency, all projects should be
+adopting this. To adopt it, add -constraints sections to ``tox.ini`` -
+examples of this can be found in the cookiecutter project's tox.ini.
 
 Configure GerritBot to Announce Changes
 ---------------------------------------
