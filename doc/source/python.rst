@@ -62,9 +62,9 @@ To run just one test suite in envlist execute::
 
   tox -e <env>
 
-so for example, run the test suite in py27::
+so for example, run the test suite in py27-constraints::
 
-  tox -e py27
+  tox -e py27-constraints
 
 
 Running the style checks
@@ -72,7 +72,7 @@ Running the style checks
 
 Just run::
 
-  tox -e pep8
+  tox -e pep8-constraints
 
 Run One Test
 ^^^^^^^^^^^^
@@ -87,11 +87,11 @@ If `testr`_ is in tox.ini, for example::
 
 Run individual tests with the following syntax::
 
-  tox -e <env> -- path.to.module:Class.test
+  tox -e <env> -- path.to.module.Class.test
 
 So for example, run the test_memory_unlimited test in openstack/nova::
 
-  tox -e py27 -- nova.tests.unit.compute.test_claims.ClaimTestCase.test_memory_unlimited
+  tox -e py27-constraints -- nova.tests.unit.compute.test_claims.ClaimTestCase.test_memory_unlimited
 
 If `nose`_ is in tox.ini, for example::
 
