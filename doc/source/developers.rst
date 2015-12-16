@@ -173,8 +173,9 @@ and https port as follows::
   git config --global gitreview.scheme https
   git config --global gitreview.port 443
 
-In case you had already tried to setup git-review and it failed, it might
-be necessary to remove the Gerrit remote from git::
+You may need to install latest git-review using pip. In case you had already
+tried to setup git-review and it failed, it might be necessary to remove the
+Gerrit remote from git::
 
   git remote rm gerrit
 
