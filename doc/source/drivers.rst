@@ -12,7 +12,8 @@ There are times when prolonged development on specific features is easier
 on a feature branch rather than on master. In particular it organizes
 work to a location that interested parties can follow. Feature branches
 also move merge points to specific points in time rather than at every
-proposed change.
+proposed change. Learn more about `feature branches in the project team
+guide <http://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_.
 
 To get started with a feature branch you will need to create the new
 branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
@@ -112,8 +113,14 @@ This section describes topics related to release management.
    mention that actions here require specific permissions, and name
    what they are.
 
-Release Branches
-----------------
+Release and stable branches
+---------------------------
+
+Projects following the release:cycle-with-milestones model generate
+release candidates before the final release to encourage 3rd-party
+testing. The first release candidate (RC1) is cut from the master
+branch. You can learn more about `release management in the project
+team guide <http://docs.openstack.org/project-team-guide/release-management.html>`_.
 
 Between RC1 and the final release, there needs to be a separate branch
 in Gerrit for release-critical changes destined for the final
@@ -122,61 +129,71 @@ as normal (with the addition that changes proposed for the final
 release should also be proposed for master, and some changes for
 master may need to be applied to the release branch).
 
-This process creates an ephemeral proposed/<series> (for example,
-proposed/juno) branch that is only available in Gerrit during the
-final release process. At final release, a tag is applied to the final
-commit to record the state of the branch at the time.
+In order to avoid tracking different branches pre- and post-release,
+this process directly creates a stable/<series> (for example,
+stable/mitaka) branch that will be reused as the stable maintenance
+branch post-release. Specific ACLs apply to the branch pre-release,
+and when the final release is tagged the generic stable branch ACLs
+are applied instead.
 
-Create proposed/* Branch
-~~~~~~~~~~~~~~~~~~~~~~~~
+Create stable/* Branch
+~~~~~~~~~~~~~~~~~~~~~~
 
 For OpenStack projects this should be performed by the OpenStack
-Release Manager at the Release Branch Point. If you are managing
+Release Management Team at the Release Branch Point. If you are managing
 branches for your project you may have permission to do this
 yourself.
 
 * Go to https://review.openstack.org/ and sign in
 * Select 'Admin', 'Projects', then the project
 * Select 'Branches'
-* Enter ``proposed/<series>`` in the 'Branch Name' field, and ``HEAD``
+* Enter ``stable/<series>`` in the 'Branch Name' field, and ``HEAD``
   as the 'Initial Revision', then press 'Create Branch'.
-  Alternatively, you may run ``git branch proposed/<series> <sha> &&
-  git push gerrit proposed/<series>``
+  Alternatively, you may run ``git branch stable/<series> <sha> &&
+  git push gerrit stable/<series>``
 
-In your local checkout::
+Once this is done, you should push a change updating the defaultbranch in
+.gitreview to match the new name of the branch, so that "git review"
+automatically pushes to the right branch::
+
+  defaultbranch=stable/<series>
+
+To check out the new branch in your local checkout, you can use::
 
   git checkout master
   git pull
-  git checkout proposed/<series>
+  git checkout stable/<series>
 
-Authoring Changes for proposed/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Authoring Changes for stable/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. (jeblair) This probably belongs in developer.rst
 
-Create topic branches as normal, but branch them from proposed/\*
+Create topic branches as normal, but branch them from stable/\*
 rather than master::
 
-  git checkout proposed/<series>
+  git checkout stable/<series>
   git pull
   git checkout -b <topic branch>
 
-Changes for proposed/\* should be submitted with::
+Generally the defaultbranch in .gitreview is adjusted on the new branch
+so that you can directly use ``git review``. If not, changes for stable/\*
+should be submitted with::
 
-  git review proposed/<series>
+  git review stable/<series>
 
-Submit Changes in master to proposed/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Submit Changes in master to stable/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. (jeblair) This probably belongs in developer.rst
 
-If a change to master should also be included in proposed/\*, use this
+If a change to master should also be included in stable/\*, use this
 procedure to cherry-pick that change and submit it for review::
 
-  git checkout proposed/<series>
+  git checkout stable/<series>
   git pull
   git checkout -b master-to-mp
   git cherry-pick -x <SHA1 or "master">
-  git review proposed/<series>
+  git review stable/<series>
   git checkout master
   git branch -D master-to-mp
 
@@ -191,17 +208,19 @@ If there are conflicts when cherry-picking, do not delete the
 'Conflicts' lines git adds to the commit message. These are valuable
 to reviewers to identify files which need extra attention.
 
+You can learn more about `stable branches in the project team guide
+<http://docs.openstack.org/project-team-guide/stable-branches.html>`_.
 
 Tagging a Release
 ~~~~~~~~~~~~~~~~~
 
-This step should be performed by the OpenStack Release Manager when
-the release is made.  If you are managing your own releases, you may
+This step should be performed by the OpenStack Release Management Team
+when the release is made. If you are managing your own releases, you may
 have permission to do this yourself.
 
-Tag the tip of the appropriate branch (proposed/<series> for server
-projects, master for clients/libraries) with a release tag and
-push that tag to Gerrit by running the following commands::
+Tag the tip of the appropriate branch (stable/<series> for server
+projects using release candidates, master for the others) with a release tag
+and push that tag to Gerrit by running the following commands::
 
   git checkout <branch name>
   git pull --ff-only
@@ -220,45 +239,8 @@ push that tag to Gerrit by running the following commands::
   * Make sure you're only adding a single tag when pushing to
     gerrit, like in the example above.
 
-  * After a tag is created the release build will get deployed to a
-    repository such as PyPI.
-
-End of Release
-~~~~~~~~~~~~~~
-This step should be performed by the OpenStack Release Manager after
-the release is tagged.
-
-When the release process is complete and the released commit is
-tagged, remove the ``proposed/<series>`` branch. The tag will persist,
-even after the branch is deleted, making it possible to restore the
-state of the tree.
-
-* Go to https://review.openstack.org/ and sign in
-* Select 'Admin', 'Projects', then the project
-* Select 'Branches'
-* Select the checkbox next to 'proposed/<series>' and hit 'Delete'
-
-Targeting Blueprints
-====================
-
-Blueprints for a project are generally posted to
-https://blueprints.launchpad.net/<projectname>. Project drivers need
-to review blueprints regularly and assign them to a target. For each
-release there are three milestones. Based on interactions with the
-proposer and/or assignee of the blueprint, the project driver assigns
-the blueprint to a milestone (release-1, release-2 or release-3) or
-defers it to a later release.
-
-Many projects have repositories entitled <project>-specs. If a project
-has a spec repo, a spec needs to be submitted and linked to the
-launchpad blueprint. The spec needs to be reviewed and approved prior
-to the launchpad blueprint being targeted to a milestone.
-
-Interactions with release management includes discussions of the
-blueprint target page:
-https://launchpad.net/<projectname>/+milestone/{release name}-{1|2|3}
-The more the blueprint target page reflects the reality of progress
-and intentions, the happier the release management team.
+  * After a tag is created the release build will generate a source code
+    tarball and may publish it to a repository such as PyPI.
 
 Gerrit IRC Notifications
 ========================
