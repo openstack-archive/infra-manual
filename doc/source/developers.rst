@@ -632,6 +632,48 @@ this to at least leave a message in Gerrit in the future. But in the
 meantime, please be cognizant of this and do not create dependency
 cycles with Depends-On lines.
 
+Limitations and Caveats
+^^^^^^^^^^^^^^^^^^^^^^^
+
+These dependencies are pure git dependencies, all changes will be
+tested and the git trees that the tests use have the dependencies
+checked out. It now depends on the test job whether and how it uses
+the git trees in a job. Specifically the change is not effective in
+these cases:
+
+* Changes for the CI infrastructure like changes
+  ``openstack-infra/project-config`` are never tested in a production
+  simulated environment. So, if one of the changes adjusts the job
+  definitions or creates a new job, a Depends-On will not test the new
+  definition, the CI infrastructure change needs to merge to master
+  and be in production to be fully evaluated.
+* If the test job install packages from PyPI and not via source, a
+  dependend change will not have any effect on the testing. The
+  package from PypI will always be used.
+
+  As an example, if you are testing a change in python-novaclient that
+  needs a change in python-keystoneclient, you add a Depends-On in the
+  python-novaclient change. If a python-novaclient job installs
+  python-keystoneclient from PyPI, the Depends-On will not have any
+  effect sinc the PyPI version is used. If a python-novaclient job
+  installs python-keystoneclient from source, the checked out source
+  will have the change applied.
+
+Do not add a Depends-On an abandoned change, your change will never
+merge.
+
+If you backport a change (change One), to another branch, the gerrit
+change ID stays the same. If you add a Depends-On for change One, it now
+is also dependent on the backported change. This might be desirable
+for some changes and a surprise for others.
+
+A change that is dependent on another can be approved before the
+dependent change merges. But it will not merge automatically when the
+dependent change has merged, even a ``recheck`` will not help. Zuul
+waits for a status change and does not see it. The change needs
+another approval or a toggle of the approval, toggle means removing
+the approval and readding it again.
+
 Code Review
 ===========
 
