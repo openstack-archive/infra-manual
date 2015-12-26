@@ -414,7 +414,7 @@ repositories. Find the right section and then add a new stanza like:
 
  - project:
     name: <projectname>
-    node: 'bare-precise || bare-trusty'
+    node: bare-trusty
     tarball-site: tarballs.openstack.org
     doc-publisher-site: docs.openstack.org
     jobs:
