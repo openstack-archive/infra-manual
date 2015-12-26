@@ -632,6 +632,38 @@ this to at least leave a message in Gerrit in the future. But in the
 meantime, please be cognizant of this and do not create dependency
 cycles with Depends-On lines.
 
+Limitations and Caveats
+~~~~~~~~~~~~~~~~~~~~~~~
+
+These dependencies are pure git dependencies, all changes will be
+tested using the checked out versions. It now depends on the test job
+how it uses this information. Especially the change does not work in
+these cases:
+
+* Changes for the CI infrastructure like changes
+  ``openstack-infra/project-config`` are never tested directly. So, if
+  one of the changes adjust the job definitions or creates a new job,
+  a depends-On will not test the new definition, the CI infrastructure
+  change needs to merge first.
+* If the test job install packages from PyPI and not via source, a
+  dependend change will not have any effect on the testing. The
+  package from PypI will always be used.
+
+Do not add a dependency on an abandoned change, your change will never
+merge.
+
+If you backport a change, let's call it change One, to another branch,
+the gerrit change ID stays the same. If you add a depends-on on change
+One, it now is also dependent on the backported change. This might be
+desirable for some changes and a surprise for others.
+
+A change that is dependent on another can be approved before the
+dependent change merges. But it will not merge automatically when the
+dependent change has merged, even a ``recheck`` will not help. Zuul
+waits for a status change and does not see it. The change needs
+another approval or a toggle of the approval, toggle means removing
+the approval and readding it again.
+
 Code Review
 ===========
 
