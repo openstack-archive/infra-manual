@@ -1,0 +1,13 @@
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: venkatamahesh <venkatamaheshkotha@gmail.com>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+1: Craige McWhirter <craige@mcwhirter.io>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Workflow+1: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 04 Jan 2016 09:51:10 +0000
+Reviewed-on: https://review.openstack.org/253687
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
