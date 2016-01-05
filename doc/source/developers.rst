@@ -633,6 +633,50 @@ this to at least leave a message in Gerrit in the future. But in the
 meantime, please be cognizant of this and do not create dependency
 cycles with Depends-On lines.
 
+Limitations and Caveats
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Keep in mind that these dependencies are dependencies on changes in
+other repositories. Thus, a Depends-on only enforces an ordering but
+is not visible otherwise especially in these cases:
+
+* Changes for the CI infrastructure like changes
+  ``openstack-infra/project-config`` are never tested in a production
+  simulated environment. So, if one of the changes adjusts the job
+  definitions or creates a new job, a Depends-On will not test the new
+  definition, the CI infrastructure change needs to merge to master
+  and be in production to be fully evaluated.
+* If a test job installs packages from PyPI and not via source, be
+  aware that the package from PyPI will always be used, a Depends-On
+  will not cause a modified package to be used instead of installing
+  from PyPI.
+
+  As an example, if you are testing a change in python-novaclient that
+  needs a change in python-keystoneclient, you add a Depends-On in the
+  python-novaclient change. If a python-novaclient job installs
+  python-keystoneclient from PyPI, the Depends-On will not have any
+  effect since the PyPI version is used. If a python-novaclient job
+  installs python-keystoneclient from source, the checked out source
+  will have the change applied.
+
+Do not add a Depends-On an abandoned change, your change will never
+merge.
+
+If you backport a change to another branch, the gerrit change ID stays
+the same. If you add a Depends-On using the Gerrit change ID of the
+patch that subsequently was backported, the patch with the Depends-On
+is now also dependent on the backported change. This might be
+desirable for some changes and a surprise for others.
+
+A change that is dependent on another can be approved before the
+dependent change merges. If the repositories share the gate queue, it
+will merge automatically after the dependent change merged. But if the
+repositories do not share the gate queue, it will not merge
+automatically when the dependent change has merged, even a ``recheck``
+will not help. Zuul waits for a status change and does not see it. The
+change needs another approval or a toggle of the approval, toggle
+means removing the approval and readding it again.
+
 Code Review
 ===========
 
