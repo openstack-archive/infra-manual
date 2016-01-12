@@ -275,12 +275,20 @@ patchsets, changes merged, comments added to patchsets and updates to
 refs.  These event notifications can be configured per project, so the
 channel can have multiple notifications per project.
 
+Before you can configure GerritBot, you need to give channel permissions with
+an accessbot configuration specific to the channel where you want
+notifications posted. The configuration file is hosted in
+`openstack-infra/project-config
+<http://git.openstack.org/cgit/openstack-infra/project-config/>`_. Edit
+``accessbot/channels.yaml`` to add your IRC channel if it is not
+already listed.
+
 In order for GerritBot to post notifications on the IRC channel of the
 project you are configuring, you need to add your GerritBot
 configuration into
-``modules/gerritbot/files/gerritbot_channel_config.yaml``.  This file
-is hosted in `openstack-infra/config
-<http://git.openstack.org/cgit/openstack-infra/config/>`_.
+``gerritbot/channels.yaml``.  This file
+is hosted in `openstack-infra/project-config
+<http://git.openstack.org/cgit/openstack-infra/project-config/>`_.
 
 The syntax for configuring the notifications is::
 
