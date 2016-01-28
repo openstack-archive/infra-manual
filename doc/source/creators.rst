@@ -453,7 +453,6 @@ projects. Find the right section and then add a new stanza like:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: python3-jobs
-      - name: translation-jobs
 
 You can find more info about job templates in the beginning of
 ``zuul/layout.yaml`` in the section starting with
@@ -973,6 +972,168 @@ Update the http://docs.openstack.org/developer/openstack-projects.html
 page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
+
+Enabling Translation Infrastructure
+===================================
+
+Once you have your project set up, you might want to enable
+translations. For this, you first need to mark all strings so that
+they can be localized, use `oslo.i18n`_ for this.
+
+.. _oslo.i18n: http://docs.openstack.org/developer/oslo.i18n
+
+Note that this is just enabling translations, the actual translations
+are done by the i18n team, and they have to prioritize which projects
+to translate.
+
+First enable translation in your project, depending on whether it is a
+Django project or a Python project.
+
+Python Projects
+---------------
+
+Update your ``setup.cfg`` file to include support for translation. It
+should contain the ``compile_catalog``, ``update_catalog``, and
+``extract_messages`` sections as well as a ``packages`` entry in the
+``files`` section:
+
+.. code-block:: ini
+
+   [files]
+   packages = ${MODULENAME}
+
+   [compile_catalog]
+   directory = ${MODULENAME}/locale
+   domain = ${MODULENAME}
+
+   [update_catalog]
+   domain = ${MODULENAME}
+   output_dir = ${MODULENAME}/locale
+   input_file = ${MODULENAME}/locale/${MODULENAME}.pot
+
+   [extract_messages]
+   keywords = _ gettext ngettext l_ lazy_gettext
+   mapping_file = babel.cfg
+   output_file = ${MODULENAME}/locale/${MODULENAME}.pot
+
+
+Replace ``${MODULENAME}`` with the name of your main module like
+``nova`` or ``novaclient``. Your i18n setup file, normally named
+``_i18n.py``, should use the name of your module as domain name:
+
+.. code-block:: python
+
+   _translators = oslo_i18n.TranslatorFactory(domain='${MODULENAME}')
+
+
+Django Projects
+---------------
+
+Update your ``setup.cfg`` file. It should contain a ``packages`` entry
+in the ``files`` section:
+
+.. code-block:: ini
+
+   [files]
+   packages = ${MODULENAME}
+
+Create file ``babel-django.cfg`` with the following content:
+
+.. code-block:: ini
+
+   [extractors]
+   django = django_babel.extract:extract_django
+
+   [python: **.py]
+   [django: templates/**.html]
+   [django: **/templates/**.csv]
+
+Create  file ``babel-djangojs.cfg`` with the following content:
+
+.. code-block:: ini
+
+   [extractors]
+   # We use a custom extractor to find translatable strings in AngularJS
+   # templates. The extractor is included in horizon.utils for now.
+   # See http://babel.pocoo.org/docs/messages/#referencing-extraction-methods for
+   # details on how this works.
+   angular = horizon.utils.babel_extract_angular:extract_angular
+
+   [javascript: **.js]
+
+   # We need to look into all static folders for HTML files.
+   # The **/static ensures that we also search within
+   # .../dashboards/XYZ/static which will ensure
+   # that plugins are also translated.
+   [angular: **/static/**.html]
+
+Add Translation Server Support
+------------------------------
+
+Propose a change to the ``openstack-infra/project-config`` repository
+including the following changes:
+
+#. Set up the project on the translation server.
+
+   Edit file ``gerrit/projects.yaml`` and add the ``translate``
+   option:
+
+   .. code-block:: yaml
+
+      - project: openstack/<projectname>
+        description: Latest and greatest cloud stuff.
+        options:
+          - translate
+
+#. Define jobs.
+
+   Edit file ``jenkins/job/projects.yaml`` and add the
+   ``translation-jobs`` job-group to your repository:
+
+   .. code-block:: yaml
+
+      - project:
+          name: <projectname>
+          node: bare-trusty
+
+          jobs:
+            - translation-jobs
+
+#. Define when to run the jobs.
+
+   Edit file ``zuul/layout.yaml`` and add the ``translation-jobs``
+   template to your repository:
+
+   .. code-block:: yaml
+
+        - name: openstack/<projectname>
+          template:
+            - name: merge-check
+            - name: python-jobs
+            - name: translation-jobs
+
+
+With these changes the string marked for translation are sent to the
+translation server after each merge to your project. Also, a periodic
+job is set up that checks daily whether there are translated strings
+and proposes them to your project together with translation source
+files. Note that the daily job will only propose translated files
+where the majority of the strings are translated.
+
+Checking Translation Imports
+----------------------------
+
+As a minimal check that the translation files that are imported are
+valid, you can add to your lint target (``pep8`` or ``linters``) a
+simple ``msgfmt`` test:
+
+.. code-block:: console
+
+   bash -c "find ${MODULENAME} -type f -regex '.*\.pot?' -print0| \
+            xargs -0 -n 1 --no-run-if-empty msgfmt --check-format -o /dev/null"
+
+Note that the infra scripts run the same test, so adding it to your
+project is optional.
 
 Project Renames
 ===============
