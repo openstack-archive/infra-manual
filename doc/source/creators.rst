@@ -453,7 +453,6 @@ projects. Find the right section and then add a new stanza like:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: python3-jobs
-      - name: translation-jobs
 
 You can find more info about job templates in the beginning of
 ``zuul/layout.yaml`` in the section starting with
@@ -973,6 +972,153 @@ Update the http://docs.openstack.org/developer/openstack-projects.html
 page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
+
+Enabling Translation Infrastructure
+===================================
+
+Once you have your project set up, you might want to enable
+translations. For this, you first need to mark all strings so that
+they can be localized, use `oslo.i18n`_ for this.
+
+.. _oslo.i18n: http://docs.openstack.org/developer/oslo.i18n
+
+Note that this is just enabling translations, the actual translations
+are done by the i18n team, and they have to prioritize which projects
+to translate.
+
+First enable translation, depending on ...
+
+Python Projects
+---------------
+
+Update your setup.cfg like the following:
+
+.. code-block:: ini
+
+   [compile_catalog]
+   directory = ${MODULENAME}/locale
+   domain = ${MODULENAME}
+
+   [update_catalog]
+   domain = ${MODULENAME}
+   output_dir = ${MODULENAME}/locale
+   input_file = ${MODULENAME}/locale/${MODULENAME}.pot
+
+   [extract_messages]
+   keywords = _ gettext ngettext l_ lazy_gettext
+   mapping_file = babel.cfg
+   output_file = ${MODULENAME}/locale/${MODULENAME}.pot
+
+Replace ``${MODULENAME}`` with the name of your main module like
+``nova`` or ``novaclient``. Your i18n setup file, normally named
+``_i18n.py``, should use the name of your module as domain name:
+
+.. code-block:: python
+
+   _translators = oslo_i18n.TranslatorFactory(domain='${MODULENAME}')
+
+
+Django Projects
+---------------
+
+File ``babel-django.cfg``:
+
+.. code-block:: ini
+
+   [extractors]
+   django = django_babel.extract:extract_django
+
+   [python: **.py]
+   [django: templates/**.html]
+   [django: **/templates/**.csv]
+
+File ``babel-djangojs.cfg``:
+
+.. code-block:: ini
+
+   [extractors]
+   # We use a custom extractor to find translatable strings in AngularJS
+   # templates. The extractor is included in horizon.utils for now.
+   # See http://babel.pocoo.org/docs/messages/#referencing-extraction-methods for
+   # details on how this works.
+   angular = horizon.utils.babel_extract_angular:extract_angular
+
+   [javascript: **.js]
+
+   # We need to look into all static folders for HTML files.
+   # The **/static ensures that we also search within
+   # /openstack_dashboard/dashboards/XYZ/static which will ensure
+   # that plugins are also translated.
+   [angular: **/static/**.html]
+
+Add Translation Server Support
+------------------------------
+
+Propose a change to the ``openstack-infra/project-config`` repository
+with the following changes:
+
+#. Set up translation server.
+
+   Edit file ``gerrit/projects.yaml`` and add the ``translation``
+   option like:
+
+   .. code-block:: yaml
+
+      - project: openstack/<projectname>
+        description: Latest and greatest cloud stuff.
+        options:
+          - translate
+
+#. Define jobs.
+
+   Edit file ``jenkins/job/projects.yaml`` and add the
+   ``translation-jobs`` job-group to your repository like:
+
+   .. code-block:: yaml
+
+      - project:
+          name: <projectname>
+          node: bare-trusty
+
+          jobs:
+            - translation-jobs
+
+#. Define when to run the jobs.
+
+   Edit file ``zuul/layout.yaml`` and add the ``translation-jobs``
+   template to your repository like:
+
+   .. code-block:: yaml
+
+        - name: openstack/<projectname>
+          template:
+            - name: merge-check
+            - name: python-jobs
+            - name: translation-jobs
+
+
+Once this change has merged, after each merge to your project the
+translated strings are sent to the translation server. Also, a
+periodic job is setup that checks daily whether there are translated
+files and proposes them to your project together with translation
+source files. Note that the daily job will only propose translated
+files where the majority of the strings are translated.
+
+Checking Translation Imports
+----------------------------
+
+As a minimal check that the translation files that are imported are
+valid, add to your lint target (``pep8`` or ``linters``) a simple
+``msgfmt`` test:
+
+.. code-block:: console
+
+   bash -c "find ${MODULENAME} -type f -regex '.*\.pot?' -print0| \
+            xargs -0 -n 1 msgfmt --check-format -o /dev/null"
+
+Note that this job will only succeed if at least *one* translation
+file has been imported, so you can only add it once the daily job has
+proposed translation files.
 
 Project Renames
 ===============
