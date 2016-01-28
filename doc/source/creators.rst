@@ -453,7 +453,6 @@ projects. Find the right section and then add a new stanza like:
       - name: integrated-gate
       - name: publish-to-pypi
       - name: python3-jobs
-      - name: translation-jobs
 
 You can find more info about job templates in the beginning of
 ``zuul/layout.yaml`` in the section starting with
@@ -973,6 +972,92 @@ Update the http://docs.openstack.org/developer/openstack-projects.html
 page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
+
+Enabling Translation Infrastructure
+===================================
+
+Once you have your project set up, you might want to enable
+translations. For this, you first need to mark all strings so that
+they can be localized, use `oslo.i18n`_ for this.
+
+.. _oslo.i18n: http://docs.openstack.org/developer/oslo.i18n
+
+Note that this is just enabling translations, the actual translations
+are done by the i18n team, and they have to prioritize which projects
+to translate.
+
+First enable translation, depending on ...
+
+Python Projects
+---------------
+
+Update your setup.cfg like the following:
+
+.. code-block:: ini
+
+   [compile_catalog]
+   directory = nova/locale
+   domain = nova
+
+   [update_catalog]
+   domain = nova
+   output_dir = nova/locale
+   input_file = nova/locale/nova.pot
+
+   [extract_messages]
+   keywords = _ gettext ngettext l_ lazy_gettext
+   mapping_file = babel.cfg
+   output_file = nova/locale/nova.pot
+
+Replace ``nova`` with the name of your main module. Also, your
+``i18n.py`` file should use the name of your module as domain name.
+
+
+.. code-block:: python
+
+   _translators = oslo_i18n.TranslatorFactory(domain='nova')
+
+
+Django Projects
+---------------
+
+File ``babel-django.cfg``:
+
+.. code-block:: ini
+
+   [extractors]
+   django = django_babel.extract:extract_django
+
+   [python: **.py]
+   [django: templates/**.html]
+   [django: **/templates/**.csv]
+
+File ``babel-djangojs.cfg``:
+
+.. code-block:: ini
+
+   [extractors]
+   # We use a custom extractor to find translatable strings in AngularJS
+   # templates. The extractor is included in horizon.utils for now.
+   # See http://babel.pocoo.org/docs/messages/#referencing-extraction-methods for
+   # details on how this works.
+   angular = horizon.utils.babel_extract_angular:extract_angular
+
+   [javascript: **.js]
+
+   # We need to look into all static folders for HTML files.
+   # The **/static ensures that we also search within
+   # /openstack_dashboard/dashboards/XYZ/static which will ensure
+   # that plugins are also translated.
+   [angular: **/static/**.html]
+
+Add Translation Server Support
+------------------------------
+
+In project-config do the following changes:
+
+
+
 
 Project Renames
 ===============
