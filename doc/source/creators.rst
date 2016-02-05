@@ -1,8 +1,8 @@
 :title: Project Creator's Guide
 
-============================
+========================
  Project Creator's Guide
-============================
+========================
 
 Before You Start
 ================
@@ -13,6 +13,13 @@ we want it to be. If you follow it, everything will be fine.
 It is important that you perform all of the steps, in the order they
 are given here. Don't skip any steps. Don't try to do things in
 parallel. Don't jump around.
+
+If your project is already set up in the OpenStack CI infrastructure,
+the following sections might be interesting for adding new tests to a
+repository:
+
+* `Configure Zuul to Run Jobs <configure_zuul>`_
+* `Zuul Best Practices <zuul_best_practices>`_
 
 Decide Status of your Project
 =============================
@@ -422,6 +429,8 @@ repositories. Find the right section and then add a new stanza like:
       - openstack-publish-jobs
       - pypi-jobs
 
+.. _configure_zuul:
+
 Configure Zuul to Run Jobs
 --------------------------
 
@@ -475,6 +484,7 @@ If you are not ready to run any tests yet and did not configure
       - name: merge-check
       - name: noop-jobs
 
+.. _zuul_best_practices:
 
 Zuul Best Practices
 -------------------
