@@ -1,0 +1,10 @@
+Code-Review+1: Doug Fish <drfish@us.ibm.com>
+Code-Review+2: Spencer Krum <nibz@spencerkrum.com>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 08 Feb 2016 08:39:14 +0000
+Reviewed-on: https://review.openstack.org/276813
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
