@@ -277,10 +277,9 @@ channel can have multiple notifications per project.
 
 In order for GerritBot to post notifications on the IRC channel of the
 project you are configuring, you need to add your GerritBot
-configuration into
-``modules/gerritbot/files/gerritbot_channel_config.yaml``.  This file
-is hosted in `openstack-infra/config
-<http://git.openstack.org/cgit/openstack-infra/config/>`_.
+configuration into ``gerritbot/channels.yaml``. This file
+is hosted in `openstack-infra/project-config
+<http://git.openstack.org/cgit/openstack-infra/project-config/>`_.
 
 The syntax for configuring the notifications is::
 
