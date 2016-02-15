@@ -362,7 +362,17 @@ adding a new section containing::
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
 
-Creating of Branches
+Deletion of Tags
+~~~~~~~~~~~~~~~~
+
+Tags should be created with care and treated as if they cannot be deleted.
+
+While deletion of tags can be done at the source and replicated to the git
+mirrors, deletion of tags is not propagated to existing git pulls of the repo.
+This means anyone who has done a remote update, including systems in the
+OpenStack infrastructure which fire on tags, will have that tag indefinitely.
+
+Creation of Branches
 ~~~~~~~~~~~~~~~~~~~~
 
 To allow creation of branches to the release team, add a ``create``
@@ -373,6 +383,13 @@ rule to it the ``refs/heads/*`` section::
   create = group <projectname>-release
   label-Code-Review = -2..+2 group <projectname>-core
   label-Workflow = -1..+1 group <projectname>-core
+
+Deletion of Branches
+~~~~~~~~~~~~~~~~~~~~
+
+Members of a team that can create branches do not have access to delete
+branches. Instead, someone on the infrastructure team with gerrit administrator
+privileges will need to complete this request.
 
 Extended ACL File
 ~~~~~~~~~~~~~~~~~
