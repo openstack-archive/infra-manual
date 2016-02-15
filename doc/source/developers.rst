@@ -808,7 +808,7 @@ reviews:
      `OpenStack API Working Group <https://wiki.openstack.org/wiki/API_Working_Group>`_
      for additional review.
   6. If the change fixes a bug, it should include the bug number. For
-     example, add the line "Fixes Bug: 1234".
+     example, add the line "Closes-Bug: 1234".
   7. If the change implements a feature, it should reference a
      blueprint. The blueprint should be approved before the change is
      merged. For example, add the line "Blueprint: my-blueprint."
