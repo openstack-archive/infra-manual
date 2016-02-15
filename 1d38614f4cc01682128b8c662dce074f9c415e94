@@ -1,0 +1,10 @@
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+1: Craige McWhirter <craige@mcwhirter.io>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 15 Feb 2016 09:02:55 +0000
+Reviewed-on: https://review.openstack.org/258286
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
