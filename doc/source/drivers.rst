@@ -429,7 +429,7 @@ Once Zuul is no longer running tests on your project, prepare a change
 that removes all of the files from your project except the README.
 Replace the contents of the README with a message such as this::
 
-  This project is no longer mantained.
+  This project is no longer maintained.
 
   The contents of this repository are still available in the Git
   source code management system.  To see the contents of this
@@ -458,7 +458,7 @@ the repository.
 Remove Project from Infrastructure Systems
 ------------------------------------------
 
-Once your repositor is in its final state, prepare a second change to
+Once your repository is in its final state, prepare a second change to
 the ``openstack-infra/project-config`` repository that does the
 following:
 
@@ -477,4 +477,5 @@ Remove Repository from the Governance Repository
 
 If this was an official OpenStack project, remove it from the
 ``reference/projects.yaml`` file in the ``openstack/governance``
-repository.
+repository.  Note that if the project was recently active, this may
+have implications for automatic detection of ATCs.
