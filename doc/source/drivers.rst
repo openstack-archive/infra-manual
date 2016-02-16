@@ -396,3 +396,94 @@ those projects into a shared change queue.
 
 Zuul comes with extensive `documentation <http://docs.openstack.org/infra/zuul/>`_
 too and should be referenced for more information.
+
+Retiring a Project
+==================
+
+If you need to retire a project and no longer accept patches, it is
+important to communicate that to both users and contributors.  The
+following steps will help you wind down a project gracefully.
+
+Announce Retirement
+-------------------
+
+Use mailing lists or other channels to announce to users and
+contributors that the project is being retired.  Be sure to include a
+date upon which maintenance will end, if that date is in the future.
+
+End Project Gating
+------------------
+
+Check out a copy of the ``openstack-infra/project-config`` repository
+and edit ``zuul/layout.yaml``.  Find the section for your project and
+change it to look like this::
+
+  - name: openstack/<projectname>
+    template:
+      - name: merge-check
+      - name: noop-jobs
+
+Also, remove your project from ``jenkins/jobs/projects.yaml``, and if
+you have created any other jobs specific for your project in
+``jenkins/jobs/``, remove them as well.
+
+Submit that change and make sure to mention in the commit message that
+you are ending project gating for the purposes of retiring the
+project.  Wait for that change to merge and then proceed.
+
+Remove Project Content
+----------------------
+
+Once Zuul is no longer running tests on your project, prepare a change
+that removes all of the files from your project except the README.
+Replace the contents of the README with a message such as this::
+
+  This project is no longer mantained.
+
+  The contents of this repository are still available in the Git
+  source code management system.  To see the contents of this
+  repository before it reached its end of life, please check out the
+  previous commit with "git checkout HEAD^1".
+
+  (Optional:)
+  For an alternative project, please see <alternative project name> at
+  <alternative project URL>.
+
+  For any further questions, please email
+  openstack-dev@lists.openstack.org or join #openstack-dev on
+  Freenode.
+
+Merge this commit to your project.
+
+If any users missed the announcement that the project is being
+retired, removing the content of the repository will cause any users
+who continuously deploy the software as well as users who track
+changes to the repository to notice the retirement.  While this may be
+disruptive, it is generally considered better than continuing to
+deploy unmaintained software.  Potential contributors who may not have
+otherwise read the README will in this case, as it is the only file in
+the repository.
+
+Remove Project from Infrastructure Systems
+------------------------------------------
+
+Once your repositor is in its final state, prepare a second change to
+the ``openstack-infra/project-config`` repository that does the
+following:
+
+* Remove your project from ``zuul/layout.yaml``.
+
+* Replace the contents of
+  ``gerrit/acls/openstack/<projectname>.config`` with::
+
+    [project]
+    state = read only
+
+* Remove your project from ``gerritbot/channels.yaml``.
+
+Remove Repository from the Governance Repository
+------------------------------------------------
+
+If this was an official OpenStack project, remove it from the
+``reference/projects.yaml`` file in the ``openstack/governance``
+repository.
