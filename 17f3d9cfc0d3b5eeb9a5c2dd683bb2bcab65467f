@@ -1,0 +1,11 @@
+Code-Review+1: Craige McWhirter <craige@mcwhirter.io>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 17 Feb 2016 09:14:39 +0000
+Reviewed-on: https://review.openstack.org/260610
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
