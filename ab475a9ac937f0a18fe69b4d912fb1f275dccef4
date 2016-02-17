@@ -1,0 +1,12 @@
+Code-Review+1: matthew wagoner <zxkuqyb@gmail.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+1: Craige McWhirter <craige@mcwhirter.io>
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Workflow+1: yolanda.robla <info@ysoft.biz>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 17 Feb 2016 09:02:48 +0000
+Reviewed-on: https://review.openstack.org/280826
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
