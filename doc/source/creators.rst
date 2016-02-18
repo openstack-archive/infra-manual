@@ -391,6 +391,29 @@ Members of a team that can create branches do not have access to delete
 branches. Instead, someone on the infrastructure team with gerrit administrator
 privileges will need to complete this request.
 
+Stable Maintenance Team
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If your team has a separate team to review stable branches, add a
+``refs/heads/stable/*`` section::
+
+  [access "refs/heads/stable/*"]
+  abandon = group Change Owner
+  abandon = group Project Bootstrappers
+  abandon = group <projectname>-stable-maint
+  exclusiveGroupPermissions = abandon label-Code-Review label-Workflow
+  label-Code-Review = -2..+2 group Project Bootstrappers
+  label-Code-Review = -2..+2 group <project-name>-stable-maint
+  label-Code-Review = -1..+1 group Registered Users
+  label-Workflow = -1..+0 group Change Owner
+  label-Workflow = -1..+1 group Project Bootstrappers
+  label-Workflow = -1..+1 group <project-name>-stable-maint
+
+The ``exclusiveGroupPermissions`` avoids the inheritance from
+``refs/heads/*`` and the default setup. The other lines grant the
+privileges to the stable team and add back the default privileges for
+owners of a change, gerrit administrators, and all users.
+
 Extended ACL File
 ~~~~~~~~~~~~~~~~~
 So, if your project requires the ICLA signed, has a release team
