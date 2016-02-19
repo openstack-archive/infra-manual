@@ -820,7 +820,10 @@ reviews:
       preferred method for OpenStack.
    2. Exceptions can be made for tests added where Mox was already
       in use, or any other situation where using Mock would cause excessive
-      difficulty for some reason.
+      difficulty for some reason. However, note that using mox does not
+      support python 3 and mox3 has known to intermittently fail in py34
+      jobs, so it should be avoided if python 3 compatibility is a goal of
+      the project being tested.
    3. There is no need to convert existing Mox test cases to Mock,
       but if you are changing a Mox test case anyway, please consider
       converting it to Mock at the same time.
@@ -836,6 +839,10 @@ reviews:
       expected to keep many such objects resident, then that should be
       stated in comments whenever `six.iteritems` is used. Otherwise,
       migrate the code to use `.items()`.
+
+   3. Unit tests should be written in mock which supports python 3. mox does
+      not support python 3 and mox3 is a limited port which intermittently
+      fails in py34 jobs due to races.
 
 6. The code should comply with the community `logging standards <https://wiki.openstack.org/wiki/LoggingStandards>`_.
 
