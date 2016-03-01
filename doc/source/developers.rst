@@ -149,6 +149,9 @@ On Mac OS X, or most other Unix-like systems, you may install it with
 
   pip install git-review
 
+On Windows, you may refer to this `video installation guide
+<https://www.youtube.com/watch?v=uAVPDyK8flc>`_.
+
 If you run into trouble, you can refer to the `git-review readme file
 <http://git.openstack.org/cgit/openstack-infra/git-review/tree/README.rst>`_.
 
