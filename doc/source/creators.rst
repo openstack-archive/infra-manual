@@ -18,8 +18,8 @@ If your project is already set up in the OpenStack CI infrastructure,
 the following sections might be interesting for adding new tests to a
 repository:
 
-* `Configure Zuul to Run Jobs <configure_zuul>`_
-* `Zuul Best Practices <zuul_best_practices>`_
+* `Configure Zuul to Run Jobs <_configure_zuul>`_
+* `Zuul Best Practices <_zuul_best_practices>`_
 
 Decide Status of your Project
 =============================
