@@ -1148,7 +1148,7 @@ including the following changes:
 
 #. Define jobs.
 
-   Edit file ``jenkins/job/projects.yaml`` and add the
+   Edit file ``jenkins/jobs/projects.yaml`` and add the
    ``translation-jobs`` job-group to your repository:
 
    .. code-block:: yaml
