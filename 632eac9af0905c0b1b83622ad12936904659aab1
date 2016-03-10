@@ -1,0 +1,11 @@
+Code-Review+1: Sharath Rao <sharath.rao@ericsson.com>
+Code-Review+1: Clint Adams <clint@gcfm.net>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 10 Mar 2016 18:23:57 +0000
+Reviewed-on: https://review.openstack.org/291241
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
