@@ -273,7 +273,7 @@ Add the project to the master projects list
    .. note::
 
       If you do not configure the upstream source here and get the project
-      imported at project creation time you will have to push exisitng
+      imported at project creation time you will have to push existing
       history into Gerrit and "review" then approve it or push some squashed
       set of history and "review" then approve that. If you need to preserve
       history the best option is to configure the upstream properly for
@@ -1050,6 +1050,16 @@ to translate.
 First enable translation in your project, depending on whether it is a
 Django project or a Python project.
 
+.. note::
+
+   The infra scripts consider a project as a Django project when your repository
+   name ends with ``-dashboard``, ``-ui``, ``horizon`` or ``django_openstack_auth``.
+   Otherwise your project will be recognized as a Python project.
+
+   If your repository structure is more complex, for example, with multiple
+   python modules, or with both Django and Python projects, see
+   :ref:`translation-setup-complex-case` as well.
+
 Python Projects
 ---------------
 
@@ -1199,6 +1209,44 @@ simple ``msgfmt`` test:
 
 Note that the infra scripts run the same test, so adding it to your
 project is optional.
+
+
+.. _translation-setup-complex-case:
+
+More complex cases
+------------------
+
+The infra scripts for translation setup work as follows:
+
+* The infra scripts recognize a project type based on its repository name.
+  If the repository name ends with ``-dashboard``, ``-ui``, ``horizon``
+  or ``django_openstack_auth``, it is treated as a Django project.
+  Otherwise it is treated as a Python project.
+* If your repository declares multiple python modules in ``packages`` entry
+  in ``[files]`` section in ``setup.cfg``, the infra scripts run translation
+  jobs for each python module.
+
+We strongly recommend to follow the above guideline, but in some cases
+this behavior does not satisfy your project structure. For example,
+
+* Your repository contains both Django and Python code.
+* Your repository defines multiple python modules, but you just want to
+  run the translation jobs for specific module(s).
+
+In such cases you can declare how each python module should be handled
+manually in ``setup.cfg``. Python modules declared in ``django_modules``
+and ``python_modules`` are treated as Django project and Python project
+respectively. If ``django_modules`` or ``python_modules`` entry does not
+exist, it is interpreted that there are no such modules.
+
+.. code-block:: ini
+
+   [openstack_translations]
+   django_modules = module1
+   python_modules = module2 module3
+
+You also need to setup your repository following the instruction
+for Python and/or Django project above appropriately.
 
 Project Renames
 ===============
