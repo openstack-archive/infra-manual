@@ -438,6 +438,8 @@ that will create tags and branches, create a
 
 See other files in the same directory for further examples.
 
+.. _basic_jenkins_jobs:
+
 Add Basic Jenkins Jobs
 ----------------------
 
@@ -497,15 +499,18 @@ projects. Find the right section and then add a new stanza like:
     template:
       - name: merge-check
       - name: python-jobs
-      - name: openstack-server-publish-jobs
-      - name: check-requirements
-      - name: integrated-gate
-      - name: publish-to-pypi
       - name: python3-jobs
+      - name: check-requirements
+      - name: openstack-server-publish-jobs
+      - name: publish-to-pypi
 
 You can find more info about job templates in the beginning of
 ``zuul/layout.yaml`` in the section starting with
 "project-templates:".
+
+Each of the jobs that you add a trigger for in ``zuul/layout.yaml``
+needs to be defined first using jenkins-job-builder configuration
+files as explained in :ref:`basic_jenkins_jobs`.
 
 .. note::
 
