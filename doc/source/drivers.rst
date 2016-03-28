@@ -470,3 +470,47 @@ If this was an official OpenStack project, remove it from the
 ``reference/projects.yaml`` file in the ``openstack/governance``
 repository.  Note that if the project was recently active, this may
 have implications for automatic detection of ATCs.
+
+Package Requirements
+====================
+
+The OpenStack CI infrastructure sets up nodes for testing that contain
+a minimal system and a number of convenience binary packages. If you
+run Python tests using ``tox``, you can install them using
+``requirements.txt`` and ``test-requirements.txt`` files. But these
+Python tests might need binary packages installed as well and if those
+are not in the nodes used for testing, they have to be installed
+explicitely.
+
+If you run devstack based tests, add missing binary packages below the
+`files
+http://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
+directory of devstack.
+
+For all other tests, add an ``other-requirements.txt`` file containing
+a cross-platform list of dependencies needed for running tests. The
+`bindep <http://docs.openstack.org/infra/bindep/>`_ utility will be
+used to install the right dependencies per distribution.
+
+If you use bindep, create a bindep tox environment as well:
+
+.. code-block:: ini
+
+   [testenv:bindep]
+   # Do not install any requirements. We want this to be fast and work even if
+   # system dependencies are missing, since it's used to tell you what system
+   # dependencies are missing! This also means that bindep must be installed
+   # separately, outside of the requirements files.
+   deps = bindep
+   commands = bindep
+
+This way developer can just run bindep to get a list of missing
+packages for their own system:
+
+.. code-block:: console
+
+   $ tox -e bindep
+
+The output of this can then be feed into the distribution package
+like ``apt-get``, ``dnf``, ``yum``, or ``zypper`` to install missing
+binary packages.
