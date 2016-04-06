@@ -88,7 +88,7 @@ should sign the `U.S. Government Contributor License Agreement
 <https://wiki.openstack.org/wiki/GovernmentCLA>`_. Please contact the
 OpenStack Foundation to initiate this process.
 
-If you are ``contributing on behalf of a company`` or organization,
+If you are contributing on behalf of a company or organization,
 you still need to sign the ICLA above but someone at your company or
 organization also needs to sign the `Corporate Contributor License
 Agreement <https://secure.echosign.com/public/hostedForm?formid=56JUVGT95E78X5>`_
