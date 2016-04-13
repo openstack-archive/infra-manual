@@ -302,12 +302,20 @@ Add the project to the master projects list
 Add Gerrit permissions
 ----------------------
 
-Each project should have two gerrit groups. The first,
-"<projectname>-core", is the normal core group, with permission to
-+2 changes. The second, "<projectname>-release" is a small group of
-the primary maintainers with permission to push tags to trigger
-releases. Libraries for projects managed by the release team do not need
-this group, and should use ``library-release`` instead.
+Each project should have a gerrit group "<projectname>-core",
+containing the normal core group, with permission to
++2 changes.
+
+Libraries for official projects should be configured so the
+``library-release`` team has tagging rights.
+
+Other official projects should be configured so that tagging rights
+use the default settings, allowing the "``Release Managers``" team to
+push tags.
+
+For unofficial projects, a second "<projectname>-release" team should
+be created and populated with a small group of the primary maintainers
+with permission to push tags to trigger releases.
 
 Create a ``gerrit/acls/openstack/<projectname>.config`` as
 explained in the following sections.
@@ -355,9 +363,9 @@ containing::
   [access "refs/tags/*"]
   pushSignedTag = group library-release
 
-For non-library projects, or projects not managed by the release team,
-you can allow the project-specific release team to create tags by
-adding a new section containing::
+For non-library projects, or unofficial projects, you can allow the
+project-specific release team to create tags by adding a new section
+containing::
 
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
