@@ -1,0 +1,10 @@
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+2: yolanda.robla <yolanda.robla-mota@hpe.com>
+Workflow+1: yolanda.robla <yolanda.robla-mota@hpe.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 15 Apr 2016 07:54:13 +0000
+Reviewed-on: https://review.openstack.org/305502
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
