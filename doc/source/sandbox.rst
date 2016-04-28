@@ -109,8 +109,8 @@ the web UI by visiting the URL of the change and hitting the *Abandon
 change* button. Alternatively you can abandon a change from command
 line using `Gerrit ssh commands <https://review.openstack.org/Documentation/cmd-review.html>`_::
 
-  ssh -l YOUR_GERRIT_USERNAME>\
+  ssh -l <YOUR_GERRIT_USERNAME>\
       -p 29418 \
       review.openstack.org 'gerrit review' \
       --project openstack-dev/sandbox.git \
-      --abandon THE_CHANGE_ID,2
+      --abandon <THE_CHANGE_ID>,2
