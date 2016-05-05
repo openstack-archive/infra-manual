@@ -320,6 +320,25 @@ with permission to push tags to trigger releases.
 Create a ``gerrit/acls/openstack/<projectname>.config`` as
 explained in the following sections.
 
+   .. note::
+
+      If the git repository you are creating is part of a project and
+      will share Gerrit permissions with another repository that is
+      part of the same project, you do not need to create an
+      independent ACL file as described in this section.
+
+      An example of this is found in the situation where the
+      trove-image-builder project has been proposed with the same
+      permissions as the trove project in
+      https://review.openstack.org/#/c/312805/.
+
+      To do this make an additional change to the
+      ``gerrit/projects.yaml`` file as shown here::
+
+        - project: openstack/<new-projectname>
+          description: Latest and greatest cloud stuff.
+          acl-config: /home/gerrit2/acls/openstack/old-projectname.config
+
 
 Minimal ACL file
 ~~~~~~~~~~~~~~~~
