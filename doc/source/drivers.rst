@@ -418,6 +418,8 @@ Remove Project Content
 
 Once Zuul is no longer running tests on your project, prepare a change
 that removes all of the files from your project except the README.
+Double check that all dot files are also removed.
+
 Replace the contents of the README with a message such as this::
 
   This project is no longer maintained.
