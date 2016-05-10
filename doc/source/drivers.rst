@@ -509,7 +509,7 @@ If you use bindep, create a bindep tox environment as well:
    # dependencies are missing! This also means that bindep must be installed
    # separately, outside of the requirements files.
    deps = bindep
-   commands = bindep
+   commands = bindep test
 
 This way a developer can just run bindep to get a list of missing
 packages for their own system:
@@ -521,3 +521,18 @@ packages for their own system:
 The output of this can then be fed into the distribution package
 manager like ``apt-get``, ``dnf``, ``yum``, or ``zypper`` to install
 missing binary packages.
+
+Note that infra uses the "test" `profile
+<http://docs.openstack.org/infra/bindep/readme.html#profiles>`__ of
+your other-requirements file for testing in the CI. Add any build time
+requirements and any requirements specific to the test jobs to the
+"test" profile, add requirements for both test and runtime to the base
+profile::
+
+   # A runtime dependency
+   libffi6
+   # A build time dependency
+   libffi-devel [test]
+
+
+
