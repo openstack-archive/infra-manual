@@ -509,7 +509,11 @@ If you use bindep, create a bindep tox environment as well:
    # dependencies are missing! This also means that bindep must be installed
    # separately, outside of the requirements files.
    deps = bindep
-   commands = bindep
+   commands = bindep test
+
+This uses the "test" `profile
+<http://docs.openstack.org/infra/bindep/readme.html#profiles>`__ of
+your other-requirements file for installation.
 
 This way a developer can just run bindep to get a list of missing
 packages for their own system:
