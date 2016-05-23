@@ -80,7 +80,7 @@ Launchpad
 
 It is preferred but not absolutely necessary for your project name on
 https://launchpad.net to be the same as your git repository name. Try
-"python-" as a prefix if necessary (for example, "python-stevedore").
+"openstack-" as a prefix if necessary (for example, "openstack-stevedore").
 
 PyPI
 ----
@@ -92,8 +92,8 @@ distributions to be installed via pip.
 It is best to name the repository and the top level Python package
 the same when possible so that the name used to install the dist and
 the name used to import the package in source files match. Try
-"python-" as a prefix if necessary (for example,
-"python-stevedore").
+"openstack-" as a prefix if necessary (for example,
+"openstack-stevedore").
 
 Project Team Rules
 ------------------
@@ -122,8 +122,8 @@ Create a new Launchpad Project
 #. Visit https://launchpad.net/projects/+new and fill in the details.
 
 #. Name your project using the same name you plan to use for the git
-   repository, unless that is taken. Try "python-" as a prefix if
-   necessary (for example, "python-stevedore"). If that name is also
+   repository, unless that is taken. Try "openstack-" as a prefix if
+   necessary (for example, "openstack-stevedore"). If that name is also
    taken, consult with the Release Manager before going any further.
 
 Put Your New Project in the Correct Project Group
