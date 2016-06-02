@@ -1,0 +1,10 @@
+Code-Review+2: yolanda.robla <info@ysoft.biz>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 02 Jun 2016 07:10:05 +0000
+Reviewed-on: https://review.openstack.org/310823
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
