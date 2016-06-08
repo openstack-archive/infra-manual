@@ -1,0 +1,12 @@
+Code-Review+1: Anita Kuno <anteaya@anteaya.info>
+Code-Review+1: Sean Dague <sean@dague.net>
+Code-Review+1: K Jonathan Harker <code@gentlydownthe.net>
+Code-Review+2: Elizabeth K. Joseph <lyz@princessleia.com>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 08 Jun 2016 22:14:20 +0000
+Reviewed-on: https://review.openstack.org/321580
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
