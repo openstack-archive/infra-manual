@@ -734,7 +734,10 @@ If a change fails tests in Jenkins, please follow the steps below:
    the test. It will include a console log, and in the case of unit
    tests, HTML output from the test runner, or in the case of a
    devstack-gate test, it may contain quite a large number of system
-   logs.
+   logs. For jobs in the post queue, logs are found at
+   ``http://logs.openstack.org/<first two characters of commit SHA>/<commit SHA>``.
+   For example, if a change is committed with the sha 'deadbeef123456',
+   the logs will be found at ``http://logs.openstack.org/de/deadbeef123456``.
 2. Examine the console log or other relevant log files to determine
    the cause of the error. If it is related to your change, you should
    fix the problem and upload a new patchset. Do not use "recheck".
