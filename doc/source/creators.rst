@@ -854,16 +854,29 @@ Choosing the Right cookiecutter Template
 The template in ``openstack-dev/cookiecutter`` is suitable for
 most projects.
 
+.. note::
+
+   Cookiecutter with '-f' option overwrites the contents of the
+   <projectname> directory. Be careful when working with non-empty
+   projects, it will overwrite any files you have which match names in the
+   cookiecutter repository.
+
+Remember, as mentioned earlier, these commands should typically be used only
+if you are working with an empty repository.
+
 ::
 
-   $ cookiecutter https://git.openstack.org/openstack-dev/cookiecutter
+   $ cookiecutter -f https://git.openstack.org/openstack-dev/cookiecutter
 
 The template in ``openstack-dev/oslo-cookiecutter`` should be used for
 Oslo libraries.
 
+
 ::
 
-   $ cookiecutter https://git.openstack.org/openstack-dev/oslo-cookiecutter
+   $ cookiecutter -f https://git.openstack.org/openstack-dev/oslo-cookiecutter
+
+
 
 Applying the Template
 ---------------------
