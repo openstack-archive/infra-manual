@@ -320,6 +320,19 @@ with permission to push tags to trigger releases.
 Create a ``gerrit/acls/openstack/<projectname>.config`` as
 explained in the following sections.
 
+   .. note::
+
+      If the git repository you are creating is using the same gerrit
+      permissions - including core groups - as another repository, do
+      not copy the configuration file, instead reference it.
+
+      To do this make an additional change to the
+      ``gerrit/projects.yaml`` file as shown here::
+
+        - project: openstack/<projectname>
+          description: Latest and greatest cloud stuff.
+          acl-config: /home/gerrit2/acls/openstack/other-project.config
+
 
 Minimal ACL file
 ~~~~~~~~~~~~~~~~
