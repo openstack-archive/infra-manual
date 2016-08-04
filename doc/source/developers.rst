@@ -736,8 +736,13 @@ If a change fails tests in Jenkins, please follow the steps below:
    devstack-gate test, it may contain quite a large number of system
    logs. For jobs in the post queue, logs are found at
    ``http://logs.openstack.org/<first two characters of commit SHA>/<commit SHA>``.
-   For example, if a change is committed with the sha 'deadbeef123456',
+   For example, if a change is committed with the SHA 'deadbeef123456',
    the logs will be found at ``http://logs.openstack.org/de/deadbeef123456``.
+   Note that in many cases (particularly for higher-churn projects)
+   the commit will be accompanied by a merge commit to stitch it into
+   the branch and it's that merge commit which is the subject of post
+   pipeline jobs, so in that situation you will need to review the Git
+   log and use the SHA of that merge commit instead.
 2. Examine the console log or other relevant log files to determine
    the cause of the error. If it is related to your change, you should
    fix the problem and upload a new patchset. Do not use "recheck".
