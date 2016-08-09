@@ -494,7 +494,7 @@ below the `files
 <http://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
 directory of devstack.
 
-For non-devstack based tests, add an ``other-requirements.txt`` file
+For non-devstack based tests, add a ``bindep.txt`` file
 containing listing the required distribution packages. It is a
 cross-platform list of all dependencies needed for running tests. The
 `bindep <http://docs.openstack.org/infra/bindep/>`_ utility will be
@@ -526,7 +526,7 @@ missing binary packages.
 
 Note that infra uses the "test" `profile
 <http://docs.openstack.org/infra/bindep/readme.html#profiles>`__ of
-your other-requirements file for testing in the CI. Add any build time
+your ``bindep.txt`` file for testing in the CI. Add any build time
 requirements and any requirements specific to the test jobs to the
 "test" profile, add requirements for both test and runtime to the base
 profile::
@@ -535,6 +535,3 @@ profile::
    libffi6
    # A build time dependency
    libffi-devel [test]
-
-
-
