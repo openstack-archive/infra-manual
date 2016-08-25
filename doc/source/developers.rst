@@ -217,7 +217,8 @@ Working on Bugs
 ---------------
 
 Bug reports for a project are generally tracked on Launchpad at
-https://bugs.launchpad.net/<projectname>. Contributors may review these
+https://bugs.launchpad.net/<projectname>, or on StoryBoard (
+https://storyboard.openstack.org). Contributors may review these
 reports regularly when looking for work to complete.
 
 There are 4 key tasks with regards to bugs that anyone can do:
@@ -245,11 +246,17 @@ https://wiki.openstack.org/wiki/Bugs
 
 If you find a bug that you wish to work on, you may assign it to yourself.
 When you upload a review, include the bug in the commit message for
-automatic updates back to Launchpad. The following options are available::
+automatic updates back to Launchpad or StoryBoard. The following options
+are available for Launchpad::
 
   Closes-Bug: #######
   Partial-Bug: #######
   Related-Bug: #######
+
+and for StoryBoard::
+
+  Task: ######
+  Story: ######
 
 Also see the `Including external references
 <https://wiki.openstack.org/wiki/GitCommitMessages#Including_external_references>`_
