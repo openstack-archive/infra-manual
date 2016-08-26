@@ -524,12 +524,13 @@ The output of this can then be fed into the distribution package
 manager like ``apt-get``, ``dnf``, ``yum``, or ``zypper`` to install
 missing binary packages.
 
-Note that infra uses the "test" `profile
-<http://docs.openstack.org/infra/bindep/readme.html#profiles>`__ of
-your ``bindep.txt`` file for testing in the CI. Add any build time
-requirements and any requirements specific to the test jobs to the
-"test" profile, add requirements for both test and runtime to the base
-profile::
+The OpenStack CI infrastructure will install packages marked for a
+`profile
+<http://docs.openstack.org/infra/bindep/readme.html#profiles>`__ named
+"test" along with any packages belonging to the default profile of the
+``bindep.txt`` file. Add any build time requirements and any
+requirements specific to the test jobs to the "test" profile, add
+requirements for both test and runtime to the base profile::
 
    # A runtime dependency
    libffi6
