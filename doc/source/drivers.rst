@@ -242,6 +242,11 @@ and push that tag to Gerrit by running the following commands::
   * After a tag is created the release build will generate a source code
     tarball and may publish it to a repository such as PyPI.
 
+  * Tags need to follow the format of `PEP 440
+    <https://www.python.org/dev/peps/pep-0440/>` which consists for
+    final releases of one or more non-negative integer values,
+    separated by dots, like 1.2.3.
+
 Gerrit IRC Notifications
 ========================
 
