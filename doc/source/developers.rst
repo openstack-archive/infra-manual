@@ -258,10 +258,15 @@ and for StoryBoard::
   Task: ######
   Story: ######
 
-This will change the task status in StoryBoard to 'review' while the patch
-is in review, and then 'merged' once the patch is merged. When all
-tasks in a story are marked 'merged', the story will automatically
-change status from 'active' to 'merged'.
+Mentioning the story will create a handy link to the story from gerrit,
+and link to the gerrit patch in StoryBoard.
+Mentioning the task will change the task status in StoryBoard to
+'review' while the patch is in review, and then 'merged' once the
+patch is merged. When all tasks in a story are marked 'merged',
+the story will automatically change status from 'active' to 'merged'.
+If the patch is abandoned, the task status will change back to 'todo'.
+It's currently best to note both story and task so that the task status
+will update and people will be able to find the related story.
 
 Also see the `Including external references
 <https://wiki.openstack.org/wiki/GitCommitMessages#Including_external_references>`_
