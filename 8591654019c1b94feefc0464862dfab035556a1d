@@ -1,0 +1,11 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Steven Dake <stdake@cisco.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 10 Oct 2016 19:38:25 +0000
+Reviewed-on: https://review.openstack.org/363941
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
