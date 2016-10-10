@@ -277,7 +277,11 @@ Add the project to the master projects list
       history into Gerrit and "review" then approve it or push some squashed
       set of history and "review" then approve that. If you need to preserve
       history the best option is to configure the upstream properly for
-      Gerrit project creation.
+      Gerrit project creation. **If you have a lot of history to import,
+      please use the upstream field instead of creating a repository and then
+      pushing the patches one at a time. Pushing a large number of related patches
+      all at one time causes the CI infrastructure to slow down, which impacts
+      work on all of the other projects using it.**
 
    .. note::
 
