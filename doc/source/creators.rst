@@ -387,6 +387,9 @@ containing::
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
 
+Note that tags must go directly after heads in the ACL file and before
+the ``receive`` and ``submit`` sections.
+
 Deletion of Tags
 ~~~~~~~~~~~~~~~~
 
