@@ -387,6 +387,10 @@ containing::
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
 
+Note the ACL file enforces strict alphabetical ordering of sections,
+so ``access`` sections like heads and tags must go in order and before
+the ``receive`` section.
+
 Deletion of Tags
 ~~~~~~~~~~~~~~~~
 
