@@ -145,7 +145,7 @@ Create Bug Tracker
 #. From the Overview page for your project, click the "Bugs" link at the
    top of the page.
 
-#. Click the pencil "edit" icon next to "Configure bug tracker".
+#. Click the pencil "edit" icon next to "Configure Bugs".
 
 #. Choose "In launchpad".
 
@@ -175,8 +175,9 @@ you should set up the blueprint tracker now. Otherwise, skip this
 step.
 
 #. From the Overview page for your project, click the "Blueprints" link
-   at the top of the page. Launchpad should suggest that you set up
-   blueprint tracking.
+   at the top of the page.
+
+#. Click the pencil "edit" icon next to "Configure Blueprints".
 
 #. Choose "Launchpad".
 
