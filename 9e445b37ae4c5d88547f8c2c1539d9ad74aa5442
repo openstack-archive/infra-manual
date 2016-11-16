@@ -1,0 +1,11 @@
+Code-Review+1: Sean M. Collins <sean@coreitpro.com>
+Code-Review+1: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 16 Nov 2016 22:54:12 +0000
+Reviewed-on: https://review.openstack.org/394566
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
