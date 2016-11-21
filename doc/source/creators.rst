@@ -860,14 +860,14 @@ most projects.
 
 ::
 
-   $ cookiecutter https://git.openstack.org/openstack-dev/cookiecutter
+   $ cookiecutter -f https://git.openstack.org/openstack-dev/cookiecutter
 
 The template in ``openstack-dev/oslo-cookiecutter`` should be used for
 Oslo libraries.
 
 ::
 
-   $ cookiecutter https://git.openstack.org/openstack-dev/oslo-cookiecutter
+   $ cookiecutter -f https://git.openstack.org/openstack-dev/oslo-cookiecutter
 
 Applying the Template
 ---------------------
