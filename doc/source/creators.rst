@@ -1326,3 +1326,20 @@ name.
 Other projects you may need to update post-rename:
 
 * projects.txt in ``openstack/requirements``
+
+Review List for New Projects
+============================
+
+Before approving a review for a new project creation, double check
+the following:
+
+#. Is there existing content to import? If the team want to preserve the
+   history, they have to use the upstream key word to import. The
+   infra team will not push anything to your repo - and cannot hand
+   out those permissions either.
+
+#. Will this be an official project? Then it needs a governance
+   review, with a link to it via "Needed-By", and get PTL+1.
+
+#. Will the repo release on pypi? Check that it http://pypi.python.org
+   is set up correctly.
