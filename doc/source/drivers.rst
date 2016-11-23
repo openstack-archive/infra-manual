@@ -467,8 +467,24 @@ following:
 
 * Remove your project from ``zuul/layout.yaml``.
 
-* Replace the contents of
-  ``gerrit/acls/openstack/<projectname>.config`` with::
+* By default, project ACL's are defined in a file called
+  ``gerrit/acls/openstack/<projectname>.config``. If this file exists,
+  replace the contents with with::
+
+    [project]
+    state = read only
+
+* If a file called ``gerrit/acls/openstack/<projectname>.config`` does
+  not exist, that implies that your project shared ACL's with some other
+  project(s). You will need to do two things in that case.
+
+** Find the entry for your project in ``gerrit/projects.yaml`` and
+ delete the line which defines the acl-config. This will cause the
+ default to be used, and that default is a file that you create next.
+
+** Create and submit a new file called
+ ``gerrit/acls/openstack/<projectname>.config`` which contains the
+ text::
 
     [project]
     state = read only
