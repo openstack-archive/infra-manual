@@ -1,8 +1,8 @@
-:title: Project Driver's Guide
+:title: Project Drivers Guide
 
 .. _driver_manual:
 
-Project Driver's Guide
+Project Drivers Guide
 ######################
 
 Feature Branches
@@ -474,6 +474,8 @@ following:
     state = read only
 
 * Remove your project from ``gerritbot/channels.yaml``.
+
+* Remove your project from ``gerrit/projects.yaml``.
 
 Remove Repository from the Governance Repository
 ------------------------------------------------
