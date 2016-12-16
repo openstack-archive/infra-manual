@@ -496,9 +496,9 @@ Remove Repository from the Governance Repository
 ------------------------------------------------
 
 If this was an official OpenStack project, remove it from the
-``reference/projects.yaml`` file in the ``openstack/governance``
-repository.  Note that if the project was recently active, this may
-have implications for automatic detection of ATCs.
+``reference/projects.yaml`` file  and add it to ``reference/legacy.yml``in the
+``openstack/governance`` repository.  Note that if the project was recently
+active, this may have implications for automatic detection of ATCs.
 
 Package Requirements
 ====================
