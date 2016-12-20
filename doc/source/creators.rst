@@ -495,6 +495,7 @@ repositories. Find the right section and then add a new stanza like:
 
     jobs:
       - python-jobs
+      - python35-jobs
       - openstack-publish-jobs
       - pypi-jobs
 
@@ -1212,6 +1213,7 @@ including the following changes:
           template:
             - name: merge-check
             - name: python-jobs
+            - name: python35-jobs
             - name: translation-jobs
 
 When submitting the change to openstack-infra/project-config for
