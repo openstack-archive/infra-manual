@@ -492,8 +492,6 @@ repositories. Find the right section and then add a new stanza like:
 
  - project:
     name: <projectname>
-    tarball-site: tarballs.openstack.org
-    doc-publisher-site: docs.openstack.org
 
     jobs:
       - python-jobs
@@ -528,7 +526,7 @@ projects. Find the right section and then add a new stanza like:
     template:
       - name: merge-check
       - name: python-jobs
-      - name: python3-jobs
+      - name: python35-jobs
       - name: check-requirements
       - name: openstack-server-publish-jobs
       - name: publish-to-pypi
@@ -585,15 +583,15 @@ For many common cases, there are templates defined in the
 ``project-templates`` section. They contain the macro ``{name}`` which
 gets replaced with the basename of the repository when used::
 
-  - name: python3-jobs
+  - name: python35-jobs
     check:
-      - 'gate-{name}-python34'
+      - 'gate-{name}-python35'
     gate:
-      - 'gate-{name}-python34'
+      - 'gate-{name}-python35'
   ...
   - name: openstack/ceilometer
     template:
-      - name: python3-jobs
+      - name: python35-jobs
 
 If you use the same set of tests in several repositories, introduce a
 new template and use that one.
