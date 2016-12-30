@@ -428,7 +428,8 @@ Remove Project Content
 
 Once Zuul is no longer running tests on your project, prepare a change
 that removes all of the files from your project except the README.
-Double check that all dot files are also removed.
+Double check that all dot files (such as: ``.gitignore, .testr.conf, and
+.gitreview``) are also removed.
 
 Replace the contents of the README with a message such as this::
 
@@ -448,6 +449,11 @@ Replace the contents of the README with a message such as this::
   Freenode.
 
 Merge this commit to your project.
+
+.. note::
+
+  * Before removing ``.gitreview`` be sure to run: ``git review -s``,  this
+    will record the necessary information about the repository.
 
 If any users missed the announcement that the project is being
 retired, removing the content of the repository will cause any users
