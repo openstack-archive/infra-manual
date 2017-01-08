@@ -396,6 +396,12 @@ If you need to retire a project and no longer accept patches, it is
 important to communicate that to both users and contributors.  The
 following steps will help you wind down a project gracefully.
 
+.. note::
+
+   The following sections are really separate steps. If your project
+   has jobs set up and is an official project, you need to submit
+   *four* different changes as explained below.
+
 Announce Retirement
 -------------------
 
