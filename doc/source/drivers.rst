@@ -396,15 +396,22 @@ If you need to retire a project and no longer accept patches, it is
 important to communicate that to both users and contributors.  The
 following steps will help you wind down a project gracefully.
 
-Announce Retirement
--------------------
+.. note::
+
+   The following sections are really separate steps. If your project
+   has jobs set up and is an official project, you need to submit
+   *four* different changes as explained below. We recommend to link
+   these changes with "Depends-On:" and "Needed-By:" headers.
+
+Prerequirement: Announce Retirement
+-----------------------------------
 
 Use mailing lists or other channels to announce to users and
 contributors that the project is being retired.  Be sure to include a
 date upon which maintenance will end, if that date is in the future.
 
-End Project Gating
-------------------
+Step 1: End Project Gating
+--------------------------
 
 Check out a copy of the ``openstack-infra/project-config`` repository
 and edit ``zuul/layout.yaml``.  Find the section for your project and
@@ -423,8 +430,8 @@ Submit that change and make sure to mention in the commit message that
 you are ending project gating for the purposes of retiring the
 project.  Wait for that change to merge and then proceed.
 
-Remove Project Content
-----------------------
+Step 2: Remove Project Content
+------------------------------
 
 Once Zuul is no longer running tests on your project, prepare a change
 that removes all of the files from your project except the README.
@@ -458,8 +465,8 @@ deploy unmaintained software.  Potential contributors who may not have
 otherwise read the README will in this case, as it is the only file in
 the repository.
 
-Remove Project from Infrastructure Systems
-------------------------------------------
+Step 3: Remove Project from Infrastructure Systems
+--------------------------------------------------
 
 Once your repository is in its final state, prepare a second change to
 the ``openstack-infra/project-config`` repository that does the
@@ -492,13 +499,14 @@ following:
 
 * Remove your project from ``gerritbot/channels.yaml``.
 
-Remove Repository from the Governance Repository
-------------------------------------------------
+Step 4: Remove Repository from the Governance Repository
+--------------------------------------------------------
 
 If this was an official OpenStack project, remove it from the
-``reference/projects.yaml`` file in the ``openstack/governance``
-repository.  Note that if the project was recently active, this may
-have implications for automatic detection of ATCs.
+``reference/projects.yaml`` file and add it to the file
+``reference/legacy.yaml`` in the ``openstack/governance`` repository.
+Note that if the project was recently active, this may have
+implications for automatic detection of ATCs.
 
 Package Requirements
 ====================
