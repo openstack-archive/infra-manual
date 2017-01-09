@@ -1,0 +1,10 @@
+Code-Review+1: Steve Martinelli <s.martinelli@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 09 Jan 2017 15:25:14 +0000
+Reviewed-on: https://review.openstack.org/417701
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
