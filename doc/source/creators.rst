@@ -1081,7 +1081,7 @@ are done by the i18n team, and they have to prioritize which projects
 to translate.
 
 First enable translation in your project, depending on whether it is a
-Django project or a Python project.
+Django project, a Python project or a ReactJS project.
 
 .. note::
 
@@ -1170,6 +1170,27 @@ Create  file ``babel-djangojs.cfg`` with the following content:
    # .../dashboards/XYZ/static which will ensure
    # that plugins are also translated.
    [angular: **/static/**.html]
+
+ReactJS Projects
+---------------
+
+Three new dependencies are required : ``react-intl``,
+``babel-plugin-react-intl``, and ``react-intl-po``.
+
+Update your ``package.json`` file. It should contain references to the
+``json2pot`` and ``po2json`` commands.
+
+.. code-block:: javascript
+
+    "scripts": {
+        ...
+        "json2pot": "rip json2pot ./i18n/extracted-messages/**/*.json -o ./i18n/messages.pot",
+        "po2json": "rip po2json -m ./i18n/extracted-messages/**/*.json"
+    }
+},
+
+The translated PO files will converted into JSON and placed into the
+``./i18n/locales`` directory.
 
 Add Translation Server Support
 ------------------------------
