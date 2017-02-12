@@ -577,3 +577,19 @@ requirements for both test and runtime to the base profile::
    libffi6
    # A build time dependency
    libffi-devel [test]
+
+Unit Test Set up
+================
+
+Projects might need special set up for unit tests which can be done
+via the script ``tools/test-setup.sh`` that needs to reside in the
+repository.
+
+Python unit tests are tests like ``coverage``, ``python27``,
+``python35``, and ``pypy`` which are run using python's ``tox``
+package as well as tests using the template
+``gate-{name}-tox-{envlist}-{node}``. For these tests, the script
+``tools/test-setup.sh`` is run if it exists in the repository and is
+executable after package installation. The script has ``sudo`` access
+and can set up the test environment as needed. For example, it should
+be used to set up the ``openstack_citest`` databases for testing.
