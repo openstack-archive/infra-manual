@@ -1,0 +1,10 @@
+Code-Review+1: Ian Cordasco <sigmavirus24@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 17 Feb 2017 18:14:46 +0000
+Reviewed-on: https://review.openstack.org/432786
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
