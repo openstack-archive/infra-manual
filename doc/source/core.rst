@@ -56,7 +56,7 @@ Re-approval
 ===========
 
 As covered in :ref:`automated-testing`, developers can take steps when
-Jenkins tests fail. Core reviewers, like other developers, can use these
+Zuul tests fail. Core reviewers, like other developers, can use these
 same steps when rerunning tests. Core reviewers have an additional tool
 for cases where gate testing fails due to reasons unrelated to the
 current change, re-approval.
@@ -65,7 +65,7 @@ Core reviewers can approve changes again to trigger gate testing for
 that particular change. Core reviewers should still heed the advice in
 :ref:`automated-testing` to ensure that unrelated failures are
 properly tracked. Note that the change will directly enter the gate
-pipeline if and only if it has already a +1 vote from Jenkins,
+pipeline if and only if it has already a +1 vote from Zuul,
 otherwise it will first enter the check pipeline like a "recheck"
 would.
 

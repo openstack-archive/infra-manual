@@ -716,7 +716,7 @@ When a review has two +2 reviews and one of the core team believes it
 is ready to be merged, he or she should leave a +1 vote in the
 "Approved" category. You may do so by clicking the "Review" button
 again, with or without changing your code review vote and optionally
-leaving a comment. When a +1 Approved review is received, Jenkins will
+leaving a comment. When a +1 Approved review is received, Zuul will
 run tests on the change, and if they pass, it will be merged.
 
 A green checkmark indicates that the review has met the requirement
@@ -733,20 +733,20 @@ Automated Testing
 -----------------
 
 When a new patchset is uploaded to Gerrit, that project's "check"
-tests are run on the patchset by Jenkins. Once completed the test
-results are reported to Gerrit by Jenkins in the form of a Verified:
+tests are run on the patchset by Zuul. Once completed the test
+results are reported to Gerrit by Zuul in the form of a Verified:
 +/-1 vote. After code reviews have been completed and a change
 receives an Approved: +1 vote that project's "gate" tests are run
-on the change by Jenkins. Jenkins reports the results of these tests
+on the change by Zuul. Zuul reports the results of these tests
 back to Gerrit in the form of a Verified: +/-2 vote. Code merging
 will only occur after the gate tests have passed successfully and
 received a Verified: +2. You can view the state of tests currently
 being run on the `Zuul Status page
 <http://status.openstack.org/zuul>`_.
 
-If a change fails tests in Jenkins, please follow the steps below:
+If a change fails tests in Zuul, please follow the steps below:
 
-1. Jenkins leaves a comment in the review with links to the log files
+1. Zuul leaves a comment in the review with links to the log files
    for the test run. Follow those links and examine the output from
    the test. It will include a console log, and in the case of unit
    tests, HTML output from the test runner, or in the case of a
@@ -778,7 +778,7 @@ If a change fails tests in Jenkins, please follow the steps below:
      you do not find an existing bug, file a new one (be sure to
      include the error message and a link to the logs for the
      failure). If the problem is due to an infrastructure problem
-     (such as Jenkins or Gerrit), file (or search for) the bug against
+     (such as Zuul or Gerrit), file (or search for) the bug against
      the openstack-gate project.
 
 4. To re-run check or gate jobs, leave a comment on the review
@@ -943,7 +943,7 @@ comment notifying of merge failure.
 
 Each time a change merges, the "merge-check" pipeline verifies that
 all open changes on the same project are still mergeable. If any
-job is not mergeable, Jenkins will give a -1 review and add a
+job is not mergeable, Zuul will give a -1 review and add a
 comment notifying of merge failure.
 
 After a change is merged, project-specific post jobs are run.
