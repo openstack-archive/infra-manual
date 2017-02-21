@@ -497,12 +497,12 @@ like::
 
 See other files in the same directory for further examples.
 
-.. _basic_jenkins_jobs:
+.. _basic_zuul_jobs:
 
-Add Basic Jenkins Jobs
-----------------------
+Add Basic Zuul Jobs
+-------------------
 
-Test jobs run through Jenkins, and the jobs are defined using
+Test jobs are run by Zuul, and the jobs are defined using
 jenkins-job-builder configuration files.
 
 .. note::
@@ -568,7 +568,7 @@ You can find more info about job templates in the beginning of
 
 Each of the jobs that you add a trigger for in ``zuul/layout.yaml``
 needs to be defined first using jenkins-job-builder configuration
-files as explained in :ref:`basic_jenkins_jobs`.
+files as explained in :ref:`basic_zuul_jobs`.
 
 .. note::
 
