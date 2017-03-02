@@ -578,6 +578,16 @@ requirements for both test and runtime to the base profile::
    # A build time dependency
    libffi-devel [test]
 
+Submodules
+----------
+
+The use of git submodules is not supported.  The tools that we use do
+not all work correctly with submodules and we have found that
+submodules can be very confusing even for experienced developers.  If
+your project depends on another project, please express that as an
+external dependency on a released package (i.e., through
+requirements.txt, bindep.txt, or similar mechanism).
+
 Unit Test Set up
 ================
 
