@@ -573,6 +573,32 @@ you can use cross-repo dependencies (CRD) in Zuul:
 
 * These are one-way dependencies only -- do not create a cycle.
 
+
+Rebasing a commit
+-----------------
+
+Sometimes your change will create a merge conflict with another patch. In
+this case, you will need to rebase your commit on top of the current state
+of the repository. In many cases, this can be achieved by pressing the
+``Rebase`` button in the gerrit interface. If this fails, though, you will
+need to perform it manually:
+
+ $ git checkout master	# checkout and
+ $ git pull	# update master
+
+ $ git review -d 180503	# check out my branch
+ $ git rebase origin/master	# rebase to master
+
+ $ git status	# tells me about conflicts
+ <remove conflicts by editing the files>
+ $ git add <file> ...	# add files that I modified
+
+After performing the rebase, check that all conflicts are resolved:
+
+ $ git status	# Check that all conflicts are resolved
+
+ $ git rebase --continue	# and hopefully complete the rebase
+
 Gate Pipeline
 ^^^^^^^^^^^^^
 
@@ -792,8 +818,8 @@ If a change fails tests in Jenkins, please follow the steps below:
 
 A patchset has to be approved to run tests in the gate pipeline. If the
 patchset has failed in the gate pipeline (it will have been approved to get
-into the gate pipeline) a recheck will first run the check jobs and if those 
-pass, it will again run the gate jobs. There is no way to only run the gate 
+into the gate pipeline) a recheck will first run the check jobs and if those
+pass, it will again run the gate jobs. There is no way to only run the gate
 jobs, the check jobs will first be run again.
 
 More information on debugging automated testing failures can be found in the
