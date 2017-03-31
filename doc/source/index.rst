@@ -14,6 +14,25 @@ If you are not trying to contribute to OpenStack directly, but are
 instead a user or developer looking for API documentation, see
 `OpenStack documentation <http://docs.openstack.org>`_.
 
+.. important::
+
+   You can always check the status of the OpenStack CI infrastructure via:
+
+   * https://wiki.openstack.org/wiki/Infrastructure_Status
+   * `@OpenStackInfra
+     <http://twitter.com/openstackinfra>`_ on Twitter.
+   * the topic in IRC
+
+   If you notice problems, report them via #openstack-infra on IRC or
+   use the `OpenStack-Infra mailing list
+   <http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_.
+
+.. note::
+
+   Note that jobs that report ``POST_FAILURE`` indicate a problem in
+   our CI, so check the above mentioned resources first and then
+   report the problem to get it fixed.
+
 .. toctree::
    :maxdepth: 2
 
