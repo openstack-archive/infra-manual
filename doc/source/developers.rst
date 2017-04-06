@@ -763,7 +763,21 @@ If a change fails tests in Jenkins, please follow the steps below:
 2. Examine the console log or other relevant log files to determine
    the cause of the error. If it is related to your change, you should
    fix the problem and upload a new patchset. Do not use "recheck".
-3. It may be the case that the problem is due to non-deterministic
+3. It is possible that the CI infrastructure may be having some issues which
+   are causing your tests to fail.  You can verify the status of the OpenStack
+   CI infrastructure by doing the following:
+
+   * https://wiki.openstack.org/wiki/Infrastructure_Status
+   * `@OpenStackInfra <http://twitter.com/openstackinfra>`_ on Twitter.
+   * the topic in your project's IRC channel (or ``#openstack-infra``)
+
+   .. note::
+
+      If a job fails in the automated testing system with the status of
+      ``POST_FAILURE`` rather than a normal ``FAILURE``.  This indicates that
+      there is an issue with the automated testing system.
+
+4. It may be the case that the problem is due to non-deterministic
    behavior unrelated to your change that has already merged. In this
    situation, you can help other developers and focus the attention of
    QA, CI, and developers working on a fix by performing the following
@@ -781,10 +795,10 @@ If a change fails tests in Jenkins, please follow the steps below:
      (such as Jenkins or Gerrit), file (or search for) the bug against
      the openstack-gate project.
 
-4. To re-run check or gate jobs, leave a comment on the review
+5. To re-run check or gate jobs, leave a comment on the review
    with the form "recheck".
 
-5. If a nice message from Elastic Recheck didn't show up in your change
+6. If a nice message from Elastic Recheck didn't show up in your change
    when a test in a gate job failed, and you've identified a bug to
    recheck against, you can help out by writing an `elastic-recheck
    query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_
@@ -792,8 +806,8 @@ If a change fails tests in Jenkins, please follow the steps below:
 
 A patchset has to be approved to run tests in the gate pipeline. If the
 patchset has failed in the gate pipeline (it will have been approved to get
-into the gate pipeline) a recheck will first run the check jobs and if those 
-pass, it will again run the gate jobs. There is no way to only run the gate 
+into the gate pipeline) a recheck will first run the check jobs and if those
+pass, it will again run the gate jobs. There is no way to only run the gate
 jobs, the check jobs will first be run again.
 
 More information on debugging automated testing failures can be found in the
