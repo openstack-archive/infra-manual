@@ -27,12 +27,6 @@ instead a user or developer looking for API documentation, see
    use the `OpenStack-Infra mailing list
    <http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_.
 
-.. note::
-
-   Note that jobs that report ``POST_FAILURE`` indicate a problem in
-   our CI, so check the above mentioned resources first and then
-   report the problem to get it fixed.
-
 .. toctree::
    :maxdepth: 2
 
