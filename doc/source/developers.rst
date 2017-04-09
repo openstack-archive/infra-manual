@@ -800,10 +800,16 @@ If a change fails tests in Jenkins, please follow the steps below:
      (such as Jenkins or Gerrit), file (or search for) the bug against
      the openstack-gate project.
 
-5. To re-run check or gate jobs, leave a comment on the review
+5. It may also happen that the CI infrastructure somehow cannot finish
+   a job and restarts it. If this happens several times, the job is
+   marked as failed with a message of ``RETRY_LIMIT``. Usually this
+   means that network connectivity for the job was lost and the change
+   itself causes the job node to become unreachable consistently.
+
+6. To re-run check or gate jobs, leave a comment on the review
    with the form "recheck".
 
-6. If a nice message from Elastic Recheck didn't show up in your change
+7. If a nice message from Elastic Recheck didn't show up in your change
    when a test in a gate job failed, and you've identified a bug to
    recheck against, you can help out by writing an `elastic-recheck
    query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_
