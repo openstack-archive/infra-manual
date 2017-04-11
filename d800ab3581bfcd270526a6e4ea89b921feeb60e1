@@ -1,0 +1,11 @@
+Code-Review+1: Brian Moss <kallimachos@gmail.com>
+Code-Review+1: Khanak Nangia <khanak.nangia@intel.com>
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 11 Apr 2017 22:44:53 +0000
+Reviewed-on: https://review.openstack.org/447341
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
