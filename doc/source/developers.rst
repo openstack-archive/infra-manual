@@ -573,6 +573,49 @@ you can use cross-repo dependencies (CRD) in Zuul:
 
 * These are one-way dependencies only -- do not create a cycle.
 
+
+Rebasing a commit
+-----------------
+
+Sometimes the target branch you are working on has changed, which can create
+a merge conflict with your patch. In this case, you need to rebase your
+commit on top of the current state of the branch. In many cases, this can be
+achieved by pressing the ``Rebase`` button in the gerrit interface. If this
+fails, you must rebase manually:
+
+#. Checkout and update master:
+
+   .. code-block:: console
+
+      $ git checkout master
+      $ git pull
+
+#. Checkout the working branch and rebase on master:
+
+   .. code-block:: console
+
+      $ git review -d 180503
+      $ git rebase origin/master
+
+#. If git indicates there are merge conflicts, view the affected files:
+
+   .. code-block:: console
+
+      $ git status
+
+#. Edit the listed files to fix conflicts, then add the modified files:
+
+   .. code-block:: console
+
+      $ git add <file1> <file2> <file3>
+
+#. Confirm that all conflicts are resolved, then continue the rebase:
+
+   .. code-block:: console
+
+      $ git status
+      $ git rebase --continue
+
 Gate Pipeline
 ^^^^^^^^^^^^^
 
