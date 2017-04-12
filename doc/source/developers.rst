@@ -579,16 +579,15 @@ Rebasing a commit
 
 Sometimes the target branch you are working on has changed, which can create
 a merge conflict with your patch. In this case, you need to rebase your
-commit on top of the current state of the branch. In many cases, this can be
-achieved by pressing the ``Rebase`` button in the gerrit interface. If this
-fails, you must rebase manually:
+commit on top of the current state of the branch. This rebase needs to
+be done manually:
 
 #. Checkout and update master:
 
    .. code-block:: console
 
       $ git checkout master
-      $ git pull
+      $ git remote update
 
 #. Checkout the working branch and rebase on master:
 
