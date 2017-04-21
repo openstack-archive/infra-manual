@@ -144,6 +144,11 @@ under the name python-git-review, so install it as any other package::
 
   zypper in python-git-review
 
+On Arch Linux, git-review is included into the distribution, so
+install it as any other package::
+
+  pacman -S git-review
+
 On Mac OS X, or most other Unix-like systems, you may install it with
 `pip <http://pip.readthedocs.org/en/latest/installing.html>`_::
 
