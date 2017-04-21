@@ -879,6 +879,13 @@ Oslo libraries.
 
 
 
+The template in ``openstack/ui-cookiecutter`` should be used for
+Horizon plugins.
+
+::
+
+   $ cookiecutter https://git.openstack.org/openstack/ui-cookiecutter
+
 Applying the Template
 ---------------------
 
