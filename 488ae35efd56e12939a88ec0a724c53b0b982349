@@ -1,0 +1,9 @@
+Code-Review+2: Joshua Hesketh <joshua.hesketh@rackspace.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Workflow+1: yolanda.robla <yroblamo@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 21 Apr 2017 06:39:07 +0000
+Reviewed-on: https://review.openstack.org/400288
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
