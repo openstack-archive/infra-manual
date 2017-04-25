@@ -154,8 +154,8 @@ On Mac OS X, or most other Unix-like systems, you may install it with
 
   pip install git-review
 
-If you run into trouble, you can refer to the `git-review readme file
-<http://git.openstack.org/cgit/openstack-infra/git-review/tree/README.rst>`_.
+If you run into trouble, you can refer to the `git-review documentation
+<https://docs.openstack.org/infra/git-review/>`_.
 
 All of git-review's interactions with Gerrit are sequences of normal
 git commands. If you want to know more about what it's doing, just
