@@ -12,7 +12,7 @@ OpenStack project.
 
 If you are not trying to contribute to OpenStack directly, but are
 instead a user or developer looking for API documentation, see
-`OpenStack documentation <http://docs.openstack.org>`_.
+`OpenStack documentation <https://docs.openstack.org>`_.
 
 .. important::
 
@@ -20,7 +20,7 @@ instead a user or developer looking for API documentation, see
 
    * https://wiki.openstack.org/wiki/Infrastructure_Status
    * `@OpenStackInfra
-     <http://twitter.com/openstackinfra>`_ on Twitter.
+     <https://twitter.com/openstackinfra>`_ on Twitter.
    * the topic in IRC
 
    If you notice problems, report them via #openstack-infra on IRC or

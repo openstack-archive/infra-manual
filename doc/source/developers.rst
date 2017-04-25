@@ -807,7 +807,7 @@ If a change fails tests in Jenkins, please follow the steps below:
    CI infrastructure by doing the following:
 
    * https://wiki.openstack.org/wiki/Infrastructure_Status
-   * `@OpenStackInfra <http://twitter.com/openstackinfra>`_ on Twitter.
+   * `@OpenStackInfra <https://twitter.com/openstackinfra>`_ on Twitter.
    * the topic in your project's IRC channel (or ``#openstack-infra``)
 
    .. note::
@@ -851,7 +851,7 @@ If a change fails tests in Jenkins, please follow the steps below:
 7. If a nice message from Elastic Recheck didn't show up in your change
    when a test in a gate job failed, and you've identified a bug to
    recheck against, you can help out by writing an `elastic-recheck
-   query <http://docs.openstack.org/infra/elastic-recheck/readme.html>`_
+   query <https://docs.openstack.org/infra/elastic-recheck/readme.html>`_
    for the bug.
 
 A patchset has to be approved to run tests in the gate pipeline. If the
@@ -1063,6 +1063,6 @@ other repositories can be identified.
 
 Additional information about project gating and Zuul can be found in
 the Zuul documentation, located at:
-http://docs.openstack.org/infra/zuul/gating.html
+https://docs.openstack.org/infra/zuul/gating.html
 
-.. _`Running Python Unit Tests`: http://docs.openstack.org/project-team-guide/project-setup/python.html#running-python-unit-tests
+.. _`Running Python Unit Tests`: https://docs.openstack.org/project-team-guide/project-setup/python.html#running-python-unit-tests

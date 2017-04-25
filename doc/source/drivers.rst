@@ -13,7 +13,7 @@ on a feature branch rather than on master. In particular it organizes
 work to a location that interested parties can follow. Feature branches
 also move merge points to specific points in time rather than at every
 proposed change. Learn more about `feature branches in the project team
-guide <http://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_.
+guide <https://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_.
 
 To get started with a feature branch you will need to create the new
 branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
@@ -120,7 +120,7 @@ Projects following the release:cycle-with-milestones model generate
 release candidates before the final release to encourage 3rd-party
 testing. The first release candidate (RC1) is cut from the master
 branch. You can learn more about `release management in the project
-team guide <http://docs.openstack.org/project-team-guide/release-management.html>`_.
+team guide <https://docs.openstack.org/project-team-guide/release-management.html>`_.
 
 Between RC1 and the final release, there needs to be a separate branch
 in Gerrit for release-critical changes destined for the final
@@ -209,7 +209,7 @@ If there are conflicts when cherry-picking, do not delete the
 to reviewers to identify files which need extra attention.
 
 You can learn more about `stable branches in the project team guide
-<http://docs.openstack.org/project-team-guide/stable-branches.html>`_.
+<https://docs.openstack.org/project-team-guide/stable-branches.html>`_.
 
 Tagging a Release
 ~~~~~~~~~~~~~~~~~
@@ -271,7 +271,7 @@ Before you can configure GerritBot, you need to give channel permissions with
 an accessbot configuration specific to the channel where you want
 notifications posted. The configuration file is hosted in
 `openstack-infra/project-config
-<http://git.openstack.org/cgit/openstack-infra/project-config/>`_. Edit
+<https://git.openstack.org/cgit/openstack-infra/project-config/>`_. Edit
 ``accessbot/channels.yaml`` to add your IRC channel if it is not
 already listed.
 
@@ -280,7 +280,7 @@ project you are configuring, you need to add your GerritBot
 configuration into
 ``gerritbot/channels.yaml``.  This file
 is hosted in `openstack-infra/project-config
-<http://git.openstack.org/cgit/openstack-infra/project-config/>`_.
+<https://git.openstack.org/cgit/openstack-infra/project-config/>`_.
 
 The syntax for configuring the notifications is::
 
@@ -305,7 +305,7 @@ Running Jobs with Zuul
 There are two major components in getting jobs running under Zuul. First
 you must ensure that the job you want to run is defined in the `JJB
 config <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_.
-The `JJB documentation <http://docs.openstack.org/infra/jenkins-job-builder/>`_
+The `JJB documentation <https://docs.openstack.org/infra/jenkins-job-builder/>`_
 is extensive as are the examples in our JJB config so we will not cover
 that here.
 
@@ -386,7 +386,7 @@ then invoke from all of the related projects.  This way they all run
 the same job (which tests the entire system) and Zuul knows to combine
 those projects into a shared change queue.
 
-Zuul comes with extensive `documentation <http://docs.openstack.org/infra/zuul/>`_
+Zuul comes with extensive `documentation <https://docs.openstack.org/infra/zuul/>`_
 too and should be referenced for more information.
 
 Retiring a Project
@@ -513,20 +513,20 @@ If you want to add additional packages, you have several options.
 If you run Python tests using ``tox``, you can install them using
 ``requirements.txt`` and ``test-requirements.txt`` files (see also the
 `global requirements process
-<http://docs.openstack.org/developer/requirements/>`_). If these
+<https://docs.openstack.org/developer/requirements/>`_). If these
 Python tests need additional distribution packages installed as well
 and if those are not in the nodes used for testing, they have to be
 installed explicitly.
 
 If you run devstack based tests, then list missing binary packages
 below the `files
-<http://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
+<https://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
 directory of devstack.
 
 For non-devstack based tests, add a ``bindep.txt`` file
 containing listing the required distribution packages. It is a
 cross-platform list of all dependencies needed for running tests. The
-`bindep <http://docs.openstack.org/infra/bindep/>`_ utility will be
+`bindep <https://docs.openstack.org/infra/bindep/>`_ utility will be
 used to install the right dependencies per distribution when running
 in the OpenStack CI infrastructure.
 
@@ -555,7 +555,7 @@ missing binary packages.
 
 The OpenStack CI infrastructure will install packages marked for a
 `profile
-<http://docs.openstack.org/infra/bindep/readme.html#profiles>`__ named
+<https://docs.openstack.org/infra/bindep/readme.html#profiles>`__ named
 "test" along with any packages belonging to the default profile of the
 ``bindep.txt`` file. Add any build time requirements and any
 requirements specific to the test jobs to the "test" profile, add

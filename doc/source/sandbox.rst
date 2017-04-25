@@ -76,7 +76,7 @@ submitted for review and a URL to your change on
 https://review.openstack.org. Click on the URL and view your patchset.
 
 You will also receive one or more emails from the
-`automatic testing system <http://docs.openstack.org/infra/manual/developers.html#automated-testing>`_,
+`automatic testing system <https://docs.openstack.org/infra/manual/developers.html#automated-testing>`_,
 reporting the testing results of your newly committed change.
 
 Now create a second patchset, in the same git branch as your first patchset.

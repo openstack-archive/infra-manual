@@ -40,10 +40,10 @@ Note that only official OpenStack projects may use certain parts of
 the OpenStack infrastructure, especially the docs.openstack.org and
 specs.openstack.org server.
 
-.. _governance site: http://governance.openstack.org
-.. _OpenStack Project Teams: http://governance.openstack.org/reference/projects/index.html
-.. _Project Team Guide: http://docs.openstack.org/project-team-guide/
-.. _StackForge: http://docs.openstack.org/infra/system-config/stackforge.html
+.. _governance site: https://governance.openstack.org
+.. _OpenStack Project Teams: https://governance.openstack.org/reference/projects/index.html
+.. _Project Team Guide: https://docs.openstack.org/project-team-guide/
+.. _StackForge: https://docs.openstack.org/infra/system-config/stackforge.html
 
 Choosing a Good Name for Your Project
 =====================================
@@ -132,7 +132,7 @@ Put Your New Project in the Correct Project Group
 If your project is not an official OpenStack project, this step is optional.
 
 #. From the Overview page of your project, select "Change Details"
-   from the right sidebar (http://launchpad.net/<projectname>/+edit).
+   from the right sidebar (https://launchpad.net/<projectname>/+edit).
 
 #. Find the "Part of" field and set the value to "openstack" for
    integrated projects and "oslo" for Oslo libraries.
@@ -675,7 +675,7 @@ channel, add it to the ``openstack-oslo`` section::
       - master
 
 If you're adding a new IRC channel, see the `IRC
-services <http://docs.openstack.org/infra/system-config/irc.html>`_ documentation.
+services <https://docs.openstack.org/infra/system-config/irc.html>`_ documentation.
 
 Submitting Infra Change for Review
 ----------------------------------
@@ -741,7 +741,7 @@ library edit the "Oslo" section::
 You can check which tags to use, or the meaning of any tag, by
 consulting the `list of currently allowed tags`_.
 
-.. _list of currently allowed tags: http://governance.openstack.org/reference/tags/index.html
+.. _list of currently allowed tags: https://governance.openstack.org/reference/tags/index.html
 
 When writing the commit message for this change, make this change
 depend on the project creation change by including a link to its
@@ -1078,7 +1078,7 @@ Add Link to Your Developer Documentation
 
 If your project is not an official OpenStack project, skip this section.
 
-Update the http://docs.openstack.org/developer/openstack-projects.html
+Update the https://docs.openstack.org/developer/openstack-projects.html
 page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
@@ -1091,8 +1091,8 @@ translations. For this, you first need to mark all strings so that
 they can be localized, use `oslo.i18n`_ for this and follow the
 `guidelines`_.
 
-.. _oslo.i18n: http://docs.openstack.org/developer/oslo.i18n
-.. _guidelines: http://docs.openstack.org/developer/oslo.i18n/guidelines.html
+.. _oslo.i18n: https://docs.openstack.org/developer/oslo.i18n
+.. _guidelines: https://docs.openstack.org/developer/oslo.i18n/guidelines.html
 
 Note that this is just enabling translations, the actual translations
 are done by the i18n team, and they have to prioritize which projects
@@ -1380,5 +1380,5 @@ the following:
 #. Will this be an official project? Then it needs a governance
    review, with a link to it via "Needed-By", and get PTL+1.
 
-#. Will the repo release on pypi? Check that it http://pypi.python.org
+#. Will the repo release on pypi? Check that it https://pypi.python.org
    is set up correctly.
