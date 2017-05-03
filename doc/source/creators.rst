@@ -441,16 +441,41 @@ The ``exclusiveGroupPermissions`` avoids the inheritance from
 privileges to the stable team and add back the default privileges for
 owners of a change, gerrit administrators, and all users.
 
+Voting Third-Party CI
+~~~~~~~~~~~~~~~~~~~~~
+
+To allow some third-party CI systems to vote Verify +1 or -1 on
+proposed changes for your project, add a ``label-Verified`` rule to
+it the ``refs/heads/*`` section::
+
+  [access "refs/heads/*"]
+  abandon = group <projectname>-core
+  label-Code-Review = -2..+2 group <projectname>-core
+  label-Verified = -1..+1 group <projectname>-ci
+  label-Workflow = -1..+1 group <projectname>-core
+
+Optionally, if you only want them to be able to Verify +1 you can
+adjust the vote range to ``0..+1`` instead.
+
+Once the project is created it is strongly recommended you go to the
+*General* settings for the ``<projectname>-ci`` group in Gerrit's
+WebUI and switch the *Owners* field to your ``<projectname>-core``
+group (or ``<projectname>-release`` if you have one) so that it is
+no longer self-managed, allowing your project team to control the
+membership without needing to be members of the group themselves.
+
 Extended ACL File
 ~~~~~~~~~~~~~~~~~
 So, if your project requires the ICLA signed, has a release team
-that will create tags and branches, create a
-``gerrit/acls/openstack/<projectname>.config`` like::
+that will create tags and branches, and allow voting third-party CI
+systems, create a ``gerrit/acls/openstack/<projectname>.config``
+like::
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
   create = group <projectname>-release
   label-Code-Review = -2..+2 group <projectname>-core
+  label-Verified = -1..+1 group <projectname>-ci
   label-Workflow = -1..+1 group <projectname>-core
 
   [access "refs/tags/*"]
