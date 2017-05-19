@@ -1,0 +1,11 @@
+Code-Review+1: Doug Hellmann <doug@doughellmann.com>
+Code-Review+1: Jea Min Lim <jmlim@os.korea.ac.kr>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 19 May 2017 21:20:30 +0000
+Reviewed-on: https://review.openstack.org/461498
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
