@@ -214,9 +214,13 @@ You can learn more about `stable branches in the project team guide
 Tagging a Release
 ~~~~~~~~~~~~~~~~~
 
-This step should be performed by the OpenStack Release Management Team
-when the release is made. If you are managing your own releases, you may
-have permission to do this yourself.
+Deliverables produced by official teams and released following the
+release cycle should be managed by the OpenStack Release Management
+Team. See the instructions in the README.rst in openstack/releases for
+details.
+
+If you are managing your own releases, you may have permission to do
+this yourself.
 
 Tag the tip of the appropriate branch (stable/<series> for server
 projects using release candidates, master for the others) with a release tag
