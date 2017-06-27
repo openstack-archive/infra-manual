@@ -555,30 +555,6 @@ want the rebase behavior in git review. If you would rather postpone
 resolving merge conflicts you can use git review ``-R`` as the last step
 above.
 
-
-Cross-Repository Dependencies
------------------------------
-
-If your change has a dependency on a change outside of that
-repository, like a change for another repository or some manual
-setup, you have to ensure that the change merge at the right time.
-
-For a change depending on a manual setup, mark your change with the
-"Work in Progress" label until the manual setup is done. A core
-reviewer might also block an important change with a -2 so that it
-does not get merged accidentally before the manual setup is done.
-
-If your change has a dependency on a change in another repository,
-you can use cross-repo dependencies (CRD) in Zuul:
-
-* To use them, include "Depends-On: <gerrit-change-id>" in the footer
-  of your commit message. Use the full Change-ID ('I' + 40
-  characters). A patch can also depend on multiple changes as
-  explained in :ref:`multiple_changes`.
-
-* These are one-way dependencies only -- do not create a cycle.
-
-
 Rebasing a commit
 -----------------
 
@@ -619,6 +595,29 @@ be done manually:
 
       $ git status
       $ git rebase --continue
+
+Cross-Repository Dependencies
+-----------------------------
+
+If your change has a dependency on a change outside of that
+repository, like a change for another repository or some manual
+setup, you have to ensure that the change merge at the right time.
+
+For a change depending on a manual setup, mark your change with the
+"Work in Progress" label until the manual setup is done. A core
+reviewer might also block an important change with a -2 so that it
+does not get merged accidentally before the manual setup is done.
+
+If your change has a dependency on a change in another repository,
+you can use cross-repo dependencies (CRD) in Zuul:
+
+* To use them, include "Depends-On: <gerrit-change-id>" in the footer
+  of your commit message. Use the full Change-ID ('I' + 40
+  characters). A patch can also depend on multiple changes as
+  explained in :ref:`multiple_changes`.
+
+* These are one-way dependencies only -- do not create a cycle.
+
 
 Gate Pipeline
 ^^^^^^^^^^^^^
@@ -730,6 +729,7 @@ automatically when the dependent change has merged, even a ``recheck``
 will not help. Zuul waits for a status change and does not see it. The
 change needs another approval or a toggle of the approval, toggle
 means removing the approval and readding it again.
+
 
 Code Review
 ===========
