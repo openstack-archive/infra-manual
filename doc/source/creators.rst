@@ -329,18 +329,18 @@ with permission to push tags to trigger releases.
 Create a ``gerrit/acls/openstack/<projectname>.config`` as
 explained in the following sections.
 
-   .. note::
+.. note::
 
-      If the git repository you are creating is using the same gerrit
-      permissions - including core groups - as another repository, do
-      not copy the configuration file, instead reference it.
+   If the git repository you are creating is using the same gerrit
+   permissions - including core groups - as another repository, do
+   not copy the configuration file, instead reference it.
 
-      To do this make an additional change to the
-      ``gerrit/projects.yaml`` file as shown here::
+   To do this make an additional change to the
+   ``gerrit/projects.yaml`` file as shown here::
 
-        - project: openstack/<projectname>
-          description: Latest and greatest cloud stuff.
-          acl-config: /home/gerrit2/acls/openstack/other-project.config
+     - project: openstack/<projectname>
+       description: Latest and greatest cloud stuff.
+       acl-config: /home/gerrit2/acls/openstack/other-project.config
 
 
 Minimal ACL file
@@ -1222,7 +1222,7 @@ Create  file ``babel-djangojs.cfg`` with the following content:
    [angular: **/static/**.html]
 
 ReactJS Projects
----------------
+----------------
 
 Three new dependencies are required : ``react-intl``,
 ``babel-plugin-react-intl``, and ``react-intl-po``.
@@ -1236,8 +1236,7 @@ Update your ``package.json`` file. It should contain references to the
         ...
         "json2pot": "rip json2pot ./i18n/extracted-messages/**/*.json -o ./i18n/messages.pot",
         "po2json": "rip po2json -m ./i18n/extracted-messages/**/*.json"
-    }
-},
+        }
 
 The translated PO files will converted into JSON and placed into the
 ``./i18n/locales`` directory.

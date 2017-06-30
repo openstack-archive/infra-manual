@@ -228,18 +228,18 @@ reports regularly when looking for work to complete.
 
 There are 4 key tasks with regards to bugs that anyone can do:
 
- #. Confirm new bugs: When a bug is filed, it is set to the "New" status.
-    A "New" bug can be marked "Confirmed" once it has been reproduced
-    and is thus confirmed as genuine.
- #. Solve inconsistencies: Make sure bugs are Confirmed, and if assigned
-    that they are marked "In Progress"
- #. Review incomplete bugs: See if information that caused them to be marked
-    "Incomplete" has been provided, determine if more information is required
-    and provide reminders to the bug reporter if they haven't responded after
-    2-4 weeks.
- #. Review stale In Progress bugs: Work with assignee of bugs to determine
-    if the bug is still being worked on, if not, unassign them and mark them
-    back to Confirmed or Triaged.
+#. Confirm new bugs: When a bug is filed, it is set to the "New" status.
+   A "New" bug can be marked "Confirmed" once it has been reproduced
+   and is thus confirmed as genuine.
+#. Solve inconsistencies: Make sure bugs are Confirmed, and if assigned
+   that they are marked "In Progress"
+#. Review incomplete bugs: See if information that caused them to be marked
+   "Incomplete" has been provided, determine if more information is required
+   and provide reminders to the bug reporter if they haven't responded after
+   2-4 weeks.
+#. Review stale In Progress bugs: Work with assignee of bugs to determine
+   if the bug is still being worked on, if not, unassign them and mark them
+   back to Confirmed or Triaged.
 
 Learn more about working with bugs for various projects at:
 
@@ -289,7 +289,7 @@ The layout of the repository will typically be something like::
   specs/<release>/
 
 It may also have subdirectories to make clear which specifications are approved
-and which have already been implemented:
+and which have already been implemented::
 
   specs/<release>/approved
   specs/<release>/implemented
@@ -478,9 +478,9 @@ Since a patch set is determined by a modification in the commit hash,
 many git commands will cause new patch sets. Three common ones that do
 this are:
 
-  * ``git commit --amend``
-  * ``git rebase``
-  * ``git cherry-pick``
+* ``git commit --amend``
+* ``git rebase``
+* ``git cherry-pick``
 
 As long as you leave the "Change-Id" line in the commit message alone
 and continue to propose the change to the same target branch, Gerrit
@@ -827,17 +827,17 @@ If a change fails tests in Jenkins, please follow the steps below:
    QA, CI, and developers working on a fix by performing the following
    steps:
 
-  1. Visit http://status.openstack.org/elastic-recheck/ to see if one
-     of the bugs listed there matches the error you've seen. If your
-     error isn't there, then:
-  2. Identify which project or projects are affected, and search for a
-     related bug on Launchpad. You can search for bugs affecting all
-     OpenStack Projects here: https://bugs.launchpad.net/openstack/ If
-     you do not find an existing bug, file a new one (be sure to
-     include the error message and a link to the logs for the
-     failure). If the problem is due to an infrastructure problem
-     (such as Jenkins or Gerrit), file (or search for) the bug against
-     the openstack-gate project.
+   1. Visit http://status.openstack.org/elastic-recheck/ to see if one
+      of the bugs listed there matches the error you've seen. If your
+      error isn't there, then:
+   2. Identify which project or projects are affected, and search for a
+      related bug on Launchpad. You can search for bugs affecting all
+      OpenStack Projects here: https://bugs.launchpad.net/openstack/ If
+      you do not find an existing bug, file a new one (be sure to
+      include the error message and a link to the logs for the
+      failure). If the problem is due to an infrastructure problem
+      (such as Jenkins or Gerrit), file (or search for) the bug against
+      the openstack-gate project.
 
 5. It may also happen that the CI infrastructure somehow cannot finish
    a job and restarts it. If this happens several times, the job is
@@ -863,8 +863,8 @@ jobs, the check jobs will first be run again.
 More information on debugging automated testing failures can be found in the
 following recordings:
 
- - `Tales From The Gate <https://www.youtube.com/watch?v=sa67J6yMYZ0>`_
- - `Debugging Failures in the OpenStack Gate <https://www.youtube.com/watch?v=fowBDdLGBlU>`_
+- `Tales From The Gate <https://www.youtube.com/watch?v=sa67J6yMYZ0>`_
+- `Debugging Failures in the OpenStack Gate <https://www.youtube.com/watch?v=fowBDdLGBlU>`_
 
 Post Processing
 ---------------
@@ -901,24 +901,24 @@ reviews:
    to make the code more uniform and easier to read.
 3. Commit message and change break-up:
 
-  1. Learn the best practices for `git commit messages <https://wiki.openstack.org/wiki/GitCommitMessages>`_.
-  2. Use the `"DocImpact"
-     <https://wiki.openstack.org/wiki/Documentation/DocImpact>`_ tag on
-     changes that affect documentation.
-  3. Use the "SecurityImpact" tag on changes that should get the
-     attention of the OpenStack Security Group (OSSG) for additional
-     review.
-  4. Use the "UpgradeImpact" tag on changes which require
-     configuration changes to be mentioned in the release notes.
-  5. Use the "APIImpact" tag on changes impacting `API stability <https://wiki.openstack.org/wiki/APIChangeGuidelines>`_,
-     this tag will aid in gaining the attention of the
-     `OpenStack API Working Group <https://wiki.openstack.org/wiki/API_Working_Group>`_
-     for additional review.
-  6. If the change fixes a bug, it should include the bug number. For
-     example, add the line "Closes-Bug: 1234".
-  7. If the change implements a feature, it should reference a
-     blueprint. The blueprint should be approved before the change is
-     merged. For example, add the line "Blueprint: my-blueprint."
+   1. Learn the best practices for `git commit messages <https://wiki.openstack.org/wiki/GitCommitMessages>`_.
+   2. Use the `"DocImpact"
+      <https://wiki.openstack.org/wiki/Documentation/DocImpact>`_ tag on
+      changes that affect documentation.
+   3. Use the "SecurityImpact" tag on changes that should get the
+      attention of the OpenStack Security Group (OSSG) for additional
+      review.
+   4. Use the "UpgradeImpact" tag on changes which require
+      configuration changes to be mentioned in the release notes.
+   5. Use the "APIImpact" tag on changes impacting `API stability <https://wiki.openstack.org/wiki/APIChangeGuidelines>`_,
+      this tag will aid in gaining the attention of the
+      `OpenStack API Working Group <https://wiki.openstack.org/wiki/API_Working_Group>`_
+      for additional review.
+   6. If the change fixes a bug, it should include the bug number. For
+      example, add the line "Closes-Bug: 1234".
+   7. If the change implements a feature, it should reference a
+      blueprint. The blueprint should be approved before the change is
+      merged. For example, add the line "Blueprint: my-blueprint."
 
 4. Test case implementation (Mock vs. Mox):
 
