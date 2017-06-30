@@ -37,3 +37,6 @@ instead a user or developer looking for API documentation, see
    creators
    sandbox
    testing
+
+Propose changes to this document to the `infra-manual git repository
+<https://git.openstack.org/cgit/openstack-infra/infra-manual>`_.
