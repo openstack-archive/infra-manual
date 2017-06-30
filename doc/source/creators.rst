@@ -1222,7 +1222,7 @@ Create  file ``babel-djangojs.cfg`` with the following content:
    [angular: **/static/**.html]
 
 ReactJS Projects
----------------
+----------------
 
 Three new dependencies are required : ``react-intl``,
 ``babel-plugin-react-intl``, and ``react-intl-po``.
@@ -1236,8 +1236,7 @@ Update your ``package.json`` file. It should contain references to the
         ...
         "json2pot": "rip json2pot ./i18n/extracted-messages/**/*.json -o ./i18n/messages.pot",
         "po2json": "rip po2json -m ./i18n/extracted-messages/**/*.json"
-    }
-},
+        }
 
 The translated PO files will converted into JSON and placed into the
 ``./i18n/locales`` directory.
