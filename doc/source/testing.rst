@@ -41,8 +41,11 @@ Each single use VM has these attributes which you can count on:
 * CPUs are all running x86-64.
 * There is at least 8GB of system memory available.
 * There is at least 80GB of disk available. This disk may not all be
-  exposed in a single filesystem partition eg not all mounted at /.
-  Additional disk will be mounted under /opt.
+  exposed in a single filesystem partition and so not all mounted at
+  /. Any additional disk can be partitioned, formatted and mounted
+  by the root user; though if you need this it is recommended to use
+  devstack-gate which takes care of it automatically and mounts the
+  extra space on /opt early in its setup phase.
   To give you an idea of what this can look like most clouds just give
   us an 80GB or bigger /. One cloud gives us a 40GB / and 80GB /opt.
   Generally you will want to write large things to /opt to take
