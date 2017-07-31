@@ -15,15 +15,29 @@ also move merge points to specific points in time rather than at every
 proposed change. Learn more about `feature branches in the project team
 guide <https://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_.
 
-To get started with a feature branch you will need to create the new
-branch in Gerrit with the 'feature/' prefix. Note that Gerrit ACLs do
-not allow for pushing of new branches via git, but specific groups of
-Gerrit users can create new branches. For official OpenStack projects
-the Release Manager creates feature branches. Unofficial projects may
-update their Gerrit ACLs to allow their release teams to create these
-branches. For similar Gerrit ACL reasons branch deletion is typically
-limited to the Infra team. Keep this in mind before creating many
-branches that will need cleanup.
+For projects under governance, new feature branches can be requested using
+the same mechanism as stable branch creation. Submit a patch to the releases
+repository with a new ``feature/feature-name`` branch defined. Set the
+location value to the repository and commit hash from which to branch::
+
+    ---
+    branches:
+      - name: feature/example-feature-work
+        location:
+          openstack/oslo.config: 02a86d2eefeda5144ea8c39657aed24b8b0c9a39
+
+For more details, refer to the openstack/releases
+`README.rst <http://git.openstack.org/cgit/openstack/releases/tree/README.rst>`_
+file.
+
+For projects not under governance, new branches can be defined via Gerrit.
+In the `Gerrit UI <https://review.openstack.org/>`_, under Projects > List,
+locate the given project and go to the Branches option. For example::
+
+    https://review.openstack.org/#/admin/projects/openstack/nova,branches
+
+If you do not have the option to add a new branch, you will need to contact
+the infra team to get the necessary permissions for the project.
 
 If more than one project is involved in a feature development effort,
 the same feature branch name should be used across all involved
