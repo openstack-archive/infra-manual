@@ -74,12 +74,97 @@ you.
 If you have custom jobs for your project, you or someone from your
 project should keep reading this document.
 
+.. TODO: console logs and other reporting changes
+
 My Project Has Customized Jobs, Tell Me More
 ============================================
 
-TODO
+If you've read this far, you may have a passing familiarity with the
+project-config repo and you have created some jobs of your own, or
+customized how jobs are run on your project.
+
+As mentioned earlier, we're going to try to automatically migrate all
+of the jobs from v2 to v3.  However, some jobs may benefit from
+further manual tweaks.  This section and the one following should give
+you the information needed to understand how to make those.
+
+How Jobs Are Defined in Zuul v3
+-------------------------------
+
+In Zuul v2, jobs were defined in Jenkins and Zuul merely instructed
+Jenkins to run them.  This split between job definition and execution
+produced the often confusing dual configuration in the project-config
+repository, where we were required to define a job in ``jenkins/jobs``
+and then separately tell Zuul to run it in ``zuul/layout.yaml``.
+
+Zuul v3 is responsible for choosing when to run which jobs, and
+running them; jobs only need to be added to one system.
+
+All aspects of Zuul relating to jobs are configured with YAML files
+similar to the Zuul v2 layout.  See the `Zuul User Guide
+<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+for more information on how jobs are configured.
+
+Where Jobs Are Defined in Zuul v3
+---------------------------------
+
+Zuul v3 loads its configuration directly from git repos.  This lets
+accomplish a number of things we have long desired: instantaneous
+reconfiguration and in-repo configuration.
+
+Zuul starts by loading the configuration in the `project-config
+repository
+<https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.yaml>`_.
+This contains all of the pipeline definitions and some very basic job
+definitions.  Zuul looks for its configuration in files named
+``zuul.yaml`` or ``.zuul.yaml``, or in directories named ``zuul.d`` or
+``.zuul.d``.  Then it loads configuration from the `zuul-jobs
+repository
+<https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml>`_. This
+repository contains job definitions intended to be used by any Zuul
+installation, including, but not limited to, OpenStack's Zuul.  Then
+it loads jobs from the `openstack-zuul-jobs repository
+<http://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.yaml>`_
+which is where we keep most of the OpenStack-specific jobs.  Finally,
+it loads jobs defined in all of the repositories in the system.  This
+means that any repo can define its own jobs.  And in most cases,
+changes to those jobs will be self-testing, as Zuul will dynamically
+change its configuration in response to proposed changes.
+
+This is very powerful, but there are some limitations.  See the
+sections of the Zuul User Guide about `Security Contexts
+<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#security-contexts>`_
+and `Configuration Loading
+<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#configuration-loading>`_
+for more details.
+
+Note that all OpenStack projects share a single namespace for job
+names, so we have established some guidelines detailed in
+:ref:`v3_naming` for how to name jobs.  Adhere to these so that we may
+avoid collisions between jobs defined in various repositories.
+
+Zuul jobs are documented in their own repositories.  Here are links to
+the documentation for the repositories mentioned above:
+
+* `zuul-jobs documentation <https://docs.openstack.org/infra/zuul-jobs/>`_
+* `openstack-zuul-jobs documentation <https://docs.openstack.org/infra/openstack-zuul-jobs/>`_
+
+How Jobs Are Selected to Run in Zuul v3
+---------------------------------------
+
+TODO:
+
+* variants
+* selectors
+* pipeline-project definition
+
 
 I Write Jobs From Scratch, How Does Zuul v3 Actually Work?
 ==========================================================
 
-TODO
+TODO:
+
+* inheritance
+* ansible (and how it's optional)
+* playbooks
+* roles
