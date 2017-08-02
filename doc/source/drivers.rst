@@ -611,6 +611,8 @@ executable after package installation. The script has ``sudo`` access
 and can set up the test environment as needed. For example, it should
 be used to set up the ``openstack_citest`` databases for testing.
 
+.. _v3_naming:
+
 Consistent Naming for Jobs with Zuul v3
 =======================================
 

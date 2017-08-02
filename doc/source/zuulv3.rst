@@ -60,7 +60,7 @@ job that can be used for every project.  So when Zuul reports on your
 changes, the job name will now be `openstack-py27` rather than
 `gate-project-python27`.
 
-.. TODO: xref job naming guide
+For details about job names, see :ref:`v3_naming`.
 
 Most jobs will be migrated automatically
 ----------------------------------------
