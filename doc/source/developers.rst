@@ -16,71 +16,55 @@ Getting Started
 The goal of this document is to walk you through the concepts and
 specifics that should be understood while contributing to OpenStack.
 
+Account Setup
+-------------
+
 Prior to contributing to an OpenStack source code repository a few
 steps need to be completed. This document covers the steps that get
 you started, such as creating a few accounts on required websites,
 signing a contributor license agreement, uploading an ssh key, and
 installing git-review.
 
-Account Setup
--------------
+Get a single sign-on OpenID
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You'll need a `Launchpad account <https://launchpad.net/+login>`_,
-since this is how the Web interface for the Gerrit Code Review system
-will identify you. This is also useful for automatically crediting bug
-fixes to you when you address them with your code commits.
+You'll need a `ubuntuone account
+<https://login.ubuntu.com/+login>`_, since this is how the Web
+interface for the Gerrit Code Review system will identify you. This
+is also useful for automatically crediting bug fixes to you on
+Launchpad when you address them with your code commits.
 
-If you haven't already, `join The OpenStack Foundation
-<https://www.openstack.org/join/>`_ (it's free and currently
-required for all code contributors, though there is work in progress
-which may remove this requirement in the future). Your member level
-needs to be *Foundation Member* (not Community Member). Among other
-privileges, this also allows you to vote in elections and run for
-elected positions within The OpenStack Project. When signing up for
-Foundation Membership, make sure to give the same email address
-you'll use for code contributions, since this will need to match
-your preferred email address in Gerrit.
+Log into Gerrit
+^^^^^^^^^^^^^^^
 
-Visit https://review.openstack.org/ and click the ``Sign In`` link at
-the top-right corner of the page.  Log in with your Launchpad ID.
+Visit https://review.openstack.org/ and click the ``Sign In`` link
+at the top-right corner of the page.  Log in with your ubuntuone
+OpenID.
 
-The first time you sign into OpenStack's Gerrit (review.openstack.org),
-you will be prompted to "Select a unique username:". You can enter your
-Launchpad username here, or something else if you want. Type carefully,
-as once set it cannot be changed. This is the username you will
-eventually use to submit changes to Gerrit and to perform authenticated
-queries through its API.
+The first time you sign into OpenStack's Gerrit site, you will be
+prompted to "Select a unique username:". You can enter your
+ubuntuone username here, or something else if you want. Type
+carefully, as once set it cannot be changed. This is the username
+you will eventually use to submit changes to Gerrit and to perform
+authenticated queries through its API.
 
-Because Gerrit uses Launchpad OpenID single sign-on, you won't need a
-separate password for Gerrit, and once you log in to one of Launchpad,
-Gerrit, or any number of other OpenStack services, you won't have to
-enter your password for the others.
+Because the OpenStack community's Gerrit deployment uses ubuntuone
+OpenID single sign-on, you won't need a separate password for
+Gerrit, and once you log in to any service relying on that OpenID
+provider such as Launchpad or a variety of OpenStack community
+systems (review, storyboard, wiki), you won't have to enter your
+password for the others.
 
 Sign the appropriate Individual Contributor License Agreement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. note:: You need to have completed **all** the steps above before you'll
-          be able to sign an Individual Contributor License Agreement.
-
 Unless you are an U.S. Government Employee (see below),
 `agree to the Individual Contributor License
-Agreement <https://review.openstack.org/#/settings/agreements>`_ and
-provide contact information. The full text of the agreement will be
+Agreement <https://review.openstack.org/#/settings/agreements>`_.
+The full text of the agreement will be
 displayed before you can enter "I AGREE" below it, but it's also
 anonymously available if you want to `preview the OpenStack
-ICLA <https://review.openstack.org/static/cla.html>`_ now. Your full name
-and email address will be public (since they also appear in
-repository commit logs) and the latter needs to match the user.email
-in your Git configuration. The other contact information (postal
-address, phone numbers) will be kept confidential and is only used
-as a fallback record in the unlikely event The OpenStack Foundation
-needs to reach you directly over code contribution related matters.
-This contact information can also be easily `updated
-<https://review.openstack.org/#/settings/contact>`_ later if
-desired, but make sure the primary email address always matches the
-one you set for your OpenStack Foundation Membership -- otherwise
-Gerrit will give you an error message and refuse to accept your
-contact information.
+ICLA <https://review.openstack.org/static/cla.html>`_ now.
 
 Employees of the U.S. Government do not sign the Individual
 CLA. Instead, someone with authority to sign on behalf of your agency
@@ -100,10 +84,17 @@ to provide changes to such list. A list of current companies and
 organizations with an existing `Corporate CLA <https://wiki.openstack.org/wiki/Contributors/Corporate>`_
 is available for your review.
 
-You'll also want to `upload an SSH key to Gerrit at review.openstack.org
+Upload your public SSH key
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You'll also want to `upload an SSH key to Gerrit
 <https://review.openstack.org/#/settings/ssh-keys>`_ while you're at
 it, so that you'll be able to commit changes for review later. This is
-different from adding a key to Launchpad.
+separate from adding a key to Launchpad (which you can do if you
+like, but is not required for this).
+
+Configure your local git environment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Ensure that you have run these steps to let git know about your email
 address::
@@ -115,8 +106,15 @@ To check your git configuration::
 
   git config --list
 
-Installing git-review
----------------------
+You'll want to make sure that the ``user.email`` you specify matches
+at least one you've provided to Gerrit. By default this is taken
+from your OpenID login the first time you authenticate, but you can
+also change it or add more addresses through the `Contact
+Information <https://review.openstack.org/#/settings/contact>`_ page
+at any point in the future.
+
+Install the git-review utility
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We recommend using the ``git-review`` tool which is a git subcommand
 that handles all the details of working with Gerrit, the code review
@@ -161,6 +159,32 @@ All of git-review's interactions with Gerrit are sequences of normal
 git commands. If you want to know more about what it's doing, just
 add -v to the options and it will print out all of the commands it's
 running.
+
+Eligibility to Vote in Elections
+--------------------------------
+
+If you haven't already, you may want to `join The OpenStack
+Foundation <https://www.openstack.org/join/>`_ at this point. Among
+other privileges, this allows you to vote in official elections and
+run for elected positions within the OpenStack community.
+
+When signing up for Foundation Membership, make sure to include the
+email address you'll use for code contributions in one of the fields
+in your profile, since this is how officials for technical elections
+will be able to identify you as an eligible voter or candidate. In
+order to qualify to participate in elections, your member level also
+needs to be *Foundation Member* (not Community Member) and you need
+to make sure you remember to keep your foundation membership email
+addresses up to date if you change the address you're using; at
+least one address in your Gerrit account needs to match at least one
+address in your foundation member profile if you want to be able to
+participate in technical elections.
+
+To keep your membership active you must also regularly vote in
+elections for the OpenStack Foundation Board of Directors once you
+are able to do so; otherwise your membership will lapse after one
+year and you'll need to rejoin before you can vote in any further
+official OpenStack elections of any kind.
 
 Starting Work on a New Project
 ------------------------------
