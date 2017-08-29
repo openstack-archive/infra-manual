@@ -1,0 +1,9 @@
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Tue, 29 Aug 2017 05:57:19 +0000
+Reviewed-on: https://review.openstack.org/497532
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
