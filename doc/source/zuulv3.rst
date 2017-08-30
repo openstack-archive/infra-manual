@@ -152,12 +152,103 @@ the documentation for the repositories mentioned above:
 How Jobs Are Selected to Run in Zuul v3
 ---------------------------------------
 
-TODO:
+How Zuul v3 determines which jobs are run (and with which parameters)
+is, to put it mildly, different than Zuul v2.
 
-* variants
-* selectors
-* pipeline-project definition
+In Zuul v2, we accomplished most of this with 2,500 lines of
+incomprehensible regular expressions.  They are gone in v3.
+Instead we have a number of simple concepts that work together to
+allow us to express when a job should run in a human-friendly manner.
 
+.. sidebar:: Further reading
+
+   Jobs, variants, and matchers are discussed in more detail in the
+   `Job section of the Zuul manual
+   <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+
+Job definitions may appear more than once in the Zuul configuration.
+We call the first instance the *reference* definition, and subsequent
+definitions *variants*.  Job definitions have several fields, such as
+``branches`` and ``files``, which act as *matchers* to determine whether
+the job is applicable to a change.  When Zuul runs a job, it builds up
+a new job definition with all of the matching variants applied.
+
+For example, consider this simple reference job definition for a job
+named ``fedstack``:
+
+.. code-block:: yaml
+
+   - job:
+       name: fedstack
+       nodes: fedora-26
+
+This may then be supplemented with a job variant:
+
+.. code-block:: yaml
+
+   - job:
+       name: fedstack
+       branches: stable/pike
+       nodes: fedora-25
+
+This variant indicates that, while by default, the fedstack job runs
+on fedora-26 nodes, any changes to the stable/pike branch should run
+on fedora-25 nodes instead.
+
+Such job variants apply to any project that uses the job, so they are
+appropriate when you know how the job should behave in all
+circumstances.  Sometimes you want to make a change to how a job runs,
+but only in the context of a specific project.  Enhancements to the
+project definition help with that.  A project definition looks like
+this:
+
+.. code-block:: yaml
+   :emphasize-lines: 3-5
+
+   - project:
+       name: openstack/cloudycloud
+       check:
+         jobs:
+           - fedstack
+
+We call the highlighted portion the ``project-pipeline`` definition.
+That says "run the fedstack job on changes to the cloudycloud project
+in the check pipeline".  A change to the master branch of cloudycloud
+will run the job described in the reference definition above.  A
+change on the stable/pike branch will combine *both* the reference
+definition and the variant and use the new merged definition when
+running the job.
+
+If we want to change how the job is run *only* for the cloudycloud
+project, we can alter the project-pipeline definition to specify a
+project-local variant.  It behaves (almost) just like a regular job
+variant, but it only applies to the project in question.  To specify
+that fedstack jobs are non-voting on cloudycloud, we would do the
+following:
+
+.. code-block:: yaml
+   :emphasize-lines: 3-6
+
+   - project:
+       name: openstack/cloudycloud
+       check:
+         jobs:
+         - fedstack:
+             voting: false
+
+This variant is combined with all other matching variants to indicate
+that all fedstack jobs run on cloudycloud are non-voting, and
+additionally, stable/pike jobs run on fedora-25 instead of fedora-26.
+
+One final note about variants: in some cases Zuul attaches an implied
+branch matcher to job definitions.  The rules are `tricky
+<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#attr-job.branches>`_,
+but in general, jobs and variants defined in the master branch of a
+project will apply to all branches, and any further variants defined
+in other branches get an implied branch matcher of their current
+branch.  This makes it so that we can branch a project from master
+along with all of its job definitions, and jobs will continue to work
+as expected.
 
 I Write Jobs From Scratch, How Does Zuul v3 Actually Work?
 ==========================================================
