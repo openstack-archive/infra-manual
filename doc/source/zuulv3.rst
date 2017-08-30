@@ -169,9 +169,11 @@ allow us to express when a job should run in a human-friendly manner.
 Job definitions may appear more than once in the Zuul configuration.
 We call the first instance the *reference* definition, and subsequent
 definitions *variants*.  Job definitions have several fields, such as
-``branches`` and ``files``, which act as *matchers* to determine whether
-the job is applicable to a change.  When Zuul runs a job, it builds up
-a new job definition with all of the matching variants applied.
+``branches`` and ``files``, which act as *matchers* to determine
+whether the job is applicable to a change.  When Zuul runs a job, it
+builds up a new job definition with all of the matching variants
+applied.  Later variants can override settings on earlier definitions,
+but any settings not overridden will be present as well.
 
 For example, consider this simple reference job definition for a job
 named ``fedstack``:
@@ -181,6 +183,8 @@ named ``fedstack``:
    - job:
        name: fedstack
        nodes: fedora-26
+       vars:
+         neutron: true
 
 This may then be supplemented with a job variant:
 
@@ -193,7 +197,8 @@ This may then be supplemented with a job variant:
 
 This variant indicates that, while by default, the fedstack job runs
 on fedora-26 nodes, any changes to the stable/pike branch should run
-on fedora-25 nodes instead.
+on fedora-25 nodes instead.  In both cases, the ``neutron`` variable
+will be set to ``true``.
 
 Such job variants apply to any project that uses the job, so they are
 appropriate when you know how the job should behave in all
