@@ -294,7 +294,7 @@ going.
    .. code-block:: yaml
 
       - job:
-           name: <projectname>-functional
+          name: <projectname>-functional
 
    The actual magic behind the ``<projectname>-functional`` job is
    found in the Ansible playbook that implements it. See the next step
@@ -319,13 +319,12 @@ going.
 
    .. code-block:: yaml
 
-      ---
-      - hosts: ubuntu-xenial
+      - hosts: all
         tasks:
-            - name: Run functional test script
-              command: run-functional-tests.sh
-              args:
-                  chdir: "src/{{ zuul.project.canonical_name }}"
+          - name: Run functional test script
+            command: run-functional-tests.sh
+            args:
+              chdir: "src/{{ zuul.project.canonical_name }}"
 
    This playbook will execute on our host named ``ubuntu-xenial``,
    which we get for free from the Zuul base job. If you need more
