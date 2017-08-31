@@ -1,0 +1,10 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+1: Jesse Keating <omgjlk@us.ibm.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 31 Aug 2017 21:03:51 +0000
+Reviewed-on: https://review.openstack.org/499793
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
