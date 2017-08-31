@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Workflow+1: David Shrewsbury <shrewsbury.dave@gmail.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Thu, 31 Aug 2017 12:33:18 +0000
+Reviewed-on: https://review.openstack.org/499361
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
