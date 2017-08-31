@@ -255,15 +255,98 @@ branch.  This makes it so that we can branch a project from master
 along with all of its job definitions, and jobs will continue to work
 as expected.
 
-I Write Jobs From Scratch, How Does Zuul v3 Actually Work?
-==========================================================
+I Write Jobs, How Does Zuul v3 Actually Work?
+=============================================
 
-TODO:
+We previously covered some things you need to know if you simply want
+already-existing jobs to be run on your project.  If you want to
+create or alter the behavior of jobs, you'll want to read this
+section.  Zuul v3 has a number of facilities to promote code re-use,
+so as a job author, your work may range in complexity from a simple
+variable tweak, to stacking some existing roles together, and on to
+creating new Ansible roles.
 
-* inheritance
-* ansible (and how it's optional)
-* playbooks
-* roles
+Job Inheritance
+---------------
+
+We discussed job variance earlier -- it's a method for making small
+changes to jobs in specific contexts, such as on a certain branch or a
+certain project.  That allows us to avoid creating many nearly
+identical jobs just to handle such situations.  Another method of job
+reuse is inheritance.  Just as in object-oriented programming,
+inheritance in Zuul allows us to build on an existing job.
+
+.. sidebar:: Further reading
+
+   Base jobs and inheritance are discussed in more detail in the
+   `Job section of the Zuul manual
+   <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+
+Every job in Zuul has a parent, except for jobs which we call *base
+jobs*.  A base job is intended to handle fundamental tasks like
+setting up git repositories and archiving logs.  You probably won't be
+creating base jobs -- we expect to have very few of them, and they can
+only be created in the ``project-config`` repository.  Instead, all
+other jobs inherit from, at the very least, one of the base jobs.
+
+A job in Zuul has three execution phases: pre-run, run, and post-run.
+Each of these correspond to an Ansible playbook, but we'll discuss
+that in more detail later.  The main action of the job -- the part
+that is intended to succeed or fail based on the content of the change
+-- happens in the run phase.  Actions which should always succeed such
+as preparing the environment or collecting results happen in the
+pre-run and post-run phases respectively.  These have a special
+behavior when inheritance comes into play: child jobs "nest" inside of
+parent jobs.  Take for example a job named ``tox-py27`` which inherits
+from ``tox`` which inherits from ``unittests`` which inherits from
+``base`` (this example is not contrived -- this is actually how the
+tox-py27 job is implemented).  The pre- and post-run execution phases
+from all of those jobs come in to play -- however, only the run phase
+of the terminal job is executed.  The sequence, nested for visual
+clarity, looks like this:
+
+.. sidebar:: Inheritance vs. Roles
+
+   This isn't the only way we could have made this job.  Each of these
+   playbooks uses Ansible roles to do the bulk of the work, so we
+   could have flattened it so that tox-py27 inherited directly from
+   base, and then used those roles in a single playbook.  In this
+   case, we chose inheritance to make it easy for folks to create
+   minor variations on unit test jobs that handle a wide range of
+   situations.
+
+::
+
+   base pre-run
+     unittests pre-run
+       tox pre-run
+         tox-py27 pre-run
+         tox-py27 run
+         tox-py27 post-run
+       tox post-run
+     unittests post-run
+   base post-run
+
+The base pre- and post-run playbooks handle setting up repositories
+and archiving logs.  The unittests pre- and post-run playbooks run
+bindep and collect testr output.  The tox pre- and post-run playbooks
+install tox and collect tox debugging logs.  Finally, the tox-py27 run
+playbook actually runs tox.
+
+A Simple Shell Job
+------------------
+
+TODO
+
+Ansible Playbooks
+-----------------
+
+TODO
+
+Ansible Roles
+-------------
+
+TODO
 
 Quickstart Guide for OpenStack Projects
 =======================================
