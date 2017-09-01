@@ -424,6 +424,17 @@ source for roles.
    located in subdirectories of the ``roles/`` directory (e.g.,
    ``roles/myrole/tasks/``).
 
+Ansible Variables
+-----------------
+
+In Zuul v2, a number of variables with information about Zuul and the
+change being tested were available as environment variables, generally
+prefixed with ``ZUUL_``.  In Zuul v3, these have been replaced with
+Ansible variables which provide much more information as well as much
+richer structured data.  See the `Job Content
+<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/jobs.html>`
+section of the Zuul User Guide for a full list.
+
 .. _howto_in_repo:
 
 HOWTO: Add an in-repo job
