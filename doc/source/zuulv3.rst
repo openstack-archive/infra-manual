@@ -285,7 +285,7 @@ inheritance in Zuul allows us to build on an existing job.
 Every job in Zuul has a parent, except for jobs which we call *base
 jobs*.  A base job is intended to handle fundamental tasks like
 setting up git repositories and archiving logs.  You probably won't be
-creating base jobs -- we expect to have very few of them, and they can
+creating base jobs; we expect to have very few of them, and they can
 only be created in the ``project-config`` repository.  Instead, all
 other jobs inherit from, at the very least, one of the base jobs.
 
@@ -293,17 +293,17 @@ A job in Zuul has three execution phases: pre-run, run, and post-run.
 Each of these correspond to an Ansible playbook, but we'll discuss
 that in more detail later.  The main action of the job -- the part
 that is intended to succeed or fail based on the content of the change
--- happens in the run phase.  Actions which should always succeed such
-as preparing the environment or collecting results happen in the
+-- happens in the run phase.  Actions which should always succeed,
+such as preparing the environment or collecting results, happen in the
 pre-run and post-run phases respectively.  These have a special
 behavior when inheritance comes into play: child jobs "nest" inside of
 parent jobs.  Take for example a job named ``tox-py27`` which inherits
 from ``tox`` which inherits from ``unittests`` which inherits from
 ``base`` (this example is not contrived -- this is actually how the
-tox-py27 job is implemented).  The pre- and post-run execution phases
-from all of those jobs come in to play -- however, only the run phase
-of the terminal job is executed.  The sequence, nested for visual
-clarity, looks like this:
+``tox-py27`` job is implemented).  The pre- and post-run execution
+phases from all of those jobs come in to play; however, only the run
+phase of the terminal job is executed.  The sequence, indented for
+visual clarity, looks like this:
 
 .. sidebar:: Inheritance vs. Roles
 
@@ -336,17 +336,95 @@ playbook actually runs tox.
 A Simple Shell Job
 ------------------
 
-TODO
+Zuul v3 uses Ansible to run jobs, and that gives us a lot of power and
+flexibility, especially in constructing multi-node jobs.  But it can
+also get out of the way if all you want to do is run a shell script.
+
+See :ref:`quickstart` below for a walkthrough describing how to set
+up a simple shell-based job.
 
 Ansible Playbooks
 -----------------
 
-TODO
+Every job runs several playbooks in succession.  At the very least, it
+will run the pre-run playbook from the base job, the playbook for the
+job itself, and the post-run playbook from the base job.  Most jobs
+will run even more.
+
+In Zuul v2 with jenkins-job-builder, we often combined the job content
+-- that is, the executable code -- with the job description, putting
+large shell snippets inside the JJB yaml, or including them into the
+yaml, or, if scripts got especially large, writing a small amount of
+shell in JJB to run a larger script found elsewhere.
+
+In Zuul v3, the job content should always be separate from the job
+description.  Rather than embedding shell scripts into Zuul yaml
+configuration, the content takes the form of Ansible playbooks (which
+might perform all of the job actions, or they might delegate to a
+shell script).  Either way, a given job's playbook is always located
+in the same repository as the job definition.  That means a job
+defined in ``project-config`` will find its playbook in
+``project-config`` as well.  And a job defined in an OpenStack project
+repo will find its playbook in the project repo.
+
+A job with pre- or post-run playbooks must specify the path to those
+playbooks explicitly.  The path is relative to the root of the
+repository, and the filename extension (usually ``.yaml`` but ``.yml``
+is supported) should be omitted.  For example:
+
+.. code-block:: yaml
+
+   - job:
+       name: test-job
+       pre-run: playbooks/test-job-pre
+       post-run: playbooks/test-job-post
+
+However, the main playbook for the job may either be explicitly
+specified (with the ``run:`` attribute) or if that is omitted, an
+implied value of ``playbooks/<jobname>`` is used.  In the above
+example, Zuul would look for the main playbook in
+``playbooks/test-job.yaml``.
 
 Ansible Roles
 -------------
 
-TODO
+Roles are the main unit of code reuse in Ansible.  We're building a
+significant library of useful roles in the ``zuul-jobs``,
+``openstack-zuul-jobs``, and ``project-config`` projects.  In many
+cases, these roles correspond to jenkins-job-builder macros that we
+used in Zuul v2.  That allows us to build up playbooks using lists of
+roles in the same way that we built jobs from list of builder macros
+in Zuul v2.
+
+Ansible roles must be installed in the environment where Ansible is
+run.  That means a role used by a Zuul job must be installed *before*
+the job starts running.  Zuul has special support for roles to
+accomodate this.  A job may use the ``roles:`` attribute to specify
+that another project in the system must be installed because that job
+uses roles that are defined there.  For instance, if your job uses a
+role from ``zuul-jobs``, you should add the following to your job
+configuration:
+
+.. code-block:: yaml
+
+   - job:
+       name: test-job
+       roles:
+         - zuul: openstack-infra/zuul-jobs
+
+The project where the job is defined is always added as an implicit
+source for roles.
+
+.. note::
+
+   If a project implements a *single* role, Zuul expects the root of
+   that project to be the root of the role (i.e., the project root
+   directory should have a ``tasks/`` subdirectory or similar).  If
+   the project contains more than one role, the roles should be
+   located in subdirectories of the ``roles/`` directory (e.g.,
+   ``roles/myrole/tasks/``).
+
+.. _quickstart:
 
 Quickstart Guide for OpenStack Projects
 =======================================
