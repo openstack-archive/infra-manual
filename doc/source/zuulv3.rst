@@ -340,7 +340,7 @@ Zuul v3 uses Ansible to run jobs, and that gives us a lot of power and
 flexibility, especially in constructing multi-node jobs.  But it can
 also get out of the way if all you want to do is run a shell script.
 
-See :ref:`quickstart` below for a walkthrough describing how to set
+See :ref:`howto_in_repo` below for a walkthrough describing how to set
 up a simple shell-based job.
 
 Ansible Playbooks
@@ -424,20 +424,19 @@ source for roles.
    located in subdirectories of the ``roles/`` directory (e.g.,
    ``roles/myrole/tasks/``).
 
-.. _quickstart:
+.. _howto_in_repo:
 
-Quickstart Guide for OpenStack Projects
-=======================================
+HOWTO: Add an in-repo job
+=========================
 
-This is the tl;dr guide for those who just want to add their OpenStack
-project to Zuul v3. It's a simple, step-by-step howto on getting up and
-going.
+This is a simple guide that shows how to add a Zuul v3 job to your
+OpenStack project.
 
 #. Create a ``.zuul.yaml`` file in your project. This is where you will configure
    your project and define its jobs.
 
 #. In your ``.zuul.yaml``, define your project. You will need to identify your
-   project name, which pipeline queues will run jobs, and the names of the jobs
+   project name, which pipelines will run jobs, and the names of the jobs
    to run in each pipeline. Below is an example project which adds two jobs to
    the ``check`` pipeline:
 
@@ -468,14 +467,14 @@ going.
 
    Zuul v3 comes with many pre-defined jobs that you may use. The
    non-OpenStack specific jobs, such as ``tox-py27``, ``tox-py35``,
-   ``tox-pep8``, and ``tox-docs`` are defined in the file
-   `zuul-jobs:main.yaml
+   ``tox-pep8``, and ``tox-docs`` are defined in the file `zuul-jobs/zuul.yaml
    <https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml>`_.
 
-   The predefined OpenStack-specific jobs, such as ``openstack-doc-build``,
-   ``tox-py35-constraints``, and ``publish-openstack-python-tarball``
-   are defined in the file
-   `openstack-zuul-jobs:main.yaml <https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.yaml>`_.
+   The predefined OpenStack-specific jobs, such as
+   ``openstack-doc-build``, ``tox-py35-constraints``, and
+   ``publish-openstack-python-tarball`` are defined in the file
+   `openstack-zuul-jobs/zuul.yaml
+   <https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.yaml>`_.
 
 #. Write any Ansible playbooks for your custom jobs. By default, these
    are placed in the ``playbooks`` directory of your project. Our
@@ -490,21 +489,22 @@ going.
           - name: Run functional test script
             command: run-functional-tests.sh
             args:
-              chdir: "src/{{ zuul.project.canonical_name }}"
+              chdir: "{{ zuul.project.src_dir }}"
 
    This playbook will execute on our host named ``ubuntu-xenial``,
    which we get for free from the Zuul base job. If you need more
    nodes, or a node of a different type, you will need to define these
    in your ``.zuul.yaml`` file.
 
-   Note that some playbook actions are restricted in the Zuul environment. Also multiple
-   roles are available for your use in the `zuul-jobs
+   Note that some playbook actions are restricted in the Zuul
+   environment. Also multiple roles are available for your use in the
+   `zuul-jobs
    <https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/roles>`_
    and `openstack-zuul-jobs
    <https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/roles>`_
    repos.
 
 #. For more detailed information on jobs, playbooks, or any of the
-   topics discussed in this quickstart guide, see the complete `Zuul
-   v3 documentation
+   topics discussed in this guide, see the complete `Zuul v3
+   documentation
    <https://docs.openstack.org/infra/zuul/feature/zuulv3>`_.
