@@ -74,7 +74,17 @@ you.
 If you have custom jobs for your project, you or someone from your
 project should keep reading this document.
 
-.. TODO: console logs and other reporting changes
+Web-based log streaming
+-----------------------
+
+Zuul v3 restores a feature lost in Zuul v2.5: web-based console log
+streaming.  If you click on the name of a running job on the status
+page, a live stream of the job's console log will appear and
+automatically update.  It is also possible to access streaming logs
+from the terminal using a ``finger`` client (so you may watch a job's
+progress from the terminal, or pipe it through ``grep``), though the
+command to do so is not yet incorporated into the status page; expect
+that to be added soon.
 
 My Project Has Customized Jobs, Tell Me More
 ============================================
