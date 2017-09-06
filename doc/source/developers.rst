@@ -1087,6 +1087,6 @@ other repositories can be identified.
 
 Additional information about project gating and Zuul can be found in
 the Zuul documentation, located at:
-https://docs.openstack.org/infra/zuul/gating.html
+https://docs.openstack.org/infra/zuul/user/gating.html
 
 .. _`Running Python Unit Tests`: https://docs.openstack.org/project-team-guide/project-setup/python.html#running-python-unit-tests
