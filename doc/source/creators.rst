@@ -1110,7 +1110,7 @@ Add Link to Your Developer Documentation
 
 If your project is not an official OpenStack project, skip this section.
 
-Update the https://docs.openstack.org/developer/openstack-projects.html
+Update the https://docs.openstack.org/openstack-projects.html
 page with a link to your documentation by checking out the
 ``openstack/openstack-manuals`` repository and editing
 ``www/developer/openstack-projects.html``.
