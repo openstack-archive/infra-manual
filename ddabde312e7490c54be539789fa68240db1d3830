@@ -1,0 +1,9 @@
+Code-Review+2: David Shrewsbury <shrewsbury.dave@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Wed, 06 Sep 2017 16:40:49 +0000
+Reviewed-on: https://review.openstack.org/500214
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
