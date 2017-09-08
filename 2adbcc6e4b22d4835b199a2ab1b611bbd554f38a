@@ -1,0 +1,10 @@
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Code-Review+1: Nguyen Van Trung <trungnv@vn.fujitsu.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Fri, 08 Sep 2017 06:09:54 +0000
+Reviewed-on: https://review.openstack.org/501382
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
