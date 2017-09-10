@@ -7,6 +7,12 @@ This is a temporary section of the Infra Manual to assist in the
 conversion to Zuul v3.  Some of the content herein will only be
 relevant before and shortly after we move from Zuul v2 to v3.
 
+.. sidebar:: Quick Links
+
+   * `Zuul manual  <https://docs.openstack.org/infra/zuul/feature/zuulv3/>`_
+   * `zuul-jobs  <https://docs.openstack.org/infra/zuul-jobs/>`_
+   * `openstack-zuul-jobs <https://docs.openstack.org/infra/openstack-zuul-jobs/>`_
+
 What is Zuul v3?
 ================
 
