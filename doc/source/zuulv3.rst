@@ -7,14 +7,14 @@ This is a temporary section of the Infra Manual to assist in the
 conversion to Zuul v3.  Some of the content herein will only be
 relevant before and shortly after we move from Zuul v2 to v3.
 
+What is Zuul v3?
+================
+
 .. sidebar:: Quick Links
 
    * `Zuul manual  <https://docs.openstack.org/infra/zuul/feature/zuulv3/>`__
    * `zuul-jobs  <https://docs.openstack.org/infra/zuul-jobs/>`__
    * `openstack-zuul-jobs <https://docs.openstack.org/infra/openstack-zuul-jobs/>`__
-
-What is Zuul v3?
-================
 
 Zuul v3 is the third major version of the project gating system
 developed for use by the OpenStack project as part of its software
