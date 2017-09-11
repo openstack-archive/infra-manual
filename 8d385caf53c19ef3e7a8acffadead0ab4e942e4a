@@ -1,0 +1,10 @@
+Code-Review+1: Zara <thezarazia@gmail.com>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Jenkins
+Submitted-by: Jenkins
+Submitted-at: Mon, 11 Sep 2017 19:18:17 +0000
+Reviewed-on: https://review.openstack.org/502539
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
