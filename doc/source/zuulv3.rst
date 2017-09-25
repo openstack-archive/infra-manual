@@ -12,7 +12,7 @@ What is Zuul v3?
 
 .. sidebar:: Quick Links
 
-   * `Zuul manual  <https://docs.openstack.org/infra/zuul/feature/zuulv3/>`__
+   * `Zuul v3 manual i <https://docs.openstack.org/infra/zuul/feature/zuulv3/>`__
    * `zuul-jobs  <https://docs.openstack.org/infra/zuul-jobs/>`__
    * `openstack-zuul-jobs <https://docs.openstack.org/infra/openstack-zuul-jobs/>`__
 
@@ -68,17 +68,19 @@ changes, the job name will now be ``openstack-py27`` rather than
 
 For details about job names, see :ref:`v3_naming`.
 
-Most jobs will be migrated automatically
-----------------------------------------
+All existing jobs will be migrated automatically
+------------------------------------------------
 
-The jobs covered by the Consistent Testing Interface will all be
-migrated automatically and you should not need to do anything.  Most
-devstack jobs should be migrated as well.  If your project uses only
-these jobs, you shouldn't need to do anything; we'll handle it for
-you.
+Jobs covered by the Consistent Testing Interface will all be
+migrated automatically to newly written v3 native jobs and you should
+not need to do anything special.
 
-If you have custom jobs for your project, you or someone from your
-project should keep reading this document.
+The rest of the jobs will be migrated to new auto-generated jobs. As the
+content of these is auto-generated from JJB template transformation, these
+jobs will need post-migration attention.
+
+If you have custom jobs for your project, you or someone from your project
+should keep reading this document, and see :ref:`legacy-job-migration-details`.
 
 Web-based log streaming
 -----------------------
@@ -128,20 +130,18 @@ Zuul v3 loads its configuration directly from git repos.  This lets
 us accomplish a number of things we have long desired: instantaneous
 reconfiguration and in-repo configuration.
 
-Zuul starts by loading the configuration in the `project-config
-repository
-<https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.yaml>`_.
+Zuul starts by loading the configuration in the `project-config zuul.d`_
+directory in the `project-config`_ repository.
 This contains all of the pipeline definitions and some very basic job
 definitions.  Zuul looks for its configuration in files named
 ``zuul.yaml`` or ``.zuul.yaml``, or in directories named ``zuul.d`` or
-``.zuul.d``.  Then it loads configuration from the `zuul-jobs
-repository
-<https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml>`_. This
+``.zuul.d``.  Then it loads configuration from the `zuul-jobs zuul.yaml`_
+file in the `zuul-jobs`_ repository. This
 repository contains job definitions intended to be used by any Zuul
 installation, including, but not limited to, OpenStack's Zuul.  Then
-it loads jobs from the `openstack-zuul-jobs repository
-<http://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.yaml>`_
-which is where we keep most of the OpenStack-specific jobs.  Finally,
+it loads jobs from the `openstack-zuul-jobs zuul.d`_ directory in the
+`openstack-zuul-jobs`_ repository which is where we keep most of
+the OpenStack-specific jobs.  Finally,
 it loads jobs defined in all of the repositories in the system.  This
 means that any repo can define its own jobs.  And in most cases,
 changes to those jobs will be self-testing, as Zuul will dynamically
@@ -162,8 +162,8 @@ avoid collisions between jobs defined in various repositories.
 Zuul jobs are documented in their own repositories.  Here are links to
 the documentation for the repositories mentioned above:
 
-* `zuul-jobs documentation <https://docs.openstack.org/infra/zuul-jobs/>`_
-* `openstack-zuul-jobs documentation <https://docs.openstack.org/infra/openstack-zuul-jobs/>`_
+* `zuul-jobs documentation`_
+* `openstack-zuul-jobs documentation`_
 
 How Jobs Are Selected to Run in Zuul v3
 ---------------------------------------
@@ -494,14 +494,13 @@ OpenStack project.
 
    Zuul v3 comes with many pre-defined jobs that you may use. The
    non-OpenStack specific jobs, such as ``tox-py27``, ``tox-py35``,
-   ``tox-pep8``, and ``tox-docs`` are defined in the file `zuul-jobs/zuul.yaml
-   <https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml>`_.
+   ``tox-pep8``, and ``tox-docs`` are defined in the `zuul-jobs zuul.yaml`_
+   file.
 
    The predefined OpenStack-specific jobs, such as
    ``openstack-doc-build``, ``tox-py35-constraints``, and
-   ``publish-openstack-python-tarball`` are defined in the file
-   `openstack-zuul-jobs/zuul.yaml
-   <https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.yaml>`_.
+   ``publish-openstack-python-tarball`` are defined in the
+   `openstack-zuul-jobs jobs.yaml` file.
 
 #. Write any Ansible playbooks for your custom jobs. By default, these
    are placed in the ``playbooks`` directory of your project. Our
@@ -525,13 +524,79 @@ OpenStack project.
 
    Note that some playbook actions are restricted in the Zuul
    environment. Also multiple roles are available for your use in the
-   `zuul-jobs
-   <https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/roles>`_
-   and `openstack-zuul-jobs
-   <https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/roles>`_
-   repos.
+   `zuul-jobs roles`_ and `openstack-zuul-jobs roles`_ directories.
 
 #. For more detailed information on jobs, playbooks, or any of the
-   topics discussed in this guide, see the complete `Zuul v3
-   documentation
-   <https://docs.openstack.org/infra/zuul/feature/zuulv3>`_.
+   topics discussed in this guide, see the complete `Zuul v3 documentation`_.
+
+.. _legacy-job-migration-details:
+
+Legacy Job Migration Details
+============================
+
+Project-specific jobs are migrated to jobs prefixed with ``legacy-``.
+This makes them easy to spot as jobs that were not written for v3 but
+instead were auto-converted.
+
+With in-repo config, the best place for most of these jobs is actually in
+the project repositories themselves so that the project cores are the ones
+who review the jobs and not the Infra team. Moving the jobs from their
+migrated location to the project will be a good opportunity to clean them
+up and rewrite them to use the new Zuul v3 features.
+
+Migrated Job Locations
+----------------------
+
+Automigrated jobs have their job definitions in `openstack-zuul-jobs`_ in the
+files `zuul.d/99legacy-jobs.yaml`_, project templates in
+`zuul.d/99legacy-project-templates.yaml`_ and the playbooks containing the
+job content itself in `playbooks/legacy`_.
+
+The ``project-pipeline`` definitions for automigrated jobs are in
+`project-config`_ in the `zuul.d/projects.yaml`_ file.
+
+Migrated Job Naming
+-------------------
+
+Jobs which correspond to newly-written v3 jobs were mapping to the appropriate
+new v3 job.
+
+If an old job did not yet have a corresponding v3 job, the following rules
+apply for the name of the new auto-generated job:
+
+* project names are removed from jobs
+* the ``gate-`` prefix is removed, if one exists
+* the ``legacy-`` prefix is added
+* the string ``ubuntu-xenial`` is removed from the name if it exists
+* the ``-nv`` suffix used to indicate non-voting jobs is removed and the
+  job is marked as non-voting directly
+
+Migrated Job and Project Matchers
+---------------------------------
+
+In v2 there was a huge section of regexes at the top of the layout file that
+filtered when a job was run. In v3, that content has been moved to matchers
+and variants on the jobs themselves. In some cases this means that jobs
+defined in a project-template for a project have to be expanded and applied
+to the project individually so that the appropriate matchers and variants
+can be applied. As jobs are reworked from converted legacy jobs to new and
+shiny v3 native jobs, some of these matches can be added to the job definition
+rather than at the project-pipeline definition and can be re-added to
+project-templates.
+
+.. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
+.. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
+.. _openstack-zuul-jobs jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/jobs.yaml
+.. _openstack-zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/roles
+.. _openstack-zuul-jobs zuul.d: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d
+.. _openstack-zuul-jobs: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs
+.. _playbooks/legacy: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/playbooks/legacy
+.. _project-config zuul.d: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d
+.. _project-config: https://git.openstack.org/cgit/openstack-infra/project-config
+.. _zuul-jobs documentation: https://docs.openstack.org/infra/zuul-jobs/
+.. _zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/roles
+.. _zuul-jobs zuul.yaml: https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml
+.. _zuul-jobs: https://git.openstack.org/cgit/openstack-infra/zuul-jobs
+.. _zuul.d/99legacy-jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/99legacy-jobs.yaml
+.. _zuul.d/99legacy-project-templates.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/99legacy-project-templates.yaml
+.. _zuul.d/projects.yaml: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d/projects.yaml
