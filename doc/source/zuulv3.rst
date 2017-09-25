@@ -548,8 +548,8 @@ Migrated Job Locations
 ----------------------
 
 Automigrated jobs have their job definitions in `openstack-zuul-jobs`_ in the
-files `zuul.d/99legacy-jobs.yaml`_, project templates in
-`zuul.d/99legacy-project-templates.yaml`_ and the playbooks containing the
+files `zuul.d/zuul-legacy-jobs.yaml`_, project templates in
+`zuul.d/zuul-legacy-project-templates.yaml`_ and the playbooks containing the
 job content itself in `playbooks/legacy`_.
 
 The ``project-pipeline`` definitions for automigrated jobs are in
@@ -597,6 +597,6 @@ project-templates.
 .. _zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/roles
 .. _zuul-jobs zuul.yaml: https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml
 .. _zuul-jobs: https://git.openstack.org/cgit/openstack-infra/zuul-jobs
-.. _zuul.d/99legacy-jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/99legacy-jobs.yaml
-.. _zuul.d/99legacy-project-templates.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/99legacy-project-templates.yaml
+.. _zuul.d/zuul-legacy-jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/zuul-legacy-jobs.yaml
+.. _zuul.d/zuul-legacy-project-templates.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/zuul-legacy-project-templates.yaml
 .. _zuul.d/projects.yaml: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d/projects.yaml
