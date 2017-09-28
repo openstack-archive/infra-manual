@@ -198,7 +198,7 @@ named ``fedstack``:
 
    - job:
        name: fedstack
-       nodes: fedora-26
+       nodeset: fedora-26
        vars:
          neutron: true
 
@@ -209,7 +209,7 @@ This may then be supplemented with a job variant:
    - job:
        name: fedstack
        branches: stable/pike
-       nodes: fedora-25
+       nodeset: fedora-25
 
 This variant indicates that, while by default, the fedstack job runs
 on fedora-26 nodes, any changes to the stable/pike branch should run
