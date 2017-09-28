@@ -451,6 +451,86 @@ richer structured data.  See the `Job Content
 <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/jobs.html>`_
 section of the Zuul User Guide for a full list.
 
+Changes to OpenStack tox jobs
+=============================
+
+One of the most common job types in OpenStack are tox-based tests. With the
+Zuul v3 rollout there are new and shiny versions of the tox jobs.
+
+There are a few important things to know about them.
+
+tox vs. tox-py27 vs. vs. openstack-tox vs. openstack-tox-py27
+-------------------------------------------------------------
+
+There is a base ``tox`` job and a set of jobs like ``tox-py27`` and
+``tox-py35``. There is also a base ``openstack-tox`` job and a set of jobs like
+``openstack-tox-py27``, ``openstack-tox-py35``.
+
+The ``tox`` base job is what it sounds like - it's a base job. It knows how to
+run tox and fetch logs and results. It has parameters you can set to control its
+behavior, see the `description in zuul-jobs
+<https://docs.openstack.org/infra/zuul-jobs/jobs.html#job-tox>`__ for details.
+
+``tox-py27`` is a job that uses the ``tox`` base job and sets ``tox_envlist``
+to ``py27``. We've made jobs for each of the common tox environments.
+
+Those are jobs that just run tox. As Zuul v3 is designed to have directly
+shareable job definitions that can be used across Zuul deployments, these jobs
+do not contain OpenStack specific logic. OpenStack projects should not use
+them, but non-OpenStack projects using OpenStack's Zuul may want to.
+
+``openstack-tox`` is a base job that builds on the ``tox`` base job and adds
+behaviors specific to OpenStack. Specifically, it adds
+``openstack/requirements`` to the ``required-projects`` list and sets the
+``tox_constraints_file`` variable to point to
+``src/git.openstack.org/openstack/requirements/upper-constraints.txt``.
+
+``openstack-tox-py27`` is like ``tox-py27`` but uses ``openstack-tox`` as a
+base job.
+
+OpenStack projects with custom tox environments should base them on
+``openstack-tox``, not ``tox``:
+
+.. code-block:: yaml
+
+    - job:
+        name: tooz-tox-py35-etcd3
+        parent: openstack-tox
+        vars:
+          tox_envlist: py35-etcd3
+
+Installation of 'sibling' requirements
+--------------------------------------
+
+One of Zuul's strengths is doing multi-repo testing. We obviously all use
+the heck out of that for integration tests, but for tox things it has
+historically been a bit harder to manage.
+
+In Zuul v3, we've added functionality to the base ``tox`` job that will look
+to see if there are other git repos in the ``required-projects`` list. If there
+are, it will look at the virtualenv that tox creates, get the list of installed
+packages, see if any of the git repos present provides that package, and if so
+will update the virtualenv with an installation of that project from its git
+repository.
+
+Long story short, if you wanted to make a job for awesome-project that did
+tox-level testing against patches to keystoneauth, you'd do this:
+
+.. code-block:: yaml
+
+    - job:
+        name: awesome-project-tox-py27-keystoneauth
+        parent: openstack-tox-py27
+        required-projects:
+          - openstack/keystoneauth
+
+Then put that job into your project pipelines. If you do that, that job will
+inject master of keystoneauth (or a speculative master state if there are any
+Depends-On lines involved) into tox's py27 virtualenv before running tests.
+
+If you want to disable this behavior, it's controlled by a variable
+``tox_install_siblings``.
+
 .. _howto_in_repo:
 
 HOWTO: Add an in-repo job
