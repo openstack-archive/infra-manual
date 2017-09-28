@@ -584,12 +584,123 @@ shiny v3 native jobs, some of these matches can be added to the job definition
 rather than at the project-pipeline definition and can be re-added to
 project-templates.
 
+HOWTO: Update Legacy Jobs
+=========================
+
+All of the auto-converted jobs prefixed with ``legacy-`` should be replaced.
+They are using old interfaces and not making good use of the new system.
+
+Some of the ``legacy-`` jobs are legitimate central shared jobs we just
+haven't gotten around to making new central versions of. Don't worry about
+those. (``releasenotes`` and ``api-ref`` jobs are good examples here)
+
+For all of the jobs specific to a particular project, teams should move the
+auto-converted ``legacy-`` jobs to their own repos and rework them to stop
+using the legacy interfaces. There are two fundamental steps:
+
+#. Move the jobs to your repo
+
+#. Rework the jobs to be native v3 jobs
+
+Both are discussed below.
+
+Moving Legacy Jobs to Projects
+------------------------------
+
+At your earliest convenience, for every job specific to your project:
+
+#. Copy the job definition into your ``.zuul.yaml`` file in your repo. You must
+   rename the job as part of the step. Replacing the ``legacy-`` prefix with
+   your project name is a good way to ensure jobs don't conflict.
+
+#. Add the new jobs to your project pipeline definition in your ``.zuul.yaml``
+   file. This will cause both the new and old ``legacy-`` copies to run.
+
+#. Submit patches to `project-config`_ and `openstack-zuul-jobs`_ with
+   Depends-On and Needed-By pointing to each other so that reviewers can
+   verify both patches. The `openstack-zuul-jobs`_ patch should Depends-On the
+   `project-config`_ patch. Specifically, these patches should contain:
+
+   * A patch to `project-config`_ to remove the jobs from your project's
+     pipeline definition in ``zuul.d/projects.yaml`` which is Needed-By the
+     next patch.
+
+   * A patch to `openstack-zuul-jobs`_ removing the jobs from
+     ``zuul.d/zuul-legacy-jobs.yaml`` and their corresponding playbooks from
+     ``playbooks/legacy``. It should Depends-On the `project-config`_ patch.
+
+   The `openstack-zuul-jobs`_ patch will give a config error because the
+   `project-config`_ patch removing use of the jobs hasn't landed. That's ok.
+   We'll recheck it once the `project-config`_ patch lands.
+
+Reworking Legacy Jobs to be v3 Native
+-------------------------------------
+
+Once the jobs are under your control you should rework them to no longer use
+a base job prefixed with ``legacy-`` or any of the legacy v2 interfaces.
+
+See if you can just replace them with something existing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We didn't try to auto-convert non-standard tox jobs to use the `openstack-tox`_
+base job as there was too much unknown for us to do it automatically. For you,
+just switching to using that's likely the **easiest** thing to do.
+
+For instance, the job ``legacy-tooz-tox-py35-etcd3`` can just become:
+
+.. code-block:: yaml
+
+   - job:
+       name: tooz-tox-py35-etcd3
+       parent: openstack-tox
+       vars:
+         tox_envlist: py35-etcd3
+
+and you can just delete ``playbooks/legacy/tooz-tox-py35-etcd3/``.
+
+Converting Custom dsvm jobs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If your job is a custom dsvm job - try to migrate it to use the new
+``devstack`` or ``devstack-tempest`` base jobs.
+
+.. note:: There may be a couple of edge cases they can't handle yet.
+
+You can see https://review.openstack.org/#/c/500365/ for an example of just
+about everything you might want to do using the new devstack base job.
+
+Converting Other Legacy Changes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If those don't apply, this will mean the following changes:
+
+* Add the repos you need to the job's ``required-projects`` list. This will
+  make sure that zuul clones what you need into ``src/``.
+
+* Stop using zuul-cloner. The repos are on disk in ``src/``. Just reference
+  them.
+
+* Stop using ``ZUUL_`` env vars, the ``/etc/nodepool`` directory, and the
+  ``WORKSPACE`` and ``BUILD_TIMEOUT`` environment variables. Zuul and nodepool
+  info is available in the zuul and nodepool ansible vars. Timeout information
+  is in ``zuul.timeout``. WORKSPACE isn't really a thing in v3. Tasks all start
+  in ``/home/zuul``, and the source code for the the project that triggered the
+  change is in ``src/{{ zuul.project.canonical_name }}``.
+
+  We added a ``mkdir /home/zuul/workspace`` to each generated playbook, but
+  that's not really a thing, it's just for transition and is not needed in new
+  jobs.
+
+* Remove ``environment: '{{ zuul | zuul_legacy_vars }}'`` from tasks once they
+  don't need the legacy environment variables.
+
 .. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
 .. _openstack-zuul-jobs jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/jobs.yaml
 .. _openstack-zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/roles
 .. _openstack-zuul-jobs zuul.d: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d
 .. _openstack-zuul-jobs: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs
+.. _openstack-tox: https://docs.openstack.org/infra/openstack-zuul-jobs/jobs.html#job-openstack-tox
 .. _playbooks/legacy: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/playbooks/legacy
 .. _project-config zuul.d: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d
 .. _project-config: https://git.openstack.org/cgit/openstack-infra/project-config
