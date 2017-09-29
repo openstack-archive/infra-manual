@@ -22,11 +22,8 @@ are given here. Don't skip any steps. Don't try to do things in
 parallel. Don't jump around.
 
 If your project is already set up in the OpenStack CI infrastructure,
-the following sections might be interesting for adding new tests to a
-repository:
-
-* :ref:`configure_zuul`
-* :ref:`zuul_best_practices`
+you might want to see :ref:`zuul_best_practices` for information on
+adding new tests to a repository.
 
 Decide Status of your Project
 =============================
@@ -509,89 +506,26 @@ See other files in the same directory for further examples.
 Add Basic Zuul Jobs
 -------------------
 
-Test jobs are run by Zuul, and the jobs are defined using
-jenkins-job-builder configuration files.
+Test jobs are run by Zuul. For a discussion of how Zuul jobs work in
+an OpenStack context, please see :doc:zuulv3.
 
-.. note::
+Edit ``zuul/main.yaml`` and add your project in alphabetical order to the
+``untrusted-projects`` section in the ``openstack`` tenant after the
+comment that reads::
 
-   Different projects will need different jobs, depending on their
-   nature, implementation language, etc. This example shows how to set
-   up a new Python code project because that is our most common
-   case. If you are working on another type of project, you will want
-   to choose different jobs or job templates to include in the "jobs"
-   list.
+  # After this point, sorting projects alphabetically will help
+  # merge conflicts
 
-Edit ``jenkins/jobs/projects.yaml`` to add your project. There are
-several sections, designated in comments, for different types of
-repositories. Find the right section and then add a new stanza like:
+Jobs themselves can be added directly to your project in the file
+``.zuul.yaml``. Be sure to see :ref:`v3_naming` for information on
+job naming.
 
-::
+OpenStack has a number of jobs and project-templates that can be used
+directly in your project's Zuul config. You can also make new jobs that
+inherit from existing jobs or or you can write your own from scratch.
 
- - project:
-    name: <projectname>
-
-    jobs:
-      - python-jobs
-      - python35-jobs
-      - openstack-publish-jobs
-      - pypi-jobs
-
-.. _configure_zuul:
-
-Configure Zuul to Run Jobs
---------------------------
-
-Zuul is the gate keeper. It watches for changes in gerrit to trigger
-the appropriate jobs. To start, establish the rules for the jobs you
-need.
-
-.. note::
-
-   Different projects will need different jobs, depending on their
-   nature, implementation language, etc. This example shows how to set
-   up the full set of gate jobs for a new Python code project because
-   that is our most common case. If you are working on another type of
-   project, you will want to choose different jobs or job templates to
-   include here.
-
-Edit ``zuul/layout.yaml`` to add your project. There are several
-sections, designated in comments, for different types of
-projects. Find the right section and then add a new stanza like:
-
-::
-
-  - name: openstack/<projectname>
-    template:
-      - name: merge-check
-      - name: python-jobs
-      - name: python35-jobs
-      - name: check-requirements
-      - name: openstack-server-publish-jobs
-      - name: publish-to-pypi
-
-You can find more info about job templates in the beginning of
-``zuul/layout.yaml`` in the section starting with
-"project-templates:".
-
-Each of the jobs that you add a trigger for in ``zuul/layout.yaml``
-needs to be defined first using jenkins-job-builder configuration
-files as explained in :ref:`basic_zuul_jobs`.
-
-.. note::
-
-   If you use ``pypi-jobs`` and ``publish-to-pypi``, please ensure
-   your projects's namespace is registered on https://pypi.python.org
-   as described in :ref:`register-pypi`.  This will be required before
-   your change is merged.
-
-If you are not ready to run any tests yet and did not configure
-``python-jobs`` in ``jenkins/jobs/projects.yaml``, the entry for
-``zuul/layout.yaml`` should look like this instead::
-
-  - name: openstack/<projectname>
-    template:
-      - name: merge-check
-      - name: noop-jobs
+For more information on writing jobs for Zuul, see
+https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html
 
 .. _zuul_best_practices:
 
@@ -603,33 +537,36 @@ There are a couple of best practices for setting up jobs.
 Adding a New Job
 ~~~~~~~~~~~~~~~~
 
-If you add a new job, you might not know how stable it runs. Best
-practice is to add the job to the experimental pipeline and then
-progressively promote it to the gate pipeline. For example:
-
-#. Add the job to the ``experimental`` queue and run it manually with
-   giving ``check experimental`` on a review to see whether it works
-   fine on single changes.
-#. Move the job to the ``check`` queue as non-voting jobs and analyze
-   how it handles the incoming changes.
-#. Make the job voting and add it to the ``gate`` queue as well.
+Jobs in Zuul are self-testing, which means that the change adding a
+new job can run with that job applied into the project's pipelines. It's
+a good idea when adding a new job in your project to put it at least
+into the ``check`` pipeline so that you can verify that it runs as expected.
 
 Use Templates
 ~~~~~~~~~~~~~
 
-For many common cases, there are templates defined in the
-``project-templates`` section. They contain the macro ``{name}`` which
-gets replaced with the basename of the repository when used::
+For many common cases, there are templates of jobs defined that can be applied
+to your project. For instance:
 
-  - name: python35-jobs
-    check:
-      - 'gate-{name}-python35'
-    gate:
-      - 'gate-{name}-python35'
-  ...
-  - name: openstack/ceilometer
-    template:
-      - name: python35-jobs
+.. code-block:: yaml
+
+  - project-template:
+      name: openstack-python27-jobs
+        check:
+          - openstack-tox-pep8
+          - openstack-tox-py27
+        gate:
+          - openstack-tox-pep8
+          - openstack-tox-py35
+
+To apply that to your project, add it to the ``templates`` section:
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/new-project
+      templates:
+        - openstack-python-jobs
 
 If you use the same set of tests in several repositories, introduce a
 new template and use that one.
@@ -637,47 +574,81 @@ new template and use that one.
 Non-Voting Jobs
 ~~~~~~~~~~~~~~~
 
-A job can either be voting or non-voting. So, if you have a job that
-is voting in one repository but non-voting in another, you need to
-duplicate the job and use different names. All jobs that end with
-``-nv`` are non-voting due to a special rule in ``zuul/layout.yaml`` ,
-so you can use that for non-voting jobs.
+A job can either be voting or non-voting. If you have a job that
+is voting in one repository but non-voting in another, you can indicate
+this by using a variant.
 
-To make a single job non-voting everywhere, add a ``voting: false``
-line for it::
+To make a single job non-voting everywhere, add ``voting: false`` in the
+job definition.
 
-  - name: gate-tempest-dsvm-ceilometer-mongodb-full
-    voting: false
+.. code-block:: yaml
 
-Non-voting jobs should only be added ``check`` queues, do not add them
+  - job:
+      parent: devstack
+      name: new-project-tempest-devstack-mongodb-full
+      voting: false
+
+and add it to your project pipelines:
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/new-project
+      templates:
+        - openstack-python-jobs
+      check:
+        jobs:
+          - new-project-tempest-devstack-mongodb-full
+
+To use a job that is otherwise voting in your project but in a non-voting
+manner, add ``voting: false`` to its entry in your project pipeline definition.
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/new-project
+      templates:
+        - openstack-python-jobs
+      check:
+        jobs:
+          - openstack-tox-py35:
+              voting: false
+
+Non-voting jobs should only be added ``check`` queues. Do not add them
 to the ``gate`` queue since running non-voting jobs in the gate is
 just a waste of resources.
 
 Running Jobs Only on Some Branches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to run the job only on a specific stable branch, say so::
+If you want to run the job only on a specific stable branch, add a branch
+matcher to the job definition.
 
-  - name: ^gate-devstack-dsvm-cells$
-    branch: ^(stable/(juno|kilo)).*$
+.. code-block:: yaml
 
-If you create a new job and it should only run on current master and
-future stable branches, exclude all current stable ones::
+  - job:
+      parent: devstack
+      name: new-project-tempest-devstack-mongodb-full
+      voting: false
+      branches: ^(?!stable/(juno|kilo)).*$
 
-  - name: gate-oslo.messaging-dsvm-functional-zeromq
-    branch: ^(?!stable/(?:juno|kilo|liberty)).*$
+If, instead, you want to use an existing job in your project but only on
+a specific branch, apply it in the project pipeline definition.
 
-So, the job above will run on ``master`` but also on newer stable
+.. code-block:: yaml
+
+  - project:
+      name: openstack/new-project
+      templates:
+        - openstack-python-jobs
+      check:
+        jobs:
+          - openstack-tox-py35:
+              branches: ^(?!stable/(juno|kilo)).*$
+
+The job above will run on ``master`` but also on newer stable
 branches like ``stable/mitaka``. It will not run on the old
-``stable/juno``, ``stable/kilo``, and ``stable/liberty`` branches.
-
-Note that you cannot run a job voting on one branch and non-voting on
-another. If you combine non-voting and a branch instruction, it means:
-Run the job non-voting - and only on this branch. Example::
-
-  - name: gate-cinder-dsvm-apache
-    branch: ^(?!stable/(?:juno|kilo)).*$
-    voting: false
+``stable/juno`` and ``stable/kilo`` branches.
 
 
 Configure GerritBot to Announce Changes
