@@ -1,0 +1,9 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 29 Sep 2017 05:38:14 +0000
+Reviewed-on: https://review.openstack.org/508327
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
