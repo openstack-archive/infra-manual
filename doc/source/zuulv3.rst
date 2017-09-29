@@ -774,6 +774,12 @@ If those don't apply, this will mean the following changes:
 * Remove ``environment: '{{ zuul | zuul_legacy_vars }}'`` from tasks once they
   don't need the legacy environment variables.
 
+* Rework log collection. The synchronize commands in the generated
+  ``post.yaml`` are very non-ideal.
+
+* Stop using nodesets prefixed with ``legacy-``. Each of them should have an
+  equivalent non-legacy nodeset.
+
 .. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
 .. _openstack-zuul-jobs jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/jobs.yaml
