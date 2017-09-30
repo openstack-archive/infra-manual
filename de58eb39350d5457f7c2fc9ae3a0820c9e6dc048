@@ -1,0 +1,9 @@
+Code-Review+1: Emmet Hikory <persia@shipstone.jp>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Sat, 30 Sep 2017 14:08:57 +0000
+Reviewed-on: https://review.openstack.org/508518
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
