@@ -321,6 +321,13 @@ file.
 Running Jobs with Zuul
 ======================
 
+.. warning::
+
+   The information in this section about ``zuul/layout.yaml`` and
+   ``jenkins/jobs/`` files are outdated, they refer to Zuul v2.
+   OpenStack CI uses Zuul v3 now. Read the :doc:`Zuul v3 Migration
+   Guide <zuulv3>` for more information.
+
 There are two major components in getting jobs running under Zuul. First
 you must ensure that the job you want to run is defined in the `JJB
 config <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_.
@@ -433,17 +440,19 @@ Step 1: End Project Gating
 --------------------------
 
 Check out a copy of the ``openstack-infra/project-config`` repository
-and edit ``zuul/layout.yaml``.  Find the section for your project and
+and edit ``zuul.d/projects.yaml``.  Find the section for your project and
 change it to look like this::
 
-  - name: openstack/<projectname>
-    template:
-      - name: merge-check
-      - name: noop-jobs
+  - project:
+    name: openstack/<projectname>
+    templates:
+      - merge-check
+      - noop-jobs
 
-Also, remove your project from ``jenkins/jobs/projects.yaml``, and if
-you have created any other jobs specific for your project in
-``jenkins/jobs/``, remove them as well.
+Also, remove any jobs and templates you have defined. These can be
+defined in ``openstack-infra/project-config`` repository in the
+directory  ``zuul.d``, or in ``openstack-infra/openstack-zuul-jobs``
+repository or in your own repository.
 
 Submit that change and make sure to mention in the commit message that
 you are ending project gating for the purposes of retiring the
@@ -497,7 +506,8 @@ Once your repository is in its final state, prepare a second change to
 the ``openstack-infra/project-config`` repository that does the
 following:
 
-* Remove your project from ``zuul/layout.yaml``.
+* Remove your project from ``zuul.d/projects.yaml`` and
+  ``zuul/main.yaml``.
 
 * By default, project ACLs are defined in a file called
   ``gerrit/acls/openstack/<projectname>.config``. If this file exists,
