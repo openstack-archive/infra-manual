@@ -4,6 +4,13 @@
  Project Creator's Guide
 ========================
 
+.. warning::
+
+   The information in this chapter about ``zuul/layout.yaml`` and
+   ``jenkins/jobs/`` files are all outdated, they refer to Zuul v2.
+   OpenStack CI uses Zuul v3 now. Read the :doc:`Zuul v3 Migration
+   Guide <zuulv3>` for more information.
+
 Before You Start
 ================
 
