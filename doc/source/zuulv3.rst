@@ -787,7 +787,7 @@ If those don't apply, this will mean the following changes:
 .. _openstack-zuul-jobs zuul.d: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d
 .. _openstack-zuul-jobs: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs
 .. _openstack-tox: https://docs.openstack.org/infra/openstack-zuul-jobs/jobs.html#job-openstack-tox
-.. _playbooks/legacy: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/playbooks/legacy
+.. _playbooks/legacy: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/playbooks/legacy
 .. _project-config zuul.d: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d
 .. _project-config: https://git.openstack.org/cgit/openstack-infra/project-config
 .. _zuul-jobs documentation: https://docs.openstack.org/infra/zuul-jobs/
