@@ -780,6 +780,28 @@ If those don't apply, this will mean the following changes:
 * Stop using nodesets prefixed with ``legacy-``. Each of them should have an
   equivalent non-legacy nodeset.
 
+What Not to Convert?
+~~~~~~~~~~~~~~~~~~~~
+
+Note that some jobs should always stay in `project-config`_. The
+general idea is that the OpenStack wide jobs mentioned in the
+`Consistent Testing Interface`_ document remain in `project-config`_
+but all the other things (things special to a given project) happen in
+their own repo.
+
+We always like to have merge-check in `project-config`_, since that's
+a system thing.
+
+So, a non-complete list of jobs that should not live in project's own
+configuration but stay in `project-config`_:
+
+* check-requirements
+* merge-check
+* openstack-python-jobs
+* publish-to-pypi
+* release-notes-jobs
+
+.. _Consistent Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html
 .. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
 .. _openstack-zuul-jobs jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/jobs.yaml
