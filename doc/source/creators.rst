@@ -4,13 +4,6 @@
  Project Creator's Guide
 ========================
 
-.. warning::
-
-   The information in this chapter about ``zuul/layout.yaml`` and
-   ``jenkins/jobs/`` files are all outdated, they refer to Zuul v2.
-   OpenStack CI uses Zuul v3 now. Read the :doc:`Zuul v3 Migration
-   Guide <zuulv3>` for more information.
-
 Before You Start
 ================
 
@@ -503,11 +496,11 @@ See other files in the same directory for further examples.
 
 .. _basic_zuul_jobs:
 
-Add Basic Zuul Jobs
+Add Project to Zuul
 -------------------
 
 Test jobs are run by Zuul. For a discussion of how Zuul jobs work in
-an OpenStack context, please see :doc:zuulv3.
+an OpenStack context, please see :doc:`zuulv3`.
 
 Edit ``zuul/main.yaml`` and add your project in alphabetical order to the
 ``untrusted-projects`` section in the ``openstack`` tenant after the
@@ -516,140 +509,41 @@ comment that reads::
   # After this point, sorting projects alphabetically will help
   # merge conflicts
 
-Jobs themselves can be added directly to your project in the file
-``.zuul.yaml``. Be sure to see :ref:`v3_naming` for information on
-job naming.
+Add Jobs for your Project
+-------------------------
 
-OpenStack has a number of jobs and project-templates that can be used
-directly in your project's Zuul config. You can also make new jobs that
-inherit from existing jobs or or you can write your own from scratch.
+Every project needs at least one test job or patches will not be able to land.
+There are a multitude of options at your disposal for jobs, but to get started
+you should do the following:
 
-For more information on writing jobs for Zuul, see
-https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html
+Add merge-check template
+------------------------
 
-.. _zuul_best_practices:
+Every project needs to have an entry in ``zuul.d/projects.yaml``
+containing an entry for the ``merge-check`` template.
 
-Zuul Best Practices
--------------------
-
-There are a couple of best practices for setting up jobs.
-
-Adding a New Job
-~~~~~~~~~~~~~~~~
-
-Jobs in Zuul are self-testing, which means that the change adding a
-new job can run with that job applied into the project's pipelines. It's
-a good idea when adding a new job in your project to put it at least
-into the ``check`` pipeline so that you can verify that it runs as expected.
-
-Use Templates
-~~~~~~~~~~~~~
-
-For many common cases, there are templates of jobs defined that can be applied
-to your project. For instance:
+Edit ``zuul.d/projects.yaml`` and add an entry for your project in alphabetical
+order:
 
 .. code-block:: yaml
 
-  - project-template:
-      name: openstack-python27-jobs
-        check:
-          - openstack-tox-pep8
-          - openstack-tox-py27
-        gate:
-          - openstack-tox-pep8
-          - openstack-tox-py27
+   - project:
+       name: openstack/<projectname>
+       templates:
+         - merge-check
 
-To apply that to your project, add it to the ``templates`` section:
+Adding additional jobs can be done in the central repository of in
+your new project's ``.zuul.yaml`` file. For more information on
+addition additional jobs into your project, see
+:ref:`in-repo-zuul-jobs`.
 
-.. code-block:: yaml
+.. important::
 
-  - project:
-      name: openstack/new-project
-      templates:
-        - openstack-python27-jobs
-
-If you use the same set of tests in several repositories, introduce a
-new template and use that one.
-
-Non-Voting Jobs
-~~~~~~~~~~~~~~~
-
-A job can either be voting or non-voting. If you have a job that
-is voting in one repository but non-voting in another, you can indicate
-this by using a variant.
-
-To make a single job non-voting everywhere, add ``voting: false`` in the
-job definition.
-
-.. code-block:: yaml
-
-  - job:
-      parent: devstack
-      name: new-project-tempest-devstack-mongodb-full
-      voting: false
-
-and add it to your project pipelines:
-
-.. code-block:: yaml
-
-  - project:
-      name: openstack/new-project
-      templates:
-        - openstack-python-jobs
-      check:
-        jobs:
-          - new-project-tempest-devstack-mongodb-full
-
-To use a job that is otherwise voting in your project but in a non-voting
-manner, add ``voting: false`` to its entry in your project pipeline definition.
-
-.. code-block:: yaml
-
-  - project:
-      name: openstack/new-project
-      templates:
-        - openstack-python-jobs
-      check:
-        jobs:
-          - openstack-tox-py35:
-              voting: false
-
-Non-voting jobs should only be added ``check`` queues. Do not add them
-to the ``gate`` queue since running non-voting jobs in the gate is
-just a waste of resources.
-
-Running Jobs Only on Some Branches
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-If you want to run the job only on a specific stable branch, add a branch
-matcher to the job definition.
-
-.. code-block:: yaml
-
-  - job:
-      parent: devstack
-      name: new-project-tempest-devstack-mongodb-full
-      voting: false
-      branches: ^(?!stable/(juno|kilo)).*$
-
-If, instead, you want to use an existing job in your project but only on
-a specific branch, apply it in the project pipeline definition.
-
-.. code-block:: yaml
-
-  - project:
-      name: openstack/new-project
-      templates:
-        - openstack-python-jobs
-      check:
-        jobs:
-          - openstack-tox-py35:
-              branches: ^(?!stable/(juno|kilo)).*$
-
-The job above will run on ``master`` but also on newer stable
-branches like ``stable/mitaka``. It will not run on the old
-``stable/juno`` and ``stable/kilo`` branches.
-
+   This addition of ``merge-check`` template needs to be a separate
+   change stacked on top of the project creation one. Submit them
+   together. This second change will fail initially, it can only pass
+   once the first change merged - and then you need to add a
+   ``recheck`` comment.
 
 Configure GerritBot to Announce Changes
 ---------------------------------------
@@ -908,11 +802,36 @@ with a skeleton, ready to have your other files added.
    $ cd <projectname>
    $ git review
 
-If you configured all of the tests for the project when it was
-created in the previous section, you will have to ensure that all of
-the tests pass before the cookiecutter change will merge. You can
-run most of the tests locally using ``tox`` to verify that they
-pass.
+.. _in-repo-zuul-jobs:
+
+Adding In-Repo Zuul Jobs
+------------------------
+
+Every project needs test jobs.
+
+OpenStack has a number of jobs and project-templates that can be used
+directly in your project's Zuul config. You can also make new jobs that
+inherit from existing jobs or or you can write your own from scratch.
+
+To get yourself started with a completely minimal set that don't actually
+do anything but do it successfully, you should add the ``noop-jobs`` template
+to your project in a file called ``.zuul.yaml``:
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/<projectname>
+      templates:
+        - noop-jobs
+
+Once your project is up and running you'll be able to add more jobs as you
+go and are ready for them. When you do, make sure to remove the ``noop-jobs``
+template, as it'll be telling Zuul to run jobs that don't do anything, which
+is not needed once you have real jobs.
+
+For more information on writing jobs for Zuul, see
+https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html
+and :ref:`zuul_best_practices`.
 
 Verify That Gerrit and the Test Jobs are Working
 ================================================
@@ -1237,35 +1156,22 @@ including the following changes:
         options:
           - translate
 
-#. Define jobs.
+#. Add the jobs to your pipelines.
 
-   Edit file ``jenkins/jobs/projects.yaml`` and add the
-   ``translation-jobs`` job-group to your repository:
+   Edit file ``zuul.d/projects.yaml`` and add the
+   ``translation-jobs`` template to your repository:
 
    .. code-block:: yaml
 
       - project:
-          name: <projectname>
-
-          jobs:
+          name: openstack/<projectname>
+          templates:
+            - merge-check
             - translation-jobs
 
-#. Define when to run the jobs.
 
-   Edit file ``zuul/layout.yaml`` and add the ``translation-jobs``
-   template to your repository:
-
-   .. code-block:: yaml
-
-        - name: openstack/<projectname>
-          template:
-            - name: merge-check
-            - name: python-jobs
-            - name: python35-jobs
-            - name: translation-jobs
-
-When submitting the change to openstack-infra/project-config for
-review, use the "translation_setup" topic so it receives the
+When submitting the change to ``openstack-infra/project-config`` for
+review, use the ``translation_setup`` topic so it receives the
 appropriate attention::
 
      $ git review -t translation_setup
@@ -1329,6 +1235,132 @@ exist, it is interpreted that there are no such modules.
 
 You also need to setup your repository following the instruction
 for Python and/or Django project above appropriately.
+
+.. _zuul_best_practices:
+
+Zuul Best Practices
+-------------------
+
+There are a couple of best practices for setting up jobs.
+
+Note that the standard OpenStack jobs should be in the
+``project-config`` repository, see :ref:`what_not_to_convert`.
+
+Adding a New Job
+~~~~~~~~~~~~~~~~
+
+Jobs in Zuul are self-testing, which means that the change adding a
+new job can run with that job applied into the project's pipelines. It's
+a good idea when adding a new job in your project to put it at least
+into the ``check`` pipeline so that you can verify that it runs as expected.
+
+Use Templates
+~~~~~~~~~~~~~
+
+For many common cases, there are templates of jobs defined that can be applied
+to your project. For instance:
+
+.. code-block:: yaml
+
+  - project-template:
+      name: openstack-python27-jobs
+        check:
+          - openstack-tox-pep8
+          - openstack-tox-py27
+        gate:
+          - openstack-tox-pep8
+          - openstack-tox-py27
+
+To apply that to your project, add it to the ``templates`` section:
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/<projectname>
+      templates:
+        - openstack-python27-jobs
+
+If you use the same set of tests in several repositories, introduce a
+new template and use that one.
+
+Non-Voting Jobs
+~~~~~~~~~~~~~~~
+
+A job can either be voting or non-voting. If you have a job that
+is voting in one repository but non-voting in another, you can indicate
+this by using a variant.
+
+To make a single job non-voting everywhere, add ``voting: false`` in the
+job definition.
+
+.. code-block:: yaml
+
+  - job:
+      parent: devstack
+      name: <projectname>-tempest-devstack-mongodb-full
+      voting: false
+
+and add it to your project pipelines:
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/<projectname>
+      templates:
+        - openstack-python-jobs
+      check:
+        jobs:
+          - <projectname>-tempest-devstack-mongodb-full
+
+To use a job that is otherwise voting in your project but in a non-voting
+manner, add ``voting: false`` to its entry in your project pipeline definition.
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/<projectname>
+      templates:
+        - openstack-python-jobs
+      check:
+        jobs:
+          - openstack-tox-py35:
+              voting: false
+
+Non-voting jobs should only be added to ``check`` queues. Do not add
+them to the ``gate`` queue since running non-voting jobs in the gate
+is just a waste of resources.
+
+Running Jobs Only on Some Branches
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to run the job only on a specific stable branch, add a branch
+matcher to the job definition.
+
+.. code-block:: yaml
+
+  - job:
+      parent: devstack
+      name: <projectname>-tempest-devstack-mongodb-full
+      voting: false
+      branches: ^(?!stable/(juno|kilo)).*$
+
+If, instead, you want to use an existing job in your project but only on
+a specific branch, apply it in the project pipeline definition.
+
+.. code-block:: yaml
+
+  - project:
+      name: openstack/<projectname>
+      templates:
+        - openstack-python-jobs
+      check:
+        jobs:
+          - openstack-tox-py35:
+              branches: ^(?!stable/(juno|kilo)).*$
+
+The job above will run on ``master`` but also on newer stable
+branches like ``stable/mitaka``. It will not run on the old
+``stable/juno`` and ``stable/kilo`` branches.
 
 Project Renames
 ===============
