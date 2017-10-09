@@ -780,6 +780,8 @@ If those don't apply, this will mean the following changes:
 * Stop using nodesets prefixed with ``legacy-``. Each of them should have an
   equivalent non-legacy nodeset.
 
+.. _what_not_to_convert:
+
 What Not to Convert?
 ~~~~~~~~~~~~~~~~~~~~
 
