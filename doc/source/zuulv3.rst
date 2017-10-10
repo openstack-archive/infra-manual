@@ -801,6 +801,7 @@ So, a non-complete list of templates that should not live in project's own
 configuration but stay in `project-config`_:
 
 * merge-check (system template)
+* announce-release
 * check-requirements (PTI)
 * openstack-python-jobs (PTI)
 * publish-to-pypi (PTI)
