@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 10 Oct 2017 16:48:19 +0000
+Reviewed-on: https://review.openstack.org/510905
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
