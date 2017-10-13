@@ -451,6 +451,41 @@ richer structured data.  See the `Job Content
 <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/jobs.html>`_
 section of the Zuul User Guide for a full list.
 
+Periodic Jobs
+-------------
+
+In Zuul v3 periodic jobs are just like regular jobs. So instead of
+putting ``periodic-foo-master`` and ``periodic-foo-pike`` on a
+project, you just put ``foo`` in the periodic pipeline. Zuul will then
+emits trigger events for every project-branch combination.
+
+So, if you add a periodic job to a project, it will run on all that
+projects branches. If you only want it to run on a subset of branches,
+you just use branch matchers in the project-pipeline in the regular
+way.
+
+The following will run ``tox-py35`` on all branches in the project:
+
+.. code-block:: yaml
+
+      - project:
+        name: openstack/<projectname>
+        periodic:
+          jobs:
+            - tox-py35
+
+This example runs ``tox-py35`` only on ``master`` and
+``stable/queens`` branches:
+
+.. code-block:: yaml
+
+      - project:
+        name: openstack/<projectname>
+        periodic:
+          jobs:
+            - tox-py35:
+                branches: [master, stable/queens]
+
 Changes to OpenStack tox jobs
 =============================
 
