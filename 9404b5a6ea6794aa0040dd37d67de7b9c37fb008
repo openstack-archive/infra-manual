@@ -1,0 +1,9 @@
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 13 Oct 2017 12:11:27 +0000
+Reviewed-on: https://review.openstack.org/511748
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
