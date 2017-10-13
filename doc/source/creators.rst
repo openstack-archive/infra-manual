@@ -516,11 +516,11 @@ Every project needs at least one test job or patches will not be able to land.
 There are a multitude of options at your disposal for jobs, but to get started
 you should do the following:
 
-Add merge-check template
-------------------------
+Add system-required template
+----------------------------
 
 Every project needs to have an entry in ``zuul.d/projects.yaml``
-containing an entry for the ``merge-check`` template.
+containing an entry for the ``system-required`` template.
 
 Edit ``zuul.d/projects.yaml`` and add an entry for your project in alphabetical
 order:
@@ -530,7 +530,7 @@ order:
    - project:
        name: openstack/<projectname>
        templates:
-         - merge-check
+         - system-required
 
 Adding additional jobs can be done in the central repository of in
 your new project's ``.zuul.yaml`` file. For more information on
@@ -539,7 +539,7 @@ addition additional jobs into your project, see
 
 .. important::
 
-   This addition of ``merge-check`` template needs to be a separate
+   This addition of ``system-required`` template needs to be a separate
    change stacked on top of the project creation one. Submit them
    together. This second change will fail initially, it can only pass
    once the first change merged - and then you need to add a
@@ -1166,7 +1166,7 @@ including the following changes:
       - project:
           name: openstack/<projectname>
           templates:
-            - merge-check
+            - system-required
             - translation-jobs
 
 

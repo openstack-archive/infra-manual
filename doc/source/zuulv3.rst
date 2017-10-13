@@ -786,7 +786,7 @@ What Not to Convert?
 ~~~~~~~~~~~~~~~~~~~~
 
 Note that some jobs should always stay in `project-config`_. We always
-like to have ``merge-check`` in `project-config`_, since that's a system
+mast have ``system-required`` in `project-config`_, since that's a system
 thing.
 
 Official OpenStack projects should implement the OpenStack wide jobs
@@ -800,7 +800,7 @@ access the external translation site.
 So, a non-complete list of templates that should not live in project's own
 configuration but stay in `project-config`_:
 
-* merge-check (system template)
+* system-required (system template)
 * announce-release
 * check-requirements (PTI)
 * openstack-python-jobs (PTI)
