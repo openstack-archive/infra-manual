@@ -1,0 +1,10 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: David Moreau Simard <dmsimard@redhat.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 13 Oct 2017 22:07:58 +0000
+Reviewed-on: https://review.openstack.org/511876
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
