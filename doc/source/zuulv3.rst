@@ -843,6 +843,33 @@ configuration but stay in `project-config`_:
 * release-notes-jobs (PTI)
 * translation-jobs
 
+Where Should Jobs And Templates Life?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We have a global namespace for jobs and project-templates, you can
+easily define a job or a template in one project and use it in others.
+Thus, do not blindly convert jobs but consider how to group and use
+them. Some recommendations and examples:
+
+* Some projects like devstack, tempest, and rally, should define a
+  common set of jobs that others can reuse directly or via
+  inheritance.
+
+* If your project consists of a server and a client project where you
+  have common tests, define one place for these common tests. We
+  recommend to use the server project for this.
+
+* The puppet team is defining a common set of jobs and templates in
+  ``openstack/puppet-openstack-integration``.
+
+* The requirements team has the ``check-requirements`` job in the
+  ``openstack/requirements`` project so that other projects can use
+  it.
+
+* The documentation team defines common jobs and templates in
+  ``openstack/openstack-manuals`` projects and other projects like
+  ``openstack/security-guide`` reuse these easily.
+
 .. _Project Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html
 .. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
