@@ -843,7 +843,7 @@ configuration but stay in `project-config`_:
 * release-notes-jobs (PTI)
 * translation-jobs
 
-Where Should Jobs And Templates Life?
+Where Should Jobs And Templates Live?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 We have a global namespace for jobs and project-templates, you can
