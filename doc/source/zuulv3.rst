@@ -870,6 +870,17 @@ them. Some recommendations and examples:
   ``openstack/openstack-manuals`` projects and other projects like
   ``openstack/security-guide`` reuse these easily.
 
+Options for Restricting When Jobs are Triggered
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Zuul v3 allows to specify when jobs are triggered to run based on
+changed files. You can define for a job either a list of
+``irrelevant-files`` or a list of ``files``. Do not use both together.
+
+See the `Zuul User Guide
+<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+for more information on how jobs are configured.
+
 .. _Project Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html
 .. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
