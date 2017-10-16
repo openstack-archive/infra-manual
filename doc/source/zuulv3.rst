@@ -738,9 +738,10 @@ At your earliest convenience, for every job specific to your project:
    verify both patches. The `openstack-zuul-jobs`_ patch should Depends-On the
    `project-config`_ patch. Specifically, these patches should contain:
 
-   * A patch to `project-config`_ to remove the jobs from your project's
+   * A patch to `project-config`_ to remove the legacy jobs from your project's
      pipeline definition in ``zuul.d/projects.yaml`` which is Needed-By the
-     next patch.
+     next patch. (See `what_not_to_convert`_ for information about which jobs
+     should stay.)
 
    * A patch to `openstack-zuul-jobs`_ removing the jobs from
      ``zuul.d/zuul-legacy-jobs.yaml`` and their corresponding playbooks from
