@@ -750,6 +750,23 @@ At your earliest convenience, for every job specific to your project:
    `project-config`_ patch removing use of the jobs hasn't landed. That's ok.
    We'll recheck it once the `project-config`_ patch lands.
 
+Stable Branches
+~~~~~~~~~~~~~~~
+
+If your project has stable branches, you will also need to add a
+``.zuul.yaml`` file to each stable branch.  The Zuul config on stable
+branches doesn't need everything on the master branch -- the jobs
+defined there will be available on any branch.  But it does at least
+need a ``project`` stanza.  When a project stanza is added to an
+in-repo project definition, unless branches are explicitly specified
+for the jobs in the project stanza, Zuul will assume the jobs listed
+should only be run on the current branch.
+
+To make sure your jobs run on all the right branches, just copy the
+``project`` stanza from the master branch.  If there are any jobs
+which should not run on any particular stable branch, omit them; and
+if there are jobs which should only run on that branch, add them.
+
 Reworking Legacy Jobs to be v3 Native
 -------------------------------------
 
