@@ -768,6 +768,9 @@ To make sure your jobs run on all the right branches, just copy the
 which should not run on any particular stable branch, omit them; and
 if there are jobs which should only run on that branch, add them.
 
+If you have playbooks or roles included on the master branch, backport
+these as well.
+
 Reworking Legacy Jobs to be v3 Native
 -------------------------------------
 
