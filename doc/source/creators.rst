@@ -214,9 +214,10 @@ If you do not have PyPI credentials, you should create them at
 https://pypi.python.org/pypi?%3Aaction=register_form as they are
 required for the next step.
 
-Once you have PyPI credentials visit
-https://pypi.python.org/pypi?%3Aaction=submit_form and upload an
-initial ``PKG-INFO`` file for a nonexistent version ``0`` of your
+Once you have PyPI credentials see
+https://packaging.python.org/tutorials/distributing-packages/
+to create and upload your initial package. The initial package would
+contain a ``PKG-INFO`` file for a nonexistent version ``0`` of your
 package (that way any release you make is guaranteed to be higher).
 It can be as simple as a plain text file containing the following
 two lines (where ``packagename`` is replaced by the desired package
