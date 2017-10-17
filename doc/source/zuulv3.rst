@@ -840,7 +840,7 @@ What Not to Convert?
 ~~~~~~~~~~~~~~~~~~~~
 
 Note that some jobs should always stay in `project-config`_. We always
-mast have ``system-required`` in `project-config`_, since that's a system
+must have ``system-required`` in `project-config`_, since that's a system
 thing.
 
 Official OpenStack projects should implement the OpenStack wide jobs
