@@ -494,57 +494,6 @@ like::
 
 See other files in the same directory for further examples.
 
-.. _basic_zuul_jobs:
-
-Add Project to Zuul
--------------------
-
-Test jobs are run by Zuul. For a discussion of how Zuul jobs work in
-an OpenStack context, please see :doc:`zuulv3`.
-
-Edit ``zuul/main.yaml`` and add your project in alphabetical order to the
-``untrusted-projects`` section in the ``openstack`` tenant after the
-comment that reads::
-
-  # After this point, sorting projects alphabetically will help
-  # merge conflicts
-
-Add Jobs for your Project
--------------------------
-
-Every project needs at least one test job or patches will not be able to land.
-There are a multitude of options at your disposal for jobs, but to get started
-you should do the following:
-
-Add system-required template
-----------------------------
-
-Every project needs to have an entry in ``zuul.d/projects.yaml``
-containing an entry for the ``system-required`` template.
-
-Edit ``zuul.d/projects.yaml`` and add an entry for your project in alphabetical
-order:
-
-.. code-block:: yaml
-
-   - project:
-       name: openstack/<projectname>
-       templates:
-         - system-required
-
-Adding additional jobs can be done in the central repository of in
-your new project's ``.zuul.yaml`` file. For more information on
-addition additional jobs into your project, see
-:ref:`in-repo-zuul-jobs`.
-
-.. important::
-
-   This addition of ``system-required`` template needs to be a separate
-   change stacked on top of the project creation one. Submit them
-   together. This second change will fail initially, it can only pass
-   once the first change merged - and then you need to add a
-   ``recheck`` comment.
-
 Configure GerritBot to Announce Changes
 ---------------------------------------
 
@@ -581,8 +530,26 @@ channel, add it to the ``openstack-oslo`` section::
 If you're adding a new IRC channel, see the `IRC
 services <https://docs.openstack.org/infra/system-config/irc.html>`_ documentation.
 
+.. _basic_zuul_jobs:
+
+Add Project to Zuul
+-------------------
+
+Test jobs are run by Zuul. For a discussion of how Zuul jobs work in
+an OpenStack context, please see :doc:`zuulv3`.
+
+Edit ``zuul/main.yaml`` and add your project in alphabetical order to the
+``untrusted-projects`` section in the ``openstack`` tenant after the
+comment that reads::
+
+  # After this point, sorting projects alphabetically will help
+  # merge conflicts
+
 Submitting Infra Change for Review
 ----------------------------------
+
+At this point, you should submit all the changes discussed so far
+as a single patchset to gerrit.
 
 When submitting the change to openstack-infra/project-config for
 review, use the "new-project" topic so it receives the appropriate
@@ -590,7 +557,55 @@ attention::
 
      $ git review -t new-project
 
-Note the Change-Id in your commit message for the next step.
+Hold onto the Change-Id for this patch.  You will need to include
+it in the commit message when you :ref:`add-to-governance-repo`
+later.
+
+Add Jobs for your Project
+-------------------------
+
+Every project needs at least one test job or patches will not be able to land.
+
+.. note::
+
+   The patchset described in this section must be submitted separately
+   from the change described above, and it will fail initially.  That's
+   to be expected.  Read through the entire following section, including
+   the Important Note at the end, before submitting your change to gerrit.
+
+There are a multitude of options at your disposal for test jobs, but to get
+started you should do the following:
+
+Add system-required template
+----------------------------
+
+Every project needs to have an entry in ``zuul.d/projects.yaml``
+containing an entry for the ``system-required`` template.
+
+Edit ``zuul.d/projects.yaml`` and add an entry for your project in alphabetical
+order:
+
+.. code-block:: yaml
+
+   - project:
+       name: openstack/<projectname>
+       templates:
+         - system-required
+
+Adding additional jobs can be done in the central repository of in
+your new project's ``.zuul.yaml`` file. For more information on
+addition additional jobs into your project, see
+:ref:`in-repo-zuul-jobs`.
+
+.. important::
+
+   This addition of ``system-required`` template needs to be a separate
+   change stacked on top of the project creation one. Submit them
+   together. This second change will fail initially, it can only pass
+   once the first change merged - and then you need to add a
+   ``recheck`` comment.
+
+.. _add-to-governance-repo:
 
 Add New Repository to the Governance Repository
 -----------------------------------------------
