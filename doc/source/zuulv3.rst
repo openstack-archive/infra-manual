@@ -32,7 +32,7 @@ are:
 * Integration with more systems
 
 We're pretty excited about Zuul v3, and we think it's going to improve
-the devolpment process for all OpenStack developers.  But we also know
+the development process for all OpenStack developers.  But we also know
 that not everyone needs to know everything about Zuul v3 in order for
 this to work.  The sections below provide increasing amounts of
 information about Zuul v3.  Please at least read the first section,
