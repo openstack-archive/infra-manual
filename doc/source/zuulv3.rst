@@ -39,7 +39,7 @@ information about Zuul v3.  Please at least read the first section,
 and then continue reading as long as subsequent sections remain
 relevant to the way you work.
 
-.. _Zuul v3 spec: http://specs.openstack.org/openstack-infra/infra-specs/specs/zuulv3.html
+.. _Zuul v3 spec: https://specs.openstack.org/openstack-infra/infra-specs/specs/zuulv3.html
 
 What's the Minimum I Need to Know?
 ==================================

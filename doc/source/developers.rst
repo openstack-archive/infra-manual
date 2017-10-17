@@ -132,7 +132,7 @@ so install it as any other package::
   yum install git-review
 
 On Red Hat Enterprise Linux, you must first enable the `EPEL
-<http://fedoraproject.org/wiki/EPEL>`_ repository, then install it as
+<https://fedoraproject.org/wiki/EPEL>`_ repository, then install it as
 any other package::
 
   yum install git-review
@@ -148,7 +148,7 @@ install it as any other package::
   pacman -S git-review
 
 On Mac OS X, or most other Unix-like systems, you may install it with
-`pip <http://pip.readthedocs.org/en/latest/installing.html>`_::
+`pip <https://pip.readthedocs.org/en/latest/installing.html>`_::
 
   pip install git-review
 
@@ -339,7 +339,7 @@ status of a specification. For more information, see `the Blueprints wiki page
 <https://wiki.openstack.org/wiki/Blueprints>`_.
 
 View all approved project team's specifications at
-http://specs.openstack.org/.
+https://specs.openstack.org/.
 
 Starting a Change
 -----------------
@@ -354,7 +354,7 @@ Make sure you have the latest upstream changes::
   git pull --ff-only origin master
 
 Create a `topic branch
-<http://git-scm.com/book/en/Git-Branching-Branching-Workflows#Topic-Branches>`_
+<https://git-scm.com/book/en/Git-Branching-Branching-Workflows#Topic-Branches>`_
 to hold your work and switch to it.  If you are working on a
 blueprint, name your topic branch ``bp/BLUEPRINT`` where BLUEPRINT is
 the name of a blueprint in Launchpad (for example,
