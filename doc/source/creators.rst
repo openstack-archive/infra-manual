@@ -593,9 +593,11 @@ order:
          - system-required
 
 Adding additional jobs can be done in the central repository or in
-your new project's ``.zuul.yaml`` file. For more information on
-addition additional jobs into your project, see
-:ref:`in-repo-zuul-jobs`.
+your new project's ``.zuul.yaml`` file. Official OpenStack projects should
+implement the OpenStack wide jobs mentioned in the `Project Testing
+Interface`_ (PTI) document. These jobs will also be listed in this project
+block and not in the project's ``.zuul.yaml``. For more information on
+addition additional jobs into your project, see :ref:`in-repo-zuul-jobs`.
 
 .. important::
 
@@ -1438,3 +1440,5 @@ the following:
 
 #. Will the repo release on pypi? Check that it https://pypi.python.org
    is set up correctly.
+
+.. _Project Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html
