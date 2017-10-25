@@ -1,0 +1,10 @@
+Code-Review+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: yolanda.robla <yroblamo@redhat.com>
+Workflow+1: yolanda.robla <yroblamo@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 25 Oct 2017 13:23:24 +0000
+Reviewed-on: https://review.openstack.org/513197
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
