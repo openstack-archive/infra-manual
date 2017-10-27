@@ -183,16 +183,16 @@ allow us to express when a job should run in a human-friendly manner.
    <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
 
 Job definitions may appear more than once in the Zuul configuration.
-We call the first instance the *reference* definition, and subsequent
-definitions *variants*.  Job definitions have several fields, such as
-``branches`` and ``files``, which act as *matchers* to determine
-whether the job is applicable to a change.  When Zuul runs a job, it
-builds up a new job definition with all of the matching variants
-applied.  Later variants can override settings on earlier definitions,
-but any settings not overridden will be present as well.
+We call these multiple definitions *variants*.  Job definitions have
+several fields, such as ``branches`` and ``files``, which act as
+*matchers* to determine whether the job is applicable to a change.
+When Zuul runs a job, it builds up a new job definition with all of
+the matching variants applied.  Later variants can override settings
+on earlier definitions, but any settings not overridden will be
+present as well.
 
-For example, consider this simple reference job definition for a job
-named ``fedstack``:
+For example, consider this simple job definition for a job named
+``fedstack``:
 
 .. code-block:: yaml
 
@@ -235,10 +235,9 @@ this:
 We call the highlighted portion the ``project-pipeline`` definition.
 That says "run the fedstack job on changes to the cloudycloud project
 in the check pipeline".  A change to the master branch of cloudycloud
-will run the job described in the reference definition above.  A
-change on the stable/pike branch will combine *both* the reference
-definition and the variant and use the new merged definition when
-running the job.
+will run the job described in the first definition above.  A change on
+the stable/pike branch will combine *both* variants and use the new
+merged definition when running the job.
 
 If we want to change how the job is run *only* for the cloudycloud
 project, we can alter the project-pipeline definition to specify a
@@ -754,22 +753,16 @@ At your earliest convenience, for every job specific to your project:
 Stable Branches
 ~~~~~~~~~~~~~~~
 
-If your project has stable branches, you will also need to add a
-``.zuul.yaml`` file to each stable branch.  The Zuul config on stable
-branches doesn't need everything on the master branch -- the jobs
-defined in the master branch will be available in any branch.  But it
-does at least need a ``project`` stanza.  When a project stanza is
-added to an in-repo project definition, unless branches are explicitly
-specified for the jobs in the project stanza, Zuul will assume the
-jobs listed should only be run on the current branch.
-
-To make sure your jobs run on all the right branches, just copy the
-``project`` stanza from the master branch.  If there are any jobs
-which should not run on any particular stable branch, omit them; and
-if there are jobs which should only run on that branch, add them.
-
-If you have playbooks or roles included on the master branch, backport
-these as well.
+If your project has stable branches, you should also add a
+``.zuul.yaml`` file (with job and project definitions -- just as on
+master) and any playbooks to each stable branch.  Zuul will
+automatically add branch matchers for the current branch to any jobs
+defined on a multi-branch project.  Jobs defined in a stable branch
+will therefore only apply to changes on the stable branch, and
+likewise master.  Backporting these changes is a little more work now
+during the transition from Zuul v2 to v3, but when we make the next
+stable branch from master, no extra would should be required -- the
+new branch will already contain all the right content.
 
 Reworking Legacy Jobs to be v3 Native
 -------------------------------------
