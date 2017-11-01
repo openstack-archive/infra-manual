@@ -385,15 +385,14 @@ repo will find its playbook in the project repo.
 
 A job with pre- or post-run playbooks must specify the path to those
 playbooks explicitly.  The path is relative to the root of the
-repository, and the filename extension (usually ``.yaml`` but ``.yml``
-is supported) should be omitted.  For example:
+repository.  For example:
 
 .. code-block:: yaml
 
    - job:
        name: test-job
-       pre-run: playbooks/test-job-pre
-       post-run: playbooks/test-job-post
+       pre-run: playbooks/test-job-pre.yaml
+       post-run: playbooks/test-job-post.yaml
 
 However, the main playbook for the job may either be explicitly
 specified (with the ``run:`` attribute) or if that is omitted, an
