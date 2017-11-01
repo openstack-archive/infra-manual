@@ -858,6 +858,7 @@ configuration but stay in `project-config`_:
 * announce-release
 * check-requirements (PTI)
 * openstack-python-jobs (PTI)
+* openstack-tox-cover (PTI)
 * publish-to-pypi (PTI)
 * release-notes-jobs (PTI)
 * translation-jobs
