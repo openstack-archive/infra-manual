@@ -1047,7 +1047,7 @@ Each patchset gets merged to the head of the branch before testing it. If
 Gerrit cannot merge a patchset, it will give a -1 review and add a
 comment notifying of merge failure.
 
-Each time a change merges, the "merge-check" pipeline verifies that
+Each time a change merges, the "system-required" pipeline verifies that
 all open changes on the same project are still mergeable. If any
 job is not mergeable, Zuul will give a -1 review and add a
 comment notifying of merge failure.
