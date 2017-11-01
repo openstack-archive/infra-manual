@@ -361,13 +361,13 @@ exist. You should end up with something like::
 
   - name: openstack/<projectname>
     template:
-      - name: merge-check
+      - name: system-required
     check:
       - gate-new-<projectname>-job
     gate:
       - gate-new-<projectname>-job
 
-The template section applies the common ``merge-check`` jobs to the
+The template section applies the common ``system-required`` jobs to the
 project (every project should use this template). Then we have
 ``gate-new-<projectname>-job`` listed in the check and gate
 pipelines. This says if an event comes in for
@@ -446,7 +446,7 @@ change it to look like this::
   - project:
     name: openstack/<projectname>
     templates:
-      - merge-check
+      - system-required
       - noop-jobs
 
 Also, remove any jobs and templates you have defined. These can be
