@@ -796,7 +796,7 @@ Converting Custom dsvm jobs
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 If your job is a custom dsvm job - try to migrate it to use the new
-``devstack`` or ``devstack-tempest`` base jobs.
+``devstack`` base job.
 
 .. note:: There may be a couple of edge cases they can't handle yet.
 
