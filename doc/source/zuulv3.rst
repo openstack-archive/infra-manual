@@ -450,6 +450,37 @@ richer structured data.  See the `Job Content
 <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/jobs.html>`_
 section of the Zuul User Guide for a full list.
 
+Secret Variables
+----------------
+
+A new feature in Zuul v3 is the ability to provide secrets which can be
+used to perform tasks with jobs run in post and release pipelines, like
+authenticating a job to a remote service or generating cryptographic
+signatures automatically. These secrets are asymmetrically encrypted for
+inclusion in job definitions using per-project public keys served from a
+Zuul API, and are presented in their decrypted form as Ansible variables
+the jobs can use.
+
+.. sidebar:: Further reading
+
+   See the `Zuul User Guide
+   <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/encryption.html>`_
+   for more information on encryption and secrets
+
+.. note::
+
+   Credentials and similar secrets encrypted for the per-project keys
+   Zuul uses cannot be decrypted except by Zuul and (by extension) the
+   root sysadmins operating the Zuul service and maintaining the job
+   nodes where those secrets are utilized. By policy, these sysadmins
+   will not deliberately decrypt secrets or access decrypted secrets,
+   aside from non-production test vectors used to ensure the feature is
+   working correctly. They will not under any circumstances be able to
+   provide decrypted copies of your project's secrets on request, and so
+   you cannot consider the encrypted copy as a backup but should instead
+   find ways to safely maintain (and if necessary share) your own backup
+   copies if you're unable to easily revoke/replace them when lost.
+
 Periodic Jobs
 -------------
 
