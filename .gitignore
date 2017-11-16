@@ -15,6 +15,7 @@ ChangeLog
 *~
 .*.swp
 .bak
+*.idea
 
 # For Mac Users
 .DS_Store
