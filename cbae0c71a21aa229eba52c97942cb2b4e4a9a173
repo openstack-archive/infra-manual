@@ -1,0 +1,11 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Code-Review+1: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 21 Nov 2017 20:18:54 +0000
+Reviewed-on: https://review.openstack.org/520181
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
