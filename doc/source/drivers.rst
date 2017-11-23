@@ -547,6 +547,9 @@ Python tests need additional distribution packages installed as well
 and if those are not in the nodes used for testing, they have to be
 installed explicitly.
 
+If you are building documentation, the file ``doc/requirements.txt``
+is used instead to install Python packages.
+
 If you run devstack based tests, then list missing binary packages
 below the `files
 <https://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
@@ -587,13 +590,16 @@ The OpenStack CI infrastructure will install packages marked for a
 <https://docs.openstack.org/infra/bindep/readme.html#profiles>`__ named
 "test" along with any packages belonging to the default profile of the
 ``bindep.txt`` file. Add any build time requirements and any
-requirements specific to the test jobs to the "test" profile, add
-requirements for both test and runtime to the base profile::
+requirements specific to the test jobs to the "test" profile, add any
+requirements specific to documentation building to the "doc" profile, add
+requirements for test, runtime, and documentation to the base profile::
 
    # A runtime dependency
    libffi6
    # A build time dependency
    libffi-devel [test]
+   # A documentation dependency
+   graphviz [doc]
 
 Submodules
 ----------
