@@ -547,6 +547,9 @@ Python tests need additional distribution packages installed as well
 and if those are not in the nodes used for testing, they have to be
 installed explicitly.
 
+If you are building documentation, the file ``doc/requirements.txt``
+is used instead to install Python packages.
+
 If you run devstack based tests, then list missing binary packages
 below the `files
 <https://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
