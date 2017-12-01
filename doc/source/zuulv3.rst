@@ -866,20 +866,20 @@ If those don't apply, this will mean the following changes:
 
 .. _what_not_to_convert:
 
-What Not to Convert?
-~~~~~~~~~~~~~~~~~~~~
+What to Convert?
+~~~~~~~~~~~~~~~~
 
-Note that some jobs should always stay in `project-config`_. We always
-must have ``system-required`` in `project-config`_, since that's a system
-thing.
+Some jobs should not be migrated and should always stay in `project-config`_.
 
-Official OpenStack projects should implement the OpenStack wide jobs
-mentioned in the `Project Testing Interface`_ (PTI) document. These jobs
-should remain in `project-config`_ but all the other things (things
-special to a given project) can happen in the project repository.
+- We always must have ``system-required`` in `project-config`_, since that's a
+  system thing.
 
-Translation jobs should also live in `project-config`_, since those
-access the external translation site.
+- Official OpenStack projects should implement the OpenStack wide jobs
+  mentioned in the `Project Testing Interface`_ (PTI) document. These jobs
+  should remain in `project-config`_.
+
+- Translation jobs should also live in `project-config`_, since those access
+  the external translation site.
 
 So, a non-complete list of templates that should not live in project's own
 configuration but stay in `project-config`_:
@@ -892,6 +892,17 @@ configuration but stay in `project-config`_:
 * publish-to-pypi (PTI)
 * release-notes-jobs (PTI)
 * translation-jobs
+
+Outside of these jobs, most jobs can be migrated to a project repository. If a
+job is used by a single project then migration is simple: you should move the
+job to that project's repository. If a job is used by multiple projects then
+things get a little trickier. In this scenario, you should move the job to the
+project that is mostly testing and where the developers are best placed to
+maintain the job. For example, a job that validates interaction between nova
+and os-vif might be run for both of these projects. However, the job is mostly
+focused on os-vif and it's likely that os-vif developers would be best placed
+to resolve issues that may arise. As a result, the job should live in os-vif.
+More information is provided below.
 
 Where Should Jobs And Templates Live?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
