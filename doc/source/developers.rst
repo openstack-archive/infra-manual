@@ -230,7 +230,9 @@ using https) then you can configure git-review to use an https endpoint
 instead of ssh. Keep in mind that you will need to generate an
 `HTTP password in Gerrit
 <https://review.openstack.org/#/settings/http-password>`_ to use this
-connection. You should run the following command before "git review -s"::
+connection(Note that the generated password must not contain any "/" character, if your
+generated password contains one, regenerate it). You should run the following
+command before "git review -s"::
 
   git remote add gerrit https://<username>@review.openstack.org/<umbrella repository name>/<repository name>.git
 
