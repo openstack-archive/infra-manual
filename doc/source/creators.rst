@@ -245,9 +245,27 @@ To add a project to the CI System, you need to modify some
 infrastructure configuration files using git and the OpenStack gerrit
 review server.
 
-All of the changes described in this section should be submitted
-together as one patchset to the ``openstack-infra/project-config``
-repository.
+Note that you need two separate changes to set up your new project
+for the ``openstack-infra/project-config`` repository:
+
+* First change to create the git repository, configure ACLs, and add
+  the git repository to the OpenStack CI system, see
+  :ref:`add_project_to_master_projects_list` and following sections.
+  For official projects, this change should also link via
+  ``Needed-By`` to a change for the ``openstack/governance``
+  repository to add the new repository under the project team, see
+  :ref:`add-to-governance-repo`.
+* Second change to add jobs to your project, see
+  :ref:`add_jobs_for_project`. This one will fail Zuul internal
+  testing until the first change is merged, the repository gets
+  created and Zuul reloads its configuration.
+
+The changes described in this section should be submitted together as
+two stacked changes to the ``openstack-infra/project-config``
+repository. Stack these two changes on top of each other to make it
+easy to review them together and then merge them one after the other.
+
+.. _add_project_to_master_projects_list:
 
 Add the project to the master projects list
 -------------------------------------------
@@ -549,8 +567,8 @@ comment that reads::
 Submitting Infra Change for Review
 ----------------------------------
 
-At this point, you should submit all the changes discussed so far
-as a single patchset to gerrit.
+At this point, you should submit all the additions discussed so far as a
+single change to gerrit.
 
 When submitting the change to openstack-infra/project-config for
 review, use the "new-project" topic so it receives the appropriate
@@ -562,6 +580,8 @@ Hold onto the Change-Id for this patch.  You will need to include
 it in the commit message when you :ref:`add-to-governance-repo`
 later.
 
+.. _add_jobs_for_project:
+
 Add Jobs for your Project
 -------------------------
 
@@ -569,7 +589,7 @@ Every project needs at least one test job or patches will not be able to land.
 
 .. note::
 
-   The patchset described in this section must be submitted separately
+   The change described in this section must be submitted separately
    from the change described above, and it will fail initially.  That's
    to be expected.  Read through the entire following section, including
    the Important Note at the end, before submitting your change to gerrit.
@@ -602,11 +622,11 @@ adding additional jobs into your project, see :ref:`in-repo-zuul-jobs`.
 
 .. important::
 
-   This addition of ``system-required`` template needs to be a separate
-   change stacked on top of the project creation one. Submit them
-   together. This second change will fail initially, it can only pass
-   once the first change merged - and then you need to add a
-   ``recheck`` comment.
+   This addition of ``system-required`` template needs to be a
+   separate change stacked on top of the previous change. Submit
+   them together. This second change will fail initially, it can
+   only pass once the first change has merged - and then you need to
+   add a ``recheck`` comment.
 
 .. _add-to-governance-repo:
 
