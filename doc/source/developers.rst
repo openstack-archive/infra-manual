@@ -16,6 +16,33 @@ Getting Started
 The goal of this document is to walk you through the concepts and
 specifics that should be understood while contributing to OpenStack.
 
+Development on OpenStack requires at minimum an account on the OpenStack
+Gerrit Code Review System. **Effective** Development in OpenStack also
+requires interacting with other developers in IRC channels on Freenode.
+It is recommended to start by getting set up on IRC so that one can ask
+questions if one encounters issues with other phases of account setup.
+
+IRC Account
+-----------
+
+OpenStack uses the Freenode IRC network for real-time communication.
+
+If you do not know how to connect to Freenode, the `Connecting to Freenode`_
+document will help.
+
+It is **highly** recommended to `Register your IRC Nick`_.
+
+There are times when the SPAM-bots attack and the OpenStack Project needs
+to configure our channels to only allow people to join who are using a
+Registered Nick. Registering a Nick also prevents someone else from taking
+a Nick that people come to know you by.
+
+For further information about the use of IRC in OpenStack, see
+:ref:`irc-guide`.
+
+.. _Connecting to Freenode: http://freenode.net/kb/answer/chat
+.. _Register your IRC Nick: http://freenode.net/kb/answer/registration
+
 Account Setup
 -------------
 

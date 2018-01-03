@@ -31,6 +31,7 @@ instead a user or developer looking for API documentation, see
    :maxdepth: 2
 
    developers
+   irc
    python
    core
    drivers
