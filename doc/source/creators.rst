@@ -495,6 +495,14 @@ like::
 
 See other files in the same directory for further examples.
 
+Create An IRC Channel For Realtime Collaboration
+------------------------------------------------
+
+This step is not required, but if you're considering adding a new IRC
+channel, see the `IRC services
+<https://docs.openstack.org/infra/system-config/irc.html>`_
+documentation.
+
 Configure GerritBot to Announce Changes
 ---------------------------------------
 
@@ -527,9 +535,6 @@ channel, add it to the ``openstack-oslo`` section::
       - openstack-dev/pbr
     branches:
       - master
-
-If you're adding a new IRC channel, see the `IRC
-services <https://docs.openstack.org/infra/system-config/irc.html>`_ documentation.
 
 .. _basic_zuul_jobs:
 
