@@ -225,6 +225,8 @@ to reviewers to identify files which need extra attention.
 You can learn more about `stable branches in the project team guide
 <https://docs.openstack.org/project-team-guide/stable-branches.html>`_.
 
+.. _tagging-a-release:
+
 Tagging a Release
 ~~~~~~~~~~~~~~~~~
 

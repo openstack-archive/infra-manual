@@ -202,42 +202,6 @@ team.
    stop and ask someone in the drivers group to help you before
    proceeding.
 
-.. _register-pypi:
-
-Give OpenStack Permission to Publish Releases
-=============================================
-
-New packages without any releases need to be manually registered on
-PyPI.
-
-If you do not have PyPI credentials, you should create them at
-https://pypi.python.org/pypi?%3Aaction=register_form as they are
-required for the next step.
-
-Once you have PyPI credentials see
-https://packaging.python.org/tutorials/distributing-packages/
-to create and upload your initial package. The initial package should
-contain a ``PKG-INFO`` file for a nonexistent version ``0`` of your
-package (that way any release you make is guaranteed to be higher).
-It can be as simple as a plain text file containing the following
-two lines (where ``packagename`` is replaced by the desired package
-name)::
-
-  Name: packagename
-  Version: 0
-
-Next your package needs to be updated so the "openstackci" user has
-"Owner" permissions.
-
-Visit
-``https://pypi.python.org/pypi?:action=role_form&package_name=<packagename>``
-and add "openstackci" in the "User Name" field, set the role to "Owner",
-and click "Add Role".
-
-.. image:: images/pypi-role-maintenance.png
-   :height: 499
-   :width: 800
-
 Adding the Project to the CI System
 ===================================
 
@@ -908,16 +872,129 @@ https://review.openstack.org/#/admin/projects/openstack-infra/infra-manual,acces
 -- and then click on the group names displayed on that page to review
 their membership.
 
-Prepare an Initial Release
-==========================
+.. _register-pypi:
+
+Prepare and Publish an Initial Release for Registration
+=======================================================
+
+If the project is an existing project that already has at least one PyPI
+release, you can skip ahead to :ref:`transfer-package-to-openstackci`.
+However, note that in the future, :ref:`tagging-a-release` contains the
+instructions for tagging and releasing.
+
+.. note::
+
+  Official OpenStack Projects manage the application of tags and the
+  driving of the release process via patches to the `openstack/releases`_
+  repository. If the new project in question is an Official Release Managed
+  project, see the `openstack/releases README.rst`_ file and skip ahead to
+  :ref:`allowing-other-openstack`.
+
+Even though your new project doesn't do anything yet, it needs to have a
+release uploaded to PyPI in order for its name to be registered. Publishing a
+registration release will also exercise the release machinery jobs so you can
+verify it's all set up properly before it's actually time to make a release
+you care about.
+
+Ensure the project can successfully produce a tarball by running:
+
+.. code-block:: bash
+
+  python setup.py sdist
+
+If it can, it's time to publish an ``0.0.0.0a1`` release to register your
+project and verify that the release machinery works,
+
+.. _openstack/releases: https://git.openstack.org/cgit/openstack/releases
+.. _openstack/releases README.rst: https://git.openstack.org/cgit/openstack/releases/tree/README.rst
+
+Register PyPI Credentials
+-------------------------
+
+If you do not have PyPI credentials, you should create them at
+https://pypi.python.org/pypi?%3Aaction=register_form as they are
+required for the next step.
+
+.. note::
+
+  If you want to avoid entering your username and password when
+  uploading, you can create a ``$HOME/.pypirc`` file with your username and
+  password:
+
+  .. code-block:: ini
+
+    [pypi]
+    username = <username>
+    password = <password>
+
+  **Be aware that this stores your password in plaintext.**
+
+.. note::
+
+  See `Packaging and Distributing Python Projects`_ for more information about
+  publishing Python packages in general. Please keep in note that it is written
+  to cover all Python projects, while OpenStack projects have adopted a
+  specific set of practices that differ including but not limited to the
+  OpenStack use of the `pbr`_ package for declarative metadata.
+
+.. _Packaging and Distributing Python Projects: https://packaging.python.org/tutorials/distributing-packages
+.. _pbr: https://docs.openstack.org/pbr/latest/
+
+Tagging an Initial Registration Release
+---------------------------------------
+
+In OpenStack, humans do not publish Python packages to PyPI by building and
+uploading directly. Rather, making a release is driven by pushing a valid
+signed git tag to the "gerrit" remote which then triggers automation jobs to
+run. This ensures that all releases have tags, and that
+additional tasks related to releasing software are always performed. The
+:ref:`tagging-a-release` section of the :ref:`driver_manual` explains making
+releases as part of running a project.
+
+.. note:: For the initial registration release, we use the tag ``0.0.0.0a1``.
+
+.. note::
+
+   You must have `GnuPG`_ installed and an OpenPGP key configured for
+   this step.
+
+Run::
+
+  $ git tag -s -m "descriptive message" 0.0.0.0a1
+  $ git push gerrit 0.0.0.0a1
+
+Wait a little while for the pypi job to run and publish the release. If it is
+successful, you should be able to see a page at
+https://pypi.python.org/pypi/<packagename>.
+
+If you need to check the logs, you can look at the `Zuul Builds Page`_ on the
+`Zuul Dashboard`_.
+
+.. _GnuPG: https://www.gnupg.org/
+.. _Zuul Builds Page: http://zuul.openstack.org/builds.html
+.. _Zuul Dashboard: http://zuul.openstack.org
+
+.. _transfer-package-to-openstackci:
+
+Transfer Package to openstackci
+-------------------------------
+
+Your package on PyPI needs to be updated so the "openstackci" user has
+"Owner" permissions.
+
+Visit
+``https://pypi.python.org/pypi?:action=role_form&package_name=<packagename>``
+and add "openstackci" in the "User Name" field, set the role to "Owner",
+and click "Add Role".
+
+.. image:: images/pypi-role-maintenance.png
+   :height: 499
+   :width: 800
 
 Make Your Project Useful
-------------------------
+========================
 
-Before going any farther, make the project do something useful.
-
-If you are importing an existing project with features, you can
-go ahead.
+Now you can make the project do something useful.
 
 If you are creating a brand new project, add some code and tests
 to provide some minimal functionality.
@@ -932,31 +1009,7 @@ Update the rest of the documentation under ``doc/source`` with
 information about the public API, tips on adopting the tool,
 instructions for running the tests, etc.
 
-Tagging a Release
------------------
-
-To verify that the release machinery works, push a signed tag to the
-"gerrit" remote. Use the smallest version number possible. If this is
-the first release, use "0.1.0". If other releases of the project
-exist, choose an appropriate next version number.
-
-.. note::
-
-   You must have GnuPG installed and an OpenPGP key configured for
-   this step.
-
-Run::
-
-  $ git tag -s -m "descriptive message" $version
-  $ git push gerrit $version
-
-Wait a little while for the pypi job to run and publish the release.
-
-If you need to check the logs, you can use the `git-os-job`_ command::
-
-  $ git os-job $version
-
-.. _git-os-job: https://pypi.python.org/pypi/git-os-job
+.. _allowing-other-openstack:
 
 Allowing Other OpenStack Projects to Use Your Library
 =====================================================
