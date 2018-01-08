@@ -560,11 +560,11 @@ OpenStack projects with custom tox environments should base them on
 
 .. code-block:: yaml
 
-    - job:
-        name: tooz-tox-py35-etcd3
-        parent: openstack-tox
-        vars:
-          tox_envlist: py35-etcd3
+    - job:
+        name: tooz-tox-py35-etcd3
+        parent: openstack-tox
+        vars:
+          tox_envlist: py35-etcd3
 
 Installation of 'sibling' requirements
 --------------------------------------
