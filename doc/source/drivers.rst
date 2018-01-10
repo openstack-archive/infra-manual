@@ -632,7 +632,7 @@ be used to set up the ``openstack_citest`` databases for testing.
 Consistent Naming for Jobs with Zuul v3
 =======================================
 
-With the move to version 3 of Zuul, it is time to define a guideance
+With the move to version 3 of Zuul, it is time to define a guidance
 on how jobs should be named for consistency across projects in the
 OpenStack project.
 
@@ -657,6 +657,7 @@ job names:
 * gate-tempest-dsvm-neutron-full-ssh
 * gate-neutron-docs-ubuntu-xenial
 * neutron-docs-ubuntu-xenial
+* legacy-tempest-dsvm-nova-lvm
 
 The current (Zuul v2) naming scheme as used at time of writing
 (July 2017) is basically:
@@ -673,15 +674,16 @@ The current (Zuul v2) naming scheme as used at time of writing
 Naming with Zuul v3
 -------------------
 
-The way Zuul v3 handles jobs, allows us to make changes to the job
-names and also gives the chance to remove some relicts:
+The way Zuul v3 handles jobs allows us to make changes to the job
+names and also gives the chance to remove some relics:
 
 * Remove ``gate`` prefix, it's not really needed.
 * Make clear what are publishing jobs. Name the test job and the
   publish job (currently ``gate-nova-docs-ubuntu-xenial`` and
   ``nova-docs-ubuntu-xenial``) clearer.
-* Remove ``dsvm`` in name, it is a historic relict.
-* Remove the ``{repository}`` from the name, it is not needed anymore.
+* Remove ``dsvm`` in name, it is a historic relic.
+* Remove the ``{repository}`` from the name, it is not needed anymore, *unless*
+  the job is defined in a specific repo.
 
 
 This all leads to the following naming scheme:
@@ -693,7 +695,8 @@ This all leads to the following naming scheme:
   to use ``gate-`` or ``periodic`` as it was done with Zuul v2.
 
 * There is in general no need to give the name of the repository as
-  part of the job as it was done with Zuul v2.
+  part of the job as it was done with Zuul v2, *unless*
+  the job is defined in a specific repo.
 
 * Publishing jobs, like documentation or tarball uploads, have a
   prefix of ``publish`` like ``publish-tarball`` and
@@ -701,7 +704,7 @@ This all leads to the following naming scheme:
 
   These jobs are normally run in a post pipeline.
 
-* Jobs that build an artefact without uploading  ``build`` like
+* Jobs that build an artifact without uploading  ``build`` like
   ``build-sphinx-docs``.
 
 * Jobs have the optional suffixes ``{node}`` which is used when a test
@@ -740,3 +743,4 @@ So, this would change the initial list of names as follows:
 * gate-tempest-dsvm-neutron-full-ssh -> tempest-neutron-full-ssh
 * gate-neutron-docs-ubuntu-xenial -> build-sphinx-docs
 * neutron-docs-ubuntu-xenial -> publish-sphinx-docs
+* legacy-tempest-dsvm-nova-lvm -> nova-lvm
