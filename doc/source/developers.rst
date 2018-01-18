@@ -789,8 +789,7 @@ Log in to https://review.openstack.org/ to see proposed changes, and
 review them.
 
 To provide a review for a proposed change in the Gerrit UI, click on
-the Review button (it will be next to the buttons that will provide
-unified or side-by-side diffs in the browser). In the code review, you
+the ``Reply...`` button. In the code review, you
 can add a message, as well as a vote (+1,0,-1).
 
 It's also possible to add comments to specific lines in the file, for
