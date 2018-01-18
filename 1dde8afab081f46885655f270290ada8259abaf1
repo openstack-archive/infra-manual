@@ -1,0 +1,9 @@
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Thu, 18 Jan 2018 19:15:32 +0000
+Reviewed-on: https://review.openstack.org/535430
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
