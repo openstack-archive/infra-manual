@@ -848,7 +848,7 @@ template, as it'll be telling Zuul to run jobs that don't do anything, which
 is not needed once you have real jobs.
 
 For more information on writing jobs for Zuul, see
-https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html
+https://docs.openstack.org/infra/zuul/user/config.html
 and :ref:`zuul_best_practices`.
 
 Verify That Gerrit and the Test Jobs are Working

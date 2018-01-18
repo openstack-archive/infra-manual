@@ -12,7 +12,7 @@ What is Zuul v3?
 
 .. sidebar:: Quick Links
 
-   * `Zuul v3 manual <https://docs.openstack.org/infra/zuul/feature/zuulv3/>`__
+   * `Zuul v3 manual <https://docs.openstack.org/infra/zuul/>`__
    * `zuul-jobs  <https://docs.openstack.org/infra/zuul-jobs/>`__
    * `openstack-zuul-jobs <https://docs.openstack.org/infra/openstack-zuul-jobs/>`__
 
@@ -120,7 +120,7 @@ running them; jobs only need to be added to one system.
 
 All aspects of Zuul relating to jobs are configured with YAML files
 similar to the Zuul v2 layout.  See the `Zuul User Guide
-<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+<https://docs.openstack.org/infra/zuul/user/config.html#job>`_
 for more information on how jobs are configured.
 
 Where Jobs Are Defined in Zuul v3
@@ -149,9 +149,9 @@ change its configuration in response to proposed changes.
 
 This is very powerful, but there are some limitations.  See the
 sections of the Zuul User Guide about `Security Contexts
-<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#security-contexts>`_
+<https://docs.openstack.org/infra/zuul/user/config.html#security-contexts>`_
 and `Configuration Loading
-<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#configuration-loading>`_
+<https://docs.openstack.org/infra/zuul/user/config.html#configuration-loading>`_
 for more details.
 
 Note that all OpenStack projects share a single namespace for job
@@ -180,7 +180,7 @@ allow us to express when a job should run in a human-friendly manner.
 
    Jobs, variants, and matchers are discussed in more detail in the
    `Job section of the Zuul manual
-   <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+   <https://docs.openstack.org/infra/zuul/user/config.html#job>`_
 
 Job definitions may appear more than once in the Zuul configuration.
 We call these multiple definitions *variants*.  Job definitions have
@@ -265,7 +265,7 @@ variant can't be used to "undo" an earlier matching variant.
 
 One final note about variants: in some cases Zuul attaches an implied
 branch matcher to job definitions.  The rules are `tricky
-<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#attr-job.branches>`_,
+<https://docs.openstack.org/infra/zuul/user/config.html#attr-job.branches>`_,
 but in general, jobs defined in a multi-branch project get an implied
 branch matcher of their current branch.  This makes it so that we can
 branch a project from master along with all of its job definitions,
@@ -296,7 +296,7 @@ inheritance in Zuul allows us to build on an existing job.
 
    Base jobs and inheritance are discussed in more detail in the
    `Job section of the Zuul manual
-   <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+   <https://docs.openstack.org/infra/zuul/user/config.html#job>`_
 
 Every job in Zuul has a parent, except for jobs which we call *base
 jobs*.  A base job is intended to handle fundamental tasks like
@@ -447,7 +447,7 @@ change being tested were available as environment variables, generally
 prefixed with ``ZUUL_``.  In Zuul v3, these have been replaced with
 Ansible variables which provide much more information as well as much
 richer structured data.  See the `Job Content
-<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/jobs.html>`_
+<https://docs.openstack.org/infra/zuul/user/jobs.html>`_
 section of the Zuul User Guide for a full list.
 
 Secret Variables
@@ -456,7 +456,7 @@ Secret Variables
 .. sidebar:: Further reading
 
    See the `Encryption section
-   <https://docs.openstack.org/infra/zuul/feature/zuulv3/user/encryption.html>`_
+   <https://docs.openstack.org/infra/zuul/user/encryption.html>`_
    of the Zuul User Guide for more information on encryption and secrets
 
 A new feature in Zuul v3 is the ability to provide secrets which can be
@@ -928,11 +928,11 @@ changed files. You can define for a job either a list of
 ``irrelevant-files`` or a list of ``files``. Do not use both together.
 
 See the `Zuul User Guide
-<https://docs.openstack.org/infra/zuul/feature/zuulv3/user/config.html#job>`_
+<https://docs.openstack.org/infra/zuul/user/config.html#job>`_
 for more information on how jobs are configured.
 
 .. _Project Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html
-.. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul/feature/zuulv3
+.. _Zuul v3 documentation: https://docs.openstack.org/infra/zuul
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
 .. _openstack-zuul-jobs jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/jobs.yaml
 .. _openstack-zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/roles
