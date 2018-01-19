@@ -520,6 +520,10 @@ following:
 
      acl-config: /home/gerrit2/acls/openstack/retired.config
 
+  Also prefix the project description with ``RETIRED,``::
+
+     description: RETIRED, existing  project description
+
 * Remove your project from ``gerritbot/channels.yaml``.
 
 Step 4: Remove Repository from the Governance Repository
