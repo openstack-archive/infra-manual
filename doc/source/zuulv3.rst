@@ -609,15 +609,14 @@ OpenStack project.
 #. Create a ``.zuul.yaml`` file in your project. This is where you will configure
    your project and define its jobs.
 
-#. In your ``.zuul.yaml``, define your project. You will need to identify your
-   project name, which pipelines will run jobs, and the names of the jobs
+#. In your ``.zuul.yaml``, define your project. You will need to define
+   which pipelines will run jobs, and the names of the jobs
    to run in each pipeline. Below is an example project which adds two jobs to
    the ``check`` pipeline:
 
    .. code-block:: yaml
 
       - project:
-        name: openstack/<projectname>
         check:
           jobs:
             - <projectname>-functional
