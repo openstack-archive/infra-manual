@@ -662,10 +662,13 @@ does not get merged accidentally before the manual setup is done.
 If your change has a dependency on a change in another repository,
 you can use cross-repo dependencies (CRD) in Zuul:
 
-* To use them, include "Depends-On: <gerrit-change-id>" in the footer
-  of your commit message. Use the full Change-ID ('I' + 40
-  characters). A patch can also depend on multiple changes as
-  explained in :ref:`multiple_changes`.
+* To use them, include "Depends-On: <gerrit-change-url>" in the footer
+  of your commit message. Use the permalink of the change.  This is
+  output by Gerrit when running git-review on the change, or you can
+  find it in the top-left corner of the Gerrit web interface.  Where
+  it says "Change ###### - Needs ..." the number is the link to the
+  change; you can copy and paste that URL.  A patch can also depend on
+  multiple changes as explained in :ref:`multiple_changes`.
 
 * These are one-way dependencies only -- do not create a cycle.
 
@@ -713,18 +716,11 @@ its own red or green dot for its test.
 Multiple Changes
 ^^^^^^^^^^^^^^^^
 
-A Gerrit change ID may refer to multiple changes (on multiple branches
-of the same project, or even multiple projects). In these cases, Zuul
-will treat all of the changes with that change ID as dependencies. So
-if you say that a tempest change Depends-On a change ID that has
-changes in nova master and nova stable/juno, then when testing the
-tempest change, both nova changes will be applied, and when deciding
-whether the tempest change can merge, both changes must merge ahead of
-it.
-
-A change may depend on more than one Gerrit change ID as well. So it is
-possible for a change in tempest to depend on a change in devstack and a
-change in nova. Simply add more "Depends-On:" lines to the footer.
+A Gerrit URL refers to a single change on a single branch, so if your
+change depends on multiple changes, or the same change on multiple
+branches of a project, you will need to explicitly list each URL.
+Simply add another "Depends-On:" line to the footer for each
+additional change.
 
 Cycles
 ^^^^^^
@@ -766,11 +762,9 @@ is not visible otherwise especially in these cases:
 Do not add a Depends-On an abandoned change, your change will never
 merge.
 
-If you backport a change to another branch, the gerrit change ID stays
-the same. If you add a Depends-On using the Gerrit change ID of the
-patch that subsequently was backported, the patch with the Depends-On
-is now also dependent on the backported change. This might be
-desirable for some changes and a surprise for others.
+If you backport a change to another branch, it will recieve a new URL.
+If you need to additionally depend on the backported change, you will
+need to amend the commit message to add another Depends-On footer.
 
 A change that is dependent on another can be approved before the
 dependent change merges. If the repositories share the gate queue, it

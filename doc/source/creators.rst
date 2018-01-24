@@ -674,13 +674,13 @@ When writing the commit message for this change, make this change
 depend on the project creation change by including a link to its
 Change-ID (from the previous step)::
 
-    Depends-On: <Gerrit Change-Id of project-config change>
+    Depends-On: <Gerrit URL of project-config change>
 
 Then, go back to the project-config change and add a link to the
 Change-ID of the governance change in the project-config commit
 message::
 
-    Needed-By: <Gerrit Change-Id of governance change>
+    Needed-By: <Gerrit URL of governance change>
 
 so that reviewers know that the governance change has been created.
 
@@ -1392,12 +1392,13 @@ The first step of doing a rename is understanding the required
 governance changes needed by the rename. You can use the following
 criteria:
 
-For a project being added to existing official OpenStack project: Create an
-``openstack/governance`` change and add a "Depends-On: project-changeID" of the
-change you make in the following steps to the commit message, and add a comment
-in the ``openstack-infra/project-config`` change that references the governance
-change. You will also make sure the PTL has expressed approval for the addition
-in some way.
+For a project being added to existing official OpenStack project:
+Create an ``openstack/governance`` change and add a "Depends-On:
+project-change-url" of the change you make in the following steps to
+the commit message, and add a comment in the
+``openstack-infra/project-config`` change that references the
+governance change. You will also make sure the PTL has expressed
+approval for the addition in some way.
 
 When preparing to rename a project, begin by making changes to the
 files in the ``openstack-infra/project-config`` repository related
