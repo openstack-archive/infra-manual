@@ -10,15 +10,10 @@ in the test environments managed by the Infrastructure team. This
 information may be useful when creating new jobs or debugging existing
 jobs.
 
-Our test environment is currently set up in two buckets. The first is
-made up of unprivileged single use VMs. The second are static VMs with
-specific credentials giving jobs access to specific services. When your
-jobs are started they will run on one of these two types of instances.
-
 Unprivileged Single Use VMs
 ===========================
 
-The vast majority of your jobs will run here. These are single use VMs
+All jobs currently run on these nodes. These are single use VMs
 booted in OpenStack clouds. You should start here unless you know you
 have a reason to use a privileged VM.
 
@@ -64,24 +59,14 @@ Each single use VM has these attributes which you can count on:
 
 Because these instances are single use we are able to give jobs full
 root access to them. This means you can install system packages, modify
-partition tables, and so on. Just about the only thing you can't do is
-reboot the instance as that will be interpreted by the job runner as
-an infrastructure failure resulting in the job being rerun in a loop.
-Keep this in mind if you intend on making changes to the system that
-typically require a reboot, like updating your kernel. You will not
-be able to reboot to accomplish that.
+partition tables, and so on. Note that if you reboot the test instances
+you will need to restart the zuul-console process.
 
-Static Privileged VMs
-=====================
-
-These VMs are preconfigured with service account credentials and are
-not deleted after jobs run on them. This allows you to have jobs that
-write to AFS volumes, publish to PyPi, sign packages, or push code
-back to Gerrit. The jobs that run here are much more tightly managed
-as we cannot run arbitrary code on them. Generally though the above
-assumptions for the single use instances hold here, with the exception
-that these static instances are not single use, and jobs running here
-do not get root access as a result.
+If jobs need to perform privileged actions they can do so using Zuul v3's
+secrets. Things like AFS access tokens or dockerhub credentials can
+be stored in Zuul secrets then used by jobs to perform privileged
+actions requiring this data. Please refer to the Zuul documentation
+for more info.
 
 Known Differences to Watch Out For
 ==================================
