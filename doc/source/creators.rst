@@ -1119,7 +1119,7 @@ Create file ``babel-django.cfg`` with the following content:
    django = django_babel.extract:extract_django
 
    [python: **.py]
-   [django: templates/**.html]
+   [django: **/templates/**.html]
    [django: **/templates/**.csv]
 
 Create  file ``babel-djangojs.cfg`` with the following content:
