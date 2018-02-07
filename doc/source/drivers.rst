@@ -436,7 +436,14 @@ Use mailing lists or other channels to announce to users and
 contributors that the project is being retired.  Be sure to include a
 date upon which maintenance will end, if that date is in the future.
 
-Step 1: End Project Gating
+Step 1: Stop requirements syncing (if set up)
+---------------------------------------------
+
+Submit a review to the ``openstack/requirements`` project removing the
+project from ``projects.txt``.  This needs to happen for stable
+branches as well.
+
+Step 2: End Project Gating
 --------------------------
 
 Check out a copy of the ``openstack-infra/project-config`` repository
@@ -458,7 +465,7 @@ Submit that change and make sure to mention in the commit message that
 you are ending project gating for the purposes of retiring the
 project.  Wait for that change to merge and then proceed.
 
-Step 2: Remove Project Content
+Step 3: Remove Project Content
 ------------------------------
 
 Once Zuul is no longer running tests on your project, prepare a change
@@ -499,7 +506,7 @@ deploy unmaintained software.  Potential contributors who may not have
 otherwise read the README will in this case, as it is the only file in
 the repository.
 
-Step 3: Remove Project from Infrastructure Systems
+Step 4: Remove Project from Infrastructure Systems
 --------------------------------------------------
 
 Once your repository is in its final state, prepare a second change to
@@ -526,7 +533,7 @@ following:
 
 * Remove your project from ``gerritbot/channels.yaml``.
 
-Step 4: Remove Repository from the Governance Repository
+Step 5: Remove Repository from the Governance Repository
 --------------------------------------------------------
 
 If this was an official OpenStack project, remove it from the
