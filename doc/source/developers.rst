@@ -153,10 +153,10 @@ distribution, so install it as any other package::
 
   apt-get install git-review
 
-On Fedora 16 and later, git-review is included into the distribution,
-so install it as any other package::
+On Fedora, git-review is included into the distribution, so install it as any
+other package::
 
-  yum install git-review
+  dnf install git-review
 
 On Red Hat Enterprise Linux, you must first enable the `EPEL
 <https://fedoraproject.org/wiki/EPEL>`_ repository, then install it as

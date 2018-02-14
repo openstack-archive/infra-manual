@@ -927,15 +927,18 @@ go ahead.
 If you are creating a brand new project, add some code and tests
 to provide some minimal functionality.
 
-Provide Basic Developer Documentation
--------------------------------------
+Provide Basic Project Documentation
+-----------------------------------
 
 Update the ``README.rst`` file to include a paragraph describing the
 new project.
 
 Update the rest of the documentation under ``doc/source`` with
-information about the public API, tips on adopting the tool,
-instructions for running the tests, etc.
+information on how to contribute to the project. Add project-specific
+documentation covering different content areas based on the intended audience,
+such as installation, configuration, and administration. Follow the layout
+of project documentation as described in `Project guide setup
+<https://docs.openstack.org/doc-contrib-guide/project-guides.html>`_.
 
 Tagging a Release
 -----------------
@@ -1025,15 +1028,14 @@ Updating devstack
      <PROJECTNAME>_REPO=${<PROJECTNAME>_REPO:-${GIT_BASE}/openstack/<projectname>.git}
      <PROJECTNAME>_BRANCH=${<PROJECTNAME>_BRANCH:-master}
 
-Add Link to Your Developer Documentation
-========================================
+Add Links to Your Project Documentation
+=======================================
 
 If your project is not an official OpenStack project, skip this section.
 
-Update the https://docs.openstack.org/openstack-projects.html
-page with a link to your documentation by checking out the
-``openstack/openstack-manuals`` repository and editing
-``www/developer/openstack-projects.html``.
+Update the https://docs.openstack.org/ site with links to your project
+documentation by following the instructions at `Template generator details
+<https://docs.openstack.org/doc-contrib-guide/doc-tools/template-generator.html>`_.
 
 Enabling Translation Infrastructure
 ===================================
