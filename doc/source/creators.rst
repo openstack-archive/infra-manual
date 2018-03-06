@@ -797,19 +797,12 @@ Remember, as mentioned earlier, these commands should typically be used only
 if you are working with an empty repository.
 
 The template in ``openstack-dev/oslo-cookiecutter`` should be used for
-Oslo libraries.
-
-
-::
+Oslo libraries::
 
    $ cookiecutter -f https://git.openstack.org/openstack-dev/oslo-cookiecutter
 
-
-
 The template in ``openstack/ui-cookiecutter`` should be used for
-Horizon plugins.
-
-::
+Horizon plugins::
 
    $ cookiecutter https://git.openstack.org/openstack/ui-cookiecutter
 
