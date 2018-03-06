@@ -796,6 +796,11 @@ most projects.  It can be used as follows:
 Remember, as mentioned earlier, these commands should typically be used only
 if you are working with an empty repository.
 
+The template in ``openstack-dev/specs-cookiecutter`` should be used for
+specs::
+
+   $ cookiecutter https://git.openstack.org/openstack-dev/specs-cookiecutter
+
 The template in ``openstack-dev/oslo-cookiecutter`` should be used for
 Oslo libraries::
 
@@ -805,6 +810,9 @@ The template in ``openstack/ui-cookiecutter`` should be used for
 Horizon plugins::
 
    $ cookiecutter https://git.openstack.org/openstack/ui-cookiecutter
+
+Other templates are available; the full list can be seen at
+https://git.openstack.org/cgit/?q=cookiecutter.
 
 Applying the Template
 ---------------------
