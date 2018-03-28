@@ -470,8 +470,14 @@ Step 3: Remove Project Content
 
 Once Zuul is no longer running tests on your project, prepare a change
 that removes all of the files from your project except the README.
-Double check that all dot files (such as ``.gitignore``, ``.testr.conf``,
-and ``.gitreview``) are also removed.
+Double check that all dot files (such as ``.gitignore`` and
+``.testr.conf``) **except** ``.gitreview`` are also removed.
+
+.. note::
+
+   Removing the ``.gitreview`` file from the master branch of a
+   repository breaks much of the release tools, so it will be harder
+   to continue to tag releases on existing stable branches.
 
 Replace the contents of the README with a message such as this::
 
