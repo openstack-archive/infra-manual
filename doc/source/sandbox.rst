@@ -23,7 +23,7 @@ Configure Git::
 
   git config user.name "firstname lastname"
   git config user.email "yourname@yourdomain.tld"
-  git config user.editor "yourfavouriteeditor"
+  git config core.editor "yourfavouriteeditor"
 
 Then configure git-review so that it knows about Gerrit. If you don't, it will
 do so the first time you submit a change for review. You will probably want to
@@ -63,10 +63,10 @@ Next commit your change with::
   git commit
 
 .. note::
-    This will take you into your editor which you set with ``git config user.editor``.
+    This will take you into your editor which you set with ``git config core.editor``.
 
 `Create a title for your commit message and add some text in the body.
-<https://wiki.openstack.org/wiki/GitCommitMessages#Summary_of_GIT_commit_message_structure>`_
+<https://wiki.openstack.org/wiki/GitCommitMessages#Summary_of_Git_commit_message_structure>`_
 Then save the file and close the editor. Next submit your patchset to gerrit::
 
   git review
@@ -86,6 +86,18 @@ new file::
   cat > second-file << EOF
    This is my second OpenStack file for that first changeset.
   EOF
+  
+Now add the second file::
+
+  git add second-file
+  
+or::
+
+  git add .
+
+or::
+
+  git add -a
 
 To ensure you submit your new patchset to the same change execute::
 
@@ -101,12 +113,12 @@ and again you should see a URL that links to your change. Open the
 web browser and look at the changeset you just submitted: notice that
 there are two patchsets now, with patchset 2 below your original
 patchset 1. If you have two different URI something went wrong, most
-likely you have not used *--amend* in your git commit or you've
+likely you have not used ``--amend`` in your git commit or you've
 changed the line Change-Id in your commit message.
 
 As a last step, you should abandon your change. You can do this from
-the web UI by visiting the URL of the change and hitting the *Abandon
-change* button. Alternatively you can abandon a change from command
+the web UI by visiting the URL of the change and hitting the *Abandon*
+button. Alternatively you can abandon a change from command
 line using `Gerrit ssh commands <https://review.openstack.org/Documentation/cmd-review.html>`_::
 
   ssh -l <YOUR_GERRIT_USERNAME>\
