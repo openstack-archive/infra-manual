@@ -836,7 +836,7 @@ Horizon plugins:
 
 .. code-block:: console
 
-   $ cookiecutter https://git.openstack.org/openstack/ui-cookiecutter
+   $ cookiecutter -f https://git.openstack.org/openstack/ui-cookiecutter
 
 Applying the Template
 ---------------------
