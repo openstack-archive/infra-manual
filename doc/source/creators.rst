@@ -319,12 +319,10 @@ Each project should have a gerrit group "<projectname>-core",
 containing the normal core group, with permission to
 +2 changes.
 
-Libraries for official projects should be configured so the
-``library-release`` team has tagging rights.
-
-Other official projects should be configured so that tagging rights
-use the default settings, allowing the "``Release Managers``" team to
-push tags.
+Release management of official projects is handled by the Release
+Management team through the ``openstack/releases`` repository, the
+default settings allow the "``Release Managers``" team to push tags
+and create branches.
 
 For unofficial projects, a second "<projectname>-release" team should
 be created and populated with a small group of the primary maintainers
@@ -388,18 +386,8 @@ should also be set for projects that want to become official.
 Creation of Tags
 ~~~~~~~~~~~~~~~~
 
-For library projects managed by the release team, allow the
-``library-release`` team to create tags by adding a new section
-containing:
-
-.. code-block:: ini
-
-  [access "refs/tags/*"]
-  pushSignedTag = group library-release
-
-For non-library projects, or unofficial projects, you can allow the
-project-specific release team to create tags by adding a new section
-containing:
+For unofficial projects, you can allow the project-specific release
+team to create tags by adding a new section containing:
 
 .. code-block:: ini
 
@@ -423,8 +411,8 @@ OpenStack infrastructure which fire on tags, will have that tag indefinitely.
 Creation of Branches
 ~~~~~~~~~~~~~~~~~~~~
 
-To allow creation of branches to the release team, add a ``create``
-rule to it the ``refs/heads/*`` section:
+For unofficial projects, to allow creation of branches to the release
+team, add a ``create`` rule to it the ``refs/heads/*`` section:
 
 .. code-block:: ini
 
@@ -493,9 +481,29 @@ membership without needing to be members of the group themselves.
 
 Extended ACL File
 ~~~~~~~~~~~~~~~~~
-So, if your project requires the ICLA signed, has a release team
-that will create tags and branches, and allow voting third-party CI
-systems, create a ``gerrit/acls/openstack/<projectname>.config``
+
+So, if your official project requires the ICLA signed and allow voting
+third-party CI systems, create a
+``gerrit/acls/openstack/<projectname>.config`` like:
+
+.. code-block:: ini
+
+  [access "refs/heads/*"]
+  abandon = group <projectname>-core
+  label-Code-Review = -2..+2 group <projectname>-core
+  label-Verified = -1..+1 group <projectname>-ci
+  label-Workflow = -1..+1 group <projectname>-core
+
+  [receive]
+  requireChangeId = true
+  requireContributorAgreement = true
+
+  [submit]
+  mergeContent = true
+
+If your unofficial project requires the ICLA signed, has a release
+team that will create tags and branches, and allow voting third-party
+CI systems, create a ``gerrit/acls/openstack/<projectname>.config``
 like:
 
 .. code-block:: ini
