@@ -1,0 +1,10 @@
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+1: Thierry Carrez <thierry@openstack.org>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 11 Apr 2018 14:50:19 +0000
+Reviewed-on: https://review.openstack.org/559946
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
