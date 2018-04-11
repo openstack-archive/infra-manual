@@ -270,7 +270,9 @@ easy to review them together and then merge them one after the other.
 Add the project to the master projects list
 -------------------------------------------
 
-#. Edit ``gerrit/projects.yaml`` to add a new section like::
+#. Edit ``gerrit/projects.yaml`` to add a new section like:
+
+   .. code-block:: yaml
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
@@ -285,7 +287,9 @@ Add the project to the master projects list
    example, when graduating an Oslo library or bringing a repository
    into gerrit from github), set the "upstream" field to the URL of
    the publicly reachable repository and also read the information
-   in :ref:`setup_review`::
+   in :ref:`setup_review`:
+
+   .. code-block:: yaml
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
@@ -314,7 +318,9 @@ Add the project to the master projects list
 
       For example, Oslo repositories should use "oslo" to ensure
       that they are associated with the https://launchpad.net/oslo
-      project group for tracking bugs and milestones::
+      project group for tracking bugs and milestones:
+
+      .. code-block:: yaml
 
         - project: openstack/<projectname>
           description: Latest and greatest cloud stuff.
@@ -352,7 +358,9 @@ explained in the following sections.
    not copy the configuration file, instead reference it.
 
    To do this make an additional change to the
-   ``gerrit/projects.yaml`` file as shown here::
+   ``gerrit/projects.yaml`` file as shown here:
+
+   .. code-block:: yaml
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
@@ -363,7 +371,9 @@ Minimal ACL file
 ~~~~~~~~~~~~~~~~
 
 The minimal ACL file allows working only on master and requires a
-change-ID for each change::
+change-ID for each change:
+
+.. code-block:: ini
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
@@ -382,7 +392,9 @@ Request Signing of ICLA
 If your project requires signing of the Individual Contributor
 License Agreement (`ICLA
 <https://review.openstack.org/static/cla.html>`_), change the
-``receive`` section to::
+``receive`` section to:
+
+.. code-block:: ini
 
   [receive]
   requireChangeId = true
@@ -396,14 +408,18 @@ Creation of Tags
 
 For library projects managed by the release team, allow the
 ``library-release`` team to create tags by adding a new section
-containing::
+containing:
+
+.. code-block:: ini
 
   [access "refs/tags/*"]
   pushSignedTag = group library-release
 
 For non-library projects, or unofficial projects, you can allow the
 project-specific release team to create tags by adding a new section
-containing::
+containing:
+
+.. code-block:: ini
 
   [access "refs/tags/*"]
   pushSignedTag = group <projectname>-release
@@ -426,7 +442,9 @@ Creation of Branches
 ~~~~~~~~~~~~~~~~~~~~
 
 To allow creation of branches to the release team, add a ``create``
-rule to it the ``refs/heads/*`` section::
+rule to it the ``refs/heads/*`` section:
+
+.. code-block:: ini
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
@@ -445,7 +463,9 @@ Stable Maintenance Team
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 If your team has a separate team to review stable branches, add a
-``refs/heads/stable/*`` section::
+``refs/heads/stable/*`` section:
+
+.. code-block:: ini
 
   [access "refs/heads/stable/*"]
   abandon = group Change Owner
@@ -469,7 +489,9 @@ Voting Third-Party CI
 
 To allow some third-party CI systems to vote Verify +1 or -1 on
 proposed changes for your project, add a ``label-Verified`` rule to
-the ``refs/heads/*`` section::
+the ``refs/heads/*`` section:
+
+.. code-block:: ini
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
@@ -492,7 +514,9 @@ Extended ACL File
 So, if your project requires the ICLA signed, has a release team
 that will create tags and branches, and allow voting third-party CI
 systems, create a ``gerrit/acls/openstack/<projectname>.config``
-like::
+like:
+
+.. code-block:: ini
 
   [access "refs/heads/*"]
   abandon = group <projectname>-core
@@ -528,31 +552,33 @@ If you want changes proposed and merged to your project to be
 announced on IRC, edit ``gerritbot/channels.yaml`` to add your new
 project to the list of projects. For example, to announce
 changes related to an Oslo library in the ``#openstack-oslo``
-channel, add it to the ``openstack-oslo`` section::
+channel, add it to the ``openstack-oslo`` section:
 
-  openstack-oslo:
-    events:
-      - patchset-created
-      - x-vrif-minus-2
-    projects:
-      - openstack/cliff
-      - openstack/oslo.config
-      - openstack/oslo-incubator
-      - openstack/oslo.messaging
-      - openstack/oslo.rootwrap
-      - openstack/oslosphinx
-      - openstack/oslo-specs
-      - openstack/oslo.test
-      - openstack/oslo.version
-      - openstack/oslo.vmware
-      - openstack/stevedore
-      - openstack/taskflow
-      - openstack-dev/cookiecutter
-      - openstack-dev/hacking
-      - openstack-dev/oslo-cookiecutter
-      - openstack-dev/pbr
-    branches:
-      - master
+.. code-block:: yaml
+
+   openstack-oslo:
+     events:
+       - patchset-created
+       - x-vrif-minus-2
+     projects:
+       - openstack/cliff
+       - openstack/oslo.config
+       - openstack/oslo-incubator
+       - openstack/oslo.messaging
+       - openstack/oslo.rootwrap
+       - openstack/oslosphinx
+       - openstack/oslo-specs
+       - openstack/oslo.test
+       - openstack/oslo.version
+       - openstack/oslo.vmware
+       - openstack/stevedore
+       - openstack/taskflow
+       - openstack-dev/cookiecutter
+       - openstack-dev/hacking
+       - openstack-dev/oslo-cookiecutter
+       - openstack-dev/pbr
+     branches:
+       - master
 
 .. _basic_zuul_jobs:
 
@@ -577,7 +603,9 @@ single change to gerrit.
 
 When submitting the change to openstack-infra/project-config for
 review, use the "new-project" topic so it receives the appropriate
-attention::
+attention:
+
+.. code-block:: console
 
      $ git review -t new-project
 
@@ -648,42 +676,44 @@ repository so we know where ATCs voting rights extend.
 
 Find the appropriate section in ``reference/projects.yaml`` and add
 the new repository to the list. For example, to add a new Oslo
-library edit the "Oslo" section::
+library edit the "Oslo" section:
 
- Oslo:
-   ptl: Doug Hellmann (dhellmann)
-   service: Common libraries
-   mission:
-     To produce a set of python libraries containing code shared by OpenStack
-     projects. The APIs provided by these libraries should be high quality,
-     stable, consistent, documented and generally applicable.
-   url: https://wiki.openstack.org/wiki/Oslo
-   tags:
-     - name: team:diverse-affiliation
-   projects:
-     - repo: openstack/oslo-incubator
-       tags:
-         - name: release:has-stable-branches
-     - repo: openstack/oslo.config
-       tags:
-         - name: release:independent
-         - name: release:has-stable-branches
-     - repo: openstack/oslo.messaging
-       tags:
-         - name: release:independent
-         - name: release:has-stable-branches
-     - repo: openstack/oslo.rootwrap
-       tags:
-         - name: release:independent
-         - name: release:has-stable-branches
-     - repo: openstack/oslosphinx
-       tags:
-         - name: release:independent
-         - name: release:has-stable-branches
-     - repo: openstack-dev/cookiecutter
-     - repo: openstack-dev/pbr
-       tags:
-         - name: release:independent
+.. code-block:: yaml
+
+   Oslo:
+     ptl: Doug Hellmann (dhellmann)
+     service: Common libraries
+     mission:
+       To produce a set of python libraries containing code shared by OpenStack
+       projects. The APIs provided by these libraries should be high quality,
+       stable, consistent, documented and generally applicable.
+     url: https://wiki.openstack.org/wiki/Oslo
+     tags:
+       - name: team:diverse-affiliation
+     projects:
+       - repo: openstack/oslo-incubator
+         tags:
+           - name: release:has-stable-branches
+       - repo: openstack/oslo.config
+         tags:
+           - name: release:independent
+           - name: release:has-stable-branches
+       - repo: openstack/oslo.messaging
+         tags:
+           - name: release:independent
+           - name: release:has-stable-branches
+       - repo: openstack/oslo.rootwrap
+         tags:
+           - name: release:independent
+           - name: release:has-stable-branches
+       - repo: openstack/oslosphinx
+         tags:
+           - name: release:independent
+           - name: release:has-stable-branches
+       - repo: openstack-dev/cookiecutter
+       - repo: openstack-dev/pbr
+         tags:
+           - name: release:independent
 
 You can check which tags to use, or the meaning of any tag, by
 consulting the `list of currently allowed tags`_.
@@ -786,13 +816,15 @@ code.
 If you had an existing repository ready for import when you submitted
 the change to project-config, you can skip this section.
 
-Start by checking out a copy of your new repository::
+Start by checking out a copy of your new repository:
+
+.. code-block:: console
 
    $ git clone https://git.openstack.org/openstack/<projectname>
 
 .. _cookiecutter: https://pypi.python.org/pypi/cookiecutter
 
-::
+.. code-block:: console
 
    $ pip install cookiecutter
 
@@ -809,7 +841,7 @@ most projects.  It can be used as follows:
    projects, it will overwrite any files you have which match names in the
    cookiecutter repository.
 
-::
+.. code-block:: console
 
    $ cookiecutter -f https://git.openstack.org/openstack-dev/cookiecutter
 
@@ -817,12 +849,16 @@ Remember, as mentioned earlier, these commands should typically be used only
 if you are working with an empty repository.
 
 The template in ``openstack-dev/oslo-cookiecutter`` should be used for
-Oslo libraries::
+Oslo libraries:
+
+.. code-block:: console
 
    $ cookiecutter -f https://git.openstack.org/openstack-dev/oslo-cookiecutter
 
 The template in ``openstack/ui-cookiecutter`` should be used for
-Horizon plugins::
+Horizon plugins:
+
+.. code-block:: console
 
    $ cookiecutter https://git.openstack.org/openstack/ui-cookiecutter
 
@@ -833,7 +869,7 @@ Running cookiecutter will prompt you for several settings, based on
 the template's configuration. It will then update your project
 with a skeleton, ready to have your other files added.
 
-::
+.. code-block:: console
 
    $ cd <projectname>
    $ git review
@@ -886,7 +922,9 @@ will need to add a ``.gitreview`` file to the repository once it has
 been created. This new file will allow you to use ``git review``.
 
 The basic process is clone your new repository, add file, push to Gerrit,
-review and approve::
+review and approve:
+
+.. code-block:: console
 
   $ git clone https://git.openstack.org/openstack/<projectname>
   $ cd <projectname>
@@ -966,14 +1004,18 @@ exist, choose an appropriate next version number.
    You must have GnuPG installed and an OpenPGP key configured for
    this step.
 
-Run::
+Run:
+
+.. code-block:: console
 
   $ git tag -s -m "descriptive message" $version
   $ git push gerrit $version
 
 Wait a little while for the pypi job to run and publish the release.
 
-If you need to check the logs, you can use the `git-os-job`_ command::
+If you need to check the logs, you can use the `git-os-job`_ command:
+
+.. code-block:: console
 
   $ git os-job $version
 
@@ -1210,7 +1252,9 @@ including the following changes:
 
 When submitting the change to ``openstack-infra/project-config`` for
 review, use the ``translation_setup`` topic so it receives the
-appropriate attention::
+appropriate attention:
+
+.. code-block:: console
 
      $ git review -t translation_setup
 
@@ -1230,7 +1274,7 @@ simple ``msgfmt`` test:
 
 .. code-block:: console
 
-   bash -c "find ${MODULENAME} -type f -regex '.*\.pot?' -print0| \
+   $ bash -c "find ${MODULENAME} -type f -regex '.*\.pot?' -print0| \
             xargs -0 -n 1 --no-run-if-empty msgfmt --check-format -o /dev/null"
 
 Note that the infra scripts run the same test, so adding it to your
@@ -1421,7 +1465,9 @@ to your project.
 
 When uploading your change, make sure the topic is "project-rename"
 which can be done by submitting the review with the following
-git review command::
+git review command:
+
+.. code-block:: console
 
    $ git review -t project-rename
 
