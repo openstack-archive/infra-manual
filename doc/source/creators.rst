@@ -72,13 +72,6 @@ https://git.openstack.org/cgit.  That is, it is not sufficient to have
 from moving those two repositories into the same namespace at some
 point.
 
-Launchpad
----------
-
-It is preferred but not absolutely necessary for your project name on
-https://launchpad.net to be the same as your git repository name. Try
-"python-" as a prefix if necessary (for example, "python-stevedore").
-
 PyPI
 ----
 
@@ -100,107 +93,6 @@ followed. For example, the Oslo team has `instructions for choosing a
 name`_ for new Oslo libraries.
 
 .. _instructions for choosing a name: https://wiki.openstack.org/wiki/Oslo/CreatingANewLibrary#Choosing_a_Name
-
-
-Set up Launchpad
-================
-
-OpenStack uses https://launchpad.net for project management tasks such
-as release planning and bug tracking. The first step to importing your
-project is to make sure you have the right project management tools
-configured.
-
-.. (dhellmann) This section will need to be updated when we move fully
-   to storyboard.
-
-Create a new Launchpad Project
-------------------------------
-
-#. Visit https://launchpad.net/projects/+new and fill in the details.
-
-#. Name your project using the same name you plan to use for the git
-   repository, unless that is taken. Try "python-" as a prefix if
-   necessary (for example, "python-stevedore"). If that name is also
-   taken, consult with the Release Manager before going any further.
-
-Put Your New Project in the Correct Project Group
--------------------------------------------------
-
-If your project is not an official OpenStack project, this step is optional.
-
-#. From the Overview page of your project, select "Change Details"
-   from the right sidebar (https://launchpad.net/<projectname>/+edit).
-
-#. Find the "Part of" field and set the value to "openstack" for
-   integrated projects and "oslo" for Oslo libraries.
-
-#. Save your changes.
-
-Create Bug Tracker
-------------------
-
-#. From the Overview page for your project, click the "Bugs" link at the
-   top of the page.
-
-#. Click the pencil "edit" icon next to "Configure Bugs".
-
-#. Choose "In launchpad".
-
-#. Check the box labeled "Expire 'Incomplete' bug reports when they
-   become inactive"
-
-#. Check the box labeled "Search for possible duplicate bugs when a
-   new bug is filed"
-
-#. Set the "Bug supervisor" field to "<projectname>-bugs" (for example,
-   "oslo-bugs").
-
-   .. note::
-
-      You may need to create the bug management team in Launchpad.  If
-      you do so, set the owner of the team to the "OpenStack
-      Administrators team" called "openstack-admins" and add the
-      "hudson-openstack" user to the team.
-
-#. Save your changes.
-
-Create Blueprint Tracker
-------------------------
-
-If your project uses Launchpad blueprints to track new feature work,
-you should set up the blueprint tracker now. Otherwise, skip this
-step.
-
-#. From the Overview page for your project, click the "Blueprints" link
-   at the top of the page.
-
-#. Click the pencil "edit" icon next to "Configure Blueprints".
-
-#. Choose "Launchpad".
-
-#. Save your changes.
-
-Set up Supervisors for your Project
------------------------------------
-
-From the Overview page for your project, click the pencil "edit" icon
-next to the Maintainer field. Replace your name with the
-<projectname>-drivers team (for example, "oslo-drivers").
-
-.. note::
-
-   You may need to create the drivers team.  If you do, set the owner
-   of the team to 'openstack-admins'.
-
-From the Overview page for your project, click the pencil "edit" icon
-next to the Drivers field. Replace your name with the project drivers
-team.
-
-.. note::
-
-   If either of these steps makes it so you cannot edit the project,
-   stop and ask someone in the drivers group to help you before
-   proceeding.
 
 .. _register-pypi:
 
@@ -276,10 +168,16 @@ Add the project to the master projects list
 
      - project: openstack/<projectname>
        description: Latest and greatest cloud stuff.
+       use-storyboard: true
 
    Note: All projects should use the ``openstack/`` namespace
    regardless of whether they are or intend to become official
    OpenStack projects.
+
+   .. note::
+      The ``use-storyboard: true`` is added so that repos will be automatically
+      created as projects in `StoryBoard <https://docs.openstack.org/infra/storyboard/>`_
+      (community tool for managing work being done in your project and tracking tasks).
 
 #. Provide a very brief description of the library.
 
@@ -310,25 +208,30 @@ Add the project to the master projects list
 
    .. note::
 
-      If the git repository short name does not match the Launchpad project
-      name, you need to add a "groups" list to provide the mapping. The
-      groups list is also used by Storyboard to be able to present grouped
-      views of stories and tasks across multiple related
-      repositories.
+      The groups list is used by Storyboard to be able to present grouped
+      views of projects, stories, and tasks across multiple related repositories.
 
-      For example, Oslo repositories should use "oslo" to ensure
-      that they are associated with the https://launchpad.net/oslo
-      project group for tracking bugs and milestones:
+      Example:
 
       .. code-block:: yaml
 
         - project: openstack/<projectname>
           description: Latest and greatest cloud stuff.
+          use-storyboard: true
           upstream: https://github.com/awesumsauce/<projectname>.git
           groups:
              - oslo
 
 .. _add-gerrit-permissions:
+
+Viewing & Using Your Project's Task Tracker
+-------------------------------------------
+
+After the project-config change above has merged, all repositories will be created in
+Storyboard and you will be able to interact with them- filing bugs and adding requests
+for new features in the `webclient <https://https://storyboard.openstack.org/>`_. All
+repositories will be added to the group that was associated with the repositories in
+the project-config change.
 
 Add Gerrit permissions
 ----------------------
