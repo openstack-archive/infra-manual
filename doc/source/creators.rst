@@ -103,7 +103,7 @@ New packages without any releases need to be manually registered on
 PyPI.
 
 If you do not have PyPI credentials, you should create them at
-https://pypi.python.org/pypi?%3Aaction=register_form as they are
+https://pypi.org/account/register/ as they are
 required for the next step.
 
 Once you have PyPI credentials see
@@ -122,13 +122,9 @@ Next your package needs to be updated so the "openstackci" user has
 "Owner" permissions.
 
 Visit
-``https://pypi.python.org/pypi?:action=role_form&package_name=<packagename>``
+``https://pypi.org/manage/project/<projectname>/collaboration/``
 and add "openstackci" in the "User Name" field, set the role to "Owner",
 and click "Add Role".
-
-.. image:: images/pypi-role-maintenance.png
-   :height: 499
-   :width: 800
 
 Adding the Project to the CI System
 ===================================
