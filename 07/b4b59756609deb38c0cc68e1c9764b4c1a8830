@@ -1,0 +1,10 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 09 May 2018 18:03:39 +0000
+Reviewed-on: https://review.openstack.org/565380
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
