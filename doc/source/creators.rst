@@ -31,7 +31,7 @@ to become one and the list of current `OpenStack Project Teams`_. The
 
 If you add a new repository, you can make it part of an existing
 official OpenStack project, use it to start a new official project, or
-start as a related project, also known as a `StackForge`_ project.
+start as a `related project`_ (formerly known as a *StackForge*).
 
 Note that only official OpenStack projects may use certain parts of
 the OpenStack infrastructure, especially the docs.openstack.org and
@@ -40,7 +40,7 @@ specs.openstack.org server.
 .. _governance site: https://governance.openstack.org
 .. _OpenStack Project Teams: https://governance.openstack.org/reference/projects/index.html
 .. _Project Team Guide: https://docs.openstack.org/project-team-guide/
-.. _StackForge: https://docs.openstack.org/infra/system-config/stackforge.html
+.. _related project: https://docs.openstack.org/infra/system-config/unofficial_project_hosting.html
 
 Choosing a Good Name for Your Project
 =====================================
