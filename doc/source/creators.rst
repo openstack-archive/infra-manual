@@ -551,6 +551,25 @@ gate pipelines. A minimal file that runs no tests includes only the
        templates:
          - noop-jobs
 
+In the past we asked that official OpenStack projects manage the PTI job
+config in the central projects.yaml file. This incurs review overhead
+that Zuul v3 was specifically designed to push onto projects themselves.
+In an effort to take advantage of this functionality we now ask that
+projects manage the PTI job config in repo.
+
+.. _central-config-exceptions:
+
+Central Config Exceptions
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are several notable exceptions for job configs that should remain
+in the central config repository:
+
+  * Translation jobs for all branches.
+  * Jobs that should only run against the master branch of the project
+    they are applied to.
+  * Jobs that are not "branch aware". Typically these are jobs that are
+    triggered by tag based events.
 
 .. _add-to-governance-repo:
 

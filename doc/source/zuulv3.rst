@@ -869,24 +869,8 @@ What to Convert?
 ~~~~~~~~~~~~~~~~
 
 Some jobs should not be migrated and should always stay in `project-config`_.
-
-- Official OpenStack projects should implement the OpenStack wide jobs
-  mentioned in the `Project Testing Interface`_ (PTI) document. These jobs
-  should remain in `project-config`_.
-
-- Translation jobs should also live in `project-config`_, since those access
-  the external translation site.
-
-So, a non-complete list of templates that should not live in project's own
-configuration but stay in `project-config`_:
-
-* announce-release
-* check-requirements (PTI)
-* openstack-python-jobs (PTI)
-* openstack-tox-cover (PTI)
-* publish-to-pypi (PTI)
-* release-notes-jobs (PTI)
-* translation-jobs
+Refer to :ref:`central-config-exceptions` for up to date info on which jobs
+should remain in centralized config.
 
 Outside of these jobs, most jobs can be migrated to a project repository. If a
 job is used by a single project then migration is simple: you should move the
