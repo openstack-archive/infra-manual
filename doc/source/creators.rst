@@ -560,9 +560,13 @@ order:
 Adding additional jobs can be done in the central repository or in
 your new project's ``.zuul.yaml`` file. Official OpenStack projects should
 implement the OpenStack wide jobs mentioned in the `Project Testing
-Interface`_ (PTI) document. These jobs will also be listed in this project
-block and not in the project's ``.zuul.yaml``. For more information on
-adding additional jobs into your project, see :ref:`in-repo-zuul-jobs`.
+Interface`_ (PTI) document. For more information on adding additional
+jobs into your project, see :ref:`in-repo-zuul-jobs`.
+In the past we asked that official OpenStack projects manage the PTI job
+config in the central projects.yaml file. This incurs review overhead
+that Zuul v3 was specifically designed to push onto projects themselves.
+In an effort to take advantage of this functionality we now ask that
+projects manage the PTI job config in repo.
 
 .. important::
 
