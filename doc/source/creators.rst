@@ -551,6 +551,11 @@ gate pipelines. A minimal file that runs no tests includes only the
        templates:
          - noop-jobs
 
+In the past we asked that official OpenStack projects manage the PTI job
+config in the central projects.yaml file. This incurs review overhead
+that Zuul v3 was specifically designed to push onto projects themselves.
+In an effort to take advantage of this functionality we now ask that
+projects manage the PTI job config in repo.
 
 .. _add-to-governance-repo:
 
