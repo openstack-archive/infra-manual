@@ -65,6 +65,8 @@ lines floods the channel and makes other communication difficult.
 
 .. _pastebin service: http://paste.openstack.org/
 
+.. _irc-technical-support:
+
 Technical Support
 -----------------
 
@@ -75,6 +77,10 @@ OpenStack project, the channel can be quite busy. However, they are there to
 help, so if you have issues, asking in ``#openstack-infra`` is completely
 appropriate. Just remember that it's best to just ask your question, and that
 sometimes it might be extra busy so you might need to be patient.
+If there is an issue that seems to require urgent attention by someone with
+access to one of the servers, you can mention ``infra-root`` in your message.
+Likewise, if you would like to get the attention of the core reviewers for
+one of our configuration repositories, use the keyword ``config-core``.
 
 Persistent Clients and IRC Bouncers
 -----------------------------------

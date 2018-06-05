@@ -23,7 +23,8 @@ instead a user or developer looking for API documentation, see
      <https://twitter.com/openstackinfra>`_ on Twitter.
    * the topic in IRC
 
-   If you notice problems, report them via #openstack-infra on IRC or
+   If you notice problems, report them via
+   :ref:`#openstack-infra on IRC <irc-technical-support>` or
    use the `OpenStack-Infra mailing list
    <http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_.
 
