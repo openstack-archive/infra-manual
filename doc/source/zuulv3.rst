@@ -644,8 +644,8 @@ OpenStack project.
    file.
 
    The predefined OpenStack-specific jobs, such as
-   ``openstack-doc-build``, ``tox-py35-constraints``, and
-   ``publish-openstack-python-tarball`` are defined in the
+   ``openstack-doc-build`` and ``tox-py35-constraints``
+   are defined in the
    `openstack-zuul-jobs jobs.yaml` file.
 
 #. Write any Ansible playbooks for your custom jobs. By default, these
