@@ -531,46 +531,26 @@ Add Jobs for your Project
 
 Every project needs at least one test job or patches will not be able to land.
 
-.. note::
+You can add jobs in either your new project's ``.zuul.yaml`` file or
+in file the ``zuul.d/projects.yaml`` in the central repository
+``openstack-infra/project-config``.
 
-   The change described in this section must be submitted separately
-   from the change described above, and it will fail initially.  That's
-   to be expected.  Read through the entire following section, including
-   the Important Note at the end, before submitting your change to gerrit.
+Official OpenStack projects should implement the OpenStack wide jobs
+mentioned in the `Project Testing Interface`_ (PTI) document. For more
+information on adding additional jobs into your project, see
+:ref:`in-repo-zuul-jobs`.
 
-There are a multitude of options at your disposal for test jobs, but to get
-started you should do the following:
-
-Add system-required template
-----------------------------
-
-Every project needs to have an entry in ``zuul.d/projects.yaml``
-containing an entry for the ``system-required`` template.
-
-Edit ``zuul.d/projects.yaml`` and add an entry for your project in alphabetical
-order:
+For adding jobs to your project's ``.zuul.yaml`` file, your very first
+change to merge needs to add this file and add jobs for both check and
+gate pipelines. A minimal file that runs no tests includes only the
+``noop-jobs`` template:
 
 .. code-block:: yaml
 
    - project:
-       name: openstack/<projectname>
        templates:
-         - system-required
+         - noop-jobs
 
-Adding additional jobs can be done in the central repository or in
-your new project's ``.zuul.yaml`` file. Official OpenStack projects should
-implement the OpenStack wide jobs mentioned in the `Project Testing
-Interface`_ (PTI) document. These jobs will also be listed in this project
-block and not in the project's ``.zuul.yaml``. For more information on
-adding additional jobs into your project, see :ref:`in-repo-zuul-jobs`.
-
-.. important::
-
-   This addition of ``system-required`` template needs to be a
-   separate change stacked on top of the previous change. Submit
-   them together. This second change will fail initially, it can
-   only pass once the first change has merged - and then you need to
-   add a ``recheck`` comment.
 
 .. _add-to-governance-repo:
 

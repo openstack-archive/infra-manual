@@ -870,9 +870,6 @@ What to Convert?
 
 Some jobs should not be migrated and should always stay in `project-config`_.
 
-- We always must have ``system-required`` in `project-config`_, since that's a
-  system thing.
-
 - Official OpenStack projects should implement the OpenStack wide jobs
   mentioned in the `Project Testing Interface`_ (PTI) document. These jobs
   should remain in `project-config`_.
@@ -883,7 +880,6 @@ Some jobs should not be migrated and should always stay in `project-config`_.
 So, a non-complete list of templates that should not live in project's own
 configuration but stay in `project-config`_:
 
-* system-required (system template)
 * announce-release
 * check-requirements (PTI)
 * openstack-python-jobs (PTI)
