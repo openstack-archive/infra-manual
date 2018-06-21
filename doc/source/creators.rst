@@ -531,31 +531,10 @@ Add Jobs for your Project
 
 Every project needs at least one test job or patches will not be able to land.
 
-.. note::
-
-   The change described in this section must be submitted separately
-   from the change described above, and it will fail initially.  That's
-   to be expected.  Read through the entire following section, including
-   the Important Note at the end, before submitting your change to gerrit.
-
 There are a multitude of options at your disposal for test jobs, but to get
 started you should do the following:
 
-Add system-required template
-----------------------------
-
-Every project needs to have an entry in ``zuul.d/projects.yaml``
-containing an entry for the ``system-required`` template.
-
-Edit ``zuul.d/projects.yaml`` and add an entry for your project in alphabetical
-order:
-
-.. code-block:: yaml
-
-   - project:
-       name: openstack/<projectname>
-       templates:
-         - system-required
+INSERT USEFUL TEXT HERE
 
 Adding additional jobs can be done in the central repository or in
 your new project's ``.zuul.yaml`` file. Official OpenStack projects should
@@ -563,14 +542,6 @@ implement the OpenStack wide jobs mentioned in the `Project Testing
 Interface`_ (PTI) document. These jobs will also be listed in this project
 block and not in the project's ``.zuul.yaml``. For more information on
 adding additional jobs into your project, see :ref:`in-repo-zuul-jobs`.
-
-.. important::
-
-   This addition of ``system-required`` template needs to be a
-   separate change stacked on top of the previous change. Submit
-   them together. This second change will fail initially, it can
-   only pass once the first change has merged - and then you need to
-   add a ``recheck`` comment.
 
 .. _add-to-governance-repo:
 
