@@ -89,3 +89,7 @@ Known Differences to Watch Out For
 * Some network protocols may be blocked in some clouds. Specfically
   we have had problems with GRE. You can rely on TCP, UDP, and ICMP
   being functional on all of our clouds.
+* Network interface MTU of 1500 is not guaranteed. Some clouds give
+  us smaller MTUs due to use of overlay networking. Test jobs
+  should check interface MTUs and use an appropriate value for the
+  current instance if creating new interfaces or bridges.
