@@ -1,0 +1,11 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: zhongshengping <chdzsp@163.com>
+Code-Review+1: Nguyen Hai <nguyentrihai93@gmail.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 26 Jun 2018 18:13:22 +0000
+Reviewed-on: https://review.openstack.org/574858
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
