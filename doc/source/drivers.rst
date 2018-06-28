@@ -539,6 +539,17 @@ following:
 
 * Remove your project from ``gerritbot/channels.yaml``.
 
+.. note::
+
+   If there is a need to unretire a project, most steps here can be done in
+   reverse. This step has some caveats to be aware of when going in reverse.
+
+   With the removal of ACLs from the Gerrit project, the project gets marked as
+   read-only. Adding those ACLs back to the configuration files does not switch
+   it back to read-write. Manual intervention will be required from the infra
+   team to restore the project status back to "Active" in Gerrit before ACLs
+   can be reapplied successfully.
+
 Step 5: Remove Repository from the Governance Repository
 --------------------------------------------------------
 
