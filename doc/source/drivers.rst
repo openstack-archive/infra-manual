@@ -360,17 +360,13 @@ projects list or add your project to the list if it does not
 exist. You should end up with something like::
 
   - name: openstack/<projectname>
-    templates:
-      - system-required
     check:
       - gate-new-<projectname>-job
     gate:
       - gate-new-<projectname>-job
 
-The template section applies the common ``system-required`` jobs to the
-project (every project should use this template). Then we have
-``gate-new-<projectname>-job`` listed in the check and gate
-pipelines. This says if an event comes in for
+The ``gate-new-<projectname>-job`` listed in the check and gate
+pipelines says if an event comes in for
 ``openstack/<projectname>`` that matches the check or gate pipeline
 triggers run the ``gate-new-<projectname>-job`` job against
 ``openstack/<projectname>`` in the matching pipeline.
@@ -453,7 +449,6 @@ change it to look like this::
   - project:
     name: openstack/<projectname>
     templates:
-      - system-required
       - noop-jobs
 
 Also, remove any jobs and templates you have defined. These can be
