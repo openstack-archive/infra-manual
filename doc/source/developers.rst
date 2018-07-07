@@ -1031,7 +1031,7 @@ projects' documentation for contributors.
 Contributors may notice a review that has several +1's from other
 reviewers, passes the functional tests, etc. but the code still has
 not been merged. As only core contributors can approve code for
-merging, you can help things along by getting a core developer's
+merging, you can help things along by getting a core reviewer's
 attention in IRC (never on the mailing lists) and letting them know
 there is a changeset with lots of positive reviews and needs final
 approval.
