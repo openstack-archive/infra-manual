@@ -1147,7 +1147,6 @@ including the following changes:
       - project:
           name: openstack/<projectname>
           templates:
-            - system-required
             - translation-jobs
 
 
