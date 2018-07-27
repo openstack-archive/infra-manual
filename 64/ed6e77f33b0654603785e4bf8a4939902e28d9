@@ -1,0 +1,9 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 27 Jul 2018 13:43:25 +0000
+Reviewed-on: https://review.openstack.org/579180
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
