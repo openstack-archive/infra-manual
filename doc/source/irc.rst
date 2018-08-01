@@ -13,8 +13,15 @@ reference for Freenode is found in the `Freenode Knowledgebase`_, this document
 contains some more specific information for those who are new to IRC and would
 like to know more about common OpenStack practices.
 
+As of August 1, 2018 all OpenStack IRC channels require users to `register`_ their
+nickname in order to join channels. Unregistered users will be redirected to
+#openstack-unregistered which has the above link in the channel topic. This was
+unfortunately `required`_ as a result of spam.
+
 .. _Freenode: http://freenode.net
 .. _Freenode Knowledgebase: http://freenode.net/kb/all
+.. _register: https://freenode.net/kb/answer/registration
+.. _required: http://lists.openstack.org/pipermail/openstack-dev/2018-August/132692.html
 
 Channel Logging
 ---------------
