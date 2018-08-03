@@ -703,7 +703,7 @@ whole pipeline does not share a graph as in the gate pipeline), but
 for each change tested, all of its dependencies are visually connected
 to it, and they are used to construct the git references that Zuul
 uses when testing.  When looking at this graph on the `Zuul
-status page <http://status.openstack.org/zuul>`_, you will note that
+status page <https://zuul.openstack.org>`_, you will note that
 the dependencies show up as grey dots, while the actual change tested
 shows up as red or green. This is to indicate that the grey changes
 are only there to establish dependencies. Even if one of the
@@ -832,8 +832,7 @@ on the change by Zuul. Zuul reports the results of these tests
 back to Gerrit in the form of a Verified: +/-2 vote. Code merging
 will only occur after the gate tests have passed successfully and
 received a Verified: +2. You can view the state of tests currently
-being run on the `Zuul Status page
-<http://status.openstack.org/zuul>`_.
+being run on the `Zuul Status page <https://zuul.openstack.org>`_.
 
 If a change fails tests in Zuul, please follow the steps below:
 
