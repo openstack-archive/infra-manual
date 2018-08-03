@@ -1,0 +1,14 @@
+Code-Review+1: Nguyen Van Trung <trungnv@vn.fujitsu.com>
+Code-Review+1: Tuan Luong-Anh <tuanla@vn.fujitsu.com>
+Code-Review+1: Kim Bao Long <longkb@vn.fujitsu.com>
+Code-Review+1: melissaml <ma.lei@99cloud.net>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+1: Andriy Shevchenko <huang.zhiping@99cloud.net>
+Code-Review+2: Paul Belanger <pabelanger@redhat.com>
+Workflow+1: Paul Belanger <pabelanger@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 03 Aug 2018 20:58:00 +0000
+Reviewed-on: https://review.openstack.org/570498
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
