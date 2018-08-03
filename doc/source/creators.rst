@@ -793,7 +793,6 @@ to your project in a file called ``.zuul.yaml``:
 .. code-block:: yaml
 
   - project:
-      name: openstack/<projectname>
       templates:
         - noop-jobs
 

@@ -320,95 +320,9 @@ file.
 Running Jobs with Zuul
 ======================
 
-.. warning::
+Read the :doc:`Zuul v3 Migration Guide <zuulv3>` for more information
+on running jobs with Zuul.
 
-   The information in this section about ``zuul/layout.yaml`` and
-   ``jenkins/jobs/`` files are outdated, they refer to Zuul v2.
-   OpenStack CI uses Zuul v3 now. Read the :doc:`Zuul v3 Migration
-   Guide <zuulv3>` for more information.
-
-There are two major components in getting jobs running under Zuul. First
-you must ensure that the job you want to run is defined in the `JJB
-config <https://git.openstack.org/cgit/openstack-infra/project-config/tree/jenkins/jobs>`_.
-The `JJB documentation <https://docs.openstack.org/infra/jenkins-job-builder/>`_
-is extensive as are the examples in our JJB config so we will not cover
-that here.
-
-The second thing you need to do is update `Zuul's layout file
-<https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul/layout.yaml>`_
-instructing Zuul to run your job when appropriate. This file is organized
-into several sections.
-
-#. Zuul python includes. You can largely ignore this section as it
-   declares arbitrary python functions loaded into Zuul and is managed
-   by the Infra team.
-#. Pipelines. You should not need to add or modify any of these
-   pipelines but they provide information on why each pipeline exists
-   and when it is triggered. This section is good as a reference.
-#. Project templates. Useful if you want to collect several jobs under
-   a single name that can be reused across projects.
-#. Job specific overrides. This section is where you specify that a
-   specific job should not vote or run only against a specific set
-   of branches.
-#. Projects. This is the section where you will likely spend most of
-   your time. Note it is organized into alphabetical subsections based
-   on git repo name prefix.
-
-To add a job to a project you will need to edit your project in the
-projects list or add your project to the list if it does not
-exist. You should end up with something like::
-
-  - name: openstack/<projectname>
-    check:
-      - gate-new-<projectname>-job
-    gate:
-      - gate-new-<projectname>-job
-
-The ``gate-new-<projectname>-job`` listed in the check and gate
-pipelines says if an event comes in for
-``openstack/<projectname>`` that matches the check or gate pipeline
-triggers run the ``gate-new-<projectname>-job`` job against
-``openstack/<projectname>`` in the matching pipeline.
-
-Integration Tests
------------------
-
-One of Zuul's most powerful features is the ability to perform complex
-integration testing across interrelated repositories.  Projects that
-share one or more jobs are combined into a shared change queue.  That
-means that as changes are approved, they are sequenced in order and
-can be tested together.  It also means that if a change specifies that
-it depends on another change with a "Depends-On:" header, those
-changes can be tested together and merged in rapid succession.
-
-In order to use this to its full advantage, your job should allow Zuul
-to perform all of the git operations for all of the projects related
-to the integration test.  If you install the software under test from
-the git checkouts supplied by Zuul, the test run will include all of
-the changes that will be merged ahead of the change under test.
-
-To do this, use the ``zuul-cloner`` command as follows::
-
-  sudo -E /usr/zuul-env/bin/zuul-cloner --cache-dir /opt/git \
-      https://git.openstack.org \
-      openstack/project1 \
-      openstack/project2 \
-      openstack/projectN
-
-Where the final arguments are the names of all of the projects
-involved in the integration test.  They will be checked out into the
-current directory (e.g., ``./openstack/project1``).  If you need them
-to be placed in a different location, see the ``clonemap`` feature of
-``zuul-cloner`` which allows for very flexible (including regular
-expressions) directory layout descriptions.
-
-Use that command in a single Jenkins Job Builder definition that you
-then invoke from all of the related projects.  This way they all run
-the same job (which tests the entire system) and Zuul knows to combine
-those projects into a shared change queue.
-
-Zuul comes with extensive `documentation <https://docs.openstack.org/infra/zuul/>`_
-too and should be referenced for more information.
 
 Retiring a Project
 ==================
