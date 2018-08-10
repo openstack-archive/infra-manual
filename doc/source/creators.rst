@@ -891,8 +891,8 @@ such as installation, configuration, and administration. Follow the layout
 of project documentation as described in `Project guide setup
 <https://docs.openstack.org/doc-contrib-guide/project-guides.html>`_.
 
-Tagging a Release
------------------
+Tagging an Initial Release
+--------------------------
 
 To verify that the release machinery works, push a signed tag to the
 "gerrit" remote. Use the smallest version number possible. If this is
@@ -920,6 +920,9 @@ If you need to check the logs, you can use the `git-os-job`_ command:
   $ git os-job $version
 
 .. _git-os-job: https://pypi.python.org/pypi/git-os-job
+
+See :ref:`tagging-a-release` in the Project Driver's Guide for more
+detail on tag pushing workflows.
 
 Allowing Other OpenStack Projects to Use Your Library
 =====================================================
