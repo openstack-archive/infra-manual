@@ -225,6 +225,8 @@ to reviewers to identify files which need extra attention.
 You can learn more about `stable branches in the project team guide
 <https://docs.openstack.org/project-team-guide/stable-branches.html>`_.
 
+.. _tagging-a-release:
+
 Tagging a Release
 ~~~~~~~~~~~~~~~~~
 
@@ -247,6 +249,11 @@ and push that tag to Gerrit by running the following commands::
   git push gerrit <version number>
 
 .. note::
+
+  * Tags can't be effectively deleted once pushed, so make absolutely
+    certain they're correct (ideally by locally testing release
+    artifact generation commands and inspecting the results between
+    the tag and push steps above).
 
   * Git won't have a remote named gerrit until the first time git-review
     runs. You may need to run ``git review -s`` before the push.
