@@ -565,11 +565,17 @@ Central Config Exceptions
 There are several notable exceptions for job configs that should remain
 in the central config repository:
 
-  * Translation jobs for all branches.
-  * Jobs that should only run against the master branch of the project
-    they are applied to.
-  * Jobs that are not "branch aware". Typically these are jobs that are
-    triggered by tag based events.
+* Translation jobs for all branches.
+* Jobs that should only run against the master branch of the project
+  they are applied to.
+* Jobs that are not "branch aware". Typically these are jobs that are
+  triggered by tag based events.
+
+  As an example, the project-templates ``publish-to-pypi`` - and its
+  variants -, ``release-openstack-server``,
+  ``publish-xstatic-to-pypi``, ``nodejs4-publish-to-npm``,
+  ``puppet-release-jobs`` include jobs that are not "branch aware"
+  since they are triggered by tag based events.
 
 .. _add-to-governance-repo:
 
