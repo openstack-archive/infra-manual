@@ -137,8 +137,8 @@ To add a project to the CI System, you need to modify some
 infrastructure configuration files using git and the OpenStack gerrit
 review server.
 
-Note that you need two separate changes to set up your new project
-for the ``openstack-infra/project-config`` repository:
+Note that you need two changes to set up your new project
+for testing with OpenStack CI systems.
 
 * First change to create the git repository, configure ACLs, and add
   the git repository to the OpenStack CI system, see
@@ -146,16 +146,13 @@ for the ``openstack-infra/project-config`` repository:
   For official projects, this change should also link via
   ``Needed-By`` to a change for the ``openstack/governance``
   repository to add the new repository under the project team, see
-  :ref:`add-to-governance-repo`.
-* Second change to add jobs to your project, see
-  :ref:`add_jobs_for_project`. This one will fail Zuul internal
-  testing until the first change is merged, the repository gets
-  created and Zuul reloads its configuration.
+  :ref:`add-to-governance-repo`. This change is for
+  ``openstack-infra/project-config`` repository.
 
-The changes described in this section should be submitted together as
-two stacked changes to the ``openstack-infra/project-config``
-repository. Stack these two changes on top of each other to make it
-easy to review them together and then merge them one after the other.
+* Second change to add jobs to your project, see
+  :ref:`add_jobs_for_project`. This one can only pass Zuul internal
+  testing once the first change is merged, the repository gets
+  created and Zuul reloads its configuration.
 
 .. _add_project_to_master_projects_list:
 
