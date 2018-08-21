@@ -565,6 +565,11 @@ in the central config repository:
 * Translation jobs for all branches.
 * Jobs that should only run against the master branch of the project
   they are applied to.
+
+  Examples for templates that include jobs that run only against the
+  master branch are ``api-ref-jobs`` and various periodic jobs like
+  ``periodic-jobs-with-oslo-master``.
+
 * Jobs that are not "branch aware". Typically these are jobs that are
   triggered by tag based events.
 
