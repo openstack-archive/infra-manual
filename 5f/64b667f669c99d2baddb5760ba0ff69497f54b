@@ -1,0 +1,10 @@
+Code-Review+1: boden <bodenvmw@gmail.com>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Workflow+1: Monty Taylor <mordred@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Tue, 21 Aug 2018 13:26:43 +0000
+Reviewed-on: https://review.openstack.org/590809
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
