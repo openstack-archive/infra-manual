@@ -64,6 +64,15 @@ man_pages = []
 # a list of builtin themes.
 html_theme = 'openstackdocs'
 
+# To use the API Reference sidebar dropdown menu,
+# uncomment the html_theme_options parameter.  The theme
+# variable, sidebar_dropdown, should be set to `api_ref`.
+# Otherwise, the list of links for the User and Ops docs
+# appear in the sidebar dropdown menu.
+html_theme_options = {
+    "display_badge": False
+}
+
 # Must set this variable to include year, month, day, hours, and minutes.
 html_last_updated_fmt = '%Y-%m-%d %H:%M'
 
