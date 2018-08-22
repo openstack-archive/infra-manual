@@ -847,7 +847,7 @@ If those don't apply, this will mean the following changes:
   ``WORKSPACE`` and ``BUILD_TIMEOUT`` environment variables. Zuul and nodepool
   info is available in the zuul and nodepool ansible vars. Timeout information
   is in ``zuul.timeout``. WORKSPACE isn't really a thing in v3. Tasks all start
-  in ``/home/zuul``, and the source code for the the project that triggered the
+  in ``/home/zuul``, and the source code for the project that triggered the
   change is in ``src/{{ zuul.project.canonical_name }}``.
 
   We added a ``mkdir /home/zuul/workspace`` to each generated playbook, but
