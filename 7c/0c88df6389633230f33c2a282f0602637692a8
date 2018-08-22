@@ -1,0 +1,8 @@
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Workflow+1: Andreas Jaeger <jaegerandi@gmail.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 22 Aug 2018 06:13:39 +0000
+Reviewed-on: https://review.openstack.org/594794
+Project: openstack-infra/infra-manual
+Branch: refs/heads/master
