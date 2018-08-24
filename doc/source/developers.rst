@@ -64,7 +64,8 @@ Launchpad when you address them with your code commits.
 Log into Gerrit
 ^^^^^^^^^^^^^^^
 
-Visit https://review.openstack.org/ and click the ``Sign In`` link
+Visit `Gerrit review
+<https://review.openstack.org/>`_ and click the ``Sign In`` link
 at the top-right corner of the page.  Log in with your Ubuntu One
 OpenID.
 
@@ -366,7 +367,7 @@ status of a specification. For more information, see `the Blueprints wiki page
 <https://wiki.openstack.org/wiki/Blueprints>`_.
 
 View all approved project team's specifications at
-https://specs.openstack.org/.
+`Specifications <https://specs.openstack.org/>`_.
 
 Starting a Change
 -----------------
