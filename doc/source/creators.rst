@@ -538,9 +538,10 @@ information on adding additional jobs into your project, see
 :ref:`in-repo-zuul-jobs`.
 
 For adding jobs to your project's ``.zuul.yaml`` file, your very first
-change to merge needs to add this file and add jobs for both check and
-gate pipelines. A minimal file that runs no tests includes only the
-``noop-jobs`` template:
+change to merge after the repository is created or imported needs to
+add this file and add jobs for both check and gate pipelines. The file
+should not pre-exist in the imported repository. A minimal file that
+runs no tests includes only the ``noop-jobs`` template:
 
 .. code-block:: yaml
 
