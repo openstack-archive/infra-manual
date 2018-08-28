@@ -555,13 +555,32 @@ that Zuul v3 was specifically designed to push onto projects themselves.
 In an effort to take advantage of this functionality we now ask that
 projects manage the PTI job config in repo.
 
+Shared Queues for Cross-Project Testing
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+When your projects are closely coupled together, you want to make sure
+changes entering the gate are going to be tested with the version of
+other projects currently enqueued in the gate (since they will
+eventually be merged and might introduce breaking features).
+
+For such `cross-project testing
+<https://zuul-ci.org/docs/zuul/user/gating.html#cross-project-testing>`_
+you need to put projects in a comon queue. The queue configuration for
+the ``integrated`` queue needs to stay in the central config
+repository since this is cross-teams. If only projects of your team
+are coupled, you can place this in-repo as well::
+
+   - project:
+     gate:
+       queue: <queuename>
+
 .. _central-config-exceptions:
 
 Central Config Exceptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are several notable exceptions for job configs that should remain
-in the central config repository:
+in the central config repository ``openstack-infra/project-config``:
 
 * Translation jobs for all branches.
 * Jobs that should only run against the master branch of the project
@@ -579,6 +598,9 @@ in the central config repository:
   ``publish-xstatic-to-pypi``, ``nodejs4-publish-to-npm``, and
   ``puppet-release-jobs`` include jobs that are not "branch aware"
   since they are triggered by tag based events.
+
+* The queue configuration for the ``integrated`` queue needs to stay
+  in the central config repository.
 
 .. _add-to-governance-repo:
 
