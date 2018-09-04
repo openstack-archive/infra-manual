@@ -544,8 +544,53 @@ requirements for test, runtime, and documentation to the base profile::
    # A documentation dependency
    graphviz [doc]
 
+Bindep profiles
+---------------
+
+The common jobs maintained in the repositories
+`openstack-infra/openstack-zuul-jobs
+<http://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/>`_
+and `openstack-infra/zuul-jobs
+<http://git.openstack.org/cgit/openstack-infra/zuul-jobs/>`_ use the
+following bindep profiles:
+
+build
+  Used by puppet modules to manage dependencies for puppet module build.
+
+compile
+  Used for dependencies needed for building wheels. This is used by doc
+
+doc
+  Used to install packages needed by documentation environments like
+  the ``docs`` and ``releasenotes`` environments.
+
+test
+  Used to install package dependencies needed by tox unit test jobs.
+
+py27
+  Used to install cPython 2.7 specific packages, especially
+  cPython 2.7 itself.
+
+py35
+  Used to install cPython 3.5 specific packages, especially
+  cPython 3.5 itself.
+
+py36
+  Used to install cPython 3.6 specific packages, especially
+  cPython 3.6 itself.
+
+py37
+  Used to install cPython 3.7 specific packages, especially
+  cPython 3.7 itself.
+
+pypy
+  Used to install Pypy specific packages, especially
+  pypy itself.
+
+
 Submodules
-----------
+==========
+
 
 The use of git submodules is not supported.  The tools that we use do
 not all work correctly with submodules and we have found that
