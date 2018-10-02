@@ -30,8 +30,8 @@ Progress tag set, it is ready to be merged. Any core reviewer can
 approve such a patch. A core reviewer can give a +2 and approval in
 the same review.
 
-Work In Progress
-================
+Work In Progress for cores
+==========================
 
 The "Work in progress" (WIP) label tells anyone looking at a change
 that more updates are still needed. Both the change's owner and any

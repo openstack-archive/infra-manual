@@ -698,10 +698,11 @@ mail list.
 Update the Gerrit Group Members
 -------------------------------
 
-After the review is approved and groups are created ask the Infra
-team to add you to both groups in Gerrit, and then you can add other
-members by going to https://review.openstack.org/#/admin/groups/ and
-filtering for your group's names.
+After the review is approved and :ref:`groups are created <Update the Gerrit
+Group Members>` ask the Infra team to add you to both groups in Gerrit, and
+then you can add other members by going to
+https://review.openstack.org/#/admin/groups/ and filtering for your group's
+names.
 
 The project team lead (PTL), at least, should be added to
 "<projectname>-release", and other developers who understand the
