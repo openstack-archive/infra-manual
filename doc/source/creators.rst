@@ -219,8 +219,6 @@ Add the project to the master projects list
           groups:
              - oslo
 
-.. _add-gerrit-permissions:
-
 Viewing & Using Your Project's Task Tracker
 -------------------------------------------
 
@@ -229,6 +227,8 @@ Storyboard and you will be able to interact with them- filing bugs and adding re
 for new features in the `webclient <https://https://storyboard.openstack.org/>`_. All
 repositories will be added to the group that was associated with the repositories in
 the project-config change.
+
+.. _add-gerrit-permissions:
 
 Add Gerrit permissions
 ----------------------
@@ -698,10 +698,11 @@ mail list.
 Update the Gerrit Group Members
 -------------------------------
 
-After the review is approved and groups are created ask the Infra
-team to add you to both groups in Gerrit, and then you can add other
-members by going to https://review.openstack.org/#/admin/groups/ and
-filtering for your group's names.
+After the review is approved and :ref:`groups are created
+<add-gerrit-permissions>` ask the Infra team to add you to both groups in 
+Gerrit, and then you can add other members by going to
+https://review.openstack.org/#/admin/groups/ and filtering for your group's
+names.
 
 The project team lead (PTL), at least, should be added to
 "<projectname>-release", and other developers who understand the
