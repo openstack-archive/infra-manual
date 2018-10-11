@@ -467,7 +467,6 @@ channel, add it to the ``openstack-oslo`` section:
    openstack-oslo:
      events:
        - patchset-created
-       - x-vrif-minus-2
      projects:
        - openstack/cliff
        - openstack/oslo.config
