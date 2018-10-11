@@ -1,0 +1,14 @@
+* Multi-tenancy support in the API
+* Array-based replication
+* Storage pool capability reporting
+* Cinder compatible API
+* Controller API request filter
+* Create volume from snapshot
+* Dashboard UI interface
+* Extend volume support
+* Fibre channel protocol support
+* Host-based replication
+* OpenStack Keystone authentication
+* Storage backend capabilities reporting
+* Volume groups
+* Containerized deployment
