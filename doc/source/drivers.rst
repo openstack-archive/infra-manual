@@ -250,6 +250,13 @@ and push that tag to Gerrit by running the following commands::
 
 .. note::
 
+  * Pushing the tag will trigger the release pipeline in zuul, but without
+    proper configuration no release will happen. A publishing job is required.
+    One common way to do this is to use a `publish-to-pypi template
+    <https://docs.openstack.org/infra/openstack-zuul-jobs/project-templates.html#project_template-publish-to-pypi-python3>`_
+    in `openstack-infra/project-config <https://git.openstack.org/cgit/openstack-infra/project-config/>`_.
+    The publishing jobs are one of the :ref:`central-config-exceptions`.
+
   * Tags can't be effectively deleted once pushed, so make absolutely
     certain they're correct (ideally by locally testing release
     artifact generation commands and inspecting the results between
