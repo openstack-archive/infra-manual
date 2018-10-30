@@ -594,8 +594,9 @@ in the central config repository ``openstack-infra/project-config``:
 
   As an example, the project-templates ``publish-to-pypi`` - and its
   variants -, ``release-openstack-server``,
-  ``publish-xstatic-to-pypi``, ``nodejs4-publish-to-npm``, and
-  ``puppet-release-jobs`` include jobs that are not "branch aware"
+  ``publish-xstatic-to-pypi``, ``nodejs4-publish-to-npm``,
+  ``puppet-release-jobs``, ``docs-on-readthedocs``
+  include jobs that are not "branch aware"
   since they are triggered by tag based events.
 
 * The queue configuration for the ``integrated`` queue needs to stay
