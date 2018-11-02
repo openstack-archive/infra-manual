@@ -481,6 +481,18 @@ the jobs can use.
    find ways to safely maintain (and if necessary share) your own backup
    copies if you're unable to easily revoke/replace them when lost.
 
+
+If you want to encrypt a secret, you can use the
+``tools/encrypt_secret.py`` script from project
+``openstack-infra/zuul``. For example, to encrypt file
+``file_with_secret`` for project ``openstack/kolla`` use:
+
+.. code-block:: shell
+
+   $ tools/encrypt_secret.py --infile file_with_secret \
+     --tenant openstack https://zuul.openstack.org openstack/kolla
+
+
 Periodic Jobs
 -------------
 
