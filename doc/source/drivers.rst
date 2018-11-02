@@ -253,7 +253,7 @@ and push that tag to Gerrit by running the following commands::
   * Pushing the tag will trigger the release pipeline in zuul, but without
     proper configuration no release will happen. A publishing job is required.
     One common way to do this is to use a `publish-to-pypi template
-    <https://docs.openstack.org/infra/openstack-zuul-jobs/project-templates.html#project_template-publish-to-pypi-python3>`_
+    <https://docs.openstack.org/infra/openstack-zuul-jobs/project-templates.html#project_template-publish-to-pypi>`_
     in `openstack-infra/project-config <https://git.openstack.org/cgit/openstack-infra/project-config/>`_.
     The publishing jobs are one of the :ref:`central-config-exceptions`.
 
