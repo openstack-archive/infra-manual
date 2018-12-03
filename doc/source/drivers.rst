@@ -415,7 +415,7 @@ Replace the contents of the README with a message such as this::
   <alternative project URL>.
 
   For any further questions, please email
-  openstack-dev@lists.openstack.org or join #openstack-dev on
+  openstack-discuss@lists.openstack.org or join #openstack-dev on
   Freenode.
 
 Merge this commit to your project.
