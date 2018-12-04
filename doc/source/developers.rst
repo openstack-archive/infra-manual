@@ -381,7 +381,7 @@ Make sure you have the latest upstream changes::
   git pull --ff-only origin master
 
 Create a `topic branch
-<https://git-scm.com/book/en/Git-Branching-Branching-Workflows#Topic-Branches>`_
+<https://git-scm.com/book/en/Git-Branching-Branching-Workflows#_topic_branch>`_
 to hold your work and switch to it.  If you are working on a
 blueprint, name your topic branch ``bp/BLUEPRINT`` where BLUEPRINT is
 the name of a blueprint in Launchpad (for example,
@@ -1106,6 +1106,6 @@ other repositories can be identified.
 
 Additional information about project gating and Zuul can be found in
 the Zuul documentation, located at:
-https://docs.openstack.org/infra/zuul/user/gating.html
+https://zuul-ci.org/docs/zuul/user/gating.html
 
 .. _`Running Python Unit Tests`: https://docs.openstack.org/project-team-guide/project-setup/python.html#running-python-unit-tests

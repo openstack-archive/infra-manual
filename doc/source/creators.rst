@@ -38,7 +38,7 @@ the OpenStack infrastructure, especially the docs.openstack.org and
 specs.openstack.org server.
 
 .. _governance site: https://governance.openstack.org
-.. _OpenStack Project Teams: https://governance.openstack.org/reference/projects/index.html
+.. _OpenStack Project Teams: https://governance.openstack.org/tc/reference/projects/index.html
 .. _Project Team Guide: https://docs.openstack.org/project-team-guide/
 .. _related project: https://docs.openstack.org/infra/system-config/unofficial_project_hosting.html
 
@@ -76,7 +76,7 @@ PyPI
 ----
 
 Python packages need to have a unique name on the Python Package
-Index (https://pypi.python.org) so we can publish source
+Index (https://pypi.org) so we can publish source
 distributions to be installed via pip.
 
 It is best to name the repository and the top level Python package
@@ -107,7 +107,7 @@ https://pypi.org/account/register/ as they are
 required for the next step.
 
 Once you have PyPI credentials see
-https://packaging.python.org/tutorials/distributing-packages/
+https://packaging.python.org/tutorials/packaging-projects/
 to create and upload your initial package. The initial package should
 contain a ``PKG-INFO`` file for a nonexistent version ``0`` of your
 package (that way any release you make is guaranteed to be higher).
@@ -224,7 +224,7 @@ Viewing & Using Your Project's Task Tracker
 
 After the project-config change above has merged, all repositories will be created in
 Storyboard and you will be able to interact with them- filing bugs and adding requests
-for new features in the `webclient <https://https://storyboard.openstack.org/>`_. All
+for new features in the `webclient <https://storyboard.openstack.org/>`_. All
 repositories will be added to the group that was associated with the repositories in
 the project-config change.
 
@@ -659,7 +659,7 @@ library edit the "Oslo" section:
 You can check which tags to use, or the meaning of any tag, by
 consulting the `list of currently allowed tags`_.
 
-.. _list of currently allowed tags: https://governance.openstack.org/reference/tags/index.html
+.. _list of currently allowed tags: https://governance.openstack.org/tc/reference/tags/index.html
 
 When writing the commit message for this change, make this change
 depend on the project creation change by including a link to its
@@ -764,7 +764,7 @@ Start by checking out a copy of your new repository:
 
    $ git clone https://git.openstack.org/openstack/<projectname>
 
-.. _cookiecutter: https://pypi.python.org/pypi/cookiecutter
+.. _cookiecutter: https://pypi.org/project/cookiecutter
 
 .. code-block:: console
 
@@ -853,8 +853,7 @@ template, as it'll be telling Zuul to run jobs that don't do anything, which
 is not needed once you have real jobs.
 
 For more information on writing jobs for Zuul, see
-https://docs.openstack.org/infra/zuul/user/config.html
-and :ref:`zuul_best_practices`.
+https://zuul-ci.org/docs/zuul/user/config.html and :ref:`zuul_best_practices`.
 
 Verify That Gerrit and the Test Jobs are Working
 ================================================
@@ -970,7 +969,7 @@ If you need to check the logs, you can use the `git-os-job`_ command:
 
   $ git os-job $version
 
-.. _git-os-job: https://pypi.python.org/pypi/git-os-job
+.. _git-os-job: https://pypi.org/project/git-os-job
 
 See :ref:`tagging-a-release` in the Project Driver's Guide for more
 detail on tag pushing workflows.
@@ -1054,8 +1053,8 @@ translations. For this, you first need to mark all strings so that
 they can be localized, use `oslo.i18n`_ for this and follow the
 `guidelines`_.
 
-.. _oslo.i18n: https://docs.openstack.org/developer/oslo.i18n
-.. _guidelines: https://docs.openstack.org/developer/oslo.i18n/guidelines.html
+.. _oslo.i18n: https://docs.openstack.org/oslo.i18n/
+.. _guidelines: https://docs.openstack.org/oslo.i18n/latest/user/guidelines.html
 
 Note that this is just enabling translations, the actual translations
 are done by the i18n team, and they have to prioritize which projects
@@ -1459,7 +1458,7 @@ the following:
 #. Will this be an official project? Then it needs a governance
    review, with a link to it via "Needed-By", and get PTL+1.
 
-#. Will the repo release on pypi? Check that it https://pypi.python.org
+#. Will the repo release on pypi? Check that it https://pypi.org
    is set up correctly.
 
 .. _Project Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html

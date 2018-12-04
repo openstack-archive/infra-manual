@@ -491,11 +491,10 @@ If you want to add additional packages, you have several options.
 
 If you run Python tests using ``tox``, you can install them using
 ``requirements.txt`` and ``test-requirements.txt`` files (see also the
-`global requirements process
-<https://docs.openstack.org/developer/requirements/>`_). If these
-Python tests need additional distribution packages installed as well
-and if those are not in the nodes used for testing, they have to be
-installed explicitly.
+`global requirements process <https://docs.openstack.org/requirements/>`_).
+If these Python tests need additional distribution packages installed as well
+and if those are not in the nodes used for testing, they have to be installed
+explicitly.
 
 If you are building documentation, the file ``doc/requirements.txt``
 is used instead to install Python packages.
