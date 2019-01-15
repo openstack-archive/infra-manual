@@ -1109,6 +1109,12 @@ Replace ``${MODULENAME}`` with the name of your main module like
 
    _translators = oslo_i18n.TranslatorFactory(domain='${MODULENAME}')
 
+Create file ``babel.cfg`` with the following content:
+
+.. code-block:: ini
+
+   [python: **.py]
+
 
 Django Projects
 ---------------
@@ -1191,16 +1197,19 @@ including the following changes:
 
 #. Add the jobs to your pipelines.
 
-   Edit file ``zuul.d/projects.yaml`` and add the
-   ``translation-jobs`` template to your repository:
+   Edit file ``zuul.d/projects.yaml`` and add a template which
+   defines translation jobs to your repository:
 
    .. code-block:: yaml
 
       - project:
           name: openstack/<projectname>
           templates:
-            - translation-jobs
+            - translation-jobs-master-stable
 
+   If the repository is planned to have stable branch, use the
+   ``translation-jobs-master-stable`` template. Otherwise use
+   the ``translation-jobs-master-only`` template.
 
 When submitting the change to ``openstack-infra/project-config`` for
 review, use the ``translation_setup`` topic so it receives the
