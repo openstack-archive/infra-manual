@@ -57,7 +57,7 @@ Talking to specific people
 To talk to a specific person, prefix the line with their name. For instance,
 to ask ``mordred`` a question::
 
-  mordred: I’m having a problem with this patch, https://review.openstack.org/#/c/530978/, could you help me figure out it?
+  mordred: I’m having a problem with this patch, https://review.opendev.org/#/c/530978/, could you help me figure out it?
 
 It is not required or useful to prefix someone's name with an ``@``, it's
 just extra typing and looks weird in IRC clients.

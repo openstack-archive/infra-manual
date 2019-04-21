@@ -27,14 +27,14 @@ location value to the repository and commit hash from which to branch::
           openstack/oslo.config: 02a86d2eefeda5144ea8c39657aed24b8b0c9a39
 
 For more details, refer to the openstack/releases
-`README.rst <http://git.openstack.org/cgit/openstack/releases/tree/README.rst>`_
+`README.rst <https://opendev.org/openstack/releases/src/README.rst>`_
 file.
 
 For projects not under governance, new branches can be defined via Gerrit.
-In the `Gerrit UI <https://review.openstack.org/>`_, under Projects > List,
+In the `Gerrit UI <https://review.opendev.org/>`_, under Projects > List,
 locate the given project and go to the Branches option. For example::
 
-    https://review.openstack.org/#/admin/projects/openstack/nova,branches
+    https://review.opendev.org/#/admin/projects/openstack/nova,branches
 
 If you do not have the option to add a new branch, you will need to contact
 the infra team to get the necessary permissions for the project.
@@ -158,7 +158,7 @@ Release Management Team at the Release Branch Point. If you are managing
 branches for your project you may have permission to do this
 yourself.
 
-* Go to https://review.openstack.org/ and sign in
+* Go to https://review.opendev.org/ and sign in
 * Select 'Admin', 'Projects', then the project
 * Select 'Branches'
 * Enter ``stable/<series>`` in the 'Branch Name' field, and ``HEAD``
@@ -233,7 +233,7 @@ Tagging a Release
 Deliverables produced by official teams and released following the
 release cycle should be managed by the OpenStack Release Management
 Team. See the instructions in the `README.rst
-<http://git.openstack.org/cgit/openstack/releases/tree/README.rst>`__
+<http://opendev.org/openstack/releases/src/README.rst>`__
 in openstack/releases for details.
 
 If you are managing your own releases, you may have permission to do
@@ -254,7 +254,7 @@ and push that tag to Gerrit by running the following commands::
     proper configuration no release will happen. A publishing job is required.
     One common way to do this is to use a `publish-to-pypi template
     <https://docs.openstack.org/infra/openstack-zuul-jobs/project-templates.html#project_template-publish-to-pypi>`_
-    in `openstack-infra/project-config <https://git.openstack.org/cgit/openstack-infra/project-config/>`_.
+    in `openstack/project-config <https://opendev.org/openstack/project-config/>`_.
     The publishing jobs are one of the :ref:`central-config-exceptions`.
 
   * Tags can't be effectively deleted once pushed, so make absolutely
@@ -302,8 +302,8 @@ channel can have multiple notifications per project.
 Before you can configure GerritBot, you need to give channel permissions with
 an accessbot configuration specific to the channel where you want
 notifications posted. The configuration file is hosted in
-`openstack-infra/project-config
-<https://git.openstack.org/cgit/openstack-infra/project-config/>`_. Edit
+`openstack/project-config
+<https://opendev.org/openstack/project-config/>`_. Edit
 ``accessbot/channels.yaml`` to add your IRC channel if it is not
 already listed.
 
@@ -311,8 +311,8 @@ In order for GerritBot to post notifications on the IRC channel of the
 project you are configuring, you need to add your GerritBot
 configuration into
 ``gerritbot/channels.yaml``.  This file
-is hosted in `openstack-infra/project-config
-<https://git.openstack.org/cgit/openstack-infra/project-config/>`_.
+is hosted in `openstack/project-config
+<https://opendev.org/openstack/project-config/>`_.
 
 The syntax for configuring the notifications is::
 
@@ -369,7 +369,7 @@ branches as well.
 Step 2: End Project Gating
 --------------------------
 
-Check out a copy of the ``openstack-infra/project-config`` repository
+Check out a copy of the ``openstack/project-config`` repository
 and edit ``zuul.d/projects.yaml``.  Find the section for your project and
 change it to look like this::
 
@@ -379,8 +379,8 @@ change it to look like this::
       - noop-jobs
 
 Also, remove any jobs and templates you have defined. These can be
-defined in ``openstack-infra/project-config`` repository in the
-directory  ``zuul.d``, or in ``openstack-infra/openstack-zuul-jobs``
+defined in ``openstack/project-config`` repository in the
+directory  ``zuul.d``, or in ``openstack/openstack-zuul-jobs``
 repository or in your own repository.
 
 Submit that change and make sure to mention in the commit message that
@@ -438,7 +438,7 @@ Step 4: Remove Project from Infrastructure Systems
 --------------------------------------------------
 
 Once your repository is in its final state, prepare a second change to
-the ``openstack-infra/project-config`` repository that does the
+the ``openstack/project-config`` repository that does the
 following:
 
 * Remove your project from ``zuul.d/projects.yaml`` and
@@ -501,7 +501,7 @@ is used instead to install Python packages.
 
 If you run devstack based tests, then list missing binary packages
 below the `files
-<https://git.openstack.org/cgit/openstack-dev/devstack/tree/files>`_
+<https://opendev.org/openstack/devstack/src/files>`_
 directory of devstack.
 
 For non-devstack based tests, add a ``bindep.txt`` file
@@ -725,13 +725,13 @@ Hosted on an External Gerrit
 If the project you wish to test is hosted on a Gerrit system (other
 than OpenStack's Gerrit), you may need to connect Zuul to it first, if
 it isn't already.  To do so, propose a change to `system-config
-<http://git.openstack.org/cgit/openstack-infra/system-config/tree/hiera/group/zuul-scheduler.yaml>`_
+<http://opendev.org/openstack/system-config/src/hiera/group/zuul-scheduler.yaml>`_
 which adds the connection information for the new server, then work
 with the infra team in #openstack-infra to set up an account.
 
 Once this is complete, propose a change to add the project(s) to
 OpenStack's Zuul.  Add them to `project-config/zuul/main.yaml
-<http://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul/main.yaml>`_
+<http://opendev.org/openstack/project-config/src/zuul/main.yaml>`_
 under the connection name established above.
 
 The project should not be configured to load any configuration objects
@@ -750,7 +750,7 @@ the `Configure` button to install the app.
 
 Once this is complete, propose a change to add the project(s) to
 OpenStack's Zuul.  Add them to `project-config/zuul/main.yaml
-<http://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul/main.yaml>`_
+<http://opendev.org/openstack/project-config/src/zuul/main.yaml>`_
 under the ``github:`` connection.
 
 The project should not be configured to load any configuration objects
@@ -767,6 +767,6 @@ projects, this needs to be done in the `project-config` repo.  Define
 the jobs you wish to run either in your own repos, or in
 `openstack-zuul-jobs`.  Then create project definitions for the new
 projects in `project-config/zuul.d/projects.yaml
-<http://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d/projects.yaml>`_
+<http://opendev.org/openstack/project-config/src/zuul.d/projects.yaml>`_
 which adds those jobs to the new project on the `third-party-check`
 pipeline.

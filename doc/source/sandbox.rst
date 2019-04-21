@@ -4,7 +4,7 @@ Learn the Gerrit Workflow in the Sandbox
 ----------------------------------------
 
 OpenStack has a sandbox repository for learning and testing purposes:
-https://git.openstack.org/cgit/openstack-dev/sandbox. This is a great
+https://opendev.org/openstack-dev/sandbox. This is a great
 repository to begin your OpenStack learning. It allows you to experiment
 with the workflow and try different options so you can learn what they do.
 Please only create 2 or 3 different changes and submit new patchsets to
@@ -13,7 +13,7 @@ intention of this repository.
 
 Clone the sandbox repo::
 
-  git clone https://git.openstack.org/openstack-dev/sandbox.git
+  git clone https://opendev.org/openstack-dev/sandbox
 
 Move into the root directory for the sandbox repo::
 
@@ -75,7 +75,7 @@ Then save the file and close the editor. Next submit your patchset to gerrit::
 
 You will see on screen a message confirming that the change has been
 submitted for review and a URL to your change on
-https://review.openstack.org. Click on the URL and view your patchset.
+https://review.opendev.org. Click on the URL and view your patchset.
 
 You will also receive one or more emails from the
 `automatic testing system <https://docs.openstack.org/infra/manual/developers.html#automated-testing>`_,
@@ -121,10 +121,10 @@ changed the line Change-Id in your commit message.
 As a last step, you should abandon your change. You can do this from
 the web UI by visiting the URL of the change and hitting the *Abandon*
 button. Alternatively you can abandon a change from command
-line using `Gerrit ssh commands <https://review.openstack.org/Documentation/cmd-review.html>`_::
+line using `Gerrit ssh commands <https://review.opendev.org/Documentation/cmd-review.html>`_::
 
   ssh -l <YOUR_GERRIT_USERNAME>\
       -p 29418 \
-      review.openstack.org 'gerrit review' \
+      review.opendev.org 'gerrit review' \
       --project openstack-dev/sandbox.git \
       --abandon <THE_CHANGE_ID>,2

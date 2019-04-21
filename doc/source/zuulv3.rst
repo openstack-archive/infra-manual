@@ -425,7 +425,7 @@ configuration:
    - job:
        name: test-job
        roles:
-         - zuul: openstack-infra/zuul-jobs
+         - zuul: zuul/zuul-jobs
 
 The project where the job is defined is always added as an implicit
 source for roles.
@@ -484,7 +484,7 @@ the jobs can use.
 
 If you want to encrypt a secret, you can use the
 ``tools/encrypt_secret.py`` script from project
-``openstack-infra/zuul``. For example, to encrypt file
+``zuul/zuul``. For example, to encrypt file
 ``file_with_secret`` for project ``openstack/kolla`` use:
 
 .. code-block:: shell
@@ -562,7 +562,7 @@ them, but non-OpenStack projects using OpenStack's Zuul may want to.
 behaviors specific to OpenStack. Specifically, it adds
 ``openstack/requirements`` to the ``required-projects`` list and sets the
 ``tox_constraints_file`` variable to point to
-``src/git.openstack.org/openstack/requirements/upper-constraints.txt``.
+``src/opendev.org/openstack/requirements/upper-constraints.txt``.
 
 ``openstack-tox-py27`` is like ``tox-py27`` but uses ``openstack-tox`` as a
 base job.
@@ -841,7 +841,7 @@ If your job is a custom dsvm job - try to migrate it to use the new
 
 .. note:: There may be a couple of edge cases they can't handle yet.
 
-You can see https://review.openstack.org/#/c/500365/ for an example of just
+You can see https://review.opendev.org/#/c/500365/ for an example of just
 about everything you might want to do using the new devstack base job.
 
 Converting Other Legacy Changes
@@ -936,18 +936,18 @@ for more information on how jobs are configured.
 .. _Project Testing Interface: https://governance.openstack.org/tc/reference/project-testing-interface.html
 .. _Zuul v3 documentation: https://zuul-ci.org/docs/zuul/
 .. _openstack-zuul-jobs documentation: https://docs.openstack.org/infra/openstack-zuul-jobs/
-.. _openstack-zuul-jobs jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/jobs.yaml
-.. _openstack-zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/roles
-.. _openstack-zuul-jobs zuul.d: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d
-.. _openstack-zuul-jobs: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs
+.. _openstack-zuul-jobs jobs.yaml: https://opendev.org/openstack/openstack-zuul-jobs/src/zuul.d/jobs.yaml
+.. _openstack-zuul-jobs roles: https://opendev.org/openstack/openstack-zuul-jobs/src/roles
+.. _openstack-zuul-jobs zuul.d: https://opendev.org/openstack/openstack-zuul-jobs/src/zuul.d
+.. _openstack-zuul-jobs: https://opendev.org/openstack/openstack-zuul-jobs
 .. _openstack-tox: https://docs.openstack.org/infra/openstack-zuul-jobs/jobs.html#job-openstack-tox
-.. _playbooks/legacy: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/playbooks/legacy
-.. _project-config zuul.d: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d
-.. _project-config: https://git.openstack.org/cgit/openstack-infra/project-config
+.. _playbooks/legacy: https://opendev.org/openstack/openstack-zuul-jobs/src/playbooks/legacy
+.. _project-config zuul.d: https://opendev.org/openstack/project-config/src/zuul.d
+.. _project-config: https://opendev.org/openstack/project-config
 .. _zuul-jobs documentation: https://zuul-ci.org/docs/zuul-jobs/
-.. _zuul-jobs roles: https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/roles
-.. _zuul-jobs zuul.yaml: https://git.openstack.org/cgit/openstack-infra/zuul-jobs/tree/zuul.yaml
-.. _zuul-jobs: https://git.openstack.org/cgit/openstack-infra/zuul-jobs
-.. _zuul.d/zuul-legacy-jobs.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/zuul-legacy-jobs.yaml
-.. _zuul.d/zuul-legacy-project-templates.yaml: https://git.openstack.org/cgit/openstack-infra/openstack-zuul-jobs/tree/zuul.d/zuul-legacy-project-templates.yaml
-.. _zuul.d/projects.yaml: https://git.openstack.org/cgit/openstack-infra/project-config/tree/zuul.d/projects.yaml
+.. _zuul-jobs roles: https://opendev.org/zuul/zuul-jobs/src/roles
+.. _zuul-jobs zuul.yaml: https://opendev.org/zuul/zuul-jobs/src/zuul.yaml
+.. _zuul-jobs: https://opendev.org/zuul/zuul-jobs
+.. _zuul.d/zuul-legacy-jobs.yaml: https://opendev.org/openstack/openstack-zuul-jobs/src/zuul.d/zuul-legacy-jobs.yaml
+.. _zuul.d/zuul-legacy-project-templates.yaml: https://opendev.org/openstack/openstack-zuul-jobs/src/zuul.d/zuul-legacy-project-templates.yaml
+.. _zuul.d/projects.yaml: https://opendev.org/openstack/project-config/src/zuul.d/projects.yaml

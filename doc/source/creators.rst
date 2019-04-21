@@ -67,7 +67,7 @@ git repository
 
 The base name of the repository should be unique across all of the
 namespace directories for git repositories under
-https://git.openstack.org/cgit.  That is, it is not sufficient to have
+https://opendev.org/explore/repos.  That is, it is not sufficient to have
 ``openstack/foo`` and ``openstack-dev/foo`` because that prevents us
 from moving those two repositories into the same namespace at some
 point.
@@ -147,7 +147,7 @@ for testing with OpenStack CI systems.
   ``Needed-By`` to a change for the ``openstack/governance``
   repository to add the new repository under the project team, see
   :ref:`add-to-governance-repo`. This change is for
-  ``openstack-infra/project-config`` repository.
+  ``openstack/project-config`` repository.
 
 * Second change to add jobs to your project, see
   :ref:`add_jobs_for_project`. This one can only pass Zuul internal
@@ -289,7 +289,7 @@ Request Signing of ICLA
 
 If your project requires signing of the Individual Contributor
 License Agreement (`ICLA
-<https://review.openstack.org/static/cla.html>`_), change the
+<https://review.opendev.org/static/cla.html>`_), change the
 ``receive`` section to:
 
 .. code-block:: ini
@@ -508,7 +508,7 @@ Submitting Infra Change for Review
 At this point, you should submit all the additions discussed so far as a
 single change to gerrit.
 
-When submitting the change to openstack-infra/project-config for
+When submitting the change to ``openstack/project-config`` for
 review, use the "new-project" topic so it receives the appropriate
 attention:
 
@@ -579,7 +579,7 @@ Central Config Exceptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are several notable exceptions for job configs that should remain
-in the central config repository ``openstack-infra/project-config``:
+in the central config repository ``openstack/project-config``:
 
 * Translation jobs for all branches.
 * Jobs that should only run against the master branch of the project
@@ -701,7 +701,7 @@ Update the Gerrit Group Members
 After the review is approved and :ref:`groups are created
 <add-gerrit-permissions>` ask the Infra team to add you to both groups in
 Gerrit, and then you can add other members by going to
-https://review.openstack.org/#/admin/groups/ and filtering for your group's
+https://review.opendev.org/#/admin/groups/ and filtering for your group's
 names.
 
 The project team lead (PTL), at least, should be added to
@@ -724,7 +724,7 @@ consistent way so they can all be tested with a common
 configuration. If your project will not need to be installed for
 devstack gate jobs, you can skip this step.
 
-Check out ``openstack-infra/devstack-gate`` and edit
+Check out ``openstack/devstack-gate`` and edit
 ``devstack-vm-gate-wrap.sh`` to add the new project::
 
   PROJECTS="openstack/<projectname> $PROJECTS"
@@ -762,7 +762,7 @@ Start by checking out a copy of your new repository:
 
 .. code-block:: console
 
-   $ git clone https://git.openstack.org/openstack/<projectname>
+   $ git clone https://opendev.org/openstack/<projectname>
 
 .. _cookiecutter: https://pypi.org/project/cookiecutter
 
@@ -785,34 +785,34 @@ most projects.  It can be used as follows:
 
 .. code-block:: console
 
-   $ cookiecutter -f https://git.openstack.org/openstack-dev/cookiecutter
+   $ cookiecutter -f https://opendev.org/openstack/cookiecutter
 
 Remember, as mentioned earlier, these commands should typically be used only
 if you are working with an empty repository.
 
-The template in ``openstack-dev/specs-cookiecutter`` should be used for
+The template in ``openstack/specs-cookiecutter`` should be used for
 specs:
 
 .. code-block:: console
 
-   $ cookiecutter -f https://git.openstack.org/openstack-dev/specs-cookiecutter
+   $ cookiecutter -f https://opendev.org/openstack/specs-cookiecutter
 
-The template in ``openstack-dev/oslo-cookiecutter`` should be used for
+The template in ``openstack/oslo-cookiecutter`` should be used for
 Oslo libraries:
 
 .. code-block:: console
 
-   $ cookiecutter -f https://git.openstack.org/openstack-dev/oslo-cookiecutter
+   $ cookiecutter -f https://opendev.org/openstack/oslo-cookiecutter
 
 The template in ``openstack/ui-cookiecutter`` should be used for
 Horizon plugins:
 
 .. code-block:: console
 
-   $ cookiecutter -f https://git.openstack.org/openstack/ui-cookiecutter
+   $ cookiecutter -f https://opendev.org/openstack/ui-cookiecutter
 
 Other templates are available; the full list can be seen at
-https://git.openstack.org/cgit/?q=cookiecutter.
+https://opendev.org/explore/repos?q=cookiecutter&tab=.
 
 Applying the Template
 ---------------------
@@ -876,12 +876,12 @@ review and approve:
 
 .. code-block:: console
 
-  $ git clone https://git.openstack.org/openstack/<projectname>
+  $ git clone https://opendev.org/openstack/<projectname>
   $ cd <projectname>
   $ git checkout -b add-gitreview
   $ cat > .gitreview <<EOF
   [gerrit]
-  host=review.openstack.org
+  host=review.opendev.org
   port=29418
   project=openstack/<projectname>.git
   EOF
@@ -908,9 +908,9 @@ administrator privileges will need to add you to each group. After
 that point, you can add other members.
 
 To check the membership of the groups, visit
-``https://review.openstack.org/#/admin/projects/openstack/<projectname>,access``
+``https://review.opendev.org/#/admin/projects/openstack/<projectname>,access``
 -- for example,
-https://review.openstack.org/#/admin/projects/openstack-infra/infra-manual,access
+https://review.opendev.org/#/admin/projects/openstack/infra-manual,access
 -- and then click on the group names displayed on that page to review
 their membership.
 
@@ -1180,7 +1180,7 @@ The translated PO files will converted into JSON and placed into the
 Add Translation Server Support
 ------------------------------
 
-Propose a change to the ``openstack-infra/project-config`` repository
+Propose a change to the ``openstack/project-config`` repository
 including the following changes:
 
 #. Set up the project on the translation server.
@@ -1211,7 +1211,7 @@ including the following changes:
    ``translation-jobs-master-stable`` template. Otherwise use
    the ``translation-jobs-master-only`` template.
 
-When submitting the change to ``openstack-infra/project-config`` for
+When submitting the change to ``openstack/project-config`` for
 review, use the ``translation_setup`` topic so it receives the
 appropriate attention:
 
@@ -1416,12 +1416,12 @@ For a project being added to existing official OpenStack project:
 Create an ``openstack/governance`` change and add a "Depends-On:
 project-change-url" of the change you make in the following steps to
 the commit message, and add a comment in the
-``openstack-infra/project-config`` change that references the
+``openstack/project-config`` change that references the
 governance change. You will also make sure the PTL has expressed
 approval for the addition in some way.
 
 When preparing to rename a project, begin by making changes to the
-files in the ``openstack-infra/project-config`` repository related
+files in the ``openstack/project-config`` repository related
 to your project.
 
 When uploading your change, make sure the topic is "project-rename"

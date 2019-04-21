@@ -64,7 +64,7 @@ Launchpad when you address them with your code commits.
 Log into Gerrit
 ^^^^^^^^^^^^^^^
 
-Visit https://review.openstack.org/ and click the ``Sign In`` link
+Visit https://review.opendev.org/ and click the ``Sign In`` link
 at the top-right corner of the page.  Log in with your Ubuntu One
 OpenID.
 
@@ -87,11 +87,11 @@ Sign the appropriate Individual Contributor License Agreement
 
 Unless you are an U.S. Government Employee (see below),
 `agree to the Individual Contributor License
-Agreement <https://review.openstack.org/#/settings/agreements>`_.
+Agreement <https://review.opendev.org/#/settings/agreements>`_.
 The full text of the agreement will be
 displayed before you can enter "I AGREE" below it, but it's also
 anonymously available if you want to `preview the OpenStack
-ICLA <https://review.openstack.org/static/cla.html>`_ now.
+ICLA <https://review.opendev.org/static/cla.html>`_ now.
 
 Employees of the U.S. Government do not sign the Individual
 CLA. Instead, someone with authority to sign on behalf of your agency
@@ -115,7 +115,7 @@ Upload your public SSH key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You'll also want to `upload an SSH key to Gerrit
-<https://review.openstack.org/#/settings/ssh-keys>`_ while you're at
+<https://review.opendev.org/#/settings/ssh-keys>`_ while you're at
 it, so that you'll be able to commit changes for review later. This is
 separate from adding a key to Launchpad (which you can do if you
 like, but is not required for contributing to OpenStack).
@@ -137,7 +137,7 @@ You'll want to make sure that the ``user.email`` you specify matches
 at least one you've provided to Gerrit. By default this is taken
 from your OpenID login the first time you authenticate, but you can
 also change it or add more addresses through the `Contact
-Information <https://review.openstack.org/#/settings/contact>`_ page
+Information <https://review.opendev.org/#/settings/contact>`_ page
 at any point in the future.
 
 Install the git-review utility
@@ -218,7 +218,7 @@ Starting Work on a New Project
 
 Clone a repository in the usual way, for example::
 
-  git clone https://git.openstack.org/openstack/<projectname>.git
+  git clone https://opendev.org/openstack/<projectname>
 
 You may want to ask git-review to configure your repository to know
 about Gerrit at this point. If you don't, it will do so the first
@@ -238,11 +238,11 @@ configuring git to use your Gerrit username, as follows::
   git config --global gitreview.username yourgerritusername
 
 If you don't remember your Gerrit user name go to the `settings page
-on gerrit <https://review.openstack.org/#/settings/>`_ to check it out
+on gerrit <https://review.opendev.org/#/settings/>`_ to check it out
 (it's not your email address).
 
-.. Note:: You can verify the SSH host keys for review.openstack.org
-    on https://review.openstack.org/#/settings/ssh-keys
+.. Note:: You can verify the SSH host keys for review.opendev.org
+    on https://review.opendev.org/#/settings/ssh-keys
 
 We have a tutorial: :ref:`sandbox`. If this is your first time
 contributing to OpenStack, we strongly suggest you follow this tutorial.
@@ -256,10 +256,10 @@ over non-standards ports might be blocked (or you need to access the web
 using https) then you can configure git-review to use an https endpoint
 instead of ssh. Keep in mind that you will need to generate an
 `HTTP password in Gerrit
-<https://review.openstack.org/#/settings/http-password>`_ to use this
+<https://review.opendev.org/#/settings/http-password>`_ to use this
 connection. You should run the following command before "git review -s"::
 
-  git remote add gerrit https://<username>@review.openstack.org/<umbrella repository name>/<repository name>.git
+  git remote add gerrit https://<username>@review.opendev.org/<umbrella repository name>/<repository name>.git
 
 In case you had already tried to setup git-review and it failed, it might
 be necessary to remove the Gerrit remote from git::
@@ -741,7 +741,7 @@ other repositories. Thus, a Depends-on only enforces an ordering but
 is not visible otherwise especially in these cases:
 
 * Changes for the CI infrastructure like changes
-  ``openstack-infra/project-config`` are never tested in a production
+  ``openstack/project-config`` are never tested in a production
   simulated environment. So, if one of the changes adjusts the job
   definitions or creates a new job, a Depends-On will not test the new
   definition, the CI infrastructure change needs to merge to master
@@ -779,7 +779,7 @@ means removing the approval and readding it again.
 Code Review
 ===========
 
-Log in to https://review.openstack.org/ to see proposed changes, and
+Log in to https://review.opendev.org/ to see proposed changes, and
 review them.
 
 To provide a review for a proposed change in the Gerrit UI, click on
@@ -816,7 +816,7 @@ check.
 
 For more details on reviews in Gerrit, check the
 `Gerrit documentation
-<https://review.openstack.org/Documentation/intro-quick.html#_reviewing_the_change>`_.
+<https://review.opendev.org/Documentation/intro-quick.html#_reviewing_the_change>`_.
 
 .. _automated-testing:
 
