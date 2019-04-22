@@ -1,0 +1,9 @@
+Code-Review+2: Monty Taylor <mordred@inaugust.com>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Mon, 22 Apr 2019 14:58:36 +0000
+Reviewed-on: https://review.opendev.org/654222
+Project: openstack/infra-manual
+Branch: refs/heads/master
