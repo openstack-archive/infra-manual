@@ -469,21 +469,21 @@ channel, add it to the ``openstack-oslo`` section:
        - patchset-created
      projects:
        - openstack/cliff
-       - openstack/oslo.config
+       - openstack/cookiecutter
+       - openstack/hacking
+       - openstack/oslo-cookiecutter
        - openstack/oslo-incubator
+       - openstack/oslo-specs
+       - openstack/oslo.config
        - openstack/oslo.messaging
        - openstack/oslo.rootwrap
-       - openstack/oslosphinx
-       - openstack/oslo-specs
        - openstack/oslo.test
        - openstack/oslo.version
        - openstack/oslo.vmware
+       - openstack/oslosphinx
+       - openstack/pbr
        - openstack/stevedore
        - openstack/taskflow
-       - openstack-dev/cookiecutter
-       - openstack-dev/hacking
-       - openstack-dev/oslo-cookiecutter
-       - openstack-dev/pbr
      branches:
        - master
 
@@ -529,7 +529,7 @@ Every project needs at least one test job or patches will not be able to land.
 
 You can add jobs in either your new project's ``.zuul.yaml`` file or
 in file the ``zuul.d/projects.yaml`` in the central repository
-``openstack-infra/project-config``.
+``openstack/project-config``.
 
 Official OpenStack projects should implement the OpenStack wide jobs
 mentioned in the `Project Testing Interface`_ (PTI) document. For more
@@ -651,8 +651,8 @@ library edit the "Oslo" section:
          tags:
            - name: release:independent
            - name: release:has-stable-branches
-       - repo: openstack-dev/cookiecutter
-       - repo: openstack-dev/pbr
+       - repo: openstack/cookiecutter
+       - repo: openstack/pbr
          tags:
            - name: release:independent
 
@@ -773,7 +773,7 @@ Start by checking out a copy of your new repository:
 Choosing the Right cookiecutter Template
 ----------------------------------------
 
-The template in ``openstack-dev/cookiecutter`` is suitable for
+The template in ``openstack/cookiecutter`` is suitable for
 most projects.  It can be used as follows:
 
 .. warning::
@@ -1005,7 +1005,7 @@ file of devstack.
 Updating devstack
 -----------------
 
-#. Check out ``openstack-dev/devstack``.
+#. Check out ``openstack/devstack``.
 
 #. Edit the appropriate project file under ``lib`` to add a variable
    defining where the source should go. For example, when adding a new
