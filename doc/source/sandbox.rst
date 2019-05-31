@@ -4,7 +4,7 @@ Learn the Gerrit Workflow in the Sandbox
 ----------------------------------------
 
 OpenStack has a sandbox repository for learning and testing purposes:
-https://opendev.org/openstack-dev/sandbox. This is a great
+https://opendev.org/opendev/sandbox. This is a great
 repository to begin your OpenStack learning. It allows you to experiment
 with the workflow and try different options so you can learn what they do.
 Please only create 2 or 3 different changes and submit new patchsets to
@@ -13,7 +13,7 @@ intention of this repository.
 
 Clone the sandbox repo::
 
-  git clone https://opendev.org/openstack-dev/sandbox
+  git clone https://opendev.org/opendev/sandbox
 
 Move into the root directory for the sandbox repo::
 
@@ -126,5 +126,5 @@ line using `Gerrit ssh commands <https://review.opendev.org/Documentation/cmd-re
   ssh -l <YOUR_GERRIT_USERNAME>\
       -p 29418 \
       review.opendev.org 'gerrit review' \
-      --project openstack-dev/sandbox.git \
+      --project opendev/sandbox.git \
       --abandon <THE_CHANGE_ID>,2
