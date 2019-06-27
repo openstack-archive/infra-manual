@@ -399,7 +399,8 @@ Double check that all dot files (such as ``.gitignore`` and
 
    Removing the ``.gitreview`` file from the master branch of a
    repository breaks much of the release tools, so it will be harder
-   to continue to tag releases on existing stable branches.
+   to continue to tag releases on existing stable branches. Take care
+   to remove all files other than ``README.rst`` and ``.gitreview``.
 
 Replace the contents of the README with a message such as this::
 
@@ -419,11 +420,6 @@ Replace the contents of the README with a message such as this::
   Freenode.
 
 Merge this commit to your project.
-
-.. note::
-
-  Before removing ``.gitreview`` be sure to run ``git review -s``,  this
-  will record the necessary information about the repository.
 
 If any users missed the announcement that the project is being
 retired, removing the content of the repository will cause any users
