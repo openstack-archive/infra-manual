@@ -164,10 +164,10 @@ any other package::
 
   yum install git-review
 
-On openSUSE 12.2 and later, git-review is included in the distribution
-under the name python-git-review, so install it as any other package::
+On openSUSE, git-review is included in the distribution, so
+install it as any other package::
 
-  zypper in python-git-review
+  zypper in git-review
 
 On Arch Linux, git-review is included into the distribution, so
 install it as any other package::
