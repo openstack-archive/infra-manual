@@ -855,6 +855,96 @@ is not needed once you have real jobs.
 For more information on writing jobs for Zuul, see
 https://zuul-ci.org/docs/zuul/user/config.html and :ref:`zuul_best_practices`.
 
+Mirroring Projects to Git Mirrors
+=================================
+
+Mirroring of git projects happens automatically to GitHub only for
+OpenStack projects, mirroring for all other namespaces and to other
+mirrors needs to be set up by the project team themselves.
+
+To replicate your git project to a custom location, create a job that
+inherits from the `upload-git-mirror
+<https://zuul-ci.org/docs/zuul-jobs/general-roles.html#role-upload-git-mirror>`_
+job.
+
+This job wraps around the `upload-git-mirror
+<https://zuul-ci.org/docs/zuul-jobs/general-roles.html#role-upload-git-mirror>`_
+Ansible role that is part of the zuul-jobs library.
+
+In order to use this job, you must supply a secret in the following format:
+
+.. code-block:: none
+
+    - secret:
+        name: <name of your secret>
+        data:
+          user: <ssh user of the remote git server>
+          host: <address of the remote git server>
+          host_key: <ssh host key of the remote git server>
+          ssh_key: <private key to authenticate with the remote git server>
+
+For GitHub, the ``user`` parameter is ``git``, not your personal
+username.
+
+The ``host_key`` parameter can be retrieved from your ``known_hosts`` file
+or with a command like `ssh-keyscan -H <host>` or `ssh-keyscan -t rsa
+<host>`.
+
+For example, the ``host_key`` when pushing to GitHub would be, on a single line::
+
+    github.com ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==
+
+The ``ssh_key`` parameter should be encrypted before being committed
+to the git repository. Zuul provides a tool for easily encrypting
+files such as SSH private keys and you can find more information about
+it in the `documentation
+<https://zuul-ci.org/docs/zuul/user/encryption.html>`_.
+
+For example, encrypting a key for the "recordsansible/ara" project would
+look like this:
+
+.. code-block:: console
+
+    $ zuul/tools/encrypt_secret.py \
+      --infile /home/dmsimard/.ssh/ara_git_key \
+      --tenant openstack https://zuul.openstack.org recordsansible/ara
+
+You can then use the secret in a job inheriting from
+``upload-git-mirror`` as such:
+
+.. code-block:: none
+
+   - job:
+       name: <project>-upload-git-mirror
+       parent: upload-git-mirror
+       description: Mirrors openstack/<project> to neworg/<project>
+       vars:
+         git_mirror_repository: neworg/<project>
+       secrets:
+         - name: git_mirror_credentials
+           secret: <name of your secret>
+           pass-to-parent: true
+
+Finally, the job must be set to run in your project's ``post``
+pipeline which is triggered every time a new commit is merged to the
+repository::
+
+    - project:
+        check:
+          jobs:
+            # [...]
+        gate:
+          jobs:
+            # [...]
+        post:
+          jobs:
+            - <project>-upload-git-mirror
+
+Note that the replication would only begin *after* the change has
+merged, meaning that merging the addition of the post job would not
+trigger the post job itself immediately.
+The post job will only trigger the next time that a commit is merged.
+
 Verify That Gerrit and the Test Jobs are Working
 ================================================
 
