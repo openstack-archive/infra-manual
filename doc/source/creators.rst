@@ -529,7 +529,9 @@ Every project needs at least one test job or patches will not be able to land.
 
 You can add jobs in either your new project's ``.zuul.yaml`` file or
 in file the ``zuul.d/projects.yaml`` in the central repository
-``openstack/project-config``.
+``openstack/project-config``. This *must* be a separate change from the
+one you created earlier to add your entry in ``zuul/main.yaml``, since
+these additions will fail with Zuul syntax errors until that merges.
 
 Official OpenStack projects should implement the OpenStack wide jobs
 mentioned in the `Project Testing Interface`_ (PTI) document. For more
