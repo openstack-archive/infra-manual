@@ -93,3 +93,50 @@ Known Differences to Watch Out For
   us smaller MTUs due to use of overlay networking. Test jobs
   should check interface MTUs and use an appropriate value for the
   current instance if creating new interfaces or bridges.
+
+Why are Jobs for Changes Queued for a Long Time
+===============================================
+
+We have a finite number of resources to run jobs on. We process jobs
+for changes in order based on a priority queuing system. This priority
+queue assigns test resources to Zuul queues based on the number of
+total changes in that queue. Changes at the heads of these queues are
+assigned resources before those at the end of the queues.
+
+We have done this to ensure that large projects with many changes and
+long running jobs do not starve small projects with few changes and short
+jobs.
+
+In order to make the queues run quicker there are several variables we
+can change:
+
+#. Lower demand. Fewer changes and/or jobs will result in less demand for
+   resources increasing availability for the changes that remain.
+#. Reduce job resource costs. Reducing job runtime means those resources
+   can be reused sooner by other jobs. Keep in mind that multinode jobs
+   use a whole integer multiple more resources than single node jobs.
+   You should only use multinode jobs where necessary to test specific
+   interactions or to fit a complex test case into the resources we have.
+#. Improve job reliability. If jobs fail because the tests or software
+   under test are unreliable then we have to run more jobs to successfully
+   merge our software. This affect is compounded by our gate queues because
+   anytime we have a change that fails we must remove it from the queue,
+   rebuild the queue without that change, then restart all jobs in the queue
+   with that change evicted.
+
+   Keep in mind that we are dog fooding OpenStack to run OpenStack's CI
+   system. This means that a more reliable OpenStack is able to provide
+   resources to our CI system effectively. Fixing OpenStack in this case
+   is a win win situation.
+#. Add resources to our pools. If we have more total resources then we will
+   have more to spread around.
+
+In general, we would like to see our software perform the testing that they
+feel is necessary. We should do so responsibly. What this means is instead
+of deleting jobs or ignoring changes we should improve our test reliability
+to ensure changes exit queues as quickly as possible with minimal resource
+cost. This then ensure the changes behind are able to get resources quickly.
+
+We are also always happy to add resources if they are available, but the
+priority from the project should be to ensure we are using what we do have
+responsibly.
