@@ -298,7 +298,7 @@ https://wiki.openstack.org/wiki/BugTriage
 
 Bug statuses are documented here:
 
-https://wiki.openstack.org/wiki/Bugs
+https://docs.openstack.org/project-team-guide/bugs.html
 
 If you find a bug that you wish to work on, you may assign it to yourself.
 When you upload a review, include the bug in the commit message for
