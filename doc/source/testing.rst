@@ -141,3 +141,29 @@ resources quickly.
 We are also always happy to add resources if they are available, but the
 priority from the project should be to ensure we are using what we do have
 responsibly.
+
+Can my changes skip the check queue?
+------------------------------------
+
+The OpenStack project uses a "clean check" approach to keep flaky
+changes out of the gate:
+
+* If your change fails in the gatethen there's an increased chance
+  it's introducing nondeterministic failure behavior so forcing it to
+  go through check again helps make that more apparent
+* This avoids also approving changes that have no hope of ever passing
+  due to pep8 or other trivial errors. The change would then enter the
+  gate and causehavoc with resets
+* It also helps with approving changes that had been sitting around
+  with a 6-month-old passing check.
+
+So, a change always needs to pass "check" before it enters "gate" -
+and if it fails in "gate", it reenters "check".
+
+Changes in the gate pipeline are prioritized but also serialized, so
+if a change fails, all tests for changes behind that failing change
+have to be restarted. If restarts after restarts happen, then
+resources are never freed up for the check pipeline.
+
+So, having a stable gate pipeline is crucial - and the "clean check"
+requirement will help with the stable jobs.
