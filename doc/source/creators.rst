@@ -1501,6 +1501,13 @@ branches like ``stable/mitaka``. It will not run on the old
 Project Renames
 ===============
 
+.. note::
+
+   If you rename a project to move out from "openstack" namespace to
+   any other namespace, follow `this OpenStack TC resolution
+   <https://governance.openstack.org/tc/resolutions/20190711-mandatory-repository-retirement.html>`_
+   instead.
+
 The first step of doing a rename is understanding the required
 governance changes needed by the rename. You can use the following
 criteria:
