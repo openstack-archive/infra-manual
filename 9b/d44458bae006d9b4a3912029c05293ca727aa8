@@ -1,0 +1,9 @@
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 15 Nov 2019 13:11:04 +0000
+Reviewed-on: https://review.opendev.org/694528
+Project: openstack/infra-manual
+Branch: refs/heads/master
