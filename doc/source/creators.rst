@@ -1224,9 +1224,6 @@ Create file ``babel-django.cfg`` with the following content:
 
 .. code-block:: ini
 
-   [extractors]
-   django = django_babel.extract:extract_django
-
    [python: **.py]
    [django: **/templates/**.html]
    [django: **/templates/**.csv]
@@ -1235,19 +1232,7 @@ Create  file ``babel-djangojs.cfg`` with the following content:
 
 .. code-block:: ini
 
-   [extractors]
-   # We use a custom extractor to find translatable strings in AngularJS
-   # templates. The extractor is included in horizon.utils for now.
-   # See http://babel.pocoo.org/docs/messages/#referencing-extraction-methods for
-   # details on how this works.
-   angular = horizon.utils.babel_extract_angular:extract_angular
-
    [javascript: **.js]
-
-   # We need to look into all static folders for HTML files.
-   # The **/static ensures that we also search within
-   # .../dashboards/XYZ/static which will ensure
-   # that plugins are also translated.
    [angular: **/static/**.html]
 
 ReactJS Projects
