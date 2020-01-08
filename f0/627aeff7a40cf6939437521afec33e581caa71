@@ -1,0 +1,10 @@
+Code-Review+1: Vishal Manchanda <manchandavishal143@gmail.com>
+Code-Review+2: Andreas Jaeger <jaegerandi@gmail.com>
+Code-Review+2: Jeremy Stanley <fungi@yuggoth.org>
+Workflow+1: Jeremy Stanley <fungi@yuggoth.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 08 Jan 2020 15:32:28 +0000
+Reviewed-on: https://review.opendev.org/700636
+Project: openstack/infra-manual
+Branch: refs/heads/master
