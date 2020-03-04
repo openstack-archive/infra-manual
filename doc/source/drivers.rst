@@ -334,9 +334,9 @@ file.
 Running Jobs with Zuul
 ======================
 
-Read the :doc:`Zuul v3 Migration Guide <zuulv3>` for more information
-on running jobs with Zuul.
-
+Those looking to write and run jobs with Zuul can refer to Zuul's
+`documentation <https://zuul-ci.org/docs/zuul/reference/config.html>`_
+in order to get started.
 
 Retiring a Project
 ==================

@@ -492,8 +492,9 @@ channel, add it to the ``openstack-oslo`` section:
 Add Project to Zuul
 -------------------
 
-Test jobs are run by Zuul. For a discussion of how Zuul jobs work in
-an OpenStack context, please see :doc:`zuulv3`.
+Test jobs are run by Zuul. For information on how to configure your
+repositories to run Zuul jobs you can refer to the Zuul `documentation
+<https://zuul-ci.org/docs/zuul/reference/config.html>`_.
 
 Edit ``zuul/main.yaml`` and add your project in alphabetical order to the
 ``untrusted-projects`` section in the ``openstack`` tenant after the
