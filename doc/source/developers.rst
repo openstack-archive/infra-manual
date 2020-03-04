@@ -85,31 +85,10 @@ password for the others.
 Sign the appropriate Individual Contributor License Agreement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Unless you are an U.S. Government Employee (see below),
-`agree to the Individual Contributor License
-Agreement <https://review.opendev.org/#/settings/agreements>`_.
-The full text of the agreement will be
-displayed before you can enter "I AGREE" below it, but it's also
-anonymously available if you want to `preview the OpenStack
-ICLA <https://review.opendev.org/static/cla.html>`_ now.
-
-Employees of the U.S. Government do not sign the Individual
-CLA. Instead, someone with authority to sign on behalf of your agency
-should sign the `U.S. Government Contributor License Agreement
-<https://wiki.openstack.org/wiki/GovernmentCLA>`_. Please contact the
-OpenStack Foundation to initiate this process.
-
-If you are contributing on behalf of a company or organization,
-you still need to sign the ICLA above but someone at your company or
-organization also needs to sign the `Corporate Contributor License
-Agreement <https://secure.echosign.com/public/hostedForm?formid=56JUVGT95E78X5>`_
-providing a list of people authorized to commit code to
-OpenStack. If you need a printable copy of the Corporate CLA please
-email `community managers <mailto:communitymngr@openstack.org>`_.
-Check `How to update the CCLA <https://wiki.openstack.org/wiki/HowToUpdateCorporateCLA>`_
-to provide changes to such list. A list of current companies and
-organizations with an existing `Corporate CLA <https://wiki.openstack.org/wiki/Contributors/Corporate>`_
-is available for your review.
+Projects that are part of OpenStack project require signing the
+Individual Contributor License Agreement, see `these detailed
+instructions
+<https://docs.openstack.org/contributors/common/setup-gerrit.html#individual-contributor-license-agreement>`_.
 
 Upload your public SSH key
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
