@@ -3,9 +3,9 @@
 Learn the Gerrit Workflow in the Sandbox
 ----------------------------------------
 
-OpenStack has a sandbox repository for learning and testing purposes:
+OpenDev has a sandbox repository for learning and testing purposes:
 https://opendev.org/opendev/sandbox. This is a great
-repository to begin your OpenStack learning. It allows you to experiment
+repository to begin your OpenDev learning. It allows you to experiment
 with the workflow and try different options so you can learn what they do.
 Please only create 2 or 3 different changes and submit new patchsets to
 those few changes. Please don't create 10 or more changes, this is not the
