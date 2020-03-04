@@ -574,64 +574,18 @@ be used to set up the ``openstack_citest`` databases for testing.
 
 .. _v3_naming:
 
-Consistent Naming for Jobs with Zuul v3
-=======================================
+Consistent Naming for Zuul Jobs
+===============================
 
-With the move to version 3 of Zuul, it is time to define a guidance
-on how jobs should be named for consistency across projects in the
-OpenStack project.
-
-This document describes a consistent naming scheme for jobs for Zuul
-v3. The goal is to give job developer and reviewers of jobs a common
+This document describes a consistent naming scheme for Zuul jobs.
+The goal is to give job developer and reviewers of jobs a common
 document as reference.
 
-.. warning:: This is a living document, it will get updates as the
-             migration to Zuul v3 moves forward.
+.. warning:: This is a living document, it may get updates as our
+             use of Zuul changes over time.
 
-Previous Naming with Zuul v2
-----------------------------
-
-As an example for the current usage with Zuul v2, here are some
-job names:
-
-* gate-REPO-python27
-* gate-REPO-python35-nv
-* gate-grenade-dsvm-neutron-forward
-* gate-neutron-dsvm-api-ubuntu-trusty
-* gate-neutron-fwaas-requirements
-* gate-tempest-dsvm-neutron-full-ssh
-* gate-neutron-docs-ubuntu-xenial
-* neutron-docs-ubuntu-xenial
-* legacy-tempest-dsvm-nova-lvm
-
-The current (Zuul v2) naming scheme as used at time of writing
-(July 2017) is basically:
-
-* Jobs in check and gate pipelines start with ``gate``
-* Jobs in periodic pipeline start with ``periodic``
-* Jobs in post and release pipelines have no special starting name
-* Jobs that use devstack setup include ``dsvm`` in the name
-* Jobs include the name of the repository
-* Jobs can have a suffix of ``-nv`` to mark them as non-voting
-* Jobs can have node name like ``ubuntu-xenial`` as last part of
-  name - only followed by the optional ``-nv`` suffix.
-
-Naming with Zuul v3
--------------------
-
-The way Zuul v3 handles jobs allows us to make changes to the job
-names and also gives the chance to remove some relics:
-
-* Remove ``gate`` prefix, it's not really needed.
-* Make clear what are publishing jobs. Name the test job and the
-  publish job (currently ``gate-nova-docs-ubuntu-xenial`` and
-  ``nova-docs-ubuntu-xenial``) clearer.
-* Remove ``dsvm`` in name, it is a historic relic.
-* Remove the ``{repository}`` from the name, it is not needed anymore, *unless*
-  the job is defined in a specific repo.
-
-
-This all leads to the following naming scheme:
+Job Naming Scheme
+-----------------
 
 * The general pattern is
   ``{prefix-}MAINPURPOSE-DETAILS{-}{node}``.
@@ -669,26 +623,25 @@ This all leads to the following naming scheme:
 * Do not use "." for versions, just cat them together like ``35`` for
   Python 3.5.
 
-* Since Zuul v3 allows overriding of job and definition of jobs, care
+* Since Zuul allows overriding of job and definition of jobs, care
   should be taken not to use the same name for different jobs:
 
-  * If you override a generic Zuul job for global OpenStack usage,
-    name it ``openstack-``.
+  * If you override a generic Zuul job for project specific usage
+    prefix it with ``PROJECT-``. For example, OpenStack creates versions
+    of generic jobs intended to be used globally within OpenStack and
+    prefixes them with ``openstack-``.
   * If you define a job in a specific repo, the name of the job should
     use the repository name as ``prefix`` or as first part of it.
 
-So, this would change the initial list of names as follows:
+Examples of job names using these rules:
 
-* gate-REPO-python27 -> tox-py27 or openstack-py27
-* gate-REPO-python35-nv -> tox-py35 or openstack-py35
-* gate-grenade-dsvm-neutron-forward -> grenade-neutron-forward
-* gate-neutron-dsvm-api-ubuntu-trusty -> neutron-api (or
-  neutron-api-ubuntu-trusty if multiple OSes need to be tested)
-* gate-neutron-fwaas-requirements -> requirements
-* gate-tempest-dsvm-neutron-full-ssh -> tempest-neutron-full-ssh
-* gate-neutron-docs-ubuntu-xenial -> build-sphinx-docs
-* neutron-docs-ubuntu-xenial -> publish-sphinx-docs
-* legacy-tempest-dsvm-nova-lvm -> nova-lvm
+* tox-py27 or openstack-py27
+* tox-py35 or openstack-py35
+* grenade-neutron-forward
+* neutron-api (or neutron-api-ubuntu-xenial if multiple OSes need to be tested)
+* tempest-neutron-full-ssh
+* build-sphinx-docs
+* publish-sphinx-docs
 
 Outbound Third-Party Testing
 ============================
