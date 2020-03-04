@@ -33,7 +33,6 @@ instead a user or developer looking for API documentation, see
 
    developers
    irc
-   python
    core
    drivers
    creators
