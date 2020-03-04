@@ -6,7 +6,7 @@ Test Environment
 ################
 
 This document should give you a good idea of what you can count on
-in the test environments managed by the Infrastructure team. This
+in the test environments managed by the OpenDev team. This
 information may be useful when creating new jobs or debugging existing
 jobs.
 
@@ -124,7 +124,7 @@ can change:
    rebuild the queue without that change, then restart all jobs in the queue
    with that change evicted.
 
-   Keep in mind that we are dog fooding OpenStack to run OpenStack's CI
+   Keep in mind that we are also dog fooding OpenStack to run OpenStack's CI
    system. This means that a more reliable OpenStack is able to provide
    resources to our CI system effectively. Fixing OpenStack in this case
    is a win win situation.
