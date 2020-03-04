@@ -39,7 +39,6 @@ instead a user or developer looking for API documentation, see
    creators
    sandbox
    testing
-   zuulv3
 
 Propose changes to this document to the `infra-manual git repository
 <https://opendev.org/openstack/infra-manual>`_.

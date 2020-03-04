@@ -492,8 +492,9 @@ channel, add it to the ``openstack-oslo`` section:
 Add Project to Zuul
 -------------------
 
-Test jobs are run by Zuul. For a discussion of how Zuul jobs work in
-an OpenStack context, please see :doc:`zuulv3`.
+Test jobs are run by Zuul. For information on how to configure your
+repositories to run Zuul jobs you can refer to the Zuul `documentation
+<https://zuul-ci.org/docs/zuul/reference/config.html>`__.
 
 Edit ``zuul/main.yaml`` and add your project in alphabetical order to the
 ``untrusted-projects`` section in the ``openstack`` tenant after the
@@ -855,7 +856,7 @@ template, as it'll be telling Zuul to run jobs that don't do anything, which
 is not needed once you have real jobs.
 
 For more information on writing jobs for Zuul, see
-https://zuul-ci.org/docs/zuul/user/config.html and :ref:`zuul_best_practices`.
+https://zuul-ci.org/docs/zuul/reference/config.html and :ref:`zuul_best_practices`.
 
 Mirroring Projects to Git Mirrors
 =================================
@@ -1364,8 +1365,15 @@ Zuul Best Practices
 
 There are a couple of best practices for setting up jobs.
 
-Note that the standard OpenStack jobs should be in the
-``project-config`` repository, see :ref:`what_not_to_convert`.
+Jobs that run outside of a branch context (release and tag jobs are
+examples), should be in your tenant's ``project-config`` repository.
+This repository should have a single branch named master removing
+any ambiguity of which version of a job should run outside of a branch
+contenxt.
+
+You should also keep jobs that are expected to apply widely to a
+tenants' repos here. As that helps keep coordination of changes
+centralized.
 
 Adding a New Job
 ~~~~~~~~~~~~~~~~
