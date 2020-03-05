@@ -25,10 +25,15 @@ person that can remove it again.
 Approval
 ========
 
-Once a patch has two +2 votes and neither any -2 votes or a Work in
-Progress tag set, it is ready to be merged. Any core reviewer can
-approve such a patch. A core reviewer can give a +2 and approval in
-the same review.
+
+Once a patch has at least one +2 vote and neither any -2 votes or a
+Work in Progress tag set, it is ready to be merged. Any core reviewer
+can approve such a patch. A core reviewer can give a +2 and approval
+in the same review.
+
+Note that some projects hosted in OpenDev have a policy of requiring
+*two* +2 votes instead of one. The OpenDev infrastructure enforces
+only a single +2 vote, the rest is policy.
 
 Work In Progress
 ================
