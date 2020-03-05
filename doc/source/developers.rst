@@ -14,25 +14,28 @@ Getting Started
 ===============
 
 The goal of this document is to walk you through the concepts and
-specifics that should be understood while contributing to OpenStack.
+specifics that should be understood while contributing to projects
+hosted in the OpenDev infrastructure.
 
-Development on OpenStack requires at minimum an account on the OpenStack
-Gerrit Code Review System. **Effective** Development in OpenStack also
-requires interacting with other developers in IRC channels on Freenode.
-It is recommended to start by getting set up on IRC so that one can ask
-questions if one encounters issues with other phases of account setup.
+Development on OpenDev requires at minimum an account on the OpenDev
+Gerrit Code Review System. **Effective** Development in hosted
+projects also requires interacting with other developers in IRC
+channels on Freenode. It is recommended to start by getting set up on
+IRC so that one can ask questions if one encounters issues with other
+phases of account setup.
 
 IRC Account
 -----------
 
-OpenStack uses the Freenode IRC network for real-time communication.
+Most projects hosted on OpenDev use the Freenode IRC network for
+real-time communication.
 
 If you do not know how to connect to Freenode, the `Connecting to Freenode`_
 document will help.
 
 It is **highly** recommended to `Register your IRC Nick`_.
 
-There are times when the OpenStack Project needs to configure our channels
+There are times when the OpenDev team needs to configure channels
 to only allow people to join who are using a Registered Nick. Registering
 a Nick also prevents someone else from taking a Nick that people come to
 know you by.
@@ -46,7 +49,7 @@ For further information about the use of IRC in OpenStack, see
 Account Setup
 -------------
 
-Prior to contributing to an OpenStack source code repository a few
+Prior to contributing to an OpenDev source code repository a few
 steps need to be completed. This document covers the steps that get
 you started, such as creating a few accounts on required websites,
 signing a contributor license agreement, uploading an ssh key, and
@@ -68,17 +71,17 @@ Visit https://review.opendev.org/ and click the ``Sign In`` link
 at the top-right corner of the page.  Log in with your Ubuntu One
 OpenID.
 
-The first time you sign into OpenStack's Gerrit site, you will be
+The first time you sign into OpenDev's Gerrit site, you will be
 prompted to "Select a unique username:". You can enter your
 Ubuntu One username here, or something else if you want. Type
 carefully, as once set it cannot be changed. This is the username
 you will eventually use to submit changes to Gerrit and to perform
 authenticated queries through its API.
 
-Because the OpenStack community's Gerrit deployment uses Ubuntu One
+Because the OpenDev's Gerrit deployment uses Ubuntu One
 OpenID single sign-on, you won't need a separate password for
 Gerrit, and once you log in to any service relying on that OpenID
-provider such as Launchpad or a variety of OpenStack community
+provider such as Launchpad or a variety of OpenDev community
 systems (review, storyboard, wiki), you won't have to enter your
 password for the others.
 
@@ -197,7 +200,7 @@ Starting Work on a New Project
 
 Clone a repository in the usual way, for example::
 
-  git clone https://opendev.org/openstack/<projectname>
+  git clone https://opendev.org/<namespace>/<projectname>
 
 You may want to ask git-review to configure your repository to know
 about Gerrit at this point. If you don't, it will do so the first
@@ -413,10 +416,9 @@ Make your changes, commit them, and submit them for review::
 Using Signed-off-by
 -------------------
 
-OpenStack projects do not currently require the use of a ``Signed-off-by``
-header as a CLA is used, instead.  However, you are welcome to include
-``Signed-off-by`` in your commits.  By doing so, you are certifying that
-the following is true::
+Projects may require the use of a ``Signed-off-by``, and even if they
+do not, you are welcome to include ``Signed-off-by`` in your commits.
+By doing so, you are certifying that the following is true::
 
         Developer's Certificate of Origin 1.1
 
@@ -682,7 +684,7 @@ whole pipeline does not share a graph as in the gate pipeline), but
 for each change tested, all of its dependencies are visually connected
 to it, and they are used to construct the git references that Zuul
 uses when testing.  When looking at this graph on the `Zuul
-status page <https://zuul.openstack.org>`_, you will note that
+status page <https://zuul.opendev.org/>`__, you will note that
 the dependencies show up as grey dots, while the actual change tested
 shows up as red or green. This is to indicate that the grey changes
 are only there to establish dependencies. Even if one of the
@@ -811,7 +813,7 @@ on the change by Zuul. Zuul reports the results of these tests
 back to Gerrit in the form of a Verified: +/-2 vote. Code merging
 will only occur after the gate tests have passed successfully and
 received a Verified: +2. You can view the state of tests currently
-being run on the `Zuul Status page <https://zuul.openstack.org>`_.
+being run on the `Zuul Status page <https://zuul.opendev.org/>`__.
 
 If a change fails tests in Zuul, please follow the steps below:
 
@@ -825,12 +827,12 @@ If a change fails tests in Zuul, please follow the steps below:
    the cause of the error. If it is related to your change, you should
    fix the problem and upload a new patchset. Do not use "recheck".
 3. It is possible that the CI infrastructure may be having some issues which
-   are causing your tests to fail.  You can verify the status of the OpenStack
-   CI infrastructure by doing the following:
+   are causing your tests to fail.  You can verify the status of the OpenDev
+   infrastructure by doing the following:
 
    * https://wiki.openstack.org/wiki/Infrastructure_Status
    * `@OpenStackInfra <https://twitter.com/openstackinfra>`_ on Twitter.
-   * the topic in your project's IRC channel (or ``#openstack-infra``)
+   * the topic in your project's IRC channel (or ``#opendev``)
 
    .. note::
 
@@ -953,7 +955,7 @@ To get early feedback on a change which is not fully finished yet, you
 can submit a change to Gerrit and mark it as "Work in Progress" (WIP).
 
 .. note::
-   The OpenStack Gerrit system does not support drafts, use
+   The OpenDev Gerrit system does not support drafts, use
    "Work in Progress" instead.
 
 To do so, after submitting a change to Gerrit in usual way (``git review``),
