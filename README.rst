@@ -1,6 +1,6 @@
-=======================================
-OpenStack Project Infrastructure Manual
-=======================================
+==============
+OpenDev Manual
+==============
 
 To build the manual, execute the following command::
 
@@ -14,19 +14,13 @@ Terminology
 
 A note on terminology use in the manual:
 
-This is a manual that describes how to use the OpenStack project
-infrastructure.  The OpenStack project, and the Technical Committee
-(TC) in particular, from time to time uses words such as "project",
-"team", "program", "repository", etc. to help classify how it
-organizes the OpenStack project from an administrative point of view.
-This manual is in service of OpenStack, but does so primarily by
+This manual is in service of OpenDev, but does so primarily by
 documenting how developers and project drivers can use the
-infrastructure to accomplish their work.  While the TC may change its
-terms from time to time, it is not necessary for us to change all of
-the terminology in this manual to match.  We should strive for
-consistent terminology that matches what developers and our tooling
-use.  When we describe specific TC-related processes, we should use
-the current TC terminology to avoid confusion.
+infrastructure to accomplish their work.
+
+We strive for consistent terminology that matches what developers and
+our tooling use, even if some hosted projects use different
+terminology.
 
 Generally speaking these terms should be used as follows:
 
