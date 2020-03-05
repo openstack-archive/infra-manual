@@ -24,11 +24,11 @@ todo_include_todos = True
 master_doc = 'index'
 
 # General information about the project.
-project = u'OpenStack Project Infrastructure Manual'
-copyright = ('%d, OpenStack Contributors.' % datetime.date.today().year)
+project = u'OpenDev Manual'
+copyright = ('%d, OpenDev Contributors.' % datetime.date.today().year)
 
 # openstackdocstheme options
-repository_name = 'openstack-infra/infra-manual'
+repository_name = 'openstack/infra-manual'
 bug_project = '721'
 bug_tag = ''
 
@@ -64,9 +64,6 @@ man_pages = []
 # a list of builtin themes.
 html_theme = 'openstackdocs'
 
-# Must set this variable to include year, month, day, hours, and minutes.
-html_last_updated_fmt = '%Y-%m-%d %H:%M'
-
 # If false, no module index is generated.
 html_domain_indices = False
 
@@ -80,7 +77,7 @@ html_use_index = False
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
   ('index', 'Infra-manual.tex', u'Infra Manual',
-   u'OpenStack Contributors', 'manual'),
+   u'OpenDev Contributors', 'manual'),
 ]
 
 
@@ -91,7 +88,7 @@ latex_documents = [
 #  dir menu entry, description, category)
 texinfo_documents = [
   ('index', 'Infra-manual', u'Infra Manual',
-   u'OpenStack Contributors', 'infra-manual', 'OpenStack Project Infrastructure Manual.',
+   u'OpenDev Contributors', 'infra-manual', 'OpenDev Manual.',
    'Miscellaneous'),
 ]
 
@@ -99,7 +96,7 @@ texinfo_documents = [
 # -- Options for Epub output ---------------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = u'OpenStack Project Infrastructure Manual'
-epub_author = u'OpenStack Contributors'
-epub_publisher = u'OpenStack Contributors'
-epub_copyright = u'%s, OpenStack Contributors' % datetime.date.today().year
+epub_title = u'OpenDev Manual'
+epub_author = u'OpenDev Contributors'
+epub_publisher = u'OpenDev Contributors'
+epub_copyright = u'%s, OpenDev Contributors' % datetime.date.today().year
