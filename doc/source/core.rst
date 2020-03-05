@@ -68,10 +68,3 @@ properly tracked. Note that the change will directly enter the gate
 pipeline if and only if it has already a +1 vote from Zuul,
 otherwise it will first enter the check pipeline like a "recheck"
 would.
-
-When re-approving, core reviewers may need to work around a specific set
-of Gerrit behavior. Gerrit only emits vote values in its event stream
-when a reviewer's vote values change. This means that if a core reviewer
-has already voted +1 Approved in the workflow category they will need
-to leave a comment of +0 in the workflow category then re-approve with
-a new +1 Approved comment.
