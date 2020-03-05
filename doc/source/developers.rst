@@ -166,32 +166,6 @@ git commands. If you want to know more about what it's doing, just
 add -v to the options and it will print out all of the commands it's
 running.
 
-Eligibility to Vote in Elections
---------------------------------
-
-If you haven't already, you may want to `join The OpenStack
-Foundation <https://www.openstack.org/join/>`_ at this point. Among
-other privileges, this allows you to vote in official elections and
-run for elected positions within the OpenStack community.
-
-When signing up for Foundation Membership, make sure to include the
-email address you'll use for code contributions in one of the fields
-in your profile, since this is how officials for technical elections
-will be able to identify you as an eligible voter or candidate. In
-order to qualify to participate in elections, your member level also
-needs to be *Foundation Member* (not Community Member) and you need
-to make sure you remember to keep your foundation membership email
-addresses up to date if you change the address you're using; at
-least one address in your Gerrit account needs to match at least one
-address in your foundation member profile if you want to be able to
-participate in technical elections.
-
-To keep your membership active you must also regularly vote in
-elections for the OpenStack Foundation Board of Directors once you
-are able to do so; otherwise your membership will lapse after one
-year and you'll need to rejoin before you can vote in any further
-official OpenStack elections of any kind.
-
 Starting Work on a New Project
 ------------------------------
 
