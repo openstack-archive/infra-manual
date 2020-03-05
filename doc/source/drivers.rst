@@ -282,17 +282,17 @@ and push that tag to Gerrit by running the following commands::
 
     If you need to support other version schemes, you might need to
     use the ``tag`` pipeline instead of the default ``release``
-    pipeline. Best discuss this with the OpenStack Infra team.
+    pipeline. Best discuss this with the OpenDev team.
 
 Gerrit IRC Notifications
 ========================
 
 The intent of this section is to detail how to set up notifications
-about all the projects that are hosted on OpenStack Gerrit in the
+about all the projects that are hosted on OpenDev Gerrit in the
 appropriate IRC channels.
 
-GerritBot is an IRC bot that listens to the OpenStack Gerrit server
-for events and notifies those on Freenode's OpenStack channels.
+GerritBot is an IRC bot that listens to the OpenDev Gerrit server
+for events and notifies those on Freenode's channels.
 
 GerritBot is able to notify the channel for events like creation of
 patchsets, changes merged, comments added to patchsets and updates to
@@ -374,7 +374,7 @@ and edit ``zuul.d/projects.yaml``.  Find the section for your project and
 change it to look like this::
 
   - project:
-    name: openstack/<projectname>
+    name: <namespace>/<projectname>
     templates:
       - noop-jobs
 
@@ -398,9 +398,10 @@ Double check that all dot files (such as ``.gitignore`` and
 .. note::
 
    Removing the ``.gitreview`` file from the master branch of a
-   repository breaks much of the release tools, so it will be harder
-   to continue to tag releases on existing stable branches. Take care
-   to remove all files other than ``README.rst`` and ``.gitreview``.
+   repository breaks much of the OpenStack release tools, so it will
+   be harder to continue to tag releases on existing stable branches.
+   Take care to remove all files other than ``README.rst`` and
+   ``.gitreview``.
 
 Replace the contents of the README with a message such as this::
 
@@ -441,7 +442,7 @@ following:
   ``zuul/main.yaml``.
 
 * By default, project ACLs are defined in a file called
-  ``gerrit/acls/openstack/<projectname>.config``. If this file exists,
+  ``gerrit/acls/<namespace>/<projectname>.config``. If this file exists,
   remove it.
 
 * Now adjust the project configuration and use the shared read-only
@@ -480,13 +481,14 @@ implications for automatic detection of ATCs.
 Package Requirements
 ====================
 
-The OpenStack CI infrastructure sets up nodes for testing that contain
+The OpenDev infrastructure sets up nodes for testing that contain
 a minimal system and a number of convenience distribution packages.
 
 If you want to add additional packages, you have several options.
 
 If you run Python tests using ``tox``, you can install them using
-``requirements.txt`` and ``test-requirements.txt`` files (see also the
+``requirements.txt`` and ``test-requirements.txt`` files (for
+OpenStack projects, see also the
 `global requirements process <https://docs.openstack.org/requirements/>`_).
 If these Python tests need additional distribution packages installed as well
 and if those are not in the nodes used for testing, they have to be installed
@@ -505,7 +507,7 @@ containing listing the required distribution packages. It is a
 cross-platform list of all dependencies needed for running tests. The
 `bindep <https://docs.openstack.org/infra/bindep/>`_ utility will be
 used to install the right dependencies per distribution when running
-in the OpenStack CI infrastructure.
+in the OpenDev infrastructure.
 
 If you use bindep, create a bindep tox environment as well:
 
@@ -530,7 +532,7 @@ The output of this can then be fed into the distribution package
 manager like ``apt-get``, ``dnf``, ``yum``, or ``zypper`` to install
 missing binary packages.
 
-The OpenStack CI infrastructure will install packages marked for a
+The OpenDev infrastructure will install packages marked for a
 `profile
 <https://docs.openstack.org/infra/bindep/readme.html#profiles>`__ named
 "test" along with any packages belonging to the default profile of the
@@ -566,8 +568,8 @@ repository.
 Python unit tests are tests like ``coverage``, ``python27``,
 ``python35``, and ``pypy`` which are run using python's ``tox``
 package as well as tests using the template
-``gate-{name}-tox-{envlist}-{node}``. For these tests, the script
-``tools/test-setup.sh`` is run if it exists in the repository and is
+``openstack-tox-{envlist}`` or ``tox-{envlist}``. For these tests, the
+script ``tools/test-setup.sh`` is run if it exists in the repository and is
 executable after package installation. The script has ``sudo`` access
 and can set up the test environment as needed. For example, it should
 be used to set up the ``openstack_citest`` databases for testing.
