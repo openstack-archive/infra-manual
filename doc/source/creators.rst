@@ -14,28 +14,35 @@ It is important that you perform all of the steps, in the order they
 are given here. Don't skip any steps. Don't try to do things in
 parallel. Don't jump around.
 
-If your project is already set up in the OpenStack CI infrastructure,
+If your project is already set up in the OpenDev infrastructure,
 you might want to see :ref:`zuul_best_practices` for information on
 adding new tests to a repository.
 
-Decide Status of your Project
-=============================
+Decide Status and Namespace of your Project
+===========================================
 
-The OpenStack CI infrastructure can be used both by official OpenStack
-projects and also by OpenStack-related projects.
+OpenDev is used by different projects which often use different
+namespaces. Some of these namespaces have special policies.
 
-Official projects are those that have applied for this status with the
-technical committee. The `governance site`_ contains details on how
-to become one and the list of current `OpenStack Project Teams`_. The
-`Project Team Guide`_ explains how OpenStack project teams work.
+If your project does not fit into one of the existing namespaces, you
+may create a new one, or use the catch-all ``x`` namespace if you
+cannot decide.
 
-If you add a new repository, you can make it part of an existing
-official OpenStack project, use it to start a new official project, or
-start as a `related project`_ (formerly known as *StackForge*).
+For OpenStack and thus the ``openstack`` namespace, the policies are:
 
-Note that only official OpenStack projects may use certain parts of
-the OpenStack infrastructure, especially the docs.openstack.org and
-specs.openstack.org server.
+* Official OpenStack projects are those that have applied for this
+  status with the technical committee. The `governance site`_ contains
+  details on how to become one and the list of current `OpenStack
+  Project Teams`_. The `Project Team Guide`_ explains how OpenStack
+  project teams work.
+
+* If you add a new repository, you can make it part of an existing
+  official OpenStack project, use it to start a new official project, or
+  start as a `related project`_ (formerly known as *StackForge*).
+
+* Note that only official OpenStack projects may use certain parts of
+  the OpenStack infrastructure, especially the docs.openstack.org and
+  specs.openstack.org server.
 
 .. _governance site: https://governance.openstack.org
 .. _OpenStack Project Teams: https://governance.openstack.org/tc/reference/projects/index.html
@@ -88,19 +95,19 @@ the name used to import the package in source files match. Try
 Project Team Rules
 ------------------
 
-Some OpenStack project teams have naming conventions that must be
-followed. For example, the Oslo team has `instructions for choosing a
-name`_ for new Oslo libraries.
+Some hosted project teams have naming conventions that must be
+followed. For example, the OpenStack Oslo team has `instructions for
+choosing a name`_ for new Oslo libraries.
 
 .. _instructions for choosing a name: https://wiki.openstack.org/wiki/Oslo/CreatingANewLibrary#Choosing_a_Name
 
 .. _register-pypi:
 
-Give OpenStack Permission to Publish Releases
-=============================================
+Give OpenDev Permission to Publish Releases
+===========================================
 
-New packages without any releases need to be manually registered on
-PyPI.
+New Python packages without any releases need to be manually
+registered on PyPI.
 
 If you do not have PyPI credentials, you should create them at
 https://pypi.org/account/register/ as they are
@@ -134,20 +141,22 @@ Adding the Project to the CI System
 ===================================
 
 To add a project to the CI System, you need to modify some
-infrastructure configuration files using git and the OpenStack gerrit
+infrastructure configuration files using git and the OpenDev gerrit
 review server.
 
 Note that you need two changes to set up your new project
-for testing with OpenStack CI systems.
+for testing with OpenDev CI systems.
 
 * First change to create the git repository, configure ACLs, and add
-  the git repository to the OpenStack CI system, see
+  the git repository to the OpenDev CI system, see
   :ref:`add_project_to_master_projects_list` and following sections.
-  For official projects, this change should also link via
+
+  For official OpenStack projects, this change should also link via
   ``Needed-By`` to a change for the ``openstack/governance``
   repository to add the new repository under the project team, see
-  :ref:`add-to-governance-repo`. This change is for
-  ``openstack/project-config`` repository.
+  :ref:`add-to-governance-repo`.
+
+  This change is for ``openstack/project-config`` repository.
 
 * Second change to add jobs to your project, see
   :ref:`add_jobs_for_project`. This one can only pass Zuul internal
@@ -163,30 +172,25 @@ Add the project to the master projects list
 
    .. code-block:: yaml
 
-     - project: openstack/<projectname>
+     - project: <namespace>/<projectname>
        description: Latest and greatest cloud stuff.
        use-storyboard: true
 
-   Note: All projects should use the ``openstack/`` namespace
-   regardless of whether they are or intend to become official
-   OpenStack projects.
+   The ``use-storyboard: true`` is added so that repos will be automatically
+   created as projects in `StoryBoard <https://docs.openstack.org/infra/storyboard/>`_
+   (community tool for managing work being done in your project and tracking tasks).
 
-   .. note::
-      The ``use-storyboard: true`` is added so that repos will be automatically
-      created as projects in `StoryBoard <https://docs.openstack.org/infra/storyboard/>`_
-      (community tool for managing work being done in your project and tracking tasks).
-
-#. Provide a very brief description of the library.
+#. Provide a very brief description of the project.
 
 #. If you have an existing repository that you want to import (for
-   example, when graduating an Oslo library or bringing a repository
+   example, when bringing a repository
    into gerrit from github), set the "upstream" field to the URL of
    the publicly reachable repository and also read the information
    in :ref:`setup_review`:
 
    .. code-block:: yaml
 
-     - project: openstack/<projectname>
+     - project: <namespace>/<projectname>
        description: Latest and greatest cloud stuff.
        upstream: https://github.com/awesumsauce/<projectname>.git
 
@@ -212,7 +216,7 @@ Add the project to the master projects list
 
       .. code-block:: yaml
 
-        - project: openstack/<projectname>
+        - project: <namespace>/<projectname>
           description: Latest and greatest cloud stuff.
           use-storyboard: true
           upstream: https://github.com/awesumsauce/<projectname>.git
@@ -237,12 +241,12 @@ Each project should have a gerrit group "<projectname>-core",
 containing the normal core group, with permission to
 +2 changes.
 
-Release management of official projects is handled by the Release
+For official OpenStack projects, release management is handled by the Release
 Management team through the ``openstack/releases`` repository, the
 default settings allow the "``Release Managers``" team to push tags
 and create branches.
 
-For unofficial projects, a second "<projectname>-release" team should
+For all other projects, a second "<projectname>-release" team should
 be created and populated with a small group of the primary maintainers
 with permission to push tags to trigger releases.
 
@@ -260,7 +264,7 @@ explained in the following sections.
 
    .. code-block:: yaml
 
-     - project: openstack/<projectname>
+     - project: <namespace>/<projectname>
        description: Latest and greatest cloud stuff.
        acl-config: /home/gerrit2/acls/openstack/other-project.config
 
@@ -304,8 +308,9 @@ should also be set for projects that want to become official.
 Creation of Tags
 ~~~~~~~~~~~~~~~~
 
-For unofficial projects, you can allow the project-specific release
-team to create tags by adding a new section containing:
+If your project is not handled by the OpenStack release team, you can
+allow the project-specific release team to create tags by adding a new
+section containing:
 
 .. code-block:: ini
 
@@ -329,7 +334,8 @@ OpenStack infrastructure which fire on tags, will have that tag indefinitely.
 Creation of Branches
 ~~~~~~~~~~~~~~~~~~~~
 
-For unofficial projects, to allow creation of branches to the release
+For projects not handled by the Openstack release team, to allow
+creation of branches to the project release
 team, add a ``create`` rule to it the ``refs/heads/*`` section:
 
 .. code-block:: ini
@@ -344,7 +350,7 @@ Deletion of Branches
 ~~~~~~~~~~~~~~~~~~~~
 
 Members of a team that can create branches do not have access to delete
-branches. Instead, someone on the infrastructure team with gerrit administrator
+branches. Instead, someone on the OpenDev team with gerrit administrator
 privileges will need to complete this request.
 
 Stable Maintenance Team
@@ -402,7 +408,7 @@ Extended ACL File
 
 So, if your official project requires the ICLA signed and allow voting
 third-party CI systems, create a
-``gerrit/acls/openstack/<projectname>.config`` like:
+``gerrit/acls/<namespace>/<projectname>.config`` like:
 
 .. code-block:: ini
 
@@ -419,9 +425,9 @@ third-party CI systems, create a
   [submit]
   mergeContent = true
 
-If your unofficial project requires the ICLA signed, has a release
+If your project does not require the ICLA signed, has a release
 team that will create tags and branches, and allow voting third-party
-CI systems, create a ``gerrit/acls/openstack/<projectname>.config``
+CI systems, create a ``gerrit/acls/<namespace>/<projectname>.config``
 like:
 
 .. code-block:: ini
@@ -438,7 +444,6 @@ like:
 
   [receive]
   requireChangeId = true
-  requireContributorAgreement = true
 
   [submit]
   mergeContent = true
@@ -459,7 +464,7 @@ Configure GerritBot to Announce Changes
 If you want changes proposed and merged to your project to be
 announced on IRC, edit ``gerritbot/channels.yaml`` to add your new
 project to the list of projects. For example, to announce
-changes related to an Oslo library in the ``#openstack-oslo``
+changes related to an OpenStack Oslo library in the ``#openstack-oslo``
 channel, add it to the ``openstack-oslo`` section:
 
 .. code-block:: yaml
@@ -583,7 +588,8 @@ Central Config Exceptions
 There are several notable exceptions for job configs that should remain
 in the central config repository ``openstack/project-config``:
 
-* Translation jobs for all branches.
+* Translation jobs for all branches, note that only OpenStack official
+  projects are translated.
 * Jobs that should only run against the master branch of the project
   they are applied to.
 
@@ -692,8 +698,8 @@ coordinate with the Infra team, and read ahead, but don't do any of
 these other steps until the import is complete and the new repository
 is configured.
 
-The Infra team can be contacted by pinging ``infra-root`` in the
-``#openstack-infra`` channel on Freenode IRC, or via email to the `openstack-infra
+The OpenDev team can be contacted by pinging ``infra-root`` in the
+``#opendev`` channel on Freenode IRC, or via email to the `openstack-infra
 <http://lists.openstack.org/cgi-bin/mailman/listinfo/openstack-infra>`_
 mail list.
 
@@ -732,23 +738,6 @@ Check out ``openstack/devstack-gate`` and edit
   PROJECTS="openstack/<projectname> $PROJECTS"
 
 Keep the list in alphabetical order.
-
-Add Project to the Requirements List
-------------------------------------
-
-The global requirements repository (openstack/requirements) controls
-which dependencies can be added to a project to ensure that all
-of OpenStack can be installed together on a single system without
-conflicts. It also automatically contributes updates to the
-requirements lists for OpenStack projects when the global
-requirements change.
-
-If your project is not going to participate in this requirements
-management, you can skip this step.
-
-Edit the ``projects.txt`` file to add the new library, adding
-"openstack/<projectname>" in the appropriate place in
-alphabetical order.
 
 Preparing a New Git Repository using cookiecutter
 =================================================
@@ -835,7 +824,7 @@ Adding In-Repo Zuul Jobs
 
 Every project needs test jobs.
 
-OpenStack has a number of jobs and project-templates that can be used
+OpenDev has a number of jobs and project-templates that can be used
 directly in your project's Zuul config. You can also make new jobs that
 inherit from existing jobs or or you can write your own from scratch.
 
@@ -920,7 +909,7 @@ You can then use the secret in a job inheriting from
    - job:
        name: <project>-upload-git-mirror
        parent: upload-git-mirror
-       description: Mirrors openstack/<project> to neworg/<project>
+       description: Mirrors <namespace>/<project> to neworg/<project>
        vars:
          git_mirror_repository: neworg/<project>
        secrets:
@@ -969,14 +958,14 @@ review and approve:
 
 .. code-block:: console
 
-  $ git clone https://opendev.org/openstack/<projectname>
+  $ git clone https://opendev.org/<namespace>/<projectname>
   $ cd <projectname>
   $ git checkout -b add-gitreview
   $ cat > .gitreview <<EOF
   [gerrit]
   host=review.opendev.org
   port=29418
-  project=openstack/<projectname>.git
+  project=<namespace>/<projectname>.git
   EOF
   $ git review -s
   $ git add .gitreview
@@ -1078,7 +1067,8 @@ other projects to use your library.
 Update the Global Requirements List
 -----------------------------------
 
-Check out the ``openstack/requirements`` git repository and modify
+If you have a library that is used by OpenStack repositories,
+check out the ``openstack/requirements`` git repository and modify
 ``global-requirements.txt`` to:
 
 #. add the new library
@@ -1140,6 +1130,8 @@ documentation by following the instructions at `Template generator details
 
 Enabling Translation Infrastructure
 ===================================
+
+If your project is not an official OpenStack project, skip this section.
 
 Once you have your project set up, you might want to enable
 translations. For this, you first need to mark all strings so that
