@@ -1,17 +1,14 @@
 :title: IRC Guide
 
-.. TODO(mordred) Replace https://wiki.openstack.org/wiki/IRC with a link to
-   this page.
-
 .. _irc-guide:
 
 IRC Guide
 #########
 
-The OpenStack Project makes heavy use of `Freenode`_ IRC. While the canonical
+Many projects hosted by OpenDev make heavy use of `Freenode`_ IRC. While the canonical
 reference for Freenode is found in the `Freenode Knowledgebase`_, this document
 contains some more specific information for those who are new to IRC and would
-like to know more about common OpenStack practices.
+like to know more about common OpenDev practices.
 
 As of August 1, 2018 all OpenStack IRC channels require users to `register`_ their
 nickname in order to join channels. Unregistered users will be redirected to
@@ -26,7 +23,7 @@ unfortunately `required`_ as a result of spam.
 Channel Logging
 ---------------
 
-OpenStack IRC Channels and OpenStack IRC Meetings are logged to `eavesdrop`_.
+OpenDev IRC Channels and IRC Meetings are logged to `eavesdrop`_.
 
 .. _eavesdrop: http://eavesdrop.openstack.org/
 
@@ -39,7 +36,7 @@ Just Start Talking
 
 Also known as "`No Naked Pings`_".
 
-When interacting with other OpenStack Developers over IRC, just start talking.
+When interacting with other developers over IRC, just start talking.
 Starting with "ping", "hi, are you there?" or "do you have a minute?" might
 seem polite, but it's actually more distracting. If you have a question, just
 ask it.
@@ -65,7 +62,7 @@ just extra typing and looks weird in IRC clients.
 Use a pastebin for communicating long content
 ---------------------------------------------
 
-OpenStack runs a `pastebin service`_ that can be used for pasting content and
+OpenDev runs a `pastebin service`_ that can be used for pasting content and
 then getting a link that can be copied into IRC. Pasting more than one or two
 lines floods the channel and makes other communication difficult.
 
@@ -76,11 +73,11 @@ lines floods the channel and makes other communication difficult.
 Technical Support
 -----------------
 
-The OpenStack Infra team is responsible for maintaining the developer
-infrastructure systems used by the OpenStack project. The team is in the
-``#openstack-infra`` channel. As they are technical support for the entire
-OpenStack project, the channel can be quite busy. However, they are there to
-help, so if you have issues, asking in ``#openstack-infra`` is completely
+The OpenDev team is responsible for maintaining the developer
+infrastructure systems used by OpenDev and its hosted projects. The team is in the
+``#opendev`` channel. As they are technical support for all
+of OpenDev, the channel can be quite busy. However, they are there to
+help, so if you have issues, asking in ``#opendev`` is completely
 appropriate. Just remember that it's best to just ask your question, and that
 sometimes it might be extra busy so you might need to be patient.
 If there is an issue that seems to require urgent attention by someone with
@@ -91,7 +88,7 @@ one of our configuration repositories, use the keyword ``config-core``.
 Persistent Clients and IRC Bouncers
 -----------------------------------
 
-Many OpenStack developers prefer to run an "IRC Bouncer" to allow for being
+Many developers prefer to run an "IRC Bouncer" to allow for being
 always connected.
 
 .. note:: It is **NOT** required to have a persistent IRC connection. Indeed,
@@ -110,7 +107,7 @@ For people who do not have access to a convenient persistent Cloud Server or
 do not care to manage a long-lived server, `IRCCloud`_ is a web-based
 IRC client that provides an optional (paid) persistent connection.
 
-.. note:: As an OpenStack developer, it may be worth the effort to find an
+.. note:: As a developer, it may be worth the effort to find an
           OpenStack Cloud on which to run a bouncer. Being an OpenStack End
           User is a great way to ensure good context for the End User
           experience.
