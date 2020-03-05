@@ -29,7 +29,6 @@ any project hosted in the OpenDev infrastructure.
 
    developers
    irc
-   python
    core
    drivers
    creators
