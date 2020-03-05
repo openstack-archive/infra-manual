@@ -904,72 +904,10 @@ Peer Review
 -----------
 
 Anyone can be a reviewer: participating in the review process is a
-great way to learn about OpenStack social norms and the development
-processes. Some things are necessary to keep in mind when doing code
-reviews:
+great way to learn about social norms and the development
+processes.
 
-1. The code should comply with everything in that project's
-   `HACKING.rst` file, if it has one. If the project reuses
-   nova's hacking guidelines, then it may have a "hacking" section in
-   its `tox.ini` file in which case much of this is already checked
-   automatically for you by the continuous integration system.
-2. The code should be 'pythonic' and look like the code around it,
-   to make the code more uniform and easier to read.
-3. Commit message and change break-up:
-
-   1. Learn the best practices for `git commit messages <https://wiki.openstack.org/wiki/GitCommitMessages>`_.
-   2. Use the `"DocImpact"
-      <https://wiki.openstack.org/wiki/Documentation/DocImpact>`_ tag on
-      changes that affect documentation.
-   3. Use the "SecurityImpact" tag on changes that should get the
-      attention of the OpenStack Security Group (OSSG) for additional
-      review.
-   4. Use the "UpgradeImpact" tag on changes which require
-      configuration changes to be mentioned in the release notes.
-   5. Use the "APIImpact" tag on changes impacting `API stability <https://wiki.openstack.org/wiki/APIChangeGuidelines>`_,
-      this tag will aid in gaining the attention of the
-      `OpenStack API Working Group <https://wiki.openstack.org/wiki/API_Working_Group>`_
-      for additional review.
-   6. If the change fixes a bug, it should include the bug number. For
-      example, add the line "Closes-Bug: 1234".
-   7. If the change implements a feature, it should reference a
-      blueprint. The blueprint should be approved before the change is
-      merged. For example, add the line "Blueprint: my-blueprint."
-
-4. Test case implementation (Mock vs. Mox):
-
-   1. New test cases should be implemented using Mock. It is part
-      of the Python standard library in Python 3 and as such is the
-      preferred method for OpenStack.
-   2. Exceptions can be made for tests added where Mox was already
-      in use, or any other situation where using Mock would cause excessive
-      difficulty for some reason. However, note that using mox does not
-      support python 3 and mox3 has known to intermittently fail in py34
-      jobs, so it should be avoided if python 3 compatibility is a goal of
-      the project being tested.
-   3. There is no need to convert existing Mox test cases to Mock,
-      but if you are changing a Mox test case anyway, please consider
-      converting it to Mock at the same time.
-
-5. About Python 3 compatibility:
-
-   1. It is preferred for new code to use package six. When it is
-      possible we should be use `six.text_type` or `six.text_binary` to cast
-      or test value for unicode or str.
-
-   2. Use of `six.iteritems` without clear justification should be
-      avoided. If a `dict` will be very large, and the program will be
-      expected to keep many such objects resident, then that should be
-      stated in comments whenever `six.iteritems` is used. Otherwise,
-      migrate the code to use `.items()`.
-
-   3. Unit tests should be written in mock which supports python 3. mox does
-      not support python 3 and mox3 is a limited port which intermittently
-      fails in py34 jobs due to races.
-
-6. The code should comply with the community `logging standards <https://wiki.openstack.org/wiki/LoggingStandards>`_.
-
-7. General flow:
+General review flow:
 
    1. Review is a conversation that works best when it flows back and
       forth. Submitters need to be responsive to questions asked in
