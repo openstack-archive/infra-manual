@@ -956,7 +956,11 @@ can submit a change to Gerrit and mark it as "Work in Progress" (WIP).
 
 .. note::
    The OpenDev Gerrit system does not support drafts, use
-   "Work in Progress" instead.
+   "Work in Progress" instead. Draft changes have been disabled because
+   people assume they are private when they are not. They also create
+   confusion if child changes are not Drafts as well as making it
+   difficult to run CI on them. Better to assume changes are public
+   and mark the not yet ready state.
 
 To do so, after submitting a change to Gerrit in usual way (``git review``),
 You should go to Gerrit, and do `Code Review`_ of your own change while
