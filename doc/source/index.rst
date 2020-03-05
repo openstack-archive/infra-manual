@@ -37,5 +37,15 @@ any project hosted in the OpenDev infrastructure.
    testing
    zuulv3
 
+Many projects hosted on OpenDev have their own Contributor Guides that
+explain project specific information. A non-complete list of these
+are:
+
+* `OpenStack Contributors Guide
+  <https://docs.openstack.org/contributors>`__
+* `StarlingX Contributor Guides
+  <https://docs.starlingx.io/contributor/index.html>`__
+
+
 Propose changes to this document to the `infra-manual git repository
 <https://opendev.org/openstack/infra-manual>`_.
