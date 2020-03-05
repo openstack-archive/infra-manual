@@ -6,7 +6,7 @@ Test Environment
 ################
 
 This document should give you a good idea of what you can count on
-in the test environments managed by the Infrastructure team. This
+in the test environments managed by the OpenDev team. This
 information may be useful when creating new jobs or debugging existing
 jobs.
 
@@ -124,7 +124,7 @@ can change:
    rebuild the queue without that change, then restart all jobs in the queue
    with that change evicted.
 
-   Keep in mind that we are dog fooding OpenStack to run OpenStack's CI
+   Keep in mind that we are also dog fooding OpenStack to run OpenStack's CI
    system. This means that a more reliable OpenStack is able to provide
    resources to our CI system effectively. Fixing OpenStack in this case
    is a win win situation.
@@ -141,28 +141,3 @@ resources quickly.
 We are also always happy to add resources if they are available, but the
 priority from the project should be to ensure we are using what we do have
 responsibly.
-
-Can my changes skip the check queue?
-------------------------------------
-
-The OpenStack project uses a "clean check" approach to keep flaky
-changes out of the gate. So, a change always needs to pass "check"
-before it enters "gate" - and if it fails in "gate", it re-enters
-the "check" pipeline.
-
-
-* If your change fails in the gate, then there is an increased chance
-  it is introducing non-deterministic failure behavior so forcing it
-  to go through check again helps make that more apparent.
-* This avoids also approving changes that have no hope of ever passing
-  due to pep8 or other trivial errors.
-* It also helps with approving changes that had been sitting around
-  with a 6-month-old passing check.
-
-Changes in the gate pipeline are prioritized but also serialized, so
-if a change fails, all tests for changes behind that failing change
-have to be restarted. If restarts after restarts happen, then
-resources are never freed up for the check pipeline.
-
-Therefore, having a stable gate pipeline is crucial - and the "clean
-check" requirement will help with the stable jobs.
