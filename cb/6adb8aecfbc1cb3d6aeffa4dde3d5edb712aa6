@@ -1,0 +1,9 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: Ian Wienand <iwienand@redhat.com>
+Workflow+1: Ian Wienand <iwienand@redhat.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 06 Mar 2020 22:47:12 +0000
+Reviewed-on: https://review.opendev.org/711650
+Project: openstack/infra-manual
+Branch: refs/heads/master
