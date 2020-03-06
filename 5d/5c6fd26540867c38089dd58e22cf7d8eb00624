@@ -1,0 +1,9 @@
+Code-Review+2: Jens Harbott (frickler) <j.harbott@x-ion.de>
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Workflow+1: Clark Boylan <cboylan@sapwetik.org>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Fri, 06 Mar 2020 18:28:58 +0000
+Reviewed-on: https://review.opendev.org/711586
+Project: openstack/infra-manual
+Branch: refs/heads/master
