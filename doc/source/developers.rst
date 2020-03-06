@@ -227,7 +227,8 @@ on gerrit <https://review.opendev.org/#/settings/>`_ to check it out
     on https://review.opendev.org/#/settings/ssh-keys
 
 We have a tutorial: :ref:`sandbox`. If this is your first time
-contributing to OpenStack, we strongly suggest you follow this tutorial.
+contributing to a project hosted by OpenDev, we strongly suggest you
+follow this tutorial.
 
 Accessing Gerrit over HTTPS
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
