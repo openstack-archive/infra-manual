@@ -752,16 +752,18 @@ comments in a review comment the inline comments are stored as Drafts
 in your browser. Other reviewers can only see them after you have
 submitted them as a comment on the patchset.
 
-Any OpenStack developer may propose or comment on a change (including
-voting +1/0/-1 on it). OpenStack project teams have a policy
-requiring two positive reviews from core reviewers. A vote of +2 is
+Any developer may propose or comment on a change (including
+voting +1/0/-1 on it). A vote of +2 is
 allowed from core reviewers, and should be used to indicate that
 they are a core reviewer and are leaving a vote that should be
 counted as such.
 
-When a review has two +2 reviews and one of the core team believes it
+Some OpenDev hosted projects, like many OpenStack project teams, have
+a policy requiring two positive reviews from core reviewers.
+
+When a review has enough +2 reviews and one of the core team believes it
 is ready to be merged, he or she should leave a +1 vote in the
-"Approved" category. You may do so by clicking the "Review" button
+"Workflow" category. You may do so by clicking the "Review" button
 again, with or without changing your code review vote and optionally
 leaving a comment. When a +1 Approved review is received, Zuul will
 run tests on the change, and if they pass, it will be merged.
