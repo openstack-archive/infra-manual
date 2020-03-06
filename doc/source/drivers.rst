@@ -12,32 +12,22 @@ There are times when prolonged development on specific features is easier
 on a feature branch rather than on master. In particular it organizes
 work to a location that interested parties can follow. Feature branches
 also move merge points to specific points in time rather than at every
-proposed change. Learn more about `feature branches in the project team
-guide <https://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_.
+proposed change.
 
-For projects under governance, new feature branches can be requested using
-the same mechanism as stable branch creation. Submit a patch to the releases
-repository with a new ``feature/feature-name`` branch defined. Set the
-location value to the repository and commit hash from which to branch::
+OpenStack projects can learn more about `feature branches in the
+project team guide
+<https://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_
+and `request a branch via the releases repository
+<https://releases.openstack.org/reference/using.html#requesting-a-branch>`_.
 
-    ---
-    branches:
-      - name: feature/example-feature-work
-        location:
-          openstack/oslo.config: 02a86d2eefeda5144ea8c39657aed24b8b0c9a39
-
-For more details, refer to the openstack/releases
-`README.rst <https://opendev.org/openstack/releases/src/README.rst>`_
-file.
-
-For projects not under governance, new branches can be defined via Gerrit.
+For other projects, new branches can be defined via Gerrit.
 In the `Gerrit UI <https://review.opendev.org/>`_, under Projects > List,
 locate the given project and go to the Branches option. For example::
 
     https://review.opendev.org/#/admin/projects/openstack/nova,branches
 
 If you do not have the option to add a new branch, you will need to contact
-the infra team to get the necessary permissions for the project.
+the OpenDev team to get the necessary permissions for the project.
 
 If more than one project is involved in a feature development effort,
 the same feature branch name should be used across all involved
