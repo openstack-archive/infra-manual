@@ -851,9 +851,12 @@ If a change fails tests in Zuul, please follow the steps below:
    QA, CI, and developers working on a fix by performing the following
    steps:
 
-   1. Visit http://status.openstack.org/elastic-recheck/ to see if one
-      of the bugs listed there matches the error you've seen. If your
-      error isn't there, then:
+   1. For OpenStack projects, check `elastic-recheck
+      <https://docs.openstack.org/contributors/code-and-documentation/elastic-recheck.html>`_
+      to see whether the bug is already identified and if not, add it.
+
+      If your error is not there, then:
+
    2. Identify which project or projects are affected, and search for a
       related bug on Launchpad. You can search for bugs affecting all
       OpenStack Projects here: https://bugs.launchpad.net/openstack/ If
@@ -871,12 +874,6 @@ If a change fails tests in Zuul, please follow the steps below:
 
 6. To re-run check or gate jobs, leave a comment on the review
    with the form "recheck".
-
-7. If a nice message from Elastic Recheck didn't show up in your change
-   when a test in a gate job failed, and you've identified a bug to
-   recheck against, you can help out by writing an `elastic-recheck
-   query <https://docs.openstack.org/infra/elastic-recheck/readme.html>`_
-   for the bug.
 
 A patchset has to be approved to run tests in the gate pipeline. If the
 patchset has failed in the gate pipeline (it will have been approved to get
