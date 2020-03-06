@@ -651,16 +651,16 @@ Examples of job names using these rules:
 Outbound Third-Party Testing
 ============================
 
-Many organizations generously donate cloud computing resources to the
-OpenStack project for use by its testing and automation system so that
-we can maintain and improve the quality of our software.  We are
+Many organizations generously donate cloud computing resources to
+OpenDev for use by its testing and automation system so that
+we can maintain and improve the quality of the hosted software.  We are
 stewards of these resources and strive to use them wisely and
 responsibly.
 
 These resources are available to perform integration testing with
 Open-Source projects which are direct dependencies or direct
-downstream consumers of official OpenStack projects.  If you want to
-set up an integration test with a non-OpenStack project that meets
+downstream consumers of hosted projects.  If you want to
+set up an integration test with a non-hosted project that meets
 these criteria, follow the instructions below.
 
 Currently, Zuul is able to report on changes proposed to Gerrit
@@ -677,15 +677,15 @@ Hosted on an External Gerrit
 ----------------------------
 
 If the project you wish to test is hosted on a Gerrit system (other
-than OpenStack's Gerrit), you may need to connect Zuul to it first, if
+than OpenDev's Gerrit), you may need to connect Zuul to it first, if
 it isn't already.  To do so, propose a change to `system-config
-<http://opendev.org/openstack/system-config/src/hiera/group/zuul-scheduler.yaml>`_
+<https://opendev.org/opendev/system-config/src/hiera/group/zuul-scheduler.yaml>`_
 which adds the connection information for the new server, then work
 with the infra team in #openstack-infra to set up an account.
 
 Once this is complete, propose a change to add the project(s) to
-OpenStack's Zuul.  Add them to `project-config/zuul/main.yaml
-<http://opendev.org/openstack/project-config/src/zuul/main.yaml>`_
+OpenDev's Zuul.  Add them to `project-config/zuul/main.yaml
+<https://opendev.org/openstack/project-config/src/zuul/main.yaml>`_
 under the connection name established above.
 
 The project should not be configured to load any configuration objects
@@ -698,13 +698,13 @@ If the project you wish to test is hosted on GitHub, ask the team
 managing the project to install the "OpenStack Zuul" App into the
 project (or organization if multiple projects are involved).
 
-Visit the `OpenStack Zuul App
-<https://github.com/apps/openstack-zuul>`_ page on GitHub and click
-the `Configure` button to install the app.
+Visit the `OpenDev Zuul App
+<https://github.com/apps/opendev-zuul>`_ page on GitHub and click
+the `Install` button to install the app.
 
 Once this is complete, propose a change to add the project(s) to
-OpenStack's Zuul.  Add them to `project-config/zuul/main.yaml
-<http://opendev.org/openstack/project-config/src/zuul/main.yaml>`_
+OpenDev's Zuul.  Add them to `project-config/zuul/main.yaml
+<https://opendev.org/openstack/project-config/src/zuul/main.yaml>`_
 under the ``github:`` connection.
 
 The project should not be configured to load any configuration objects
@@ -721,6 +721,6 @@ projects, this needs to be done in the `project-config` repo.  Define
 the jobs you wish to run either in your own repos, or in
 `openstack-zuul-jobs`.  Then create project definitions for the new
 projects in `project-config/zuul.d/projects.yaml
-<http://opendev.org/openstack/project-config/src/zuul.d/projects.yaml>`_
+<https://opendev.org/openstack/project-config/src/zuul.d/projects.yaml>`_
 which adds those jobs to the new project on the `third-party-check`
 pipeline.
