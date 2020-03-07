@@ -120,33 +120,21 @@ This section describes topics related to release management.
 Release and stable branches
 ---------------------------
 
-Projects following the release:cycle-with-milestones model generate
-release candidates before the final release to encourage 3rd-party
-testing. The first release candidate (RC1) is cut from the master
-branch. You can learn more about `release management in the project
-team guide <https://docs.openstack.org/project-team-guide/release-management.html>`_.
+Different projects hosted on OpenDev, have different processes on how
+to do releases.
 
-Between RC1 and the final release, there needs to be a separate branch
-in Gerrit for release-critical changes destined for the final
-release. Meanwhile, development on the master branch should continue
-as normal (with the addition that changes proposed for the final
-release should also be proposed for master, and some changes for
-master may need to be applied to the release branch).
-
-In order to avoid tracking different branches pre- and post-release,
-this process directly creates a stable/<series> (for example,
-stable/mitaka) branch that will be reused as the stable maintenance
-branch post-release. Specific ACLs apply to the branch pre-release,
-and when the final release is tagged the generic stable branch ACLs
-are applied instead.
+For OpenStack projects, read more about `release management in the
+project team guide
+<https://docs.openstack.org/project-team-guide/release-management.html>`_.
 
 Create stable/* Branch
 ~~~~~~~~~~~~~~~~~~~~~~
 
 For OpenStack projects this should be performed by the OpenStack
-Release Management Team at the Release Branch Point. If you are managing
-branches for your project you may have permission to do this
-yourself.
+Release Management Team at the Release Branch Point.
+
+If you are managing branches for your project you may have permission
+to do this yourself.
 
 * Go to https://review.opendev.org/ and sign in
 * Select 'Admin', 'Projects', then the project
@@ -156,9 +144,10 @@ yourself.
   Alternatively, you may run ``git branch stable/<series> <sha> &&
   git push gerrit stable/<series>``
 
-Once this is done, you should push a change updating the defaultbranch in
-.gitreview to match the new name of the branch, so that "git review"
-automatically pushes to the right branch::
+Once this is done, you should push a change updating the
+``defaultbranch`` in ``.gitreview`` to match the new name of the
+branch, so that "git review" automatically pushes to the right
+branch::
 
   defaultbranch=stable/<series>
 
