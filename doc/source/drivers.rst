@@ -352,6 +352,8 @@ date upon which maintenance will end, if that date is in the future.
 Step 1: Stop requirements syncing (if set up)
 ---------------------------------------------
 
+This step is specific to OpenStack projects.
+
 Submit a review to the ``openstack/requirements`` project removing the
 project from ``projects.txt``.  This needs to happen for stable
 branches as well.
@@ -461,6 +463,8 @@ following:
 
 Step 5: Remove Repository from the Governance Repository
 --------------------------------------------------------
+
+This step is specific to OpenStack projects.
 
 If this was an official OpenStack project, remove it from the
 ``reference/projects.yaml`` file and add it to the file
