@@ -1486,24 +1486,9 @@ branches like ``stable/mitaka``. It will not run on the old
 Project Renames
 ===============
 
-.. note::
-
-   If you rename a project to move out from "openstack" namespace to
-   any other namespace, follow `this OpenStack TC resolution
-   <https://governance.openstack.org/tc/resolutions/20190711-mandatory-repository-retirement.html>`_
-   instead.
-
 The first step of doing a rename is understanding the required
 governance changes needed by the rename. You can use the following
 criteria:
-
-For a project being added to existing official OpenStack project:
-Create an ``openstack/governance`` change and add a "Depends-On:
-project-change-url" of the change you make in the following steps to
-the commit message, and add a comment in the
-``openstack/project-config`` change that references the
-governance change. You will also make sure the PTL has expressed
-approval for the addition in some way.
 
 When preparing to rename a project, begin by making changes to the
 files in the ``openstack/project-config`` repository related
@@ -1534,9 +1519,6 @@ Post rename, a member of the Infrastructure team will submit a patch to update
 the :file:`.gitreview` file in the renamed project to point to the new project
 name.
 
-Other projects you may need to update post-rename:
-
-* projects.txt in ``openstack/requirements``
 
 Review List for New Projects
 ============================
