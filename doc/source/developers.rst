@@ -885,31 +885,31 @@ processes.
 
 General review flow:
 
-   1. Review is a conversation that works best when it flows back and
-      forth. Submitters need to be responsive to questions asked in
-      comments, even if the score is `+0` from the reviewer. Likewise,
-      reviewers should not use a negative score to elicit a response if
-      they are not sure the patch should be changed before merging.
+1. Review is a conversation that works best when it flows back and
+   forth. Submitters need to be responsive to questions asked in
+   comments, even if the score is `+0` from the reviewer. Likewise,
+   reviewers should not use a negative score to elicit a response if
+   they are not sure the patch should be changed before merging.
 
-      For example, if there is a patch submitted which a reviewer cannot
-      fully understand because there are changes that aren't documented
-      in the commit message or code documentation, this is a good time
-      to issue a negative score. Patches need to be clear in their commit
-      message and documentation.
+   For example, if there is a patch submitted which a reviewer cannot
+   fully understand because there are changes that aren't documented
+   in the commit message or code documentation, this is a good time
+   to issue a negative score. Patches need to be clear in their commit
+   message and documentation.
 
-      As a counter-example, a patch which is making use of a new library,
-      which the reviewer has never used before, should not elicit a
-      negative score from the reviewer with a question like "Is this
-      library using standard python sockets for communication?" That is
-      a question the reviewer can answer themselves, and which should
-      not hold up the review process while the submitter explains
-      things. Either the author or a reviewer should try to add a review
-      comment answering such questions, unless they indicate a need to
-      better extend the commit message, code comments, docstrings or
-      accompanying documentation files.
+   As a counter-example, a patch which is making use of a new library,
+   which the reviewer has never used before, should not elicit a
+   negative score from the reviewer with a question like "Is this
+   library using standard python sockets for communication?" That is
+   a question the reviewer can answer themselves, and which should
+   not hold up the review process while the submitter explains
+   things. Either the author or a reviewer should try to add a review
+   comment answering such questions, unless they indicate a need to
+   better extend the commit message, code comments, docstrings or
+   accompanying documentation files.
 
-   2. In almost all cases, a negative review should be accompanied by
-      clear instructions for the submitter how they might fix the patch.
+2. In almost all cases, a negative review should be accompanied by
+   clear instructions for the submitter how they might fix the patch.
 
 There may be more specific items to be aware of inside the
 projects' documentation for contributors.
