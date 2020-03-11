@@ -5,29 +5,57 @@
 Project Driver's Guide
 ######################
 
+
+Branches
+========
+
+Projects might want to create branches for either prolonged
+development on specific branches, so called feature branches, or for
+maintenance of a release, these are called stable branches.
+
+Some projects use the namespace ``feature/`` for feature branches and
+``stable/`` for stable branches.
+
+Branch Creation
+---------------
+
+If you are managing branches for your project you may have permission
+to do this yourself:
+
+* Go to https://review.opendev.org/ and sign in
+* Select 'Admin', 'Projects', then the project
+* Select 'Branches'
+* Enter the name of your branch in the 'Branch Name' field, and ``HEAD``
+  as the 'Initial Revision', then press 'Create Branch'.
+  Alternatively, you may run ``git branch <new-branch> <sha> &&
+  git push gerrit <new-branch>``
+
+If you do not have the option to add a new branch, you will need to
+contact the OpenDev team to get the necessary permissions for the
+project.
+
+Once this is done, you should push a change updating the
+``defaultbranch`` in ``.gitreview`` to match the new name of the
+branch, so that "git review" automatically pushes to the right
+branch::
+
+  defaultbranch=<new-branch>
+
+To check out the new branch in your local checkout, you can use::
+
+  git checkout master
+  git pull
+  git checkout <new-branch>
+
+
 Feature Branches
-================
+----------------
 
 There are times when prolonged development on specific features is easier
 on a feature branch rather than on master. In particular it organizes
 work to a location that interested parties can follow. Feature branches
 also move merge points to specific points in time rather than at every
 proposed change.
-
-OpenStack projects can learn more about `feature branches in the
-project team guide
-<https://docs.openstack.org/project-team-guide/other-branches.html#feature-branches>`_
-and `request a branch via the releases repository
-<https://releases.openstack.org/reference/using.html#requesting-a-branch>`_.
-
-For other projects, new branches can be defined via Gerrit.
-In the `Gerrit UI <https://review.opendev.org/>`_, under Projects > List,
-locate the given project and go to the Branches option. For example::
-
-    https://review.opendev.org/#/admin/projects/openstack/nova,branches
-
-If you do not have the option to add a new branch, you will need to contact
-the OpenDev team to get the necessary permissions for the project.
 
 If more than one project is involved in a feature development effort,
 the same feature branch name should be used across all involved
@@ -108,75 +136,26 @@ added to it. Immediately before you ``git commit --amend`` do::
 
   git checkout origin/master -- .gitreview
 
-Release Management
-==================
+Stable or Maintenance Branches
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes topics related to release management.
+If your project consists of several repositories or it is part of a
+larger group of projects, the same branch name should be used across
+all involved projects. This will cause integration testing with Zuul
+to use the respective stable branch from any project that carries it.
+Projects without an equivalently named stable branch will use master
+instead.
 
-.. (jeblair) After the other sections move, this should probably
-   mention that actions here require specific permissions, and name
-   what they are.
 
-Release and stable branches
----------------------------
-
-Projects following the release:cycle-with-milestones model generate
-release candidates before the final release to encourage 3rd-party
-testing. The first release candidate (RC1) is cut from the master
-branch. You can learn more about `release management in the project
-team guide <https://docs.openstack.org/project-team-guide/release-management.html>`_.
-
-Between RC1 and the final release, there needs to be a separate branch
-in Gerrit for release-critical changes destined for the final
-release. Meanwhile, development on the master branch should continue
-as normal (with the addition that changes proposed for the final
-release should also be proposed for master, and some changes for
-master may need to be applied to the release branch).
-
-In order to avoid tracking different branches pre- and post-release,
-this process directly creates a stable/<series> (for example,
-stable/mitaka) branch that will be reused as the stable maintenance
-branch post-release. Specific ACLs apply to the branch pre-release,
-and when the final release is tagged the generic stable branch ACLs
-are applied instead.
-
-Create stable/* Branch
-~~~~~~~~~~~~~~~~~~~~~~
-
-For OpenStack projects this should be performed by the OpenStack
-Release Management Team at the Release Branch Point. If you are managing
-branches for your project you may have permission to do this
-yourself.
-
-* Go to https://review.opendev.org/ and sign in
-* Select 'Admin', 'Projects', then the project
-* Select 'Branches'
-* Enter ``stable/<series>`` in the 'Branch Name' field, and ``HEAD``
-  as the 'Initial Revision', then press 'Create Branch'.
-  Alternatively, you may run ``git branch stable/<series> <sha> &&
-  git push gerrit stable/<series>``
-
-Once this is done, you should push a change updating the defaultbranch in
-.gitreview to match the new name of the branch, so that "git review"
-automatically pushes to the right branch::
-
-  defaultbranch=stable/<series>
-
-To check out the new branch in your local checkout, you can use::
-
-  git checkout master
-  git pull
-  git checkout stable/<series>
-
-Authoring Changes for stable/*
+Authoring Changes for branches
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. (jeblair) This probably belongs in developer.rst
 
-Create topic branches as normal, but branch them from stable/\*
-rather than master::
+Create topic branches as normal, but branch them from the feature or
+stable branch rather than master::
 
-  git checkout stable/<series>
+  git checkout <branch>
   git pull
   git checkout -b <topic branch>
 
@@ -184,20 +163,20 @@ Generally the defaultbranch in .gitreview is adjusted on the new branch
 so that you can directly use ``git review``. If not, changes for stable/\*
 should be submitted with::
 
-  git review stable/<series>
+  git review <branch>
 
-Submit Changes in master to stable/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Submit Changes in master to a stable branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 .. (jeblair) This probably belongs in developer.rst
 
-If a change to master should also be included in stable/\*, use this
+If a change to master should also be included in a stable branch, use this
 procedure to cherry-pick that change and submit it for review::
 
-  git checkout stable/<series>
+  git checkout <stable-branch>
   git pull
   git checkout -b master-to-mp
   git cherry-pick -x <SHA1 or "master">
-  git review stable/<series>
+  git review <stable-branch>
   git checkout master
   git branch -D master-to-mp
 
@@ -212,25 +191,15 @@ If there are conflicts when cherry-picking, do not delete the
 'Conflicts' lines git adds to the commit message. These are valuable
 to reviewers to identify files which need extra attention.
 
-You can learn more about `stable branches in the project team guide
-<https://docs.openstack.org/project-team-guide/stable-branches.html>`_.
-
 .. _tagging-a-release:
 
 Tagging a Release
-~~~~~~~~~~~~~~~~~
+=================
 
-Deliverables produced by official teams and released following the
-release cycle should be managed by the OpenStack Release Management
-Team. See the instructions in the `README.rst
-<http://opendev.org/openstack/releases/src/README.rst>`__
-in openstack/releases for details.
+If you are managing your own releases, your ACLs need to be setup to
+have have permission to tag a relase.
 
-If you are managing your own releases, you may have permission to do
-this yourself.
-
-Tag the tip of the appropriate branch (stable/<series> for server
-projects using release candidates, master for the others) with a release tag
+Tag the tip of the appropriate branch  with a release tag
 and push that tag to Gerrit by running the following commands::
 
   git checkout <branch name>
