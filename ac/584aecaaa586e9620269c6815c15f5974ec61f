@@ -1,0 +1,9 @@
+Code-Review+2: Clark Boylan <cboylan@sapwetik.org>
+Code-Review+2: James E. Blair <corvus@inaugust.com>
+Workflow+1: James E. Blair <corvus@inaugust.com>
+Verified+2: Zuul
+Submitted-by: Zuul
+Submitted-at: Wed, 11 Mar 2020 14:45:17 +0000
+Reviewed-on: https://review.opendev.org/711819
+Project: openstack/infra-manual
+Branch: refs/heads/master
