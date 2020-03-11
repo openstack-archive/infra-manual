@@ -725,21 +725,6 @@ release process can volunteer to be added as well.
    you need to trust them all to collaborate on group management
    with you.
 
-Updating devstack-vm-gate-wrap.sh
----------------------------------
-
-The ``devstack-gate`` tools let us install OpenStack projects in a
-consistent way so they can all be tested with a common
-configuration. If your project will not need to be installed for
-devstack gate jobs, you can skip this step.
-
-Check out ``openstack/devstack-gate`` and edit
-``devstack-vm-gate-wrap.sh`` to add the new project::
-
-  PROJECTS="openstack/<projectname> $PROJECTS"
-
-Keep the list in alphabetical order.
-
 Preparing a New Git Repository using cookiecutter
 =================================================
 
