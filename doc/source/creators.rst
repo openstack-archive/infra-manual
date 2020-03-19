@@ -978,7 +978,7 @@ that point, you can add other members.
 To check the membership of the groups, visit
 ``https://review.opendev.org/#/admin/projects/openstack/<projectname>,access``
 -- for example,
-https://review.opendev.org/#/admin/projects/openstack/infra-manual,access
+https://review.opendev.org/#/admin/projects/opendev/infra-manual,access
 -- and then click on the group names displayed on that page to review
 their membership.
 

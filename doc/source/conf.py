@@ -28,7 +28,7 @@ project = u'OpenDev Manual'
 copyright = ('%d, OpenDev Contributors.' % datetime.date.today().year)
 
 # openstackdocstheme options
-repository_name = 'openstack/infra-manual'
+repository_name = 'opendev/infra-manual'
 bug_project = '721'
 bug_tag = ''
 

@@ -46,4 +46,4 @@ are:
 
 
 Propose changes to this document to the `infra-manual git repository
-<https://opendev.org/openstack/infra-manual>`_.
+<https://opendev.org/opendev/infra-manual>`_.
